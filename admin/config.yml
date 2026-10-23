@@ -1,0 +1,33 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "img/uploads"
+public_folder: "/img/uploads"
+
+collections:
+  - name: "productos"
+    label: "Productos del Catálogo"
+    folder: "contenido/productos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre de la Creación", name: "title", widget: "string" }
+      - { label: "Categoría", name: "categoria", widget: "select", options: ["velas", "crochet", "bordado", "bisuteria"] }
+      - { label: "Precio ($ USD)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Foto del Producto", name: "imagen", widget: "image" }
+
+  - name: "talleres"
+    label: "Talleres Presenciales"
+    folder: "contenido/talleres"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre del Taller", name: "title", widget: "string" }
+      - { label: "Fecha y Horario", name: "fecha", widget: "string" }
+      - { label: "Lugar", name: "lugar", widget: "string", default: "Almax Center, Samborondón" }
+      - { label: "Valor ($ USD)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Cupo Máximo", name: "cupoMax", widget: "number", default: 10 }
+      - { label: "Cupos Ocupados", name: "ocupados", widget: "number", default: 0 }
+      - { label: "Foto del Taller", name: "imagen", widget: "image" }
