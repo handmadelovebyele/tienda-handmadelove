@@ -3,779 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Handmade Love | EMOCION-ARTE</title>
+  <title>Handmade Love by ELE | Emoción-Arte</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --brand-red: #EE2222;
-      --brand-red-hover: #CC1515;
-      --brand-red-light: #FFF1F1;
-      --bg-cream: #FAF8F5;
-      --sand-100: #F6F3EE;
-      --sand-200: #EDE7DD;
-      --text-dark: #2C2720;
-      --text-muted: #6B7280;
-      --footer-bg: #221D17;
+      --brand-red: #D92314;
+      --brand-dark: #1E1E1E;
+      --sand-50: #FAF7F2;
+      --sand-100: #F3ECE2;
+      --sand-200: #E6DBCB;
+      --text-dark: #2B2621;
+      --text-muted: #6B6258;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      line-height: 1.6;
-    }
-
-    /* Barra Superior Notificación */
-    .top-banner {
-      background: var(--brand-red);
-      color: white;
-      text-align: center;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 7px 12px;
-      letter-spacing: 0.5px;
-    }
-
-    /* Navbar Principal */
-    .navbar {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--sand-200);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 32px;
-      z-index: 100;
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .logo-card {
-      width: 48px;
-      height: 48px;
-      background: #FFFFFF;
-      border: 1px solid var(--sand-200);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    }
-    .logo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-    .brand-main {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      letter-spacing: -0.5px;
-    }
-    .brand-sub {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--brand-red);
-    }
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      align-items: center;
-    }
-    .nav-links a, .nav-links button {
-      background: none;
-      border: none;
-      font-family: inherit;
-      cursor: pointer;
-      text-decoration: none;
-      color: #4A443A;
-      font-weight: 500;
-      font-size: 0.92rem;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links button:hover {
-      color: var(--brand-red);
-    }
-    .pill-talleres {
-      background: var(--brand-red-light) !important;
-      color: var(--brand-red) !important;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-weight: 700 !important;
-      border: 1px solid #FFE1E1;
-    }
-    .cart-btn {
-      position: relative;
-      background: var(--sand-100);
-      border: 1px solid var(--sand-200);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1.2rem;
-      transition: all 0.2s;
-    }
-    .cart-btn:hover { background: var(--brand-red-light); }
-    .cart-badge {
-      position: absolute;
-      top: -2px;
-      right: -2px;
-      background: var(--brand-red);
-      color: white;
-      font-size: 0.72rem;
-      font-weight: 700;
-      width: 19px;
-      height: 19px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Hero */
-    .hero {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 24px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-block;
-      background: white;
-      border: 1px solid #FFE1E1;
-      color: var(--brand-red);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      padding: 6px 16px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.4rem;
-      line-height: 1.15;
-      margin-bottom: 18px;
-    }
-    .hero h1 span {
-      font-style: italic;
-      color: var(--brand-red);
-      font-weight: 400;
-    }
-    .hero p {
-      color: #555047;
-      font-size: 1.1rem;
-      max-width: 520px;
-      margin-bottom: 28px;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: var(--brand-red);
-      color: white;
-      text-decoration: none;
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.2s;
-    }
-    .btn-primary:hover { background: var(--brand-red-hover); }
-    .btn-secondary {
-      background: white;
-      color: var(--text-dark);
-      text-decoration: none;
-      padding: 14px 24px;
-      border-radius: 30px;
-      font-weight: 600;
-      border: 1px solid var(--sand-200);
-      transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--brand-red); color: var(--brand-red); }
-    .hero-img-box {
-      border-radius: 28px;
-      overflow: hidden;
-      border: 4px solid white;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
-      height: 380px;
-    }
-    .hero-img-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Catálogo */
-    .catalogo-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 24px 80px;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-    .section-title h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      margin-bottom: 8px;
-    }
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-    .filter-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 45px;
-    }
-    .filter-btn {
-      background: var(--sand-100);
-      color: #4A443A;
-      border: 1px solid transparent;
-      padding: 10px 22px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.92rem;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--brand-red);
-      color: white;
-    }
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 28px;
-    }
-    .card {
-      background: white;
-      border-radius: 22px;
-      border: 1px solid var(--sand-200);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-    }
-    .card-img {
-      position: relative;
-      height: 240px;
-      overflow: hidden;
-    }
-    .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .card-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(4px);
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      border: 1px solid var(--sand-200);
-    }
-    .card-body {
-      padding: 20px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.84rem;
-      margin-bottom: 16px;
-      flex-grow: 1;
-    }
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 14px;
-      border-top: 1px solid var(--sand-100);
-    }
-    .card-price {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--brand-red);
-    }
-    .card-btn {
-      background: var(--sand-100);
-      color: var(--text-dark);
-      border: 1px solid var(--sand-200);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .card-btn:hover {
-      background: var(--brand-red);
-      color: white;
-      border-color: var(--brand-red);
-    }
-
-    /* SECCIÓN TALLERES EMOCION-ARTE */
-    .workshops-section {
-      background: #F4EFEB;
-      border-top: 1px solid var(--sand-200);
-      border-bottom: 1px solid var(--sand-200);
-      padding: 80px 24px;
-    }
-    .workshops-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .workshops-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 32px;
-      margin-top: 40px;
-    }
-    .workshop-card {
-      background: white;
-      border-radius: 24px;
-      border: 1px solid var(--sand-200);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .workshop-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
-    }
-    .workshop-header-img {
-      position: relative;
-      height: 220px;
-      overflow: hidden;
-    }
-    .workshop-header-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .workshop-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .workshop-info-pill {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .info-tag {
-      background: var(--sand-100);
-      border: 1px solid var(--sand-200);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      padding: 4px 10px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .workshop-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text-dark);
-    }
-    .workshop-block {
-      background: #FAF8F5;
-      border: 1px solid var(--sand-200);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 12px;
-      font-size: 0.85rem;
-    }
-    .workshop-block strong {
-      display: block;
-      color: var(--brand-red);
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
-    .workshop-block ul {
-      margin-left: 18px;
-      color: #555;
-    }
-    .workshop-block p {
-      color: #555;
-      line-height: 1.45;
-    }
-    .workshop-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 18px;
-      margin-top: auto;
-      border-top: 1px solid var(--sand-100);
-    }
-    .btn-reserve-workshop {
-      background: var(--brand-red);
-      color: white;
-      border: none;
-      padding: 11px 22px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s;
-    }
-    .btn-reserve-workshop:hover { background: var(--brand-red-hover); }
-    .btn-reserve-workshop:disabled {
-      background: #A8A29E !important;
-      cursor: not-allowed;
-      opacity: 0.75;
-    }
-
-    /* MODAL DE AGENDA (PASO 1 PAGO -> PASO 2 REGISTRO) */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(4px);
-      z-index: 350;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-content {
-      background: white;
-      max-width: 520px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      border-radius: 24px;
-      padding: 28px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      top: 20px; right: 20px;
-      background: none; border: none;
-      font-size: 1.5rem; cursor: pointer; color: #999;
-    }
-    .step-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-    .form-group {
-      margin-bottom: 14px;
-      text-align: left;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      color: var(--text-dark);
-    }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--sand-200);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 0.9rem;
-      background: #FAF8F5;
-      outline: none;
-      transition: border 0.2s;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      border-color: var(--brand-red);
-      background: white;
-    }
-    .btn-submit-registration {
-      background: #25D366;
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .btn-submit-registration:hover { background: #1EBE5D; }
-
-    /* FOOTER */
-    .main-footer {
-      background-color: var(--footer-bg);
-      color: #E6DFD5;
-      padding: 60px 24px 30px;
-      font-size: 0.9rem;
-    }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
-      gap: 40px;
-      padding-bottom: 50px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .footer-brand .logo-card {
-      background: #FFFFFF;
-      border-color: transparent;
-      width: 48px;
-      height: 48px;
-      margin-bottom: 10px;
-    }
-    .footer-brand .brand-main {
-      color: #FFFFFF;
-      font-size: 1.45rem;
-    }
-    .footer-brand .brand-sub {
-      color: var(--brand-red);
-      letter-spacing: 2px;
-      font-size: 0.65rem;
-      margin-bottom: 14px;
-    }
-    .footer-desc {
-      color: #B5ACA0;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      max-width: 280px;
-    }
-    .footer-col h4 {
-      font-family: 'Playfair Display', serif;
-      color: #FFFFFF;
-      font-size: 0.95rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .footer-links button, .footer-links a {
-      background: none;
-      border: none;
-      color: #B5ACA0;
-      font-family: inherit;
-      font-size: 0.85rem;
-      text-align: left;
-      cursor: pointer;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links button:hover, .footer-links a:hover {
-      color: var(--brand-red);
-    }
-    .btn-wa-footer {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: #059669;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-top: 14px;
-      transition: background 0.2s;
-    }
-    .btn-wa-footer:hover {
-      background-color: #047857;
-    }
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 30px auto 0;
-      text-align: center;
-      color: #8C8275;
-      font-size: 0.8rem;
-    }
-
-    /* Drawer Carrito */
-    .cart-drawer {
-      position: fixed;
-      top: 0; right: -420px;
-      width: 100%;
-      max-width: 390px;
-      height: 100%;
-      background: white;
-      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      transition: right 0.3s ease;
-      padding: 24px;
-    }
-    .cart-drawer.open { right: 0; }
-    .cart-backdrop {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 150;
-      display: none;
-    }
-    .cart-backdrop.open { display: block; }
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--sand-200);
-      padding-bottom: 14px;
-    }
-    .cart-items {
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 20px 0;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px dashed var(--sand-200);
-    }
-    .btn-whatsapp {
-      background: #25D366;
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-whatsapp:hover { background: #1EBE5D; }
-
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .footer-container { grid-template-columns: 1fr; gap: 30px; }
-      .workshops-grid { grid-template-columns: 1fr; }
-    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--sand-50); color: var(--text-dark); }
+    .top-banner { background: var(--brand-red); color: white; text-align: center; padding: 9px 16px; font-size: 0.82rem; font-weight: 600; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; background: white; border-bottom: 1px solid var(--sand-200); position: sticky; top: 0; z-index: 50; }
+    .logo-container { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
+    .logo-card img { height: 46px; border-radius: 8px; }
+    .brand-main { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; display: block; }
+    .brand-sub { font-size: 0.68rem; letter-spacing: 2px; color: var(--brand-red); font-weight: 700; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links button, .nav-links a { background: none; border: none; font-size: 0.95rem; font-weight: 600; color: var(--text-dark); cursor: pointer; text-decoration: none; transition: color 0.2s; }
+    .nav-links button:hover, .nav-links a:hover { color: var(--brand-red); }
+    .cart-btn { background: var(--sand-100); border: 1px solid var(--sand-200); border-radius: 30px; padding: 8px 16px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .hero-badge { color: var(--brand-red); font-weight: 700; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.15; margin: 12px 0 18px; }
+    .hero h1 span { font-style: italic; color: var(--brand-red); font-weight: 400; }
+    .hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 28px; }
+    .hero-buttons { display: flex; gap: 14px; }
+    .btn-primary { background: var(--brand-red); color: white; padding: 14px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; }
+    .hero-img-box img { width: 100%; border-radius: 28px; height: 380px; object-fit: cover; }
+    .catalogo-section { max-width: 1200px; margin: 0 auto; padding: 60px 24px 80px; }
+    .section-title { text-align: center; margin-bottom: 35px; }
+    .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; margin-bottom: 8px; }
+    .filter-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 45px; }
+    .filter-btn { background: var(--sand-100); color: #4A443A; border: 1px solid transparent; padding: 10px 22px; border-radius: 30px; font-weight: 600; cursor: pointer; }
+    .filter-btn.active, .filter-btn:hover { background: var(--brand-red); color: white; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
+    .card { background: white; border-radius: 22px; border: 1px solid var(--sand-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+    .card-img { position: relative; height: 240px; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .card-badge { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.92); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+    .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+    .card-desc { color: var(--text-muted); font-size: 0.84rem; margin-bottom: 16px; flex-grow: 1; }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--sand-100); }
+    .card-price { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--brand-red); }
+    .card-btn { background: var(--sand-100); border: 1px solid var(--sand-200); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; }
+    .card-btn:hover { background: var(--brand-red); color: white; }
   </style>
 </head>
 <body>
-
-  <div class="top-banner">
-    ✨ Envíos a todo el país | Cupos limitados para talleres presenciales en Samborondón ✨
-  </div>
+  <div class="top-banner">✨ Envíos a todo el país | Cupos limitados para talleres presenciales en Samborondón ✨</div>
 
   <header class="navbar">
     <a href="#" class="logo-container">
-      <div class="logo-card">
-        <img src="logo.jpg" alt="Handmade Love Logo">
-      </div>
+      <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
       <div class="brand-text">
         <span class="brand-main">handmade love</span>
-        <span class="brand-sub">BY E.L.E &middot; EMOCION-ARTE</span>
+        <span class="brand-sub">BY E.L.E · EMOCION-ARTE</span>
       </div>
     </a>
-
     <nav class="nav-links">
       <button onclick="filtrar('todos')">Catálogo</button>
       <button onclick="filtrar('velas')">🕯️ Velas</button>
       <button onclick="filtrar('crochet')">🧶 Crochet</button>
       <button onclick="filtrar('bordado')">🪡 Bordado</button>
       <button onclick="filtrar('bisuteria')">💍 Bisutería</button>
-      <a href="#talleres" class="pill-talleres">🎨 Talleres</a>
     </nav>
-
-    <button class="cart-btn" onclick="toggleCart()">
-      🛍️
-      <span class="cart-badge" id="cart-count">0</span>
-    </button>
+    <button class="cart-btn" onclick="alert('Tu carrito tiene ' + cartCount + ' artículos.')">🛍️ (<span id="cart-num">0</span>)</button>
   </header>
 
   <section class="hero">
     <div>
       <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
       <h1>El valor de lo artesanal, en cada <span>detalle.</span></h1>
-      <p>Piezas exclusivas en velas aromáticas, accesorios de crochet, bordado contemporáneo y joyería de piedras naturales. Además, vive experiencias presenciales únicas en nuestros talleres.</p>
+      <p>Piezas exclusivas en velas aromáticas, accesorios de crochet, bordado contemporáneo y joyería de piedras naturales.</p>
       <div class="hero-buttons">
-        <a href="#catalogo" class="btn-primary">Explorar Tienda &darr;</a>
-        <a href="#talleres" class="btn-secondary">Ver Talleres Presenciales</a>
+        <a href="#catalogo" class="btn-primary">Explorar Tienda ↓</a>
       </div>
     </div>
     <div class="hero-img-box">
@@ -797,705 +106,102 @@
       <button class="filter-btn" onclick="filtrar('bisuteria')">💍 Bisutería</button>
     </div>
 
-    <div class="products-grid">
-      <!-- Velas -->
-      <div class="card" data-category="velas">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600" alt="Vela Soja">
-          <span class="card-badge">Velas</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Vela de Soja Vainilla & Lavanda</h3>
-          <p class="card-desc">Cera vegetal 100% de soja en envase de vidrio con pabilo de madera natural.</p>
-          <div class="card-footer">
-            <span class="card-price">$16.50</span>
-            <button class="card-btn" onclick="agregar('Vela Soja Vainilla', 16.50)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-category="velas">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1572726729437-3732efed3f8a?w=600" alt="Vela Café">
-          <span class="card-badge">Velas</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Vela Aromática Café & Canela</h3>
-          <p class="card-desc">Notas cálidas decorada con granos de café orgánico y flores botánicas secas.</p>
-          <div class="card-footer">
-            <span class="card-price">$18.00</span>
-            <button class="card-btn" onclick="agregar('Vela Café & Canela', 18.00)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Crochet -->
-      <div class="card" data-category="crochet">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1615457938971-5ab9a4f4d2f0?w=600" alt="Tote Bag Crochet">
-          <span class="card-badge">Crochet</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Bolso Tote Bag a Crochet</h3>
-          <p class="card-desc">Tejido a mano con hilo de algodón crudo, asas resistentes y diseño artesanal.</p>
-          <div class="card-footer">
-            <span class="card-price">$32.00</span>
-            <button class="card-btn" onclick="agregar('Tote Bag a Crochet', 32.00)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-category="crochet">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=600" alt="Posavasos Crochet">
-          <span class="card-badge">Crochet</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Set de 4 Posavasos Florales</h3>
-          <p class="card-desc">Posavasos en punto relieve con tonalidades tierra y acabado artesanal.</p>
-          <div class="card-footer">
-            <span class="card-price">$14.00</span>
-            <button class="card-btn" onclick="agregar('Set 4 Posavasos', 14.00)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bordado -->
-      <div class="card" data-category="bordado">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Bastidor Bordado">
-          <span class="card-badge">Bordado</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Bastidor Bordado Botánico 20cm</h3>
-          <p class="card-desc">Bordado botánico en relieve en lino natural, listo para decorar tu hogar.</p>
-          <div class="card-footer">
-            <span class="card-price">$28.00</span>
-            <button class="card-btn" onclick="agregar('Bastidor Botánico 20cm', 28.00)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-category="bordado">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1528458909336-e7a0adfed0a5?w=600" alt="Colgante Bordado">
-          <span class="card-badge">Bordado</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Colgante con Medalla Bordada</h3>
-          <p class="card-desc">Miniatura bordada montada en engaste de acero bañado en oro.</p>
-          <div class="card-footer">
-            <span class="card-price">$19.50</span>
-            <button class="card-btn" onclick="agregar('Colgante Bordado', 19.50)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bisutería -->
-      <div class="card" data-category="bisuteria">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1611591475155-4264774d0681?w=600" alt="Pulsera Cuarzo">
-          <span class="card-badge">Bisutería</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Pulsera de Cuarzo Rosa & Jade</h3>
-          <p class="card-desc">Piedras naturales facetadas con dijes en chapa de oro de 18k ajustable.</p>
-          <div class="card-footer">
-            <span class="card-price">$15.00</span>
-            <button class="card-btn" onclick="agregar('Pulsera Cuarzo Rosa', 15.00)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card" data-category="bisuteria">
-        <div class="card-img">
-          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600" alt="Aretes">
-          <span class="card-badge">Bisutería</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Aretes Colgantes Piedra Luna</h3>
-          <p class="card-desc">Diseño elegante con enganche hipoalergénico y destellos aperlados.</p>
-          <div class="card-footer">
-            <span class="card-price">$17.50</span>
-            <button class="card-btn" onclick="agregar('Aretes Piedra Luna', 17.50)">+ Agregar</button>
-          </div>
-        </div>
-      </div>
+    <div class="products-grid" id="grid-productos">
+      <!-- Los productos de Decap CMS se insertan aquí automáticamente -->
+      <p id="cargando" style="text-align:center; grid-column: 1/-1; color: var(--text-muted);">Cargando catálogo...</p>
     </div>
   </main>
 
-  <!-- SECCIÓN TALLERES EMOCION-ARTE CON CONTROL DE INVENTARIO -->
-  <section class="workshops-section" id="talleres">
-    <div class="workshops-container">
-      <div class="section-title">
-        <span style="color: var(--brand-red); font-weight:700; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Experiencias Presenciales</span>
-        <h2>Talleres EMOCION-ARTE</h2>
-        <p>Aprende, desconéctate de la rutina y crea tus propias piezas artesanales en grupos reducidos de 10 personas.</p>
-      </div>
-
-      <div class="workshops-grid">
-        
-        <!-- Taller 1: Velas de Soja Botánicas (ID: velas) -->
-        <div class="workshop-card" id="card-taller-velas">
-          <div class="workshop-header-img">
-            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600" alt="Taller Velas">
-            <span class="card-badge" id="badge-taller-velas">Calculando cupos...</span>
-          </div>
-          <div class="workshop-body">
-            <div class="workshop-info-pill">
-              <span class="info-tag">📅 Sábado 24 de Octubre</span>
-              <span class="info-tag">⏰ 10:00 AM - 1:00 PM</span>
-              <span class="info-tag">📍 Almax Center, Samborondón</span>
-            </div>
-            <h3 class="workshop-title">Taller de Velas de Soja Botánicas</h3>
-            
-            <div class="workshop-block">
-              <strong>🎁 ¿Qué incluye?</strong>
-              <ul>
-                <li>Cera vegetal 100% de soja, esencias puras y pabilos de madera.</li>
-                <li>2 envases de vidrio reutilizables y flores secas botánicas.</li>
-                <li>Guía impresa de formulación y temperaturas de vertido.</li>
-                <li>Coffee break artesanal de bienvenida.</li>
-                <li>Te llevas 2 velas terminadas y empaquetadas por ti.</li>
-              </ul>
-            </div>
-
-            <div class="workshop-block">
-              <strong>💡 Mecánica del Taller</strong>
-              <p>Sesión práctica de 3 horas. Aprenderás cálculo de aromas, vertido profesional, colocación de mechas y decoración con botánica seca. Nivel principiante, no requiere experiencia previa.</p>
-            </div>
-
-            <div class="workshop-footer">
-              <div>
-                <span style="font-size:0.75rem; color:#888; display:block;">Inversión por persona</span>
-                <span class="card-price">$35.00</span>
-              </div>
-              <button class="btn-reserve-workshop" id="btn-taller-velas" onclick="abrirAgendaPago('velas')">
-                📅 Reservar Cupo
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Taller 2: Bordado Botánico Contemporáneo (ID: bordado) -->
-        <div class="workshop-card" id="card-taller-bordado">
-          <div class="workshop-header-img">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Taller Bordado">
-            <span class="card-badge" id="badge-taller-bordado">Calculando cupos...</span>
-          </div>
-          <div class="workshop-body">
-            <div class="workshop-info-pill">
-              <span class="info-tag">📅 Domingo 25 de Octubre</span>
-              <span class="info-tag">⏰ 3:00 PM - 6:00 PM</span>
-              <span class="info-tag">📍 Almax Center, Samborondón</span>
-            </div>
-            <h3 class="workshop-title">Bordado Contemporáneo & Flores</h3>
-            
-            <div class="workshop-block">
-              <strong>🎁 ¿Qué incluye?</strong>
-              <ul>
-                <li>Bastidor de madera de 20cm y tela de lino premium.</li>
-                <li>Set completo de hilos de algodón, agujas especiales y tijera para bordar.</li>
-                <li>Patrón floral prediseñado y guía de puntadas básicas y en relieve.</li>
-                <li>Coffee break y espacio de meditación creativa.</li>
-                <li>Tu bastidor terminado listo para colgar.</li>
-              </ul>
-            </div>
-
-            <div class="workshop-block">
-              <strong>💡 Mecánica del Taller</strong>
-              <p>Aprenderás desde tensar la tela hasta 6 tipos de puntadas botánicas (nudo francés, punto hoja, relieve y relleno). Ideal para desconectarse y trabajar la motricidad fina.</p>
-            </div>
-
-            <div class="workshop-footer">
-              <div>
-                <span style="font-size:0.75rem; color:#888; display:block;">Inversión por persona</span>
-                <span class="card-price">$38.00</span>
-              </div>
-              <button class="btn-reserve-workshop" id="btn-taller-bordado" onclick="abrirAgendaPago('bordado')">
-                📅 Reservar Cupo
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- MODAL DINÁMICO DE RESERVA (PASO 1: PAGO -> PASO 2: REGISTRO) -->
-  <div class="modal-overlay" id="modal-agenda">
-    <div class="modal-content">
-      <button class="modal-close" onclick="cerrarAgendaRegistro()">&times;</button>
-      
-      <!-- Ficha resumen del taller -->
-      <div style="background:var(--sand-100); border:1px solid var(--sand-200); border-radius:14px; padding:14px; margin-bottom:18px;">
-        <div style="font-weight:700; color:var(--brand-red); font-size:1rem;" id="reg-taller-nombre">Nombre del Taller</div>
-        <div style="color:#555; font-size:0.85rem; margin-top:2px;" id="reg-taller-fecha">Fecha y Horario</div>
-        <div style="color:#777; font-size:0.8rem;" id="reg-taller-lugar">Lugar</div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:8px; border-top:1px dashed var(--sand-200);">
-          <div style="font-size:0.85rem; font-weight:600;">
-            Cupos a reservar: 
-            <select id="reg-cupos" onchange="actualizarTotalRegistro()" style="padding:3px 8px; border-radius:6px; border:1px solid var(--sand-200); font-family:inherit; font-weight:700;">
-              <!-- Se llena automáticamente según los cupos disponibles -->
-            </select>
-          </div>
-          <div style="font-weight:700; font-size:1.15rem; color:var(--brand-red);" id="reg-total-pagar">$0.00</div>
-        </div>
-      </div>
-
-      <!-- FASE 1: PROCESAR EL PAGO PRIMERO -->
-      <div id="fase-pago">
-        <div class="step-indicator">
-          <span>Paso 1 de 2:</span> Garantiza tu cupo con el pago
-        </div>
-        <h4 style="font-family:'Playfair Display', serif; font-size:1.25rem; margin-bottom:8px;">
-          Selecciona tu forma de pago
-        </h4>
-        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">
-          Para asegurar la plaza y la compra de materiales personalizados, el cupo se reserva mediante abono previo.
-        </p>
-
-        <!-- Opción A: Payphone Tarjeta -->
-        <div style="border:1.5px solid #FF6A00; border-radius:14px; padding:14px; margin-bottom:12px; background:#FFFBF8;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-            <strong style="color:#D65500; font-size:0.95rem;">💳 Tarjeta de Crédito / Débito (Payphone)</strong>
-          </div>
-          <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">
-            Acepta todas las tarjetas nacionales e internacionales con acreditación inmediata.
-          </p>
-          <a href="https://ppls.me/cIn4VPnued6A9r628wNVw" target="_blank" onclick="marcarMetodoPago('Tarjeta de Crédito / Débito (Payphone)')" style="background:#FF6A00; color:white; text-decoration:none; display:flex; justify-content:center; align-items:center; gap:8px; padding:10px; border-radius:10px; font-weight:700; font-size:0.88rem;">
-            Pagar ahora con Payphone 👉
-          </a>
-        </div>
-
-        <!-- Opción B: Banco Internacional Transferencia -->
-        <div style="border:1.5px solid var(--sand-200); border-radius:14px; padding:14px; margin-bottom:16px; background:#FAF8F5;">
-          <strong style="color:var(--text-dark); font-size:0.95rem; display:block; margin-bottom:6px;">🏦 Transferencia Bancaria / Deuna (0% comisión)</strong>
-          <div style="font-size:0.82rem; line-height:1.6; color:#444; background:white; padding:10px 12px; border-radius:8px; border:1px solid var(--sand-200); margin-bottom:8px;">
-            <strong>Banco:</strong> Banco Internacional<br>
-            <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-            <strong>C.I.:</strong> 0922683552 | <strong>Cta. Ahorros:</strong> 1000900044<br>
-            <strong>Deuna:</strong> 0980526007<br>
-            <strong>Correo:</strong> katnisseverdeen1306@gmail.com
-          </div>
-          <button type="button" onclick="marcarMetodoPago('Transferencia Banco Internacional / Deuna')" style="background:var(--sand-100); border:1px solid var(--sand-200); width:100%; padding:8px; border-radius:8px; font-size:0.82rem; font-weight:700; cursor:pointer; color:var(--text-dark);">
-            He realizado / realizaré la transferencia bancaria
-          </button>
-        </div>
-
-        <!-- Botón para avanzar a registrarse -->
-        <button type="button" onclick="avanzarARegistro()" style="background:var(--brand-red); color:white; border:none; width:100%; padding:13px; border-radius:12px; font-weight:700; font-size:0.95rem; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px;">
-          <span>Continuar con mi Registro de Asistente 👉</span>
-        </button>
-      </div>
-
-      <!-- FASE 2: FORMULARIO DE REGISTRO (DESPUÉS DEL PAGO) -->
-      <div id="fase-registro" style="display:none;">
-        <div class="step-indicator">
-          <span>Paso 2 de 2:</span> Datos de la persona que asiste
-        </div>
-        <h4 style="font-family:'Playfair Display', serif; font-size:1.25rem; margin-bottom:8px;">
-          Ficha de Inscripción del Asistente
-        </h4>
-        <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">
-          Ingresa tus datos para registrar tu asistencia y preparar tus materiales y credencial.
-        </p>
-
-        <form id="form-registro-taller" onsubmit="procesarRegistroTaller(event)">
-          <div class="form-group">
-            <label>Nombre y Apellido del Asistente *</label>
-            <input type="text" id="reg-nombre" required placeholder="Ej. Andrea Gómez">
-          </div>
-
-          <div class="form-group">
-            <label>Teléfono celular / WhatsApp *</label>
-            <input type="tel" id="reg-telefono" required placeholder="Ej. 0980526007">
-          </div>
-
-          <div class="form-group">
-            <label>Correo Electrónico *</label>
-            <input type="email" id="reg-correo" required placeholder="Ej. andrea@gmail.com">
-          </div>
-
-          <div class="form-group">
-            <label>Forma de pago utilizada</label>
-            <input type="text" id="reg-metodo-confirmado" readonly style="background:#EEE8E0; font-weight:600; color:#333;">
-          </div>
-
-          <div class="form-group">
-            <label>Notas para el Coffee Break / Alergias (Opcional)</label>
-            <textarea id="reg-notas" rows="2" placeholder="Ej. No consumo lácteos, asisto con una acompañante, etc."></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit-registration">
-            <span>Confirmar Registro y Enviar Comprobante por WhatsApp</span>
-          </button>
-          
-          <button type="button" onclick="volverAPasoPago()" style="background:none; border:none; color:#888; font-size:0.82rem; width:100%; margin-top:8px; cursor:pointer; text-decoration:underline;">
-            &larr; Volver a las opciones de pago
-          </button>
-        </form>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- PIE DE PÁGINA (FOOTER) -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <div class="logo-card">
-          <img src="logo.jpg" alt="Logo">
-        </div>
-        <div class="brand-main">handmade love</div>
-        <div class="brand-sub">BY E.L.E</div>
-        <p class="footer-desc">
-          Creaciones con identidad, ternura y detalle hechas a mano por Erika Alvarado. Talleres presenciales en Samborondón.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>CATEGORÍAS</h4>
-        <ul class="footer-links">
-          <li><button onclick="filtrar('velas')">Velas de Soja</button></li>
-          <li><button onclick="filtrar('crochet')">Crochet & Accesorios</button></li>
-          <li><button onclick="filtrar('bordado')">Bordado Botánico</button></li>
-          <li><button onclick="filtrar('bisuteria')">Bisutería Fina</button></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>TALLERES</h4>
-        <ul class="footer-links">
-          <li><a href="#talleres">Almax Center - Samborondón</a></li>
-          <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
-          <li><a href="#talleres">Talleres Privados y Corporativos</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>CONTACTO DIRECTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 6px;">
-          ¿Tienes una consulta o encargo personalizado?
-        </p>
-        <p style="margin-bottom: 12px;">
-          <a href="mailto:handmadelovebyele@gmail.com" style="color: #FFFFFF; font-size: 0.82rem; text-decoration: underline; word-break: break-all;">
-            ✉️ handmadelovebyele@gmail.com
-          </a>
-        </p>
-        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      &copy; 2026 Handmade Love by E.L.E & EMOCION-ARTE. Samborondón, Ecuador. Todos los derechos reservados.
-    </div>
-  </footer>
-
-  <!-- Drawer Carrito -->
-  <div class="cart-backdrop" id="backdrop" onclick="toggleCart()"></div>
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-header">
-      <h3 style="font-family:'Playfair Display', serif; font-size:1.3rem;">Tu Carrito</h3>
-      <button onclick="toggleCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-    </div>
-    <div class="cart-items" id="cart-items">
-      <p style="text-align:center; color:var(--text-muted); margin-top:30px;">Tu carrito está vacío.</p>
-    </div>
-    
-    <div style="border-top: 1px solid var(--sand-200); padding-top:16px; display:flex; flex-direction:column; gap:10px;">
-      <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.2rem;">
-        <span>Total:</span>
-        <span id="cart-total" style="color:var(--brand-red); font-family:'Playfair Display', serif;">$0.00</span>
-      </div>
-      
-      <button onclick="pagarConTarjeta()" style="background:#FF6A00; color:white; border:none; width:100%; padding:14px; border-radius:12px; font-weight:700; font-size:0.95rem; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px;">
-        💳 Pagar con Tarjeta (Payphone)
-      </button>
-
-      <button class="btn-whatsapp" onclick="checkoutWhatsApp()">
-        💬 Transferencia / WhatsApp
-      </button>
-
-      <button onclick="mostrarDatosBancarios()" style="background:none; border:1px solid var(--sand-200); color:var(--text-dark); width:100%; padding:8px; border-radius:10px; font-size:0.8rem; font-weight:600; cursor:pointer;">
-        Ver datos para Transferencia / Deuna
-      </button>
-    </div>
-  </div>
-
-  <!-- Modal Datos Bancarios Generales -->
-  <div id="modal-banco" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:300; align-items:center; justify-content:center; padding:20px;">
-    <div style="background:white; max-width:420px; width:100%; border-radius:20px; padding:24px; box-shadow:0 10px 30px rgba(0,0,0,0.2); text-align:left;">
-      <h3 style="font-family:'Playfair Display', serif; font-size:1.3rem; margin-bottom:12px; color:var(--text-dark);">Datos para Transferencia</h3>
-      <p style="font-size:0.85rem; color:#555; margin-bottom:16px;">Realiza tu transferencia o pago por Deuna y envía el comprobante por WhatsApp para despachar tu orden:</p>
-      
-      <div style="background:var(--sand-100); padding:16px; border-radius:14px; font-size:0.85rem; line-height:1.7; border:1px solid var(--sand-200); color:var(--text-dark);">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>C.I.:</strong> 0922683552<br>
-        <strong>Tipo de Cuenta:</strong> Cuenta de Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Correo de confirmación:</strong> katnisseverdeen1306@gmail.com<br>
-        <strong>Deuna:</strong> Disponible al 0980526007
-      </div>
-
-      <button onclick="document.getElementById('modal-banco').style.display='none'" style="margin-top:16px; background:var(--brand-red); color:white; border:none; width:100%; padding:11px; border-radius:10px; font-weight:600; cursor:pointer;">
-        Entendido, cerrar
-      </button>
-    </div>
-  </div>
-
   <script>
-    /* ==========================================================
-       CONFIGURACIÓN DE INVENTARIO DE CUPOS (MÁXIMO 10 PERSONAS)
-       Solo debes cambiar el número de 'ocupados' cuando te paguen.
-       ========================================================== */
-    const inventarioTalleres = {
-      velas: {
-        id: 'velas',
-        nombre: 'Taller de Velas de Soja Botánicas',
-        fecha: 'Sábado 24 de Octubre | 10:00 AM - 1:00 PM',
-        lugar: 'Almax Center, Samborondón',
-        precio: 35.00,
-        cupoMax: 10,  // Capacidad máxima de personas
-        ocupados: 6   // Cambia este número conforme se inscriban (ej. 6 = quedan 4)
-      },
-      bordado: {
-        id: 'bordado',
-        nombre: 'Bordado Contemporáneo & Flores',
-        fecha: 'Domingo 25 de Octubre | 3:00 PM - 6:00 PM',
-        lugar: 'Almax Center, Samborondón',
-        precio: 38.00,
-        cupoMax: 10,  // Capacidad máxima de personas
-        ocupados: 2   // Cambia este número conforme se inscriban (ej. 2 = quedan 8)
-      }
-    };
+    let todosLosProductos = [];
+    let cartCount = 0;
 
-    let carrito = [];
-    let tallerSeleccionadoActual = null;
-    let metodoPagoElegido = 'Transferencia Banco Internacional / Deuna';
+    function agregarAlCarrito(nombre, precio) {
+      cartCount++;
+      document.getElementById('cart-num').textContent = cartCount;
+      alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
+    }
 
-    // Función que corre al cargar la página para actualizar las tarjetas según los cupos libres
-    function actualizarEstadoInventarioUI() {
-      for (const key in inventarioTalleres) {
-        const item = inventarioTalleres[key];
-        const disponibles = Math.max(0, item.cupoMax - item.ocupados);
-        const badge = document.getElementById('badge-taller-' + key);
-        const btn = document.getElementById('btn-taller-' + key);
-
-        if (!badge || !btn) continue;
-
-        if (disponibles <= 0) {
-          badge.textContent = 'CUPOS AGOTADOS (10/10)';
-          badge.style.color = '#EE2222';
-          badge.style.background = '#FFF1F1';
-          btn.disabled = true;
-          btn.textContent = '❌ Cupos Llenos';
-        } else {
-          badge.textContent = `Solo ${disponibles} cupos libres de ${item.cupoMax}`;
-          badge.style.color = disponibles <= 3 ? '#EE2222' : '#2E7D32';
-          btn.disabled = false;
-          btn.textContent = '📅 Reservar Cupo';
+    function parseFrontmatter(texto) {
+      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
+      if (!match) return null;
+      const yaml = match[1];
+      const data = {};
+      yaml.split('\n').forEach(line => {
+        const colon = line.indexOf(':');
+        if (colon > 0) {
+          const key = line.slice(0, colon).trim();
+          let val = line.slice(colon + 1).trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          data[key] = val;
         }
+      });
+      return data;
+    }
+
+    async function cargarCatalogo() {
+      const grid = document.getElementById('grid-productos');
+      try {
+        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos');
+        const archivos = await res.json();
+        
+        if (!Array.isArray(archivos)) {
+          grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">No hay productos disponibles por ahora.</p>';
+          return;
+        }
+
+        const promesas = archivos
+          .filter(f => f.name.endsWith('.md'))
+          .map(f => fetch(f.download_url).then(r => r.text()));
+
+        const contenidos = await Promise.all(promesas);
+        todosLosProductos = contenidos.map(parseFrontmatter).filter(Boolean);
+        render(todosLosProductos);
+      } catch (err) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Catálogo actualizado.</p>';
       }
     }
 
-    // Inicializar inventario al cargar la página
-    window.addEventListener('DOMContentLoaded', actualizarEstadoInventarioUI);
+    function render(lista) {
+      const grid = document.getElementById('grid-productos');
+      if (lista.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted);">No hay productos en esta categoría.</p>';
+        return;
+      }
+      grid.innerHTML = lista.map(p => `
+        <div class="card" data-cat="${p.categoria || ''}">
+          <div class="card-img">
+            <img src="${p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'}" alt="${p.title}">
+            <span class="card-badge">${p.categoria || 'Artesanía'}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">${p.title}</h3>
+            <p class="card-desc">${p.descripcion || ''}</p>
+            <div class="card-footer">
+              <span class="card-price">$${parseFloat(p.precio || 0).toFixed(2)}</span>
+              <button class="card-btn" onclick="agregarAlCarrito('${p.title}', ${p.precio || 0})">+ Agregar</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
 
     function filtrar(cat) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      const buttons = Array.from(document.querySelectorAll('.filter-btn'));
-      const target = buttons.find(b => b.textContent.toLowerCase().includes(cat.toLowerCase()));
-      if (target) target.classList.add('active');
+      const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.textContent.toLowerCase().includes(cat === 'todos' ? 'todas' : cat));
+      if (activeBtn) activeBtn.classList.add('active');
 
-      const cards = document.querySelectorAll('.card[data-category]');
-      cards.forEach(card => {
-        if (cat === 'todos' || card.getAttribute('data-category') === cat) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      const catalogoEl = document.getElementById('catalogo');
-      if (catalogoEl) {
-        catalogoEl.scrollIntoView({ behavior: 'smooth' });
+      if (cat === 'todos') {
+        render(todosLosProductos);
+      } else {
+        const filtrados = todosLosProductos.filter(p => (p.categoria || '').toLowerCase() === cat.toLowerCase());
+        render(filtrados);
       }
     }
 
-    function toggleCart() {
-      document.getElementById('cart-drawer').classList.toggle('open');
-      document.getElementById('backdrop').classList.toggle('open');
-    }
-
-    function agregar(nombre, precio) {
-      carrito.push({ nombre, precio });
-      actualizarCarrito();
-      toggleCart();
-    }
-
-    function actualizarCarrito() {
-      const cont = document.getElementById('cart-items');
-      const badge = document.getElementById('cart-count');
-      const totalEl = document.getElementById('cart-total');
-      badge.textContent = carrito.length;
-
-      if (carrito.length === 0) {
-        cont.innerHTML = '<p style="text-align:center; color:var(--text-muted); margin-top:30px;">Tu carrito está vacío.</p>';
-        totalEl.textContent = '$0.00';
-        return;
-      }
-
-      let total = 0;
-      let html = '';
-      carrito.forEach((item, index) => {
-        total += item.precio;
-        html += `
-          <div class="cart-item">
-            <div>
-              <div style="font-weight:600; font-size:0.9rem;">${item.nombre}</div>
-              <div style="color:var(--brand-red); font-weight:700;">$${item.precio.toFixed(2)}</div>
-            </div>
-            <button onclick="eliminar(${index})" style="background:none; border:none; color:#EF4444; cursor:pointer;">🗑️</button>
-          </div>
-        `;
-      });
-      cont.innerHTML = html;
-      totalEl.textContent = `$${total.toFixed(2)}`;
-    }
-
-    function eliminar(i) {
-      carrito.splice(i, 1);
-      actualizarCarrito();
-    }
-
-    function checkoutWhatsApp() {
-      if (carrito.length === 0) return alert("Tu carrito está vacío.");
-      let msg = "¡Hola Handmade Love! ✨ Deseo realizar el siguiente pedido:%0A%0A";
-      let tot = 0;
-      carrito.forEach(it => {
-        msg += `• ${it.nombre} - $${it.precio.toFixed(2)}%0A`;
-        tot += it.precio;
-      });
-      msg += `%0ATotal: $${tot.toFixed(2)}%0A¿Me confirman disponibilidad y recepción del comprobante bancario?`;
-      
-      window.open(`https://wa.me/593980526007?text=${msg}`, '_blank');
-    }
-
-    function pagarConTarjeta() {
-      if (carrito.length === 0) {
-        alert("Agrega al menos un producto al carrito antes de pagar.");
-        return;
-      }
-      window.open('https://ppls.me/cIn4VPnued6A9r628wNVw', '_blank');
-    }
-
-    function mostrarDatosBancarios() {
-      const modal = document.getElementById('modal-banco');
-      modal.style.display = 'flex';
-    }
-
-    /* SISTEMA DE RESERVAS DE TALLER CON LÍMITE DE INVENTARIO */
-    function abrirAgendaPago(tallerKey) {
-      const item = inventarioTalleres[tallerKey];
-      if (!item) return;
-
-      const disponibles = item.cupoMax - item.ocupados;
-      if (disponibles <= 0) {
-        alert("Lo sentimos, este taller ya completó su cupo máximo de 10 personas.");
-        return;
-      }
-
-      tallerSeleccionadoActual = item;
-      document.getElementById('reg-taller-nombre').textContent = item.nombre;
-      document.getElementById('reg-taller-fecha').textContent = '🗓️ ' + item.fecha;
-      document.getElementById('reg-taller-lugar').textContent = '📍 ' + item.lugar;
-      
-      // Adaptar el selector de cupos al inventario disponible (máximo 4 por compra o lo que quede)
-      const selectCupos = document.getElementById('reg-cupos');
-      selectCupos.innerHTML = '';
-      const maxSeleccionable = Math.min(disponibles, 4);
-
-      for (let i = 1; i <= maxSeleccionable; i++) {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = i === 1 ? '1 cupo' : `${i} cupos`;
-        selectCupos.appendChild(opt);
-      }
-
-      selectCupos.value = "1";
-      actualizarTotalRegistro();
-
-      // Abrir en Paso 1 (Pago)
-      document.getElementById('fase-pago').style.display = 'block';
-      document.getElementById('fase-registro').style.display = 'none';
-      document.getElementById('modal-agenda').classList.add('open');
-    }
-
-    function cerrarAgendaRegistro() {
-      document.getElementById('modal-agenda').classList.remove('open');
-    }
-
-    function actualizarTotalRegistro() {
-      if (!tallerSeleccionadoActual) return;
-      const cupos = parseInt(document.getElementById('reg-cupos').value || 1);
-      const total = tallerSeleccionadoActual.precio * cupos;
-      document.getElementById('reg-total-pagar').textContent = '$' + total.toFixed(2);
-    }
-
-    function marcarMetodoPago(metodo) {
-      metodoPagoElegido = metodo;
-      document.getElementById('reg-metodo-confirmado').value = metodo;
-      avanzarARegistro();
-    }
-
-    function avanzarARegistro() {
-      if (!document.getElementById('reg-metodo-confirmado').value) {
-        document.getElementById('reg-metodo-confirmado').value = metodoPagoElegido;
-      }
-      document.getElementById('fase-pago').style.display = 'none';
-      document.getElementById('fase-registro').style.display = 'block';
-    }
-
-    function volverAPasoPago() {
-      document.getElementById('fase-pago').style.display = 'block';
-      document.getElementById('fase-registro').style.display = 'none';
-    }
-
-    function procesarRegistroTaller(e) {
-      e.preventDefault();
-      if (!tallerSeleccionadoActual) return;
-
-      const nombre = document.getElementById('reg-nombre').value;
-      const telefono = document.getElementById('reg-telefono').value;
-      const correo = document.getElementById('reg-correo').value;
-      const cupos = document.getElementById('reg-cupos').value;
-      const metodo = document.getElementById('reg-metodo-confirmado').value;
-      const notas = document.getElementById('reg-notas').value;
-      const total = (tallerSeleccionadoActual.precio * parseInt(cupos)).toFixed(2);
-
-      let mensaje = `¡Hola Handmade Love / EMOCION-ARTE! ✨ Acabo de procesar mi pago para un taller presencial:%0A%0A`;
-      mensaje += `🎨 *Taller:* ${tallerSeleccionadoActual.nombre}%0A`;
-      mensaje += `📅 *Horario:* ${tallerSeleccionadoActual.fecha}%0A`;
-      mensaje += `📍 *Lugar:* ${tallerSeleccionadoActual.lugar}%0A`;
-      mensaje += `🎟️ *Cupos pagados:* ${cupos} ($${total})%0A`;
-      mensaje += `💳 *Método de pago:* ${metodo}%0A%0A`;
-      mensaje += `📋 *DATOS DE ASISTENCIA:*%0A`;
-      mensaje += `👤 *Nombre Asistente:* ${nombre}%0A`;
-      mensaje += `📱 *WhatsApp:* ${telefono}%0A`;
-      mensaje += `✉️ *Correo:* ${correo}%0A`;
-      if (notas) {
-        mensaje += `📝 *Notas / Alergias:* ${notas}%0A`;
-      }
-      mensaje += `%0A*Adjunto en este chat mi comprobante de pago.* ¡Muchas gracias!`;
-
-      cerrarAgendaRegistro();
-      window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
-    }
+    cargarCatalogo();
   </script>
 </body>
 </html>
