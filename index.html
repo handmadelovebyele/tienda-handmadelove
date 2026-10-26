@@ -72,22 +72,49 @@
     .card-btn { background: var(--sand-100); border: 1px solid var(--sand-200); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .card-btn:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-    /* Modal / Pop-up de Detalle */
+    /* Modal / Pop-up con scroll y diseño flexible */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
     .modal-overlay.open { display: flex; }
-    .modal-card { background: white; border-radius: 24px; max-width: 820px; width: 100%; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-    .modal-close { position: absolute; top: 16px; right: 18px; background: var(--sand-100); border: none; font-size: 1.4rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .modal-card { 
+      background: white; 
+      border-radius: 24px; 
+      max-width: 860px; 
+      width: 100%; 
+      max-height: 85vh; 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 32px; 
+      padding: 32px; 
+      position: relative; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      overflow: hidden; /* Evita que el contenedor principal se deforme */
+    }
+    .modal-close { position: absolute; top: 16px; right: 18px; background: var(--sand-100); border: none; font-size: 1.4rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
+    
     .modal-gallery { display: flex; flex-direction: column; gap: 12px; }
     .modal-main-img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; border: 1px solid var(--sand-200); }
-    .modal-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .modal-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
     .modal-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.2s; flex-shrink: 0; }
     .modal-thumb.active, .modal-thumb:hover { border-color: var(--brand-red); opacity: 1; }
-    .modal-info { display: flex; flex-direction: column; }
+    
+    /* Columna de información con Scrollbar independiente */
+    .modal-info { 
+      display: flex; 
+      flex-direction: column; 
+      max-height: calc(85vh - 64px); 
+      overflow-y: auto; 
+      padding-right: 10px; 
+    }
+    /* Estilo sutil de la barra de scroll */
+    .modal-info::-webkit-scrollbar { width: 6px; }
+    .modal-info::-webkit-scrollbar-thumb { background-color: var(--sand-200); border-radius: 4px; }
+    .modal-info::-webkit-scrollbar-thumb:hover { background-color: #d1c3af; }
+
     .modal-cat { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--brand-red); font-weight: 700; margin-bottom: 6px; }
     .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1.2; margin-bottom: 12px; }
     .modal-price { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--brand-red); font-weight: 700; margin-bottom: 16px; }
-    .modal-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; white-space: pre-line; flex-grow: 1; }
-    .modal-actions { display: flex; gap: 12px; flex-direction: column; }
+    .modal-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; white-space: pre-line; }
+    .modal-actions { margin-top: auto; padding-top: 10px; }
     .btn-modal-cart { background: var(--brand-red); color: white; border: none; padding: 14px 20px; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; width: 100%; transition: background 0.2s; }
     .btn-modal-cart:hover { background: var(--brand-red-hover); }
 
@@ -113,7 +140,8 @@
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      .modal-card { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
+      .modal-card { grid-template-columns: 1fr; padding: 24px; gap: 20px; overflow-y: auto; }
+      .modal-info { max-height: none; padding-right: 0; }
       .modal-main-img { height: 260px; }
       .footer-container { grid-template-columns: 1fr; gap: 30px; }
     }
@@ -136,362 +164,4 @@
     <nav class="nav-links">
       <button onclick="filtrar('todos')">Catálogo</button>
       <button onclick="filtrar('velas')">🕯️ Velas</button>
-      <button onclick="filtrar('crochet')">🧶 Crochet</button>
-      <button onclick="filtrar('bordado')">🪡 Bordado</button>
-      <button onclick="filtrar('bisuteria')">💍 Bisutería</button>
-      <a href="#talleres" class="pill-talleres">🎨 Talleres</a>
-    </nav>
-    <button class="cart-btn" onclick="alert('Tu carrito tiene ' + cartCount + ' artículos.')">
-      🛍️ <span class="cart-badge" id="cart-num">0</span>
-    </button>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div>
-      <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
-      <h1>El valor de lo artesanal, en cada <span>detalle.</span></h1>
-      <p>Piezas exclusivas en velas aromáticas, accesorios de crochet, bordado contemporáneo y joyería de piedras naturales. Además, vive experiencias presenciales únicas en nuestros talleres.</p>
-      <div class="hero-buttons">
-        <a href="#catalogo" class="btn-primary">Explorar Tienda ↓</a>
-        <a href="#talleres" class="btn-secondary">Ver Talleres Presenciales</a>
-      </div>
-    </div>
-    <div class="hero-img-box">
-      <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800" alt="Creaciones artesanales">
-    </div>
-  </section>
-
-  <!-- Catálogo Dinámico con Decap CMS -->
-  <main class="catalogo-section" id="catalogo">
-    <div class="section-title">
-      <h2>Catálogo de Creaciones</h2>
-      <p>Haz clic en cualquier pieza para ver más detalles y fotografías.</p>
-    </div>
-
-    <div class="filter-tabs">
-      <button class="filter-btn active" onclick="filtrar('todos')">Todas las Piezas</button>
-      <button class="filter-btn" onclick="filtrar('velas')">🕯️ Velas</button>
-      <button class="filter-btn" onclick="filtrar('crochet')">🧶 Crochet</button>
-      <button class="filter-btn" onclick="filtrar('bordado')">🪡 Bordado</button>
-      <button class="filter-btn" onclick="filtrar('bisuteria')">💍 Bisutería</button>
-    </div>
-
-    <div class="products-grid" id="grid-productos">
-      <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Cargando creaciones...</p>
-    </div>
-  </main>
-
-  <!-- Modal Emergente de Producto -->
-  <div class="modal-overlay" id="modal-producto" onclick="cerrarModalExterno(event)">
-    <div class="modal-card">
-      <button class="modal-close" onclick="cerrarModal()">×</button>
-      <div class="modal-gallery">
-        <img src="" alt="" class="modal-main-img" id="modal-img-principal">
-        <div class="modal-thumbnails" id="modal-galeria-thumbs"></div>
-      </div>
-      <div class="modal-info">
-        <span class="modal-cat" id="modal-categoria"></span>
-        <h2 class="modal-title" id="modal-titulo"></h2>
-        <div class="modal-price" id="modal-precio"></div>
-        <div class="modal-desc" id="modal-descripcion"></div>
-        <div class="modal-actions">
-          <button class="btn-modal-cart" id="modal-btn-comprar">Agregar al Carrito</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Talleres EMOCION-ARTE -->
-  <section class="workshops-section" id="talleres">
-    <div class="workshops-container">
-      <div class="section-title">
-        <span style="color: var(--brand-red); font-weight:700; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Experiencias Presenciales</span>
-        <h2>Talleres EMOCION-ARTE</h2>
-        <p>Aprende, desconéctate y crea tus propias piezas de arte en Almax Center, Samborondón.</p>
-      </div>
-
-      <div class="workshops-grid">
-        <div class="card" style="cursor: default;">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600" alt="Taller Velas">
-            <span class="card-badge" style="color:var(--brand-red);">Solo 4 cupos libres</span>
-          </div>
-          <div class="card-body">
-            <span style="font-size:0.75rem; color:#888;">📅 Sábado, 10:00 AM - 1:00 PM</span>
-            <h3 class="card-title" style="margin-top:6px;">Taller de Velas de Soja Botánicas</h3>
-            <p class="card-desc">Elabora tus velas aromáticas con cera vegetal, esencias y flores secas. Incluye coffee break y materiales completos.</p>
-            <div class="card-footer">
-              <span class="card-price">$35.00</span>
-              <button class="card-btn" onclick="agregarAlCarrito('Cupo Taller Velas', 35.00)">Reservar Cupo</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="cursor: default;">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Taller Bordado">
-            <span class="card-badge" style="color:#526E59;">Cupos Abiertos</span>
-          </div>
-          <div class="card-body">
-            <span style="font-size:0.75rem; color:#888;">📅 Domingo, 3:00 PM - 6:00 PM</span>
-            <h3 class="card-title" style="margin-top:6px;">Bordado Contemporáneo & Flores</h3>
-            <p class="card-desc">Aprende puntadas esenciales sobre bastidor para crear composiciones botánicas relajantes. Materiales incluidos.</p>
-            <div class="card-footer">
-              <span class="card-price">$38.00</span>
-              <button class="card-btn" onclick="agregarAlCarrito('Cupo Taller Bordado', 38.00)">Reservar Cupo</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
-        <div class="brand-main">handmade love</div>
-        <div class="brand-sub">BY E.L.E</div>
-        <p class="footer-desc">
-          Creaciones con identidad, ternura y detalle hechas a mano por Erika Alvarado. Talleres presenciales en Samborondón.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>CATEGORÍAS</h4>
-        <ul class="footer-links">
-          <li><button onclick="filtrar('velas')">Velas de Soja</button></li>
-          <li><button onclick="filtrar('crochet')">Crochet & Accesorios</button></li>
-          <li><button onclick="filtrar('bordado')">Bordado Botánico</button></li>
-          <li><button onclick="filtrar('bisuteria')">Bisutería Fina</button></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>TALLERES</h4>
-        <ul class="footer-links">
-          <li><a href="#talleres">Almax Center - Samborondón</a></li>
-          <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
-          <li><a href="#talleres">Talleres Privados y Corporativos</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>CONTACTO DIRECTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
-          ¿Tienes una consulta o encargo personalizado?
-        </p>
-        <p style="margin-bottom: 12px;">
-          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
-          </a>
-        </p>
-        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.
-    </div>
-  </footer>
-
-  <script>
-    let todosLosProductos = [];
-    let cartCount = 0;
-
-    function agregarAlCarrito(nombre, precio) {
-      cartCount++;
-      document.getElementById('cart-num').textContent = cartCount;
-      alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
-    }
-
-    // Analizador corregido para leer descripciones completas multilínea
-    function parseFrontmatter(texto) {
-      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
-      if (!match) return null;
-      const yaml = match[1];
-      const data = { fotos: [] };
-      const lines = yaml.split('\n');
-      
-      let currentKey = null;
-      let buffer = [];
-      let enListaFotos = false;
-
-      function guardarCampo() {
-        if (!currentKey) return;
-        if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
-          // Las fotos ya se acumularon en el array
-        } else {
-          let val = buffer.join(' ').trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
-          }
-          data[currentKey] = val;
-        }
-        buffer = [];
-      }
-
-      lines.forEach(line => {
-        const trimmed = line.trim();
-        
-        // Captura elementos de lista de fotos (- /img/uploads/foto.jpg)
-        if (trimmed.startsWith('-') && enListaFotos) {
-          const item = trimmed.replace(/^-\s*/, '').replace(/^foto:\s*/, '').replace(/^["']|["']$/g, '');
-          if (item) data.fotos.push(item);
-          return;
-        }
-
-        // Detecta nueva clave (ej: title:, descripcion:, imagen:)
-        const matchPropiedad = line.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
-
-        if (matchPropiedad) {
-          guardarCampo();
-          currentKey = matchPropiedad[1];
-          let val = matchPropiedad[2].trim();
-
-          if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
-            enListaFotos = true;
-          } else {
-            enListaFotos = false;
-            // Ignorar marcadores de bloque YAML (> o >- o |)
-            if (val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
-              if (val.length > 0) buffer.push(val);
-            }
-          }
-        } else if (currentKey && trimmed.length > 0) {
-          // Continúa acumulando todas las líneas de la descripción larga
-          buffer.push(trimmed);
-        }
-      });
-
-      guardarCampo();
-
-      // Compatibilidad de nombres
-      data.descripcion = data.descripcion || data.description || '';
-
-      // Si existe 'imagen' simple, colocarla de primera en la galería
-      if (data.imagen && !data.fotos.includes(data.imagen)) {
-        data.fotos.unshift(data.imagen);
-      }
-
-      return data;
-    }
-
-    async function cargarCatalogo() {
-      try {
-        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos');
-        const archivos = await res.json();
-        
-        if (Array.isArray(archivos)) {
-          const promesas = archivos
-            .filter(f => f.name.endsWith('.md'))
-            .map(f => fetch(f.download_url).then(r => r.text()));
-
-          const contenidos = await Promise.all(promesas);
-          todosLosProductos = contenidos.map(parseFrontmatter).filter(Boolean);
-        } else {
-          todosLosProductos = [];
-        }
-      } catch (err) {
-        console.error('Error al cargar creaciones:', err);
-        todosLosProductos = [];
-      }
-      render(todosLosProductos);
-    }
-
-    function render(lista) {
-      const grid = document.getElementById('grid-productos');
-      if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay creaciones disponibles en esta categoría.</p>';
-        return;
-      }
-      grid.innerHTML = lista.map((p, index) => {
-        const portada = (p.fotos && p.fotos.length > 0) ? p.fotos[0] : (p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600');
-        return `
-          <div class="card" data-category="${p.categoria || ''}" onclick="abrirModal(${index})">
-            <div class="card-img">
-              <img src="${portada}" alt="${p.title}">
-              <span class="card-badge">${p.categoria || 'Artesanía'}</span>
-            </div>
-            <div class="card-body">
-              <h3 class="card-title">${p.title}</h3>
-              <p class="card-desc">${p.descripcion || ''}</p>
-              <div class="card-footer">
-                <span class="card-price">$${parseFloat(p.precio || 0).toFixed(2)}</span>
-                <button class="card-btn" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${p.precio || 0})">+ Agregar</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function abrirModal(index) {
-      const p = todosLosProductos[index];
-      if (!p) return;
-
-      document.getElementById('modal-categoria').textContent = p.categoria || 'Artesanía';
-      document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
-      
-      // Muestra la descripción completa sin recortar
-      document.getElementById('modal-descripcion').innerText = p.descripcion || 'Sin descripción adicional.';
-
-      const galeria = (p.fotos && p.fotos.length > 0) ? p.fotos : [p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'];
-      const imgPrincipal = document.getElementById('modal-img-principal');
-      const contThumbs = document.getElementById('modal-galeria-thumbs');
-
-      imgPrincipal.src = galeria[0];
-      contThumbs.innerHTML = '';
-
-      if (galeria.length > 1) {
-        galeria.forEach((src, i) => {
-          const thumb = document.createElement('img');
-          thumb.src = src;
-          thumb.className = `modal-thumb ${i === 0 ? 'active' : ''}`;
-          thumb.onclick = () => {
-            imgPrincipal.src = src;
-            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-          };
-          contThumbs.appendChild(thumb);
-        });
-      }
-
-      const btnComprar = document.getElementById('modal-btn-comprar');
-      btnComprar.onclick = () => agregarAlCarrito(p.title, p.precio || 0);
-
-      document.getElementById('modal-producto').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function cerrarModal() {
-      document.getElementById('modal-producto').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function cerrarModalExterno(e) {
-      if (e.target.id === 'modal-producto') cerrarModal();
-    }
-
-    function filtrar(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.textContent.toLowerCase().includes(cat === 'todos' ? 'todas' : cat));
-      if (activeBtn) activeBtn.classList.add('active');
-
-      if (cat === 'todos') {
-        render(todosLosProductos);
-      } else {
-        const filtrados = todosLosProductos.filter(p => (p.categoria || '').toLowerCase() === cat.toLowerCase());
-        render(filtrados);
-      }
-    }
-
-    cargarCatalogo();
-  </script>
-</body>
-</html>
+      <button onclick="filtrar('crochet')">
