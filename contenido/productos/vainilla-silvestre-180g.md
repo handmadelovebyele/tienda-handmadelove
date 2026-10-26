@@ -8,7 +8,6 @@ descripcion: >-
   y de larga duración sin emitir residuos tóxicos. Perfecta para ambientar y
   aportar calidez a tus espacios.
 
-
   80 horas de duración.
 imagen: /img/uploads/bicchiere-trasparente-1.png.webp
 ---
