@@ -329,14 +329,22 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza rutas absolutas o relativas
+    // Normaliza rutas y garantiza la carpeta img/uploads/
     function normalizarRuta(src) {
       if (!src) return '';
       src = src.trim();
+      
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
         return src;
       }
-      return src.replace(/^\/+/, '');
+
+      src = src.replace(/^\/+/, '');
+
+      if (!src.startsWith('img/uploads/') && !src.startsWith('img/')) {
+        src = 'img/uploads/' + src;
+      }
+
+      return src;
     }
 
     // Analizador YAML compatible con 'fotos' en línea única y listas
@@ -391,7 +399,6 @@
 
           if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
             enListaFotos = true;
-            // Captura si la foto viene en la misma línea (fotos: /img/uploads/...)
             if (val && val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
               let itemDirecto = normalizarRuta(val.replace(/^["']|["']$/g, '').trim());
               if (itemDirecto && !data.fotos.includes(itemDirecto)) {
