@@ -329,7 +329,7 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza rutas y garantiza la carpeta img/uploads/
+    // Normaliza cualquier formato de ruta y garantiza img/uploads/
     function normalizarRuta(src) {
       if (!src) return '';
       src = src.trim();
@@ -340,14 +340,15 @@
 
       src = src.replace(/^\/+/, '');
 
-      if (!src.startsWith('img/uploads/') && !src.startsWith('img/')) {
+      if (!src.startsWith('img/uploads/')) {
+        src = src.replace(/^uploads\//, '').replace(/^img\//, '');
         src = 'img/uploads/' + src;
       }
 
       return src;
     }
 
-    // Analizador YAML compatible con 'fotos' en línea única y listas
+    // Analizador YAML compatible con 'fotos' en línea y en lista
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -374,7 +375,7 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Elementos de la lista de fotos (- url:, - foto: o - /img...)
+        // Elementos en lista (- url:, - foto:, o viñeta directa)
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
