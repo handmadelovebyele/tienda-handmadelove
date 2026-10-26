@@ -58,7 +58,7 @@
     .filter-btn.active, .filter-btn:hover { background: var(--brand-red); color: white; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
     
-    /* Tarjeta de producto */
+    /* Card interactiva */
     .card { background: white; border-radius: 22px; border: 1px solid var(--sand-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
     .card-img { position: relative; height: 240px; }
@@ -66,7 +66,7 @@
     .card-badge { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.92); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; }
     .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
     .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-    .card-desc { color: var(--text-muted); font-size: 0.84rem; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-desc { color: var(--text-muted); font-size: 0.84rem; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--sand-100); }
     .card-price { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--brand-red); }
     .card-btn { background: var(--sand-100); border: 1px solid var(--sand-200); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
@@ -309,67 +309,71 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Analizador que procesa bloques multilínea (>-) sin recortar
+    // Analizador corregido para leer descripciones completas multilínea
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
       const yaml = match[1];
       const data = { fotos: [] };
       const lines = yaml.split('\n');
+      
       let currentKey = null;
-      let multiLineBuffer = [];
+      let buffer = [];
       let enListaFotos = false;
+
+      function guardarCampo() {
+        if (!currentKey) return;
+        if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
+          // Las fotos ya se acumularon en el array
+        } else {
+          let val = buffer.join(' ').trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          data[currentKey] = val;
+        }
+        buffer = [];
+      }
 
       lines.forEach(line => {
         const trimmed = line.trim();
-        const colon = line.indexOf(':');
-
-        // Captura listas de fotos (- foto.jpg)
+        
+        // Captura elementos de lista de fotos (- /img/uploads/foto.jpg)
         if (trimmed.startsWith('-') && enListaFotos) {
           const item = trimmed.replace(/^-\s*/, '').replace(/^foto:\s*/, '').replace(/^["']|["']$/g, '');
           if (item) data.fotos.push(item);
           return;
         }
 
-        // Nueva propiedad clave: valor
-        if (colon > 0 && !line.startsWith(' ') && !line.startsWith('\t')) {
-          enListaFotos = false;
-          if (currentKey && multiLineBuffer.length > 0) {
-            data[currentKey] = multiLineBuffer.join('\n').trim();
-            multiLineBuffer = [];
-          }
+        // Detecta nueva clave (ej: title:, descripcion:, imagen:)
+        const matchPropiedad = line.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
 
-          const key = line.slice(0, colon).trim();
-          let val = line.slice(colon + 1).trim();
+        if (matchPropiedad) {
+          guardarCampo();
+          currentKey = matchPropiedad[1];
+          let val = matchPropiedad[2].trim();
 
-          if (key === 'fotos' || key === 'imagenes' || key === 'galeria') {
+          if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
             enListaFotos = true;
-            currentKey = null;
-          } else if (val === '>' || val === '>-' || val === '|' || val === '|-') {
-            currentKey = key;
           } else {
-            if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-              val = val.slice(1, -1);
+            enListaFotos = false;
+            // Ignorar marcadores de bloque YAML (> o >- o |)
+            if (val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
+              if (val.length > 0) buffer.push(val);
             }
-            data[key] = val;
-            currentKey = null;
           }
-        } else if (currentKey) {
-          // Líneas sangradas que pertenecen a la descripción
-          if (trimmed.length > 0) {
-            multiLineBuffer.push(trimmed);
-          }
+        } else if (currentKey && trimmed.length > 0) {
+          // Continúa acumulando todas las líneas de la descripción larga
+          buffer.push(trimmed);
         }
       });
 
-      if (currentKey && multiLineBuffer.length > 0) {
-        data[currentKey] = multiLineBuffer.join('\n').trim();
-      }
+      guardarCampo();
 
-      // Compatibilidad si se guardó como 'description' en inglés o 'descripcion'
+      // Compatibilidad de nombres
       data.descripcion = data.descripcion || data.description || '';
 
-      // Si tiene campo único 'imagen', se añade como primera foto
+      // Si existe 'imagen' simple, colocarla de primera en la galería
       if (data.imagen && !data.fotos.includes(data.imagen)) {
         data.fotos.unshift(data.imagen);
       }
@@ -434,7 +438,7 @@
       document.getElementById('modal-titulo').textContent = p.title || '';
       document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
       
-      // Muestra la descripción íntegra respetando sus saltos de línea
+      // Muestra la descripción completa sin recortar
       document.getElementById('modal-descripcion').innerText = p.descripcion || 'Sin descripción adicional.';
 
       const galeria = (p.fotos && p.fotos.length > 0) ? p.fotos : [p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'];
