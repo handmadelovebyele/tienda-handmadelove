@@ -206,7 +206,7 @@
     </div>
   </section>
 
-  <!-- Pie de página original corregido -->
+  <!-- Pie de página -->
   <footer class="main-footer">
     <div class="footer-container">
       <!-- Columna 1: Marca -->
@@ -240,7 +240,7 @@
         </ul>
       </div>
 
-      <!-- Columna 4: Contacto Directo Corregido -->
+      <!-- Columna 4: Contacto Directo -->
       <div class="footer-col">
         <h4>CONTACTO DIRECTO</h4>
         <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
@@ -267,30 +267,6 @@
     let todosLosProductos = [];
     let cartCount = 0;
 
-    const productosBase = [
-      {
-        title: "Vela de Soja Vainilla & Lavanda",
-        categoria: "velas",
-        precio: 16.50,
-        descripcion: "Cera vegetal 100% de soja en envase de vidrio con pabilo de madera natural.",
-        imagen: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600"
-      },
-      {
-        title: "Bolso Tote Bag a Crochet",
-        categoria: "crochet",
-        precio: 32.00,
-        descripcion: "Tejido a mano con hilo de algodón crudo, asas resistentes y diseño artesanal.",
-        imagen: "https://images.unsplash.com/photo-1615457938971-5ab9a4f4d2f0?w=600"
-      },
-      {
-        title: "Bastidor Bordado Botánico 20cm",
-        categoria: "bordado",
-        precio: 28.00,
-        descripcion: "Bordado botánico en relieve en lino natural, listo para decorar tu hogar.",
-        imagen: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600"
-      }
-    ];
-
     function agregarAlCarrito(nombre, precio) {
       cartCount++;
       document.getElementById('cart-num').textContent = cartCount;
@@ -302,17 +278,45 @@
       if (!match) return null;
       const yaml = match[1];
       const data = {};
-      yaml.split('\n').forEach(line => {
+      const lines = yaml.split('\n');
+      let currentKey = null;
+      let multiLineBuffer = [];
+
+      lines.forEach(line => {
         const colon = line.indexOf(':');
-        if (colon > 0) {
+        
+        // Verifica si es una propiedad nueva clave: valor
+        if (colon > 0 && !line.startsWith(' ') && !line.startsWith('\t')) {
+          if (currentKey && multiLineBuffer.length > 0) {
+            data[currentKey] = multiLineBuffer.join(' ').trim();
+            multiLineBuffer = [];
+          }
+
           const key = line.slice(0, colon).trim();
           let val = line.slice(colon + 1).trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
+
+          // Maneja formatos de texto multilínea YAML (>- o >)
+          if (val === '>' || val === '>-' || val === '|' || val === '|-') {
+            currentKey = key;
+          } else {
+            if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+              val = val.slice(1, -1);
+            }
+            data[key] = val;
+            currentKey = null;
           }
-          data[key] = val;
+        } else if (currentKey) {
+          // Captura las líneas indentadas que pertenecen a la descripción multilínea
+          if (line.trim().length > 0) {
+            multiLineBuffer.push(line.trim());
+          }
         }
       });
+
+      if (currentKey && multiLineBuffer.length > 0) {
+        data[currentKey] = multiLineBuffer.join(' ').trim();
+      }
+
       return data;
     }
 
@@ -327,13 +331,13 @@
             .map(f => fetch(f.download_url).then(r => r.text()));
 
           const contenidos = await Promise.all(promesas);
-          const productosCMS = contenidos.map(parseFrontmatter).filter(Boolean);
-          todosLosProductos = [...productosCMS, ...productosBase];
+          todosLosProductos = contenidos.map(parseFrontmatter).filter(Boolean);
         } else {
-          todosLosProductos = productosBase;
+          todosLosProductos = [];
         }
       } catch (err) {
-        todosLosProductos = productosBase;
+        console.error('Error al cargar productos:', err);
+        todosLosProductos = [];
       }
       render(todosLosProductos);
     }
@@ -341,7 +345,7 @@
     function render(lista) {
       const grid = document.getElementById('grid-productos');
       if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles en esta categoría.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay creaciones disponibles en esta categoría.</p>';
         return;
       }
       grid.innerHTML = lista.map(p => `
