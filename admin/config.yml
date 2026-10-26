@@ -21,7 +21,8 @@ collections:
         name: "fotos"
         widget: "list"
         required: false
-        field: { label: "Foto Adicional", widget: "image" }
+        fields:
+          - { label: "Imagen", name: "url", widget: "image" }
 
   - name: "talleres"
     label: "Talleres Presenciales"
