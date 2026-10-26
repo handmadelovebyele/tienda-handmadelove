@@ -9,5 +9,5 @@ descripcion: Pulsera artesanal de hilo rojo de protección, tejida cuidadosament
   la mejor energía o como un obsequio especial lleno de significado.
 imagen: /img/uploads/whatsapp-image-2026-10-23-at-2.08.13-pm-3-.jpeg
 fotos:
-  - /img/uploads/gemini_generated_image_1id4gw1id4gw1id4.jpeg
+  - /img/uploads/gemini_generated_image_frq5t5frq5t5frq5.jpg
 ---
