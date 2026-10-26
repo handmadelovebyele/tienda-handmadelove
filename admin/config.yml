@@ -16,7 +16,12 @@ collections:
       - { label: "Categoría", name: "categoria", widget: "select", options: ["velas", "crochet", "bordado", "bisuteria"] }
       - { label: "Precio ($ USD)", name: "precio", widget: "number", value_type: "float" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
-      - { label: "Foto del Producto", name: "imagen", widget: "image" }
+      - { label: "Foto Principal (Portada)", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
 
   - name: "talleres"
     label: "Talleres Presenciales"
