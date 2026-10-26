@@ -329,7 +329,7 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Limpia barras iniciales para asegurar rutas relativas válidas
+    // Normaliza rutas absolutas o relativas
     function normalizarRuta(src) {
       if (!src) return '';
       src = src.trim();
@@ -339,7 +339,7 @@
       return src.replace(/^\/+/, '');
     }
 
-    // Analizador que extrae campos simples, multilínea y listas de fotos
+    // Analizador YAML compatible con 'fotos' en línea única y listas
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -366,7 +366,7 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Reconoce elementos de la lista de fotos
+        // Elementos de la lista de fotos (- url:, - foto: o - /img...)
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
@@ -391,6 +391,13 @@
 
           if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
             enListaFotos = true;
+            // Captura si la foto viene en la misma línea (fotos: /img/uploads/...)
+            if (val && val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
+              let itemDirecto = normalizarRuta(val.replace(/^["']|["']$/g, '').trim());
+              if (itemDirecto && !data.fotos.includes(itemDirecto)) {
+                data.fotos.push(itemDirecto);
+              }
+            }
           } else {
             enListaFotos = false;
             if (val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
