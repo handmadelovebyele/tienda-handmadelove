@@ -58,7 +58,7 @@
     .filter-btn.active, .filter-btn:hover { background: var(--brand-red); color: white; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
     
-    /* Card interactiva */
+    /* Tarjeta de producto */
     .card { background: white; border-radius: 22px; border: 1px solid var(--sand-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
     .card-img { position: relative; height: 240px; }
@@ -66,17 +66,17 @@
     .card-badge { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.92); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; }
     .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
     .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-    .card-desc { color: var(--text-muted); font-size: 0.84rem; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-desc { color: var(--text-muted); font-size: 0.84rem; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--sand-100); }
     .card-price { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--brand-red); }
     .card-btn { background: var(--sand-100); border: 1px solid var(--sand-200); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .card-btn:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-    /* Modal de Detalle de Producto */
+    /* Modal / Pop-up de Detalle */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
     .modal-overlay.open { display: flex; }
     .modal-card { background: white; border-radius: 24px; max-width: 820px; width: 100%; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-    .modal-close { position: absolute; top: 18px; right: 20px; background: var(--sand-100); border: none; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .modal-close { position: absolute; top: 16px; right: 18px; background: var(--sand-100); border: none; font-size: 1.4rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     .modal-gallery { display: flex; flex-direction: column; gap: 12px; }
     .modal-main-img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; border: 1px solid var(--sand-200); }
     .modal-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
@@ -166,7 +166,7 @@
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
-      <p>Haz clic en cualquier pieza para ver más fotos y su detalle completo.</p>
+      <p>Haz clic en cualquier pieza para ver más detalles y fotografías.</p>
     </div>
 
     <div class="filter-tabs">
@@ -182,7 +182,7 @@
     </div>
   </main>
 
-  <!-- Ventana Modal de Producto -->
+  <!-- Modal Emergente de Producto -->
   <div class="modal-overlay" id="modal-producto" onclick="cerrarModalExterno(event)">
     <div class="modal-card">
       <button class="modal-close" onclick="cerrarModal()">×</button>
@@ -309,6 +309,7 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
+    // Analizador que procesa bloques multilínea (>-) sin recortar
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -323,7 +324,7 @@
         const trimmed = line.trim();
         const colon = line.indexOf(':');
 
-        // Detecta listas (guiones para fotos adicionales)
+        // Captura listas de fotos (- foto.jpg)
         if (trimmed.startsWith('-') && enListaFotos) {
           const item = trimmed.replace(/^-\s*/, '').replace(/^foto:\s*/, '').replace(/^["']|["']$/g, '');
           if (item) data.fotos.push(item);
@@ -334,14 +335,14 @@
         if (colon > 0 && !line.startsWith(' ') && !line.startsWith('\t')) {
           enListaFotos = false;
           if (currentKey && multiLineBuffer.length > 0) {
-            data[currentKey] = multiLineBuffer.join(' ').trim();
+            data[currentKey] = multiLineBuffer.join('\n').trim();
             multiLineBuffer = [];
           }
 
           const key = line.slice(0, colon).trim();
           let val = line.slice(colon + 1).trim();
 
-          if (key === 'imagenes' || key === 'fotos' || key === 'galeria') {
+          if (key === 'fotos' || key === 'imagenes' || key === 'galeria') {
             enListaFotos = true;
             currentKey = null;
           } else if (val === '>' || val === '>-' || val === '|' || val === '|-') {
@@ -354,15 +355,21 @@
             currentKey = null;
           }
         } else if (currentKey) {
-          if (trimmed.length > 0) multiLineBuffer.push(trimmed);
+          // Líneas sangradas que pertenecen a la descripción
+          if (trimmed.length > 0) {
+            multiLineBuffer.push(trimmed);
+          }
         }
       });
 
       if (currentKey && multiLineBuffer.length > 0) {
-        data[currentKey] = multiLineBuffer.join(' ').trim();
+        data[currentKey] = multiLineBuffer.join('\n').trim();
       }
 
-      // Compatibilidad: si tiene 'imagen' simple, agrégala a la galería
+      // Compatibilidad si se guardó como 'description' en inglés o 'descripcion'
+      data.descripcion = data.descripcion || data.description || '';
+
+      // Si tiene campo único 'imagen', se añade como primera foto
       if (data.imagen && !data.fotos.includes(data.imagen)) {
         data.fotos.unshift(data.imagen);
       }
@@ -386,7 +393,7 @@
           todosLosProductos = [];
         }
       } catch (err) {
-        console.error('Error al cargar productos:', err);
+        console.error('Error al cargar creaciones:', err);
         todosLosProductos = [];
       }
       render(todosLosProductos);
@@ -419,15 +426,16 @@
       }).join('');
     }
 
-    /* Lógica del Modal y Galería */
     function abrirModal(index) {
       const p = todosLosProductos[index];
       if (!p) return;
 
       document.getElementById('modal-categoria').textContent = p.categoria || 'Artesanía';
-      document.getElementById('modal-titulo').textContent = p.title;
+      document.getElementById('modal-titulo').textContent = p.title || '';
       document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
-      document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
+      
+      // Muestra la descripción íntegra respetando sus saltos de línea
+      document.getElementById('modal-descripcion').innerText = p.descripcion || 'Sin descripción adicional.';
 
       const galeria = (p.fotos && p.fotos.length > 0) ? p.fotos : [p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'];
       const imgPrincipal = document.getElementById('modal-img-principal');
