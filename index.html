@@ -72,7 +72,7 @@
     .card-btn { background: var(--sand-100); border: 1px solid var(--sand-200); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
     .card-btn:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
 
-    /* Modal / Pop-up con scroll y diseño flexible */
+    /* Modal emergente */
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
     .modal-overlay.open { display: flex; }
     .modal-card { 
@@ -80,7 +80,7 @@
       border-radius: 24px; 
       max-width: 860px; 
       width: 100%; 
-      max-height: 85vh; 
+      max-height: 88vh; 
       display: grid; 
       grid-template-columns: 1fr 1fr; 
       gap: 32px; 
@@ -92,22 +92,21 @@
     .modal-close { position: absolute; top: 16px; right: 18px; background: var(--sand-100); border: none; font-size: 1.4rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
     
     .modal-gallery { display: flex; flex-direction: column; gap: 12px; }
-    .modal-main-img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; border: 1px solid var(--sand-200); }
+    .modal-main-img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; border: 1px solid var(--sand-200); background-color: var(--sand-100); }
     .modal-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-    .modal-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; opacity: 0.7; transition: all 0.2s; flex-shrink: 0; }
+    .modal-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: all 0.2s; flex-shrink: 0; background-color: var(--sand-100); }
     .modal-thumb.active, .modal-thumb:hover { border-color: var(--brand-red); opacity: 1; }
     
-    /* Scroll independiente en el modal */
+    /* Scroll para la descripción */
     .modal-info { 
       display: flex; 
       flex-direction: column; 
-      max-height: calc(85vh - 64px); 
+      max-height: calc(88vh - 64px); 
       overflow-y: auto; 
       padding-right: 12px; 
     }
     .modal-info::-webkit-scrollbar { width: 6px; }
     .modal-info::-webkit-scrollbar-thumb { background-color: var(--sand-200); border-radius: 4px; }
-    .modal-info::-webkit-scrollbar-thumb:hover { background-color: #d1c3af; }
 
     .modal-cat { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--brand-red); font-weight: 700; margin-bottom: 6px; }
     .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1.2; margin-bottom: 12px; }
@@ -148,10 +147,8 @@
 </head>
 <body>
 
-  <!-- Top Banner -->
   <div class="top-banner">✨ Envíos a todo el país | Cupos limitados para talleres presenciales en Samborondón ✨</div>
 
-  <!-- Navbar -->
   <header class="navbar">
     <a href="#" class="logo-container">
       <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
@@ -173,7 +170,6 @@
     </button>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
     <div>
       <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
@@ -189,7 +185,6 @@
     </div>
   </section>
 
-  <!-- Catálogo Dinámico con Decap CMS -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
@@ -209,7 +204,7 @@
     </div>
   </main>
 
-  <!-- Modal Emergente de Producto con Scroll -->
+  <!-- Modal Emergente -->
   <div class="modal-overlay" id="modal-producto" onclick="cerrarModalExterno(event)">
     <div class="modal-card">
       <button class="modal-close" onclick="cerrarModal()">×</button>
@@ -307,9 +302,7 @@
 
       <div class="footer-col">
         <h4>CONTACTO DIRECTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
-          ¿Tienes una consulta o encargo personalizado?
-        </p>
+        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">¿Tienes una consulta o encargo personalizado?</p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
             ✉️ hadmadelovebyele@gmail.com
@@ -336,7 +329,17 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Analizador que captura texto continuo y listas de fotos
+    // Limpia barras iniciales para asegurar rutas relativas válidas
+    function normalizarRuta(src) {
+      if (!src) return '';
+      src = src.trim();
+      if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
+        return src;
+      }
+      return src.replace(/^\/+/, '');
+    }
+
+    // Analizador que extrae campos simples, multilínea y listas de fotos
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -363,21 +366,22 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Elementos de la lista de fotos (soporta tanto "- url: ..." como "- /img/...")
-        if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:'))) {
-          const item = trimmed
+        // Reconoce elementos de la lista de fotos
+        if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
+          let item = trimmed
             .replace(/^-\s*/, '')
             .replace(/^url:\s*/, '')
             .replace(/^foto:\s*/, '')
             .replace(/^["']|["']$/g, '')
             .trim();
+          
+          item = normalizarRuta(item);
           if (item && !data.fotos.includes(item)) {
             data.fotos.push(item);
           }
           return;
         }
 
-        // Línea con clave: valor
         const matchPropiedad = line.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
 
         if (matchPropiedad) {
@@ -402,8 +406,11 @@
 
       data.descripcion = data.descripcion || data.description || '';
 
-      if (data.imagen && !data.fotos.includes(data.imagen)) {
-        data.fotos.unshift(data.imagen);
+      if (data.imagen) {
+        const fotoPortada = normalizarRuta(data.imagen);
+        if (!data.fotos.includes(fotoPortada)) {
+          data.fotos.unshift(fotoPortada);
+        }
       }
 
       return data;
@@ -438,11 +445,11 @@
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
-        const portada = (p.fotos && p.fotos.length > 0) ? p.fotos[0] : (p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600');
+        const portada = (p.fotos && p.fotos.length > 0) ? p.fotos[0] : (normalizarRuta(p.imagen) || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600');
         return `
           <div class="card" data-category="${p.categoria || ''}" onclick="abrirModal(${index})">
             <div class="card-img">
-              <img src="${portada}" alt="${p.title}">
+              <img src="${portada}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'">
               <span class="card-badge">${p.categoria || 'Artesanía'}</span>
             </div>
             <div class="card-body">
@@ -467,7 +474,8 @@
       document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
       document.getElementById('modal-descripcion').innerText = p.descripcion || 'Sin descripción adicional.';
 
-      const galeria = (p.fotos && p.fotos.length > 0) ? p.fotos : [p.imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'];
+      let galeria = (p.fotos && p.fotos.length > 0) ? p.fotos : [normalizarRuta(p.imagen) || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'];
+
       const imgPrincipal = document.getElementById('modal-img-principal');
       const contThumbs = document.getElementById('modal-galeria-thumbs');
 
