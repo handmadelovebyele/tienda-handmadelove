@@ -97,7 +97,6 @@
     .modal-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: all 0.2s; flex-shrink: 0; background-color: var(--sand-100); }
     .modal-thumb.active, .modal-thumb:hover { border-color: var(--brand-red); opacity: 1; }
     
-    /* Scroll para la descripción */
     .modal-info { 
       display: flex; 
       flex-direction: column; 
@@ -204,7 +203,7 @@
     </div>
   </main>
 
-  <!-- Modal Emergente -->
+  <!-- Modal Emergente de Producto -->
   <div class="modal-overlay" id="modal-producto" onclick="cerrarModalExterno(event)">
     <div class="modal-card">
       <button class="modal-close" onclick="cerrarModal()">×</button>
@@ -304,8 +303,8 @@
         <h4>CONTACTO DIRECTO</h4>
         <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">¿Tienes una consulta o encargo personalizado?</p>
         <p style="margin-bottom: 12px;">
-          <a href="mailto:handmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ handmadelovebyele@gmail.com
+          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
+            ✉️ hadmadelovebyele@gmail.com
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
@@ -329,19 +328,20 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza cualquier ruta para garantizar que apunte a img/uploads/
+    // Normaliza cualquier formato de ruta y garantiza la carpeta img/uploads/
     function normalizarRuta(src) {
       if (!src) return '';
       src = String(src).trim();
       
+      // Si ya viene con protocolo web o base64 se respeta tal cual
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
         return src;
       }
 
-      // Remover barras iniciales, ./ o ../
+      // Remueve barras diagonales iniciales o ./
       src = src.replace(/^(\.\/|\/|\.\.\/)+/, '');
 
-      // Si no contiene la ruta completa a img/uploads
+      // Garantiza que empiece por img/uploads/
       if (!src.startsWith('img/uploads/')) {
         src = src.replace(/^uploads\//, '').replace(/^img\//, '');
         src = 'img/uploads/' + src;
@@ -350,7 +350,7 @@
       return src;
     }
 
-    // Analizador YAML
+    // Parser YAML flexible para listas de fotos y portada
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -377,6 +377,7 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
+        // Elementos de listas con guion (- foto.jpg)
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
@@ -509,10 +510,10 @@
       if (galeria.length > 1) {
         galeria.forEach((src, i) => {
           const thumb = document.createElement('img');
-          thumb.src = src;
+          thumb.src = normalizarRuta(src);
           thumb.className = `modal-thumb ${i === 0 ? 'active' : ''}`;
           thumb.onclick = () => {
-            imgPrincipal.src = src;
+            imgPrincipal.src = normalizarRuta(src);
             document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
           };
