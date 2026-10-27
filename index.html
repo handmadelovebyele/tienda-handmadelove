@@ -328,20 +328,20 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Función universal para normalizar rutas y evitar 404
+    // Normaliza cualquier ruta y asegura img/uploads/
     function normalizarRuta(src) {
       if (!src) return '';
       src = String(src).trim();
       
-      // Si ya contiene protocolo web o base64, se mantiene intacto
+      // Respetar enlaces web completos
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
         return src;
       }
 
-      // Remover barras diagonales o puntos iniciales (./ o /)
+      // Remover diagonales o ./ iniciales
       src = src.replace(/^(\.\/|\/|\.\.\/)+/, '');
 
-      // Garantizar que apunte siempre a img/uploads/
+      // Asegurar que empiece por img/uploads/
       if (!src.startsWith('img/uploads/')) {
         src = src.replace(/^uploads\//, '').replace(/^img\//, '');
         src = 'img/uploads/' + src;
@@ -350,7 +350,7 @@
       return src;
     }
 
-    // Parser YAML flexible para portadas y galerías
+    // Analizador YAML
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -377,7 +377,6 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Elementos pertenecientes a la lista de fotos
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
@@ -464,10 +463,10 @@
       }
       grid.innerHTML = lista.map((p, index) => {
         let portada = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600';
-        if (p.imagen) {
-          portada = normalizarRuta(p.imagen);
-        } else if (p.fotos && p.fotos.length > 0) {
+        if (p.fotos && p.fotos.length > 0) {
           portada = normalizarRuta(p.fotos[0]);
+        } else if (p.imagen) {
+          portada = normalizarRuta(p.imagen);
         }
 
         return `
