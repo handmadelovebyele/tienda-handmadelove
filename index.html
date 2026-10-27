@@ -152,7 +152,7 @@
     .modal-bank-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 250; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-bank-card { background: white; max-width: 440px; width: 100%; border-radius: 22px; padding: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); text-align: left; }
 
-    /* Talleres */
+    /* Talleres Dinámicos desde Decap CMS */
     .workshops-section { background: #F4EFEB; border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200); padding: 80px 24px; }
     .workshops-container { max-width: 1200px; margin: 0 auto; }
     .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
@@ -354,7 +354,7 @@
     </div>
   </div>
 
-  <!-- Talleres EMOCION-ARTE -->
+  <!-- Talleres EMOCION-ARTE Dinámicos desde Decap CMS -->
   <section class="workshops-section" id="talleres">
     <div class="workshops-container">
       <div class="section-title">
@@ -363,38 +363,9 @@
         <p>Aprende, desconéctate y crea tus propias piezas de arte en Almax Center, Samborondón.</p>
       </div>
 
-      <div class="workshops-grid">
-        <div class="card" style="cursor: default;">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600" alt="Taller Velas">
-            <span class="card-badge" style="color:var(--brand-red);">Solo 4 cupos libres</span>
-          </div>
-          <div class="card-body">
-            <span style="font-size:0.75rem; color:#888;">📅 Sábado, 10:00 AM - 1:00 PM</span>
-            <h3 class="card-title" style="margin-top:6px;">Taller de Velas de Soja Botánicas</h3>
-            <p class="card-desc">Elabora tus velas aromáticas con cera vegetal, esencias y flores secas. Incluye coffee break y materiales completos.</p>
-            <div class="card-footer">
-              <span class="card-price">$35.00</span>
-              <button class="card-btn" onclick="agregarAlCarrito('Cupo Taller Velas', 35.00, 'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600')">Reservar Cupo</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="cursor: default;">
-          <div class="card-img">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Taller Bordado">
-            <span class="card-badge" style="color:#526E59;">Cupos Abiertos</span>
-          </div>
-          <div class="card-body">
-            <span style="font-size:0.75rem; color:#888;">📅 Domingo, 3:00 PM - 6:00 PM</span>
-            <h3 class="card-title" style="margin-top:6px;">Bordado Contemporáneo & Flores</h3>
-            <p class="card-desc">Aprende puntadas esenciales sobre bastidor para crear composiciones botánicas relajantes. Materiales incluidos.</p>
-            <div class="card-footer">
-              <span class="card-price">$38.00</span>
-              <button class="card-btn" onclick="agregarAlCarrito('Cupo Taller Bordado', 38.00, 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600')">Reservar Cupo</button>
-            </div>
-          </div>
-        </div>
+      <!-- Contenedor dinámico de talleres -->
+      <div class="workshops-grid" id="grid-talleres">
+        <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Cargando talleres disponibles...</p>
       </div>
     </div>
   </section>
@@ -451,6 +422,7 @@
 
   <script>
     let todosLosProductos = [];
+    let todosLosTalleres = [];
     let carrito = [];
     const TASA_IVA = 0.15; // 15% IVA vigente
 
@@ -556,7 +528,7 @@
 
     function pagarConTarjeta() {
       if (carrito.length === 0) {
-        alert("Agrega al menos una creación al carrito antes de pagar.");
+        alert("Agrega al menos una creación o cupo de taller al carrito antes de pagar.");
         return;
       }
       
@@ -580,7 +552,7 @@
 
     function checkoutWhatsApp(pagoConTarjeta = false) {
       if (carrito.length === 0) {
-        alert('Tu carrito está vacío. Agrega una creación para realizar tu pedido.');
+        alert('Tu carrito está vacío. Agrega una creación o cupo al carrito.');
         return;
       }
 
@@ -598,10 +570,10 @@
 
       let mensaje = "¡Hola Handmade Love! ✨ Deseo concretar el siguiente pedido desde su tienda web:%0A%0A";
       mensaje += "*DETALLE DEL PEDIDO:*%0A" + detalle + "%0A";
-      mensaje += `*Subtotal Productos:* $${subtotal.toFixed(2)}%0A`;
+      mensaje += `*Subtotal:* $${subtotal.toFixed(2)}%0A`;
       mensaje += `*IVA (15%):* $${iva.toFixed(2)}%0A`;
-      mensaje += `*TOTAL PRODUCTOS:* $${total.toFixed(2)}%0A`;
-      mensaje += "*(+ Envío por coordinar según mi ubicación)*%0A%0A";
+      mensaje += `*TOTAL PRODUCTOS / CUPOS:* $${total.toFixed(2)}%0A`;
+      mensaje += "*(+ Envío por coordinar si aplica envío físico)*%0A%0A";
 
       if (pagoConTarjeta) {
         mensaje += "*MÉTODO DE PAGO PREFERIDO:* 💳 Tarjeta de Crédito/Débito (Payphone)%0A%0A";
@@ -619,10 +591,10 @@
         if (facDireccion) mensaje += `• *Dirección de Entrega:* ${facDireccion}%0A`;
         if (facCorreo) mensaje += `• *Correo:* ${facCorreo}%0A%0A`;
       } else {
-        mensaje += "*MI DIRECCIÓN DE ENTREGA:* %0A[Escribe aquí tu dirección o si prefieres retiro presencial]%0A%0A";
+        mensaje += "*MI DIRECCIÓN / NOTA:* %0A[Escribe aquí tu dirección o si es cupo para taller presencial]%0A%0A";
       }
 
-      mensaje += "¿Me confirman la disponibilidad y el costo de envío exacto a mi ubicación?";
+      mensaje += "¿Me confirman la disponibilidad para proceder?";
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
@@ -717,6 +689,92 @@
         todosLosProductos = [];
       }
       render(todosLosProductos);
+    }
+
+    // CARGAR TALLERES DINÁMICAMENTE DESDE contenido/talleres (Decap CMS)
+    async function cargarTalleres() {
+      const gridTalleres = document.getElementById('grid-talleres');
+      try {
+        const timestamp = new Date().getTime();
+        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres?t=${timestamp}`);
+        const archivos = await res.json();
+
+        if (Array.isArray(archivos) && archivos.length > 0) {
+          const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(`${f.download_url}?t=${timestamp}`).then(r => r.text()));
+          const contenidos = await Promise.all(promesas);
+          todosLosTalleres = contenidos.map(parseFrontmatter).filter(Boolean);
+          renderTalleres(todosLosTalleres);
+        } else {
+          gridTalleres.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; background: white; border-radius: 20px; border: 1px dashed var(--sand-200);">
+              <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 6px;">Próximamente nuevas fechas de talleres presenciales.</p>
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Estamos preparando nuevas experiencias botánicas y textiles en Samborondón.</p>
+            </div>
+          `;
+        }
+      } catch (err) {
+        gridTalleres.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; background: white; border-radius: 20px; border: 1px dashed var(--sand-200);">
+            <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 6px;">Próximamente nuevas fechas de talleres presenciales.</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Consulta por talleres privados o corporativos directamente a nuestro WhatsApp.</p>
+          </div>
+        `;
+      }
+    }
+
+    function renderTalleres(lista) {
+      const gridTalleres = document.getElementById('grid-talleres');
+      if (lista.length === 0) {
+        gridTalleres.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; background: white; border-radius: 20px; border: 1px dashed var(--sand-200);">
+            <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark); margin-bottom: 6px;">Próximamente nuevas fechas de talleres presenciales.</p>
+          </div>
+        `;
+        return;
+      }
+
+      gridTalleres.innerHTML = lista.map((t) => {
+        let portada = 'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600';
+        if (t.imagen) portada = normalizarRuta(t.imagen);
+        else if (t.fotos && t.fotos.length > 0) portada = normalizarRuta(t.fotos[0]);
+
+        const max = parseInt(t.cupoMax) || 10;
+        const ocup = parseInt(t.ocupados) || 0;
+        const libres = Math.max(0, max - ocup);
+
+        let badgeTexto = 'Cupos Abiertos';
+        let badgeColor = '#526E59';
+
+        if (libres <= 0) {
+          badgeTexto = 'Cupos Agotados';
+          badgeColor = '#888';
+        } else if (libres <= 4) {
+          badgeTexto = `Solo ${libres} cupos libres`;
+          badgeColor = 'var(--brand-red)';
+        }
+
+        return `
+          <div class="card" style="cursor: default;">
+            <div class="card-img">
+              <img src="${portada}" alt="${t.title}" onerror="this.src='https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600'">
+              <span class="card-badge" style="color: ${badgeColor};">${badgeTexto}</span>
+            </div>
+            <div class="card-body">
+              <span style="font-size:0.75rem; color:#888;">📅 ${t.fecha || 'Horario por coordinar'}</span>
+              <h3 class="card-title" style="margin-top:6px;">${t.title}</h3>
+              <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:6px;">📍 ${t.lugar || 'Almax Center, Samborondón'}</p>
+              <p class="card-desc">${t.descripcion || 'Incluye materiales completos y coffee break.'}</p>
+              <div class="card-footer">
+                <span class="card-price">$${parseFloat(t.precio || 0).toFixed(2)}</span>
+                ${libres > 0 ? 
+                  `<button class="card-btn" onclick="agregarAlCarrito('Cupo: ${t.title}', ${t.precio || 0}, '${portada}')">Reservar Cupo</button>` :
+                  `<button class="card-btn" style="opacity:0.6; cursor:not-allowed;" disabled>Agotado</button>`
+                }
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     function render(lista) {
@@ -814,7 +872,9 @@
       }
     }
 
+    // Inicializar Catálogo de Productos y Talleres Dinámicos
     cargarCatalogo();
+    cargarTalleres();
   </script>
 </body>
 </html>
