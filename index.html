@@ -328,20 +328,20 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza cualquier formato de ruta y garantiza la carpeta img/uploads/
+    // Normaliza cualquier ruta asegurando img/uploads/ y admitiendo enlaces externos directos
     function normalizarRuta(src) {
       if (!src) return '';
       src = String(src).trim();
       
-      // Si ya viene con protocolo web o base64 se respeta tal cual
+      // Si ya contiene protocolo o base64, respetarlo
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
         return src;
       }
 
-      // Remueve barras diagonales iniciales o ./
+      // Remover barras diagonales iniciales o ./
       src = src.replace(/^(\.\/|\/|\.\.\/)+/, '');
 
-      // Garantiza que empiece por img/uploads/
+      // Si no empieza por img/uploads/ ni es un archivo que ya esté en la raíz
       if (!src.startsWith('img/uploads/')) {
         src = src.replace(/^uploads\//, '').replace(/^img\//, '');
         src = 'img/uploads/' + src;
@@ -350,7 +350,7 @@
       return src;
     }
 
-    // Parser YAML flexible para listas de fotos y portada
+    // Parser YAML flexible para portadas y listas
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -377,7 +377,7 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Elementos de listas con guion (- foto.jpg)
+        // Elementos de lista de fotos (- url:, - foto: o guion simple)
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
@@ -463,7 +463,13 @@
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
-        const portada = (p.fotos && p.fotos.length > 0) ? p.fotos[0] : (normalizarRuta(p.imagen) || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600');
+        let portada = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600';
+        if (p.fotos && p.fotos.length > 0) {
+          portada = normalizarRuta(p.fotos[0]);
+        } else if (p.imagen) {
+          portada = normalizarRuta(p.imagen);
+        }
+
         return `
           <div class="card" data-category="${p.categoria || ''}" onclick="abrirModal(${index})">
             <div class="card-img">
