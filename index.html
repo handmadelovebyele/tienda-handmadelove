@@ -328,12 +328,12 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza cualquier ruta y asegura img/uploads/
+    // Normaliza cualquier ruta y asegura img/uploads/ sin importar si viene relativa o con /
     function normalizarRuta(src) {
       if (!src) return '';
       src = String(src).trim();
       
-      // Respetar enlaces web completos
+      // Respetar enlaces web completos y base64
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
         return src;
       }
@@ -350,7 +350,7 @@
       return src;
     }
 
-    // Analizador YAML
+    // Analizador YAML para portadas y colecciones de fotos
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
