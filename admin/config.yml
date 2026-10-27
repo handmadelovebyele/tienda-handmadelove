@@ -2,6 +2,7 @@ backend:
   name: github
   repo: handmadelovebyele/tienda-handmadelove
   branch: main
+  auth_type: implicit
 
 media_folder: "img/uploads"
 public_folder: "img/uploads"
