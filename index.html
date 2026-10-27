@@ -304,8 +304,8 @@
         <h4>CONTACTO DIRECTO</h4>
         <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">¿Tienes una consulta o encargo personalizado?</p>
         <p style="margin-bottom: 12px;">
-          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
+          <a href="mailto:handmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
+            ✉️ handmadelovebyele@gmail.com
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
@@ -329,7 +329,7 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza cualquier formato de ruta y garantiza img/uploads/
+    // Normaliza cualquier ruta para garantizar que apunte a img/uploads/
     function normalizarRuta(src) {
       if (!src) return '';
       src = String(src).trim();
@@ -338,10 +338,10 @@
         return src;
       }
 
-      // Remueve barras diagonales iniciales y './'
-      src = src.replace(/^\.\//, '').replace(/^\/+/, '');
+      // Remover barras iniciales, ./ o ../
+      src = src.replace(/^(\.\/|\/|\.\.\/)+/, '');
 
-      // Garantiza que empiece con img/uploads/
+      // Si no contiene la ruta completa a img/uploads
       if (!src.startsWith('img/uploads/')) {
         src = src.replace(/^uploads\//, '').replace(/^img\//, '');
         src = 'img/uploads/' + src;
@@ -350,7 +350,7 @@
       return src;
     }
 
-    // Analizador YAML flexible para campos en línea o listas
+    // Analizador YAML
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -377,7 +377,6 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Elementos de la lista de fotos (- url:, - foto: o guión simple)
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
@@ -435,13 +434,14 @@
 
     async function cargarCatalogo() {
       try {
-        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos');
+        const timestamp = new Date().getTime();
+        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos?t=${timestamp}`);
         const archivos = await res.json();
         
         if (Array.isArray(archivos)) {
           const promesas = archivos
             .filter(f => f.name.endsWith('.md'))
-            .map(f => fetch(f.download_url).then(r => r.text()));
+            .map(f => fetch(`${f.download_url}?t=${timestamp}`).then(r => r.text()));
 
           const contenidos = await Promise.all(promesas);
           todosLosProductos = contenidos.map(parseFrontmatter).filter(Boolean);
@@ -491,7 +491,6 @@
       document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
       document.getElementById('modal-descripcion').innerText = p.descripcion || 'Sin descripción adicional.';
 
-      // Normaliza y construye la lista de imágenes para la galería
       let galeria = [];
       if (p.fotos && p.fotos.length > 0) {
         galeria = p.fotos.map(normalizarRuta);
@@ -510,10 +509,10 @@
       if (galeria.length > 1) {
         galeria.forEach((src, i) => {
           const thumb = document.createElement('img');
-          thumb.src = normalizarRuta(src);
+          thumb.src = src;
           thumb.className = `modal-thumb ${i === 0 ? 'active' : ''}`;
           thumb.onclick = () => {
-            imgPrincipal.src = normalizarRuta(src);
+            imgPrincipal.src = src;
             document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
           };
