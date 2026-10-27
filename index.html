@@ -58,7 +58,7 @@
     .filter-btn.active, .filter-btn:hover { background: var(--brand-red); color: white; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
     
-    /* Tarjetas de Producto */
+    /* Tarjeta de Producto */
     .card { background: white; border-radius: 22px; border: 1px solid var(--sand-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
     .card-img { position: relative; height: 240px; }
@@ -99,11 +99,21 @@
     .cart-drawer-header h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
     .btn-close-drawer { background: var(--sand-100); border: none; font-size: 1.3rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; }
     
-    .cart-items-list { flex-grow: 1; overflow-y: auto; padding: 14px 0; display: flex; flex-direction: column; gap: 12px; }
-    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px dashed var(--sand-200); }
-    .cart-item-name { font-weight: 600; font-size: 0.9rem; }
-    .cart-item-price { color: var(--brand-red); font-weight: 700; font-size: 0.95rem; }
-    .btn-delete-item { background: none; border: none; color: #DC2626; cursor: pointer; font-size: 1rem; padding: 4px; }
+    .cart-items-list { flex-grow: 1; overflow-y: auto; padding: 14px 0; display: flex; flex-direction: column; gap: 14px; }
+    
+    /* Fila de Producto con Controles de Cantidad (+ / -) */
+    .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px dashed var(--sand-200); gap: 10px; }
+    .cart-item-info { flex-grow: 1; }
+    .cart-item-name { font-weight: 600; font-size: 0.9rem; line-height: 1.3; margin-bottom: 4px; }
+    .cart-item-unit-price { color: var(--text-muted); font-size: 0.8rem; }
+    .cart-item-total-price { color: var(--brand-red); font-weight: 700; font-size: 0.95rem; }
+    
+    .cart-qty-controls { display: flex; align-items: center; gap: 6px; background: var(--sand-100); border: 1px solid var(--sand-200); border-radius: 20px; padding: 3px 8px; }
+    .btn-qty { background: none; border: none; font-size: 1rem; font-weight: 700; color: var(--text-dark); cursor: pointer; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+    .btn-qty:hover { color: var(--brand-red); }
+    .cart-qty-number { font-weight: 700; font-size: 0.88rem; min-width: 18px; text-align: center; }
+    .btn-delete-item { background: none; border: none; color: #999; cursor: pointer; font-size: 1.1rem; padding: 4px; transition: color 0.2s; }
+    .btn-delete-item:hover { color: #DC2626; }
 
     /* Calculadora de Envío y Desglose */
     .cart-drawer-footer { border-top: 1px solid var(--sand-200); padding-top: 14px; display: flex; flex-direction: column; gap: 8px; }
@@ -122,7 +132,10 @@
     .billing-fields.open { display: flex; }
     .billing-fields input { padding: 6px 10px; border: 1px solid var(--sand-200); border-radius: 6px; font-size: 0.8rem; font-family: inherit; }
 
-    /* Botones de Pago */
+    /* Botones de Acción del Carrito */
+    .btn-continue-shopping { background: var(--sand-100); color: var(--text-dark); border: 1px solid var(--sand-200); padding: 10px; border-radius: 25px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 6px; transition: all 0.2s; margin-bottom: 4px; }
+    .btn-continue-shopping:hover { background: var(--sand-200); }
+
     .btn-payphone { background: #FF6A00; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
     .btn-payphone:hover { background: #e55e00; }
     .btn-checkout-wa { background: #25D366; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
@@ -134,7 +147,7 @@
     .modal-bank-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 250; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-bank-card { background: white; max-width: 440px; width: 100%; border-radius: 22px; padding: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); text-align: left; }
 
-    /* Talleres Presenciales */
+    /* Talleres */
     .workshops-section { background: #F4EFEB; border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200); padding: 80px 24px; }
     .workshops-container { max-width: 1200px; margin: 0 auto; }
     .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
@@ -236,13 +249,13 @@
         <div class="modal-price" id="modal-precio"></div>
         <div class="modal-desc" id="modal-descripcion"></div>
         <div class="modal-actions">
-          <button class="btn-modal-cart" id="modal-btn-comprar">Agregar al Carrito</button>
+          <button class="btn-modal-cart" id="modal-btn-comprar">+ Agregar al Carrito</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Drawer Lateral del Carrito con Envío Calculado e IVA -->
+  <!-- Drawer Lateral del Carrito con Multiplicador de Cantidad y Seguir Comprando -->
   <div class="cart-drawer-backdrop" id="cart-backdrop" onclick="cerrarCarrito()"></div>
   <aside class="cart-drawer" id="cart-drawer">
     <div class="cart-drawer-header">
@@ -255,6 +268,11 @@
     </div>
 
     <div class="cart-drawer-footer">
+      <!-- Botón para Seguir Comprando sin salir de la tienda -->
+      <button class="btn-continue-shopping" onclick="cerrarCarrito()">
+        🛍️ Seguir comprando más creaciones
+      </button>
+
       <!-- Calculadora de Zona de Envío -->
       <div class="shipping-box">
         <label for="select-envio">🚚 Selecciona tu Ciudad / Entrega:</label>
@@ -266,7 +284,7 @@
         </select>
       </div>
 
-      <!-- Desglose Matemático con el Envío Sumado -->
+      <!-- Desglose Matemático -->
       <div class="breakdown-row">
         <span>Subtotal Productos:</span>
         <span id="cart-subtotal">$0.00</span>
@@ -298,17 +316,15 @@
         </div>
       </div>
 
-      <!-- Botón 1: Payphone Guiado -->
+      <!-- Botones de Pago -->
       <button class="btn-payphone" onclick="pagarConTarjeta()">
         💳 Pagar con Tarjeta (Payphone)
       </button>
 
-      <!-- Botón 2: Finalizar por WhatsApp -->
       <button class="btn-checkout-wa" onclick="checkoutWhatsApp()">
         💬 Finalizar Pedido por WhatsApp
       </button>
 
-      <!-- Botón 3: Cuentas Bancarias -->
       <button class="btn-show-bank" onclick="abrirModalBanco()">
         🏦 Ver datos de Transferencia Bancaria
       </button>
@@ -434,7 +450,7 @@
   <script>
     let todosLosProductos = [];
     let carrito = [];
-    const TASA_IVA = 0.15; // Tarifa general vigente en Ecuador
+    const TASA_IVA = 0.15; // Tarifa general vigente en Ecuador (15%)
 
     function abrirCarrito() {
       document.getElementById('cart-drawer').classList.add('open');
@@ -446,10 +462,27 @@
       document.getElementById('cart-backdrop').classList.remove('open');
     }
 
+    // Agregar producto (si ya existe en el carrito, suma 1 unidad)
     function agregarAlCarrito(nombre, precio) {
-      carrito.push({ nombre, precio: parseFloat(precio) || 0 });
+      const index = carrito.findIndex(item => item.nombre === nombre);
+      if (index > -1) {
+        carrito[index].cantidad += 1;
+      } else {
+        carrito.push({ nombre, precio: parseFloat(precio) || 0, cantidad: 1 });
+      }
       actualizarCarritoUI();
       abrirCarrito();
+    }
+
+    // Sumar o restar unidades directamente en el carrito
+    function cambiarCantidad(index, delta) {
+      if (carrito[index]) {
+        carrito[index].cantidad += delta;
+        if (carrito[index].cantidad <= 0) {
+          carrito.splice(index, 1);
+        }
+        actualizarCarritoUI();
+      }
     }
 
     function eliminarDelCarrito(index) {
@@ -473,7 +506,9 @@
       const totalEl = document.getElementById('cart-total');
       const selectEnvio = document.getElementById('select-envio');
 
-      badge.textContent = carrito.length;
+      // Conteo total de piezas en la bolsa
+      const totalUnidades = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      badge.textContent = totalUnidades;
 
       if (carrito.length === 0) {
         itemsList.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">Tu carrito está vacío.</p>';
@@ -486,19 +521,29 @@
 
       let subtotal = 0;
       itemsList.innerHTML = carrito.map((item, index) => {
-        subtotal += item.precio;
+        const itemSubtotal = item.precio * item.cantidad;
+        subtotal += itemSubtotal;
         return `
           <div class="cart-item-row">
-            <div>
+            <div class="cart-item-info">
               <div class="cart-item-name">${item.nombre}</div>
-              <div class="cart-item-price">$${item.precio.toFixed(2)}</div>
+              <div class="cart-item-unit-price">$${item.precio.toFixed(2)} c/u</div>
+              <div class="cart-item-total-price">$${itemSubtotal.toFixed(2)}</div>
             </div>
-            <button class="btn-delete-item" onclick="eliminarDelCarrito(${index})" title="Eliminar">🗑️</button>
+            
+            <!-- Controles de Cantidad (+ / -) -->
+            <div class="cart-qty-controls">
+              <button class="btn-qty" onclick="cambiarCantidad(${index}, -1)" title="Disminuir">-</button>
+              <span class="cart-qty-number">${item.cantidad}</span>
+              <button class="btn-qty" onclick="cambiarCantidad(${index}, 1)" title="Aumentar">+</button>
+            </div>
+
+            <!-- Botón Borrar -->
+            <button class="btn-delete-item" onclick="eliminarDelCarrito(${index})" title="Eliminar creación">✕</button>
           </div>
         `;
       }).join('');
 
-      // Suma matemática del Envío + IVA + Subtotal
       const costoEnvio = parseFloat(selectEnvio.value) || 0;
       const valorIva = subtotal * TASA_IVA;
       const totalDefinitivo = subtotal + valorIva + costoEnvio;
@@ -547,8 +592,9 @@
       let detalle = "";
 
       carrito.forEach((it) => {
-        detalle += `• ${it.nombre} ($${it.precio.toFixed(2)})%0A`;
-        subtotal += it.precio;
+        const itemTot = it.precio * it.cantidad;
+        detalle += `• ${it.cantidad}x ${it.nombre} ($${it.precio.toFixed(2)} c/u) = $${itemTot.toFixed(2)}%0A`;
+        subtotal += itemTot;
       });
 
       const iva = subtotal * TASA_IVA;
@@ -566,7 +612,6 @@
         mensaje += "*(Por favor facilítenme el link de cobro con este monto exacto bloqueado)*%0A%0A";
       }
 
-      // Datos de Facturación opcionales
       const facNombre = document.getElementById('fac-nombre').value.trim();
       const facCedula = document.getElementById('fac-cedula').value.trim();
       const facDireccion = document.getElementById('fac-direccion').value.trim();
