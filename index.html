@@ -37,7 +37,7 @@
     .cart-btn { background: var(--sand-100); border: 1px solid var(--sand-200); border-radius: 30px; padding: 8px 16px; cursor: pointer; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
     .cart-badge { background: var(--brand-red); color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.75rem; }
 
-    /* Portada / Hero */
+    /* Hero / Portada */
     .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
     .hero-badge { color: var(--brand-red); font-weight: 700; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.15; margin: 12px 0 18px; }
@@ -58,7 +58,7 @@
     .filter-btn.active, .filter-btn:hover { background: var(--brand-red); color: white; }
     .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
     
-    /* Tarjeta de Producto */
+    /* Tarjetas de Producto */
     .card { background: white; border-radius: 22px; border: 1px solid var(--sand-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
     .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
     .card-img { position: relative; height: 240px; }
@@ -93,33 +93,48 @@
     /* Drawer Lateral del Carrito */
     .cart-drawer-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); z-index: 150; display: none; }
     .cart-drawer-backdrop.open { display: block; }
-    .cart-drawer { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100%; background: white; box-shadow: -8px 0 30px rgba(0,0,0,0.2); z-index: 200; display: flex; flex-direction: column; transition: right 0.3s ease; padding: 24px; }
+    .cart-drawer { position: fixed; top: 0; right: -460px; width: 100%; max-width: 420px; height: 100%; background: white; box-shadow: -8px 0 30px rgba(0,0,0,0.2); z-index: 200; display: flex; flex-direction: column; transition: right 0.3s ease; padding: 22px; }
     .cart-drawer.open { right: 0; }
-    .cart-drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--sand-200); padding-bottom: 16px; }
+    .cart-drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--sand-200); padding-bottom: 14px; }
     .cart-drawer-header h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
     .btn-close-drawer { background: var(--sand-100); border: none; font-size: 1.3rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; }
-    .cart-items-list { flex-grow: 1; overflow-y: auto; padding: 16px 0; display: flex; flex-direction: column; gap: 14px; }
+    
+    .cart-items-list { flex-grow: 1; overflow-y: auto; padding: 14px 0; display: flex; flex-direction: column; gap: 12px; }
     .cart-item-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px dashed var(--sand-200); }
     .cart-item-name { font-weight: 600; font-size: 0.9rem; }
     .cart-item-price { color: var(--brand-red); font-weight: 700; font-size: 0.95rem; }
     .btn-delete-item { background: none; border: none; color: #DC2626; cursor: pointer; font-size: 1rem; padding: 4px; }
-    .cart-drawer-footer { border-top: 1px solid var(--sand-200); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; }
-    .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; }
-    .cart-total-val { font-family: 'Playfair Display', serif; color: var(--brand-red); font-size: 1.4rem; }
 
-    /* Botones de Pago (Payphone, WhatsApp y Datos Bancarios) */
-    .btn-payphone { background: #FF6A00; color: white; border: none; padding: 13px; border-radius: 25px; font-weight: 700; font-size: 0.92rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
+    /* Calculadora de Envío y Desglose */
+    .cart-drawer-footer { border-top: 1px solid var(--sand-200); padding-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .shipping-box { background: var(--sand-100); border: 1.5px solid var(--sand-200); border-radius: 12px; padding: 10px 12px; margin-bottom: 4px; }
+    .shipping-box label { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dark); display: block; margin-bottom: 5px; }
+    .shipping-box select { width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--sand-200); background: white; font-family: inherit; font-size: 0.85rem; font-weight: 600; outline: none; cursor: pointer; }
+    
+    .breakdown-row { display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--text-muted); }
+    .breakdown-row.shipping-highlight { color: var(--text-dark); font-weight: 600; }
+    .breakdown-row.total-final { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); border-top: 1.5px solid var(--sand-200); padding-top: 8px; margin-top: 4px; }
+    .breakdown-row.total-final .cart-total-val { font-family: 'Playfair Display', serif; color: var(--brand-red); font-size: 1.45rem; }
+
+    /* Acordeón de Datos de Facturación */
+    .billing-toggle { background: none; border: 1px dashed var(--sand-200); padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: var(--text-dark); cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; }
+    .billing-fields { display: none; flex-direction: column; gap: 6px; background: #FAF7F2; padding: 10px; border-radius: 10px; border: 1px solid var(--sand-200); margin-top: 4px; }
+    .billing-fields.open { display: flex; }
+    .billing-fields input { padding: 6px 10px; border: 1px solid var(--sand-200); border-radius: 6px; font-size: 0.8rem; font-family: inherit; }
+
+    /* Botones de Pago */
+    .btn-payphone { background: #FF6A00; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
     .btn-payphone:hover { background: #e55e00; }
-    .btn-checkout-wa { background: #25D366; color: white; border: none; padding: 13px; border-radius: 25px; font-weight: 700; font-size: 0.92rem; cursor: pointer; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
+    .btn-checkout-wa { background: #25D366; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: 700; font-size: 0.9rem; cursor: pointer; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
     .btn-checkout-wa:hover { background: #1eb857; }
-    .btn-show-bank { background: none; border: 1px solid var(--sand-200); color: var(--text-dark); padding: 9px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+    .btn-show-bank { background: none; border: 1px solid var(--sand-200); color: var(--text-dark); padding: 8px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
     .btn-show-bank:hover { background: var(--sand-100); }
 
     /* Modal Datos Bancarios */
     .modal-bank-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 250; display: none; align-items: center; justify-content: center; padding: 20px; }
     .modal-bank-card { background: white; max-width: 440px; width: 100%; border-radius: 22px; padding: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); text-align: left; }
 
-    /* Talleres */
+    /* Talleres Presenciales */
     .workshops-section { background: #F4EFEB; border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200); padding: 80px 24px; }
     .workshops-container { max-width: 1200px; margin: 0 auto; }
     .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
@@ -227,40 +242,80 @@
     </div>
   </div>
 
-  <!-- Drawer Lateral del Carrito -->
+  <!-- Drawer Lateral del Carrito con Envío Calculado e IVA -->
   <div class="cart-drawer-backdrop" id="cart-backdrop" onclick="cerrarCarrito()"></div>
   <aside class="cart-drawer" id="cart-drawer">
     <div class="cart-drawer-header">
       <h3>Tu Carrito</h3>
       <button class="btn-close-drawer" onclick="cerrarCarrito()">×</button>
     </div>
+    
     <div class="cart-items-list" id="cart-items-list">
       <p style="text-align: center; color: var(--text-muted); margin-top: 40px;">Tu carrito está vacío.</p>
     </div>
+
     <div class="cart-drawer-footer">
-      <div class="cart-total-row">
-        <span>Total:</span>
+      <!-- Calculadora de Zona de Envío -->
+      <div class="shipping-box">
+        <label for="select-envio">🚚 Selecciona tu Ciudad / Entrega:</label>
+        <select id="select-envio" onchange="actualizarCarritoUI()">
+          <option value="0">Retiro en Taller (Almax Center, Samborondón) - Gratis ($0.00)</option>
+          <option value="3.00">Samborondón / La Puntilla / Daule - $3.00</option>
+          <option value="3.50">Guayaquil (Norte, Centro, Ceibos, Vía Costa) - $3.50</option>
+          <option value="5.50">Resto del País (Servientrega Nacional) - $5.50</option>
+        </select>
+      </div>
+
+      <!-- Desglose Matemático con el Envío Sumado -->
+      <div class="breakdown-row">
+        <span>Subtotal Productos:</span>
+        <span id="cart-subtotal">$0.00</span>
+      </div>
+      <div class="breakdown-row">
+        <span>IVA (15%):</span>
+        <span id="cart-iva">$0.00</span>
+      </div>
+      <div class="breakdown-row shipping-highlight">
+        <span>+ Costo de Envío:</span>
+        <span id="cart-shipping-val">$0.00</span>
+      </div>
+      <div class="breakdown-row total-final">
+        <span>TOTAL A PAGAR:</span>
         <span class="cart-total-val" id="cart-total">$0.00</span>
       </div>
-      
-      <!-- 1. Botón Payphone -->
+
+      <!-- Acordeón Opcional: Datos de Facturación -->
+      <div>
+        <button type="button" class="billing-toggle" onclick="toggleFacturacion()">
+          <span>🧾 Datos para Factura Electrónica (Opcional)</span>
+          <span id="billing-arrow">▼</span>
+        </button>
+        <div class="billing-fields" id="billing-fields">
+          <input type="text" id="fac-nombre" placeholder="Nombre completo o Razón Social">
+          <input type="text" id="fac-cedula" placeholder="Cédula o RUC (10 o 13 dígitos)">
+          <input type="text" id="fac-direccion" placeholder="Dirección de entrega">
+          <input type="email" id="fac-correo" placeholder="Correo electrónico para la factura">
+        </div>
+      </div>
+
+      <!-- Botón 1: Payphone Guiado -->
       <button class="btn-payphone" onclick="pagarConTarjeta()">
         💳 Pagar con Tarjeta (Payphone)
       </button>
 
-      <!-- 2. Botón WhatsApp Pedido -->
+      <!-- Botón 2: Finalizar por WhatsApp -->
       <button class="btn-checkout-wa" onclick="checkoutWhatsApp()">
         💬 Finalizar Pedido por WhatsApp
       </button>
 
-      <!-- 3. Botón Datos Bancarios -->
+      <!-- Botón 3: Cuentas Bancarias -->
       <button class="btn-show-bank" onclick="abrirModalBanco()">
         🏦 Ver datos de Transferencia Bancaria
       </button>
     </div>
   </aside>
 
-  <!-- Modal Datos de Transferencia -->
+  <!-- Modal Datos Bancarios -->
   <div class="modal-bank-overlay" id="modal-banco" onclick="cerrarModalBancoExterno(event)">
     <div class="modal-bank-card">
       <h3 style="font-family:'Playfair Display', serif; font-size:1.35rem; margin-bottom:10px;">Datos para Transferencia</h3>
@@ -379,6 +434,7 @@
   <script>
     let todosLosProductos = [];
     let carrito = [];
+    const TASA_IVA = 0.15; // Tarifa general vigente en Ecuador
 
     function abrirCarrito() {
       document.getElementById('cart-drawer').classList.add('open');
@@ -401,22 +457,36 @@
       actualizarCarritoUI();
     }
 
+    function toggleFacturacion() {
+      const box = document.getElementById('billing-fields');
+      const arrow = document.getElementById('billing-arrow');
+      box.classList.toggle('open');
+      arrow.textContent = box.classList.contains('open') ? '▲' : '▼';
+    }
+
     function actualizarCarritoUI() {
       const itemsList = document.getElementById('cart-items-list');
       const badge = document.getElementById('cart-num');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const ivaEl = document.getElementById('cart-iva');
+      const shippingValEl = document.getElementById('cart-shipping-val');
       const totalEl = document.getElementById('cart-total');
+      const selectEnvio = document.getElementById('select-envio');
 
       badge.textContent = carrito.length;
 
       if (carrito.length === 0) {
         itemsList.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 40px;">Tu carrito está vacío.</p>';
+        subtotalEl.textContent = '$0.00';
+        ivaEl.textContent = '$0.00';
+        shippingValEl.textContent = '$0.00';
         totalEl.textContent = '$0.00';
         return;
       }
 
-      let total = 0;
+      let subtotal = 0;
       itemsList.innerHTML = carrito.map((item, index) => {
-        total += item.precio;
+        subtotal += item.precio;
         return `
           <div class="cart-item-row">
             <div>
@@ -428,7 +498,15 @@
         `;
       }).join('');
 
-      totalEl.textContent = `$${total.toFixed(2)}`;
+      // Suma matemática del Envío + IVA + Subtotal
+      const costoEnvio = parseFloat(selectEnvio.value) || 0;
+      const valorIva = subtotal * TASA_IVA;
+      const totalDefinitivo = subtotal + valorIva + costoEnvio;
+
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      ivaEl.textContent = `$${valorIva.toFixed(2)}`;
+      shippingValEl.textContent = `$${costoEnvio.toFixed(2)}`;
+      totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
 
     function pagarConTarjeta() {
@@ -436,7 +514,11 @@
         alert("Agrega al menos una creación al carrito antes de pagar.");
         return;
       }
-      window.open("https://ppls.me/cIn4VPnued6A9r628wNVw", "_blank");
+      
+      const confirmar = confirm("💳 Para garantizar el monto exacto de tu compra y costo de envío bloqueado, te enviaremos tu link de pago oficial por WhatsApp.\n\n¿Deseas enviar tu pedido por WhatsApp ahora para recibir tu link de pago seguro?");
+      if (confirmar) {
+        checkoutWhatsApp(true);
+      }
     }
 
     function abrirModalBanco() {
@@ -451,22 +533,54 @@
       if (e.target.id === 'modal-banco') cerrarModalBanco();
     }
 
-    function checkoutWhatsApp() {
+    function checkoutWhatsApp(pagoConTarjeta = false) {
       if (carrito.length === 0) {
         alert('Tu carrito está vacío. Agrega una creación para realizar tu pedido.');
         return;
       }
 
-      let mensaje = "¡Hola Handmade Love! ✨ Deseo concretar el siguiente pedido desde su tienda web:%0A%0A";
-      let total = 0;
+      const selectEnvio = document.getElementById('select-envio');
+      const metodoEnvioTexto = selectEnvio.options[selectEnvio.selectedIndex].text;
+      const costoEnvio = parseFloat(selectEnvio.value) || 0;
+
+      let subtotal = 0;
+      let detalle = "";
 
       carrito.forEach((it) => {
-        mensaje += `• ${it.nombre} ($${it.precio.toFixed(2)})%0A`;
-        total += it.precio;
+        detalle += `• ${it.nombre} ($${it.precio.toFixed(2)})%0A`;
+        subtotal += it.precio;
       });
 
-      mensaje += `%0A*TOTAL:* $${total.toFixed(2)}%0A`;
-      mensaje += "%0A¿Me confirman disponibilidad y los datos para la entrega o reserva?";
+      const iva = subtotal * TASA_IVA;
+      const total = subtotal + iva + costoEnvio;
+
+      let mensaje = "¡Hola Handmade Love! ✨ Deseo concretar el siguiente pedido desde su tienda web:%0A%0A";
+      mensaje += "*DETALLE DEL PEDIDO:*%0A" + detalle + "%0A";
+      mensaje += `*Subtotal Productos:* $${subtotal.toFixed(2)}%0A`;
+      mensaje += `*IVA (15%):* $${iva.toFixed(2)}%0A`;
+      mensaje += `*Costo de Envío:* ${metodoEnvioTexto} ($${costoEnvio.toFixed(2)})%0A`;
+      mensaje += `*TOTAL FINAL A PAGAR:* $${total.toFixed(2)}%0A%0A`;
+
+      if (pagoConTarjeta) {
+        mensaje += "*MÉTODO DE PAGO:* 💳 Tarjeta de Crédito/Débito (Payphone)%0A";
+        mensaje += "*(Por favor facilítenme el link de cobro con este monto exacto bloqueado)*%0A%0A";
+      }
+
+      // Datos de Facturación opcionales
+      const facNombre = document.getElementById('fac-nombre').value.trim();
+      const facCedula = document.getElementById('fac-cedula').value.trim();
+      const facDireccion = document.getElementById('fac-direccion').value.trim();
+      const facCorreo = document.getElementById('fac-correo').value.trim();
+
+      if (facCedula || facNombre) {
+        mensaje += "*DATOS PARA FACTURA ELECTRÓNICA:*%0A";
+        mensaje += `• *Cliente/Razón Social:* ${facNombre || 'No especificado'}%0A`;
+        mensaje += `• *C.I./RUC:* ${facCedula || 'No especificado'}%0A`;
+        mensaje += `• *Dirección:* ${facDireccion || 'No especificada'}%0A`;
+        mensaje += `• *Correo Electrónico:* ${facCorreo || 'No especificado'}%0A%0A`;
+      }
+
+      mensaje += "¿Me confirman la disponibilidad para proceder con el pago?";
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
