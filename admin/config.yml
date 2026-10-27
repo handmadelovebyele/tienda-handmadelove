@@ -2,7 +2,6 @@ backend:
   name: github
   repo: handmadelovebyele/tienda-handmadelove
   branch: main
-  auth_type: implicit
 
 media_folder: "img/uploads"
 public_folder: "img/uploads"
@@ -19,7 +18,7 @@ collections:
       - { label: "Precio ($ USD)", name: "precio", widget: "number", value_type: "float" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
       - { label: "Foto Principal (Portada)", name: "imagen", widget: "image" }
-      - label: "Galería de Fotos Adicionales (Optional)"
+      - label: "Galería de Fotos Adicionales (Opcional)"
         name: "fotos"
         widget: "list"
         required: false
@@ -32,9 +31,19 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Nombre del Taller", name: "title", widget: "string" }
-      - { label: "Fecha y Horario", name: "fecha", widget: "string" }
+      - label: "Fecha y Horario del Taller"
+        name: "fecha"
+        widget: "datetime"
+        date_format: "DD/MM/YYYY"
+        time_format: "HH:mm"
+        format: "YYYY-MM-DD HH:mm"
       - { label: "Lugar", name: "lugar", widget: "string", default: "Almax Center, Samborondón" }
       - { label: "Valor ($ USD)", name: "precio", widget: "number", value_type: "float" }
       - { label: "Cupo Máximo", name: "cupoMax", widget: "number", default: 10 }
       - { label: "Cupos Ocupados", name: "ocupados", widget: "number", default: 0 }
       - { label: "Foto del Taller", name: "imagen", widget: "image" }
+      - label: "Descripción del Taller"
+        name: "descripcion"
+        widget: "text"
+        required: false
+        hint: "Escribe los detalles, materiales que incluye, refrigerio o requisitos (puedes dejar espacios y párrafos)."
