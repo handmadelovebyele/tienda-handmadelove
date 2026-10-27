@@ -1,9 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: handmadelovebyele/tienda-handmadelove
   branch: main
 
 media_folder: "img/uploads"
-public_folder: "/img/uploads"
+public_folder: "img/uploads"
 
 collections:
   - name: "productos"
@@ -17,12 +18,11 @@ collections:
       - { label: "Precio ($ USD)", name: "precio", widget: "number", value_type: "float" }
       - { label: "Descripción", name: "descripcion", widget: "text" }
       - { label: "Foto Principal (Portada)", name: "imagen", widget: "image" }
-      - label: "Galería de Fotos Adicionales"
+      - label: "Galería de Fotos Adicionales (Optional)"
         name: "fotos"
         widget: "list"
         required: false
-        fields:
-          - { label: "Imagen", name: "url", widget: "image" }
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
 
   - name: "talleres"
     label: "Talleres Presenciales"
