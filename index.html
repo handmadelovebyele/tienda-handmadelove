@@ -328,20 +328,20 @@
       alert(`¡"${nombre}" ($${precio}) se agregó a tu carrito!`);
     }
 
-    // Normaliza cualquier ruta asegurando img/uploads/ y admitiendo enlaces externos directos
+    // Función universal para normalizar rutas y evitar 404
     function normalizarRuta(src) {
       if (!src) return '';
       src = String(src).trim();
       
-      // Si ya contiene protocolo o base64, respetarlo
+      // Si ya contiene protocolo web o base64, se mantiene intacto
       if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) {
         return src;
       }
 
-      // Remover barras diagonales iniciales o ./
+      // Remover barras diagonales o puntos iniciales (./ o /)
       src = src.replace(/^(\.\/|\/|\.\.\/)+/, '');
 
-      // Si no empieza por img/uploads/ ni es un archivo que ya esté en la raíz
+      // Garantizar que apunte siempre a img/uploads/
       if (!src.startsWith('img/uploads/')) {
         src = src.replace(/^uploads\//, '').replace(/^img\//, '');
         src = 'img/uploads/' + src;
@@ -350,7 +350,7 @@
       return src;
     }
 
-    // Parser YAML flexible para portadas y listas
+    // Parser YAML flexible para portadas y galerías
     function parseFrontmatter(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -377,7 +377,7 @@
       lines.forEach(line => {
         const trimmed = line.trim();
         
-        // Elementos de lista de fotos (- url:, - foto: o guion simple)
+        // Elementos pertenecientes a la lista de fotos
         if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
           let item = trimmed
             .replace(/^-\s*/, '')
@@ -464,10 +464,10 @@
       }
       grid.innerHTML = lista.map((p, index) => {
         let portada = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600';
-        if (p.fotos && p.fotos.length > 0) {
-          portada = normalizarRuta(p.fotos[0]);
-        } else if (p.imagen) {
+        if (p.imagen) {
           portada = normalizarRuta(p.imagen);
+        } else if (p.fotos && p.fotos.length > 0) {
+          portada = normalizarRuta(p.fotos[0]);
         }
 
         return `
