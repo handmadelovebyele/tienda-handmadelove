@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --brand-brown: #b8977e;
-      --brand-brown-dark: #9e7f67;
+      --brand-red: #c94a4a;
+      --brand-red-dark: #a83838;
       --bg-color: #faf9f6;
       --text-main: #333;
       --text-muted: #666;
@@ -26,7 +26,7 @@
     }
     /* Banner Superior */
     .top-banner {
-      background-color: var(--brand-brown);
+      background-color: var(--brand-red);
       color: white;
       text-align: center;
       padding: 0.5rem;
@@ -68,7 +68,7 @@
     }
     .brand-sub {
       font-size: 0.6rem;
-      color: var(--brand-brown);
+      color: var(--brand-red);
       letter-spacing: 1.5px;
       font-weight: 700;
     }
@@ -90,13 +90,14 @@
       transition: color 0.3s;
     }
     .nav-links button:hover, .nav-links a:hover {
-      color: var(--brand-brown);
+      color: var(--brand-red);
     }
     .pill-talleres {
-      background-color: #f4efe6;
+      background-color: #fdf2f2;
       padding: 6px 14px;
       border-radius: 20px;
       font-weight: 500;
+      color: var(--brand-red) !important;
     }
     /* Menú Desplegable de Categorías */
     .dropdown {
@@ -121,15 +122,15 @@
       text-align: left;
     }
     .dropdown-content a:hover {
-      background-color: #f9f6f0;
-      color: var(--brand-brown);
+      background-color: #fdf2f2;
+      color: var(--brand-red);
     }
     .dropdown:hover .dropdown-content {
       display: block;
     }
     /* Botón del Carrito */
     .cart-btn {
-      background-color: var(--brand-brown);
+      background-color: var(--brand-red);
       color: white !important;
       padding: 6px 14px;
       border-radius: 20px;
@@ -140,13 +141,13 @@
     }
     .cart-badge {
       background: white;
-      color: var(--brand-brown);
+      color: var(--brand-red);
       padding: 1px 6px;
       border-radius: 50%;
       font-size: 0.75rem;
       font-weight: 700;
     }
-    /* Sección Hero y Mensaje Principal */
+    /* Sección Hero / Mensaje de Portada */
     .hero {
       max-width: 1100px;
       margin: 2.5rem auto 1.5rem auto;
@@ -160,7 +161,7 @@
       font-size: 0.75rem;
       letter-spacing: 2px;
       font-weight: 700;
-      color: var(--brand-brown);
+      color: var(--brand-red);
       margin-bottom: 10px;
       display: block;
     }
@@ -171,7 +172,7 @@
       line-height: 1.2;
     }
     .hero h1 span {
-      color: var(--brand-brown);
+      color: var(--brand-red);
     }
     .hero p {
       color: var(--text-muted);
@@ -184,7 +185,7 @@
       gap: 15px;
     }
     .btn-primary {
-      background-color: var(--brand-brown);
+      background-color: var(--brand-red);
       color: white;
       padding: 0.7rem 1.5rem;
       border-radius: 25px;
@@ -194,7 +195,7 @@
       transition: background 0.3s;
     }
     .btn-primary:hover {
-      background-color: var(--brand-brown-dark);
+      background-color: var(--brand-red-dark);
     }
     .btn-secondary {
       background-color: transparent;
@@ -208,8 +209,8 @@
       transition: all 0.3s;
     }
     .btn-secondary:hover {
-      border-color: var(--brand-brown);
-      color: var(--brand-brown);
+      border-color: var(--brand-red);
+      color: var(--brand-red);
     }
     /* Carrusel */
     .hero-carousel-container {
@@ -219,7 +220,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      background-color: #f4efe6;
+      background-color: #fdf2f2;
     }
     .hero-slide {
       position: absolute;
@@ -254,7 +255,7 @@
     }
     .carousel-btn:hover {
       background-color: #fff;
-      color: var(--brand-brown);
+      color: var(--brand-red);
     }
     .carousel-prev { left: 15px; }
     .carousel-next { right: 15px; }
@@ -276,7 +277,7 @@
       transition: background 0.3s;
     }
     .dot.active {
-      background-color: var(--brand-brown);
+      background-color: var(--brand-red);
     }
     /* Catálogo y Secciones */
     .catalogo-section {
@@ -344,10 +345,10 @@
     .card-price {
       font-weight: 600;
       font-size: 1.1rem;
-      color: var(--brand-brown);
+      color: var(--brand-red);
     }
     .card-btn {
-      background-color: var(--brand-brown);
+      background-color: var(--brand-red);
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -357,7 +358,7 @@
       transition: background 0.3s;
     }
     .card-btn:hover {
-      background-color: var(--brand-brown-dark);
+      background-color: var(--brand-red-dark);
     }
     /* Talleres */
     .talleres-section {
@@ -378,7 +379,7 @@
     }
     .btn-main {
       display: inline-block;
-      background-color: var(--brand-brown);
+      background-color: var(--brand-red);
       color: white;
       padding: 0.6rem 1.2rem;
       border-radius: 20px;
@@ -389,7 +390,54 @@
       transition: background 0.3s;
     }
     .btn-main:hover {
-      background-color: var(--brand-brown-dark);
+      background-color: var(--brand-red-dark);
+    }
+    /* Newsletter Section */
+    .newsletter-section {
+      background-color: #fdf2f2;
+      padding: 4rem 2rem;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .newsletter-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .newsletter-section h2 {
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+    .newsletter-section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .newsletter-form input {
+      padding: 0.7rem 1rem;
+      border-radius: 25px;
+      border: 1px solid #ccc;
+      width: 70%;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+    }
+    .newsletter-form button {
+      background-color: var(--brand-red);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .newsletter-form button:hover {
+      background-color: var(--brand-red-dark);
     }
     /* Modal del Carrito */
     .carrito-modal {
@@ -530,13 +578,19 @@
       .nav-links {
         display: none;
       }
+      .newsletter-form {
+        flex-direction: column;
+      }
+      .newsletter-form input {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Top Banner -->
-  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales en Almax Center, Samborondón ✨[cite: 9]</div>
+  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
 
   <!-- Navbar -->
   <header class="navbar">
@@ -564,7 +618,7 @@
         </li>
 
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="#talleres" class="pill-talleres">Talleres Almax</a></li>
+        <li><a href="#talleres" class="pill-talleres">Talleres EMOCION-ARTE</a></li>
         <li>
           <button class="cart-btn" onclick="toggleCarrito()">
             🛒 <span id="cart-num">0</span>
@@ -582,7 +636,7 @@
       <p>Piezas exclusivas en velas aromáticas, accesorios de crochet, bordado contemporáneo y joyería artesanal. Además, vive experiencias presenciales únicas en nuestros talleres.</p>
       <div class="hero-buttons">
         <a href="#catalogo" class="btn-primary">Explorar Tienda ↓</a>
-        <a href="#talleres" class="btn-secondary">Ver Talleres Presenciales</a>
+        <a href="#talleres" class="btn-secondary">Ver Talleres EMOCION-ARTE</a>
       </div>
     </div>
     <!-- Carrusel de Portada -->
@@ -617,19 +671,31 @@
     </div>
   </main>
 
-  <!-- Talleres en Almax Center -->
+  <!-- Talleres EMOCION-ARTE -->
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
-      <h2>Talleres Presenciales en Almax Center (Samborondón)[cite: 9]</h2>
-      <p>Vive experiencias únicas de aprendizaje artesanal.</p>
+      <h2>Talleres Presenciales EMOCION-ARTE</h2>
+      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón.</p>
     </div>
     <div class="talleres-grid">
       <div class="taller-card">
         <h3>Taller de Velas Artesanales</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 9]</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón</p>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
         <a href="#" class="btn-main">Reservar Cupo</a>
       </div>
+    </div>
+  </section>
+
+  <!-- Sección de Newsletter / Comunidad VIP -->
+  <section class="newsletter-section">
+    <div class="newsletter-container">
+      <h2>Únete a nuestra Comunidad VIP</h2>
+      <p>Recibe sorpresas, patrones exclusivos y entérate antes que nadie de las nuevas fechas de nuestros talleres.</p>
+      <form class="newsletter-form" onsubmit="suscribirNewsletter(event)">
+        <input type="email" id="newsletter-email" placeholder="Ingresa tu correo electrónico..." required>
+        <button type="submit">Suscribirme</button>
+      </form>
     </div>
   </section>
 
@@ -655,7 +721,7 @@
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales en Samborondón[cite: 9].
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
         </p>
       </div>
 
@@ -675,7 +741,7 @@
       <div class="footer-col">
         <h4>TALLERES</h4>
         <ul class="footer-links">
-          <li><a href="#talleres">Almax Center, Samborondón[cite: 9]</a></li>
+          <li><a href="#talleres">Almax Center, Samborondón</a></li>
           <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
         </ul>
       </div>
@@ -688,11 +754,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com[cite: 1]
+            ✉️ hadmadelovebyele@gmail.com
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención[cite: 1]</span>
+          <span>💬 WhatsApp de Atención</span>
         </a>
       </div>
     </div>
@@ -738,6 +804,14 @@
     setInterval(() => {
       moverCarrusel(1);
     }, 4000);
+
+    // Newsletter
+    function suscribirNewsletter(e) {
+      e.preventDefault();
+      const correo = document.getElementById('newsletter-email').value;
+      alert(`¡Gracias por unirte a nuestra Comunidad VIP, ${correo}!`);
+      document.getElementById('newsletter-email').value = '';
+    }
 
     // Carrito y Decap CMS
     let carrito = [];
