@@ -1,49 +1,13 @@
-backend:
-  name: github
-  repo: handmadelovebyele/tienda-handmadelove
-  branch: main
-
-media_folder: "img/uploads"
-public_folder: "img/uploads"
-
-collections:
-  - name: "productos"
-    label: "Productos del Catálogo"
-    folder: "contenido/productos"
+- name: "blog"
+    label: "Blog y Técnicas"
+    folder: "contenido/blog"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Nombre de la Creación", name: "title", widget: "string" }
-      - { label: "Categoría", name: "categoria", widget: "select", options: ["velas", "crochet", "bordado", "bisuteria"] }
-      - { label: "Precio ($ USD)", name: "precio", widget: "number", value_type: "float" }
-      - { label: "Descripción", name: "descripcion", widget: "text" }
-      - { label: "Foto Principal (Portada)", name: "imagen", widget: "image" }
-      - label: "Galería de Fotos Adicionales (Opcional)"
-        name: "fotos"
-        widget: "list"
-        required: false
-        field: { label: "Foto Adicional", name: "foto", widget: "image" }
-
-  - name: "talleres"
-    label: "Talleres Presenciales"
-    folder: "contenido/talleres"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Nombre del Taller", name: "title", widget: "string" }
-      - label: "Fecha y Horario del Taller"
-        name: "fecha"
-        widget: "datetime"
-        date_format: "DD/MM/YYYY"
-        time_format: "HH:mm"
-        format: "YYYY-MM-DD HH:mm"
-      - { label: "Lugar", name: "lugar", widget: "string", default: "Almax Center, Samborondón" }
-      - { label: "Valor ($ USD)", name: "precio", widget: "number", value_type: "float" }
-      - { label: "Cupo Máximo", name: "cupoMax", widget: "number", default: 10 }
-      - { label: "Cupos Ocupados", name: "ocupados", widget: "number", default: 0 }
-      - { label: "Foto del Taller", name: "imagen", widget: "image" }
-      - label: "Descripción del Taller"
-        name: "descripcion"
-        widget: "text"
-        required: false
-        hint: "Escribe los detalles, materiales que incluye, refrigerio o requisitos (puedes dejar espacios y párrafos)."
+      - {label: "Título del Artículo", name: "title", widget: "string"}
+      - {label: "Categoría o Técnica", name: "categoria", widget: "string", default: "Técnica Artesanal"}
+      - {label: "Fecha", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Imagen de Portada", name: "imagen", widget: "image"}
+      - {label: "Resumen Corto", name: "descripcion", widget: "text"}
+      - {label: "Contenido Completo (Editor de Texto)", name: "body", widget: "markdown"}
+      - {label: "Archivo Descargable (Patrón, Guía o PDF Opcional)", name: "archivo", widget: "file", required: false}
