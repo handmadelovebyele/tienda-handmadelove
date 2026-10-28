@@ -46,7 +46,21 @@
     .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary { background: var(--brand-red); color: white; padding: 14px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; }
     .btn-secondary { background: white; border: 1px solid var(--sand-200); color: var(--text-dark); padding: 14px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; }
-    .hero-img-box img { width: 100%; border-radius: 28px; height: 380px; object-fit: cover; }
+
+    /* Carrusel en el Hero */
+    .hero-carousel-container { position: relative; width: 100%; height: 380px; border-radius: 28px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background: var(--sand-100); }
+    .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; backdrop-filter: blur(2px); }
+    .carousel-btn:hover { background: white; color: var(--brand-red); transform: translateY(-50%) scale(1.08); }
+    .carousel-prev { left: 14px; }
+    .carousel-next { right: 14px; }
+
+    .carousel-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+    .carousel-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.3s; }
+    .carousel-dot.active { background: var(--brand-red); width: 22px; border-radius: 10px; }
 
     /* Catálogo */
     .catalogo-section { max-width: 1200px; margin: 0 auto; padding: 60px 24px 80px; }
@@ -90,7 +104,7 @@
     .btn-modal-cart { background: var(--brand-red); color: white; border: none; padding: 14px 20px; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; width: 100%; transition: background 0.2s; }
     .btn-modal-cart:hover { background: var(--brand-red-hover); }
 
-    /* DRAWER LATERAL REDISEÑADO */
+    /* Carrito Drawer Lateral */
     .cart-drawer-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); z-index: 150; display: none; }
     .cart-drawer-backdrop.open { display: block; }
     .cart-drawer { position: fixed; top: 0; right: -490px; width: 100%; max-width: 440px; height: 100%; background: white; box-shadow: -8px 0 35px rgba(0,0,0,0.25); z-index: 200; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
@@ -150,7 +164,7 @@
     .workshops-container { max-width: 1200px; margin: 0 auto; }
     .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
 
-    /* Sección de Newsletter */
+    /* Newsletter */
     .newsletter-section { background: #EFE8DF; border-top: 1px solid var(--sand-200); padding: 50px 24px; text-align: center; }
     .newsletter-container { max-width: 600px; margin: 0 auto; }
     .newsletter-container h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 8px; }
@@ -176,6 +190,7 @@
 
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
+      .hero-carousel-container { height: 300px; }
       .nav-links { display: none; }
       .modal-card { grid-template-columns: 1fr; padding: 24px; gap: 20px; overflow-y: auto; }
       .modal-info { max-height: none; padding-right: 0; }
@@ -209,6 +224,7 @@
     </button>
   </header>
 
+  <!-- SECCIÓN HERO CON TUS FOTOS EN EL CARRUSEL -->
   <section class="hero">
     <div>
       <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
@@ -219,8 +235,28 @@
         <a href="#talleres" class="btn-secondary">Ver Talleres Presenciales</a>
       </div>
     </div>
-    <div class="hero-img-box">
-      <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800" alt="Creaciones artesanales">
+    
+    <!-- Carrusel Interactivo con tus fotos -->
+    <div class="hero-carousel-container" id="hero-carousel">
+      <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800" alt="Creaciones artesanales">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=800" alt="Velas botánicas artesanales">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800" alt="Bordado botánico sobre bastidor">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800" alt="Joyería artesanal y piedras naturales">
+      </div>
+
+      <!-- Flechas de navegación -->
+      <button class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
+      <button class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
+
+      <!-- Indicadores de puntos -->
+      <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </section>
 
@@ -351,7 +387,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN DINÁMICA DE TALLERES (SIN CÓDIGO FIJO) -->
+  <!-- SECCIÓN DINÁMICA DE TALLERES -->
   <section class="workshops-section" id="talleres">
     <div class="workshops-container">
       <div class="section-title">
@@ -437,10 +473,60 @@
     let carrito = [];
     const TASA_IVA = 0.15;
     
-    // Conector a tu Google Apps Script
+    // Conector a Google Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcYeIxJ8nWwH-Vp_sr5PgkCd9AIM2fji7pxOMQoiIZLUnbZhxrQMYBw8jOkXah6eAGjQ/exec";
 
-    // Función para enviar datos a tu Google Sheet en segundo plano
+    /* LÓGICA DEL CARRUSEL HERO */
+    let slideActual = 0;
+    let timerCarrusel = null;
+
+    function iniciarCarrusel() {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dotsCont = document.getElementById('carousel-dots');
+      if (!slides.length || !dotsCont) return;
+
+      dotsCont.innerHTML = '';
+      slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+        dot.onclick = () => irASlide(i);
+        dotsCont.appendChild(dot);
+      });
+
+      reiniciarTimerCarrusel();
+    }
+
+    function mostrarSlide(indice) {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      if (!slides.length) return;
+
+      if (indice >= slides.length) slideActual = 0;
+      else if (indice < 0) slideActual = slides.length - 1;
+      else slideActual = indice;
+
+      slides.forEach((s, i) => s.classList.toggle('active', i === slideActual));
+      dots.forEach((d, i) => d.classList.toggle('active', i === slideActual));
+    }
+
+    function moverCarrusel(delta) {
+      mostrarSlide(slideActual + delta);
+      reiniciarTimerCarrusel();
+    }
+
+    function irASlide(i) {
+      mostrarSlide(i);
+      reiniciarTimerCarrusel();
+    }
+
+    function reiniciarTimerCarrusel() {
+      clearInterval(timerCarrusel);
+      timerCarrusel = setInterval(() => {
+        mostrarSlide(slideActual + 1);
+      }, 4000); // Cambia cada 4 segundos
+    }
+
+    /* BASE DE DATOS Y NEWSLETTER */
     function registrarEnBaseDeDatos(datos) {
       if (!SCRIPT_URL) return;
       try {
@@ -455,7 +541,6 @@
       }
     }
 
-    // Suscripción al Newsletter
     function suscribirNewsletter(e) {
       e.preventDefault();
       const nombre = document.getElementById('news-nombre').value.trim();
@@ -486,6 +571,7 @@
       }, 700);
     }
 
+    /* CARRITO */
     function abrirCarrito() {
       document.getElementById('cart-drawer').classList.add('open');
       document.getElementById('cart-backdrop').classList.add('open');
@@ -959,6 +1045,8 @@
       }
     }
 
+    // Inicializaciones
+    iniciarCarrusel();
     cargarCatalogo();
     cargarTalleres();
   </script>
