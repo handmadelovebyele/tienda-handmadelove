@@ -271,7 +271,7 @@
     .dot.active {
       background-color: var(--brand-red);
     }
-    /* Catálogo y Tarjetas con Altura Controlada */
+    /* Catálogo */
     .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
@@ -301,7 +301,8 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      height: 420px; /* Altura fija para mantener simetría */
+      height: 420px;
+      cursor: pointer;
       transition: transform 0.3s;
     }
     .card:hover {
@@ -332,7 +333,7 @@
       margin-bottom: 1rem;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 3; /* Limita máximo a 3 líneas */
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
     .card-footer {
@@ -449,20 +450,20 @@
       display: flex;
       justify-content: flex-end;
       z-index: 2000;
-      transition: opacity 0.3s;
     }
     .carrito-modal.oculto {
       display: none;
     }
     .carrito-contenido {
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
       background: #fff;
       height: 100%;
       padding: 2rem;
       display: flex;
       flex-direction: column;
       box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      overflow-y: auto;
     }
     .cerrar-carrito {
       font-size: 1.5rem;
@@ -471,34 +472,262 @@
       margin-bottom: 1rem;
     }
     #lista-carrito {
-      flex-grow: 1;
+      max-height: 160px;
       overflow-y: auto;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 8px;
     }
     .item-carrito {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-      font-size: 0.9rem;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      border-bottom: 1px dashed #f2f2f2;
+    }
+    .item-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .item-controls button {
+      background: #fdf2f2;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--brand-red);
+    }
+    .form-cliente {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: 8px 0;
+    }
+    .form-cliente label {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .form-cliente input, .form-cliente select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      outline: none;
+    }
+    .carrito-resumen {
+      background: #fdf8f8;
+      border: 1px solid #f5e6e6;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.85rem;
+      margin: 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .carrito-resumen div {
+      display: flex;
+      justify-content: space-between;
     }
     .carrito-total {
       border-top: 2px solid #eee;
-      padding-top: 1rem;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
     }
-    .btn-pagar {
+    .btn-pagar-tarjeta {
+      width: 100%;
+      background-color: #FF6A00;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+      font-size: 0.9rem;
+    }
+    .btn-pagar-whatsapp {
       width: 100%;
       background-color: #25D366;
       color: white;
       border: none;
-      padding: 0.8rem;
-      border-radius: 25px;
+      padding: 0.75rem;
+      border-radius: 20px;
       font-weight: 600;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 5px;
+      font-size: 0.9rem;
     }
-    /* Footer Original de 4 Columnas */
+    .btn-banco {
+      width: 100%;
+      background: none;
+      border: 1px solid #ccc;
+      color: var(--text-main);
+      padding: 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+    .btn-seguir-comprando {
+      width: 100%;
+      background: #fdf2f2;
+      border: none;
+      color: var(--brand-red);
+      padding: 0.5rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    /* Modal Datos Bancarios */
+    .modal-banco {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      padding: 20px;
+    }
+    .modal-banco.open {
+      display: flex;
+    }
+    .modal-banco-content {
+      background: white;
+      max-width: 380px;
+      width: 100%;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Modal Detalle Producto */
+    .product-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      padding: 20px;
+    }
+    .product-modal.open {
+      display: flex;
+    }
+    .product-modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 750px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2rem;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .close-product-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #555;
+    }
+    .modal-gallery img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .modal-thumbs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .modal-thumb {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+    .modal-thumb.active {
+      border-color: var(--brand-red);
+    }
+    .modal-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--brand-red);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .modal-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .modal-price {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--brand-red);
+      margin-bottom: 15px;
+    }
+    .modal-desc-box {
+      max-height: 150px;
+      overflow-y: auto;
+      padding-right: 5px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .product-modal-content {
+        grid-template-columns: 1fr;
+        max-height: 95vh;
+      }
+      .hero, .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    /* Footer */
     .main-footer {
       background: #231F1C;
       color: #FAF7F2;
@@ -565,25 +794,6 @@
       color: #7A7268;
       font-size: 0.82rem;
     }
-    @media (max-width: 860px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .footer-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .nav-links {
-        display: none;
-      }
-      .newsletter-form {
-        flex-direction: column;
-      }
-      .newsletter-form input {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
@@ -604,7 +814,7 @@
       <ul class="nav-links">
         <li><button onclick="filtrar('todos')">Catálogo</button></li>
         
-        <!-- Menú Desplegable de Categorías -->
+        <!-- Menú Desplegable -->
         <li class="dropdown">
           <a href="#" class="dropbtn">Categorías ▾</a>
           <div class="dropdown-content">
@@ -656,15 +866,13 @@
     </div>
   </section>
 
-  <!-- Catálogo Dinámico con Decap CMS -->
+  <!-- Catálogo -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
       <p>Piezas elaboradas a mano con dedicación y listas para ti.</p>
     </div>
-    <div class="grid-productos" id="grid-productos">
-      <!-- Los productos cargan aquí -->
-    </div>
+    <div class="grid-productos" id="grid-productos"></div>
   </main>
 
   <!-- Talleres EMOCION-ARTE -->
@@ -695,22 +903,96 @@
     </div>
   </section>
 
+  <!-- Modal Detalle de Producto -->
+  <div id="modal-producto" class="product-modal">
+    <div class="product-modal-content">
+      <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
+      
+      <div class="modal-gallery">
+        <img id="modal-img-principal" src="" alt="Producto">
+        <div class="modal-thumbs" id="modal-galeria-thumbs"></div>
+      </div>
+
+      <div class="modal-details">
+        <span class="modal-category" id="modal-categoria">Categoría</span>
+        <h2 class="modal-title" id="modal-titulo">Título</h2>
+        <p class="modal-price" id="modal-precio">$0.00</p>
+        
+        <div class="modal-desc-box">
+          <p id="modal-descripcion" style="white-space: pre-line;"></p>
+        </div>
+
+        <button class="card-btn" id="modal-btn-comprar" style="margin-top: auto; padding: 0.7rem; font-size: 0.95rem;">+ Agregar al Carrito</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal del Carrito -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       <h3>Tu Carrito de Compras</h3>
       <div id="lista-carrito">
-        <p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">El carrito está vacío</p>
+        <p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>
       </div>
+      
+      <button class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
+
+      <div class="form-cliente">
+        <label for="input-nombre">Tu Nombre:</label>
+        <input type="text" id="input-nombre" placeholder="Ej. María Pérez" required>
+        
+        <label for="input-telefono">Celular / WhatsApp:</label>
+        <input type="tel" id="input-telefono" placeholder="Ej. 0980526007" required>
+        
+        <label for="input-correo">Correo Electrónico:</label>
+        <input type="email" id="input-correo" placeholder="Ej. correo@gmail.com" required>
+
+        <label for="select-envio">Zona de Envío:</label>
+        <select id="select-envio" onchange="actualizarCarrito()">
+          <option value="0">Retiro en Taller (Almax Center) - $0.00</option>
+          <option value="3.00">Samborondón / Daule - $3.00</option>
+          <option value="3.50">Guayaquil - $3.50</option>
+          <option value="5.50">Resto del País (Servientrega) - $5.50</option>
+        </select>
+      </div>
+
+      <div class="carrito-resumen">
+        <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
+        <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
+        <div><span>Envío:</span> <span id="cart-shipping-val">$0.00</span></div>
+      </div>
+
       <div class="carrito-total">
-        <p style="font-weight: 600; margin-bottom: 10px;">Total: $<span id="total-precio">0.00</span></p>
-        <button class="btn-pagar" onclick="procesarCompra()">Finalizar por WhatsApp 💬</button>
+        <span>TOTAL:</span>
+        <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
+
+      <!-- Botones de Pago -->
+      <button class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone)</button>
+      <button class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
+      <button class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
     </div>
   </div>
 
-  <!-- Pie de Página -->
+  <!-- Modal Datos Bancarios -->
+  <div id="modal-banco" class="modal-banco" onclick="if(event.target.id === 'modal-banco') cerrarDatosBancarios()">
+    <div class="modal-banco-content">
+      <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
+      <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
+        <strong>Banco:</strong> Banco Internacional<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros<br>
+        <strong>Número de Cuenta:</strong> 1000900044<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
+        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
+        <strong>Deuna:</strong> 0980526007
+      </div>
+      <button onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -762,6 +1044,8 @@
 
   <!-- Scripts -->
   <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
+
     // Carrusel
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
@@ -797,20 +1081,37 @@
       moverCarrusel(1);
     }, 4000);
 
+    // Enviar datos al Google Sheet (Base de datos)
+    async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
+      if (!SCRIPT_URL) return;
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ tipo, nombre, telefono, correo, detalle, total })
+        });
+      } catch (err) {
+        console.error("Error al registrar en Google Sheet", err);
+      }
+    }
+
     // Newsletter
     function suscribirNewsletter(e) {
       e.preventDefault();
       const correo = document.getElementById('newsletter-email').value;
+      enviarBaseDatos('Suscripción Newsletter', 'Susccriptor Web', 'N/D', correo, 'Suscripción al boletín VIP', '$0.00');
       alert(`¡Gracias por unirte a nuestra Comunidad VIP, ${correo}!`);
       document.getElementById('newsletter-email').value = '';
     }
 
-    // Carrito y Decap CMS
+    // Carrito, IVA (15%), Envío y CMS
     let carrito = [];
     let todosLosProductos = [];
+    const TASA_IVA = 0.15;
 
     const productosBase = [
-      { title: "Pulsera de Hilo Rojo", categoria: "Bisutería", precio: 12.00, descripcion: "Protección y diseño artesanal.", imagen: "pulsera-secundaria.jpg" }
+      { title: "Pulsera de Hilo Rojo", categoria: "Bisutería", precio: 12.00, descripcion: "Protección y diseño artesanal con perlas y detalles finos.", imagen: "pulsera-secundaria.jpg" }
     ];
 
     function toggleCarrito() {
@@ -819,51 +1120,204 @@
     }
 
     function agregarAlCarrito(nombre, precio) {
-      carrito.push({ nombre, precio });
+      const encontrado = carrito.find(item => item.nombre === nombre);
+      if (encontrado) {
+        encontrado.cantidad += 1;
+      } else {
+        carrito.push({ nombre, precio, cantidad: 1 });
+      }
       actualizarCarrito();
       alert(`¡"${nombre}" se agregó a tu carrito!`);
+    }
+
+    function cambiarCantidad(index, delta) {
+      carrito[index].cantidad += delta;
+      if (carrito[index].cantidad <= 0) {
+        carrito.splice(index, 1);
+      }
+      actualizarCarrito();
     }
 
     function actualizarCarrito() {
       const lista = document.getElementById('lista-carrito');
       const contador = document.getElementById('cart-num');
-      const totalPrecio = document.getElementById('total-precio');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const ivaEl = document.getElementById('cart-iva');
+      const shippingValEl = document.getElementById('cart-shipping-val');
+      const totalEl = document.getElementById('total-precio');
+      const selectEnvio = document.getElementById('select-envio');
 
-      contador.textContent = carrito.length;
+      let totalItems = 0;
+      carrito.forEach(item => totalItems += item.cantidad);
+      contador.textContent = totalItems;
 
       if (carrito.length === 0) {
-        lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">El carrito está vacío</p>';
-        totalPrecio.textContent = '0.00';
+        lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>';
+        subtotalEl.textContent = '$0.00';
+        ivaEl.textContent = '$0.00';
+        shippingValEl.textContent = '$0.00';
+        totalEl.textContent = '$0.00';
         return;
       }
 
-      let html = '';
-      let total = 0;
-      carrito.forEach((item) => {
-        total += item.precio;
-        html += `<div class="item-carrito">
-          <span>${item.nombre}</span>
-          <span>$${item.precio.toFixed(2)}</span>
-        </div>`;
-      });
+      let subtotal = 0;
+      lista.innerHTML = carrito.map((item, index) => {
+        subtotal += item.precio * item.cantidad;
+        return `
+          <div class="item-carrito">
+            <div>
+              <strong>${item.nombre}</strong><br>
+              <span style="color:var(--brand-red);">$${(item.precio * item.cantidad).toFixed(2)}</span>
+            </div>
+            <div class="item-controls">
+              <button onclick="cambiarCantidad(${index}, -1)">-</button>
+              <span>${item.cantidad}</span>
+              <button onclick="cambiarCantidad(${index}, 1)">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
 
-      lista.innerHTML = html;
-      totalPrecio.textContent = total.toFixed(2);
+      const costoEnvio = parseFloat(selectEnvio.value) || 0;
+      const valorIva = subtotal * TASA_IVA;
+      const totalDefinitivo = subtotal + valorIva + costoEnvio;
+
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      ivaEl.textContent = `$${valorIva.toFixed(2)}`;
+      shippingValEl.textContent = `$${costoEnvio.toFixed(2)}`;
+      totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
 
-    function procesarCompra() {
+    function validarCliente() {
+      const nombre = document.getElementById('input-nombre').value.trim();
+      const telefono = document.getElementById('input-telefono').value.trim();
+      const correo = document.getElementById('input-correo').value.trim();
+
+      if (!nombre || !telefono || !correo) {
+        alert('Por favor completa tu Nombre, Teléfono y Correo antes de continuar.');
+        return false;
+      }
+      return { nombre, telefono, correo };
+    }
+
+    function procesarCompraWhatsApp() {
       if (carrito.length === 0) {
         alert('Tu carrito está vacío.');
         return;
       }
-      let mensaje = "Hola Handmade Love! Quisiera pedir lo siguiente:%0A";
-      let total = 0;
+
+      const cliente = validarCliente();
+      if (!cliente) return;
+
+      const selectEnvio = document.getElementById('select-envio');
+      const textoEnvio = selectEnvio.options[selectEnvio.selectedIndex].text;
+      const costoEnvio = parseFloat(selectEnvio.value) || 0;
+
+      let subtotal = 0;
+      let detalleStr = "";
       carrito.forEach(item => {
-        mensaje += `- ${item.nombre} ($${item.precio.toFixed(2)})%0A`;
-        total += item.precio;
+        detalleStr += `${item.nombre} (x${item.cantidad}) - $${(item.precio * item.cantidad).toFixed(2)}; `;
+        subtotal += item.precio * item.cantidad;
       });
-      mensaje += `%0ATotal a pagar: $${total.toFixed(2)}`;
+
+      const valorIva = subtotal * TASA_IVA;
+      const totalFinal = subtotal + valorIva + costoEnvio;
+
+      // Registrar en Google Sheet
+      enviarBaseDatos('Compra Web (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, detalleStr, `$${totalFinal.toFixed(2)}`);
+
+      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono} | Correo: ${cliente.correo}). Deseo realizar el siguiente pedido:%0A`;
+      carrito.forEach(item => {
+        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(item.precio * item.cantidad).toFixed(2)}%0A`;
+      });
+
+      mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
+      mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
+      mensaje += `%0AEnvío (${textoEnvio}): $${costoEnvio.toFixed(2)}`;
+      mensaje += `%0A*TOTAL A PAGAR: $${totalFinal.toFixed(2)}*`;
+
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
+    }
+
+    function pagarPayphone() {
+      if (carrito.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+      }
+      const cliente = validarCliente();
+      if (!cliente) return;
+
+      let subtotal = 0;
+      let detalleStr = "";
+      carrito.forEach(item => {
+        detalleStr += `${item.nombre} (x${item.cantidad}); `;
+        subtotal += item.precio * item.cantidad;
+      });
+      const costoEnvio = parseFloat(document.getElementById('select-envio').value) || 0;
+      const totalFinal = subtotal + (subtotal * TASA_IVA) + costoEnvio;
+
+      enviarBaseDatos('Compra Web (Payphone)', cliente.nombre, cliente.telefono, cliente.correo, detalleStr, `$${totalFinal.toFixed(2)}`);
+      window.open('https://ppls.me/cIn4VPnued6A9r628wNVw', '_blank');
+    }
+
+    function mostrarDatosBancarios() {
+      document.getElementById('modal-banco').classList.add('open');
+    }
+
+    function cerrarDatosBancarios() {
+      document.getElementById('modal-banco').classList.remove('open');
+    }
+
+    // Modal Detalle Producto
+    function abrirModalProducto(index) {
+      const p = todosLosProductos[index];
+      if (!p) return;
+
+      document.getElementById('modal-categoria').textContent = p.categoria || 'Creación';
+      document.getElementById('modal-titulo').textContent = p.title || '';
+      document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
+      document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
+
+      let galeria = [];
+      if (p.fotos && Array.isArray(p.fotos) && p.fotos.length > 0) {
+        galeria = p.fotos.map(f => f.startsWith('http') ? f : 'img/uploads/' + f.replace(/^.*[\\\/]/, ''));
+      } else {
+        galeria = [p.imagen || 'logo.jpg'];
+      }
+
+      const imgPrincipal = document.getElementById('modal-img-principal');
+      const thumbsContainer = document.getElementById('modal-galeria-thumbs');
+
+      imgPrincipal.src = galeria[0];
+      thumbsContainer.innerHTML = '';
+
+      if (galeria.length > 1) {
+        galeria.forEach((src, i) => {
+          const thumb = document.createElement('img');
+          thumb.src = src;
+          thumb.className = `modal-thumb ${i === 0 ? 'active' : ''}`;
+          thumb.onclick = () => {
+            imgPrincipal.src = src;
+            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          };
+          thumbsContainer.appendChild(thumb);
+        });
+      }
+
+      const btnComprar = document.getElementById('modal-btn-comprar');
+      btnComprar.onclick = () => {
+        agregarAlCarrito(p.title, p.precio || 0);
+        cerrarModalProducto();
+      };
+
+      document.getElementById('modal-producto').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModalProducto() {
+      document.getElementById('modal-producto').classList.remove('open');
+      document.body.style.overflow = 'auto';
     }
 
     function render(lista) {
@@ -873,15 +1327,15 @@
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles.</p>';
         return;
       }
-      grid.innerHTML = lista.map(p => `
-        <div class="card" data-category="${p.categoria || ''}">
+      grid.innerHTML = lista.map((p, index) => `
+        <div class="card" onclick="abrirModalProducto(${index})">
           <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}" onerror="this.src='logo.jpg'">
           <div class="card-body">
             <h3 class="card-title" title="${p.title}">${p.title}</h3>
             <p class="card-desc">${p.descripcion || ''}</p>
             <div class="card-footer">
               <span class="card-price">$${parseFloat(p.precio || 0).toFixed(2)}</span>
-              <button class="card-btn" onclick="agregarAlCarrito('${p.title}', ${p.precio || 0})">+ Agregar</button>
+              <button class="card-btn" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${p.precio || 0})">+ Agregar</button>
             </div>
           </div>
         </div>
@@ -923,12 +1377,12 @@
                 data[key] = val;
               }
             });
-            // Corrección automática de la ruta de la imagen
+
             if (data.imagen) {
               if (data.imagen.startsWith('http')) {
-                // Se queda igual si es externa
+                // externa
               } else if (data.imagen.startsWith('img/uploads/')) {
-                // Ya tiene la ruta correcta
+                // correcta
               } else {
                 data.imagen = 'img/uploads/' + data.imagen.replace(/^.*[\\\/]/, '');
               }
