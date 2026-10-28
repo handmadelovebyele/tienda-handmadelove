@@ -1029,6 +1029,7 @@
       if (e.target.id === 'modal-producto') cerrarModal();
     }
 
+    // Función de filtrado con desplazamiento automático al catálogo
     function filtrar(cat) {
       document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
       const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.textContent.toLowerCase().includes(cat === 'todos' ? 'todas' : cat));
@@ -1039,6 +1040,12 @@
       } else {
         const filtrados = todosLosProductos.filter(p => (p.categoria || '').toLowerCase() === cat.toLowerCase());
         render(filtrados);
+      }
+
+      // Desplazamiento suave hacia la sección del catálogo
+      const seccion = document.getElementById('catalogo');
+      if (seccion) {
+        seccion.scrollIntoView({ behavior: 'smooth' });
       }
     }
 
