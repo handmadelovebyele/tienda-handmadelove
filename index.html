@@ -399,7 +399,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN DE NEWSLETTER / COMUNIDAD (AHORA CON TELÉFONO PARA WHATSAPP) -->
+  <!-- SECCIÓN DE NEWSLETTER / COMUNIDAD -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <span style="color: var(--brand-red); font-weight:700; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;">COMUNIDAD HANDMADE LOVE</span>
@@ -471,8 +471,8 @@
     let carrito = [];
     const TASA_IVA = 0.15;
     
-    // Conector a Google Apps Script
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
+    // Conector a Google Apps Script actualizado con tu nueva URL
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynetQYmHNjBVhwcHL8kqlO3j9ohaz3v4UlcIraDHjNiHFHyq1A3xpnBfQIe-c1g-3pIA/exec";
 
     /* LÓGICA DEL CARRUSEL HERO */
     let slideActual = 0;
@@ -521,7 +521,7 @@
       clearInterval(timerCarrusel);
       timerCarrusel = setInterval(() => {
         mostrarSlide(slideActual + 1);
-      }, 4000); // Cambia cada 4 segundos
+      }, 4000);
     }
 
     /* BASE DE DATOS Y NEWSLETTER */
@@ -562,7 +562,7 @@
       setTimeout(() => {
         msg.style.display = "block";
         msg.style.color = "#2E7D32";
-        msg.textContent = "¡Bienvenida a nuestra comunidad VIP! Te contactaremos pronto.";
+        msg.textContent = "¡Bienvenida a nuestra comunidad VIP! Te hemos enviado un correo de confirmación.";
         document.getElementById('news-nombre').value = "";
         document.getElementById('news-telefono').value = "";
         document.getElementById('news-correo').value = "";
@@ -725,7 +725,7 @@
       const facDireccion = document.getElementById('fac-direccion').value.trim();
       const facCorreo = document.getElementById('fac-correo').value.trim();
 
-      // Guardar en la Base de Datos Google Sheets
+      // Guardar en la Base de Datos Google Sheets y disparar correo
       registrarEnBaseDeDatos({
         tipo: tieneTaller ? "Reserva Taller" : "Compra Web",
         nombre: facNombre || "Cliente Web",
