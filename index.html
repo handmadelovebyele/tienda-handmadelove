@@ -99,7 +99,7 @@
       font-weight: 500;
       color: var(--brand-red) !important;
     }
-    /* Menú Desplegable de Categorías */
+    /* Menú Desplegable */
     .dropdown {
       position: relative;
     }
@@ -128,7 +128,7 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    /* Botón del Carrito */
+    /* Carrito */
     .cart-btn {
       background-color: var(--brand-red);
       color: white !important;
@@ -139,15 +139,7 @@
       gap: 6px;
       font-weight: 500;
     }
-    .cart-badge {
-      background: white;
-      color: var(--brand-red);
-      padding: 1px 6px;
-      border-radius: 50%;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    /* Sección Hero / Mensaje de Portada */
+    /* Hero */
     .hero {
       max-width: 1100px;
       margin: 2.5rem auto 1.5rem auto;
@@ -279,7 +271,7 @@
     .dot.active {
       background-color: var(--brand-red);
     }
-    /* Catálogo y Secciones */
+    /* Catálogo y Tarjetas con Altura Controlada */
     .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
@@ -309,6 +301,7 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
+      height: 420px; /* Altura fija para mantener simetría */
       transition: transform 0.3s;
     }
     .card:hover {
@@ -316,7 +309,7 @@
     }
     .card img {
       width: 100%;
-      height: 220px;
+      height: 200px;
       object-fit: cover;
     }
     .card-body {
@@ -329,12 +322,18 @@
       font-size: 1.05rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .card-desc {
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 1rem;
-      flex-grow: 1;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* Limita máximo a 3 líneas */
+      -webkit-box-orient: vertical;
     }
     .card-footer {
       display: flex;
@@ -392,7 +391,7 @@
     .btn-main:hover {
       background-color: var(--brand-red-dark);
     }
-    /* Newsletter Section */
+    /* Newsletter */
     .newsletter-section {
       background-color: #fdf2f2;
       padding: 4rem 2rem;
@@ -605,7 +604,7 @@
       <ul class="nav-links">
         <li><button onclick="filtrar('todos')">Catálogo</button></li>
         
-        <!-- Menú Desplegable con tus 5 Categorías -->
+        <!-- Menú Desplegable de Categorías -->
         <li class="dropdown">
           <a href="#" class="dropbtn">Categorías ▾</a>
           <div class="dropdown-content">
@@ -628,7 +627,7 @@
     </nav>
   </header>
 
-  <!-- Sección Hero / Mensaje de Portada -->
+  <!-- Sección Hero -->
   <section class="hero">
     <div>
       <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
@@ -639,7 +638,7 @@
         <a href="#talleres" class="btn-secondary">Ver Talleres EMOCION-ARTE</a>
       </div>
     </div>
-    <!-- Carrusel de Portada -->
+    <!-- Carrusel -->
     <div class="hero-carousel-container" id="hero-carousel">
       <div class="hero-slide active">
         <img src="img/uploads/bordado-crochet-varios.jpg" alt="Bordado y Crochet Handmade Love">
@@ -651,11 +650,8 @@
         <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería artesanal">
       </div>
 
-      <!-- Flechas de navegación -->
       <button class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
       <button class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
-
-      <!-- Indicadores de puntos -->
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </section>
@@ -687,7 +683,7 @@
     </div>
   </section>
 
-  <!-- Sección de Newsletter / Comunidad VIP -->
+  <!-- Newsletter -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
@@ -714,10 +710,9 @@
     </div>
   </div>
 
-  <!-- Pie de Página Original de 4 Columnas -->
+  <!-- Pie de Página -->
   <footer class="main-footer">
     <div class="footer-container">
-      <!-- Columna 1: Marca -->
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
@@ -725,7 +720,6 @@
         </p>
       </div>
 
-      <!-- Columna 2: Categorías -->
       <div class="footer-col">
         <h4>CATEGORÍAS</h4>
         <ul class="footer-links">
@@ -737,7 +731,6 @@
         </ul>
       </div>
 
-      <!-- Columna 3: Talleres -->
       <div class="footer-col">
         <h4>TALLERES</h4>
         <ul class="footer-links">
@@ -746,7 +739,6 @@
         </ul>
       </div>
 
-      <!-- Columna 4: Contacto Directo -->
       <div class="footer-col">
         <h4>CONTACTO DIRECTO</h4>
         <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
@@ -883,9 +875,9 @@
       }
       grid.innerHTML = lista.map(p => `
         <div class="card" data-category="${p.categoria || ''}">
-          <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}">
+          <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}" onerror="this.src='logo.jpg'">
           <div class="card-body">
-            <h3 class="card-title">${p.title}</h3>
+            <h3 class="card-title" title="${p.title}">${p.title}</h3>
             <p class="card-desc">${p.descripcion || ''}</p>
             <div class="card-footer">
               <span class="card-price">$${parseFloat(p.precio || 0).toFixed(2)}</span>
@@ -931,8 +923,17 @@
                 data[key] = val;
               }
             });
-            if (data.imagen && !data.imagen.startsWith('http')) {
-              data.imagen = 'img/uploads/' + data.imagen;
+            // Corrección automática de la ruta de la imagen
+            if (data.imagen) {
+              if (data.imagen.startsWith('http')) {
+                // Se queda igual si es externa
+              } else if (data.imagen.startsWith('img/uploads/')) {
+                // Ya tiene la ruta correcta
+              } else {
+                data.imagen = 'img/uploads/' + data.imagen.replace(/^.*[\\\/]/, '');
+              }
+            } else {
+              data.imagen = 'logo.jpg';
             }
             return data;
           }).filter(Boolean);
