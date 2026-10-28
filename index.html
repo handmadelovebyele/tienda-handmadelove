@@ -3,1124 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Handmade Love | EMOCION-ARTE</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Handmade Love by E.L.E & EMOCION-ARTE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --brand-red: #D92314;
-      --brand-red-hover: #b81b0e;
-      --brand-red-light: #FFF0EE;
-      --bg-cream: #FAF7F2;
-      --sand-100: #F3ECE2;
-      --sand-200: #E6DBCB;
-      --text-dark: #2B2621;
-      --text-muted: #6B6258;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-cream); color: var(--text-dark); line-height: 1.6; }
-
-    /* Barra Superior */
-    .top-banner { background: var(--brand-red); color: white; text-align: center; padding: 9px 16px; font-size: 0.82rem; font-weight: 600; }
-
-    /* Barra de Navegación */
-    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; background: white; border-bottom: 1px solid var(--sand-200); position: sticky; top: 0; z-index: 50; }
-    .logo-container { display: flex; align-items: center; gap: 14px; text-decoration: none; color: inherit; }
-    .logo-card img { height: 48px; border-radius: 8px; object-fit: contain; }
-    .brand-main { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; display: block; }
-    .brand-sub { font-size: 0.68rem; letter-spacing: 2px; color: var(--brand-red); font-weight: 700; text-transform: uppercase; }
-    .nav-links { display: flex; gap: 20px; align-items: center; }
-    .nav-links button, .nav-links a { background: none; border: none; font-size: 0.95rem; font-weight: 600; color: var(--text-dark); cursor: pointer; text-decoration: none; transition: color 0.2s; }
-    .nav-links button:hover, .nav-links a:hover { color: var(--brand-red); }
-    .pill-talleres { background: var(--brand-red-light); color: var(--brand-red) !important; padding: 6px 14px; border-radius: 20px; }
-    .cart-btn { background: var(--sand-100); border: 1px solid var(--sand-200); border-radius: 30px; padding: 8px 16px; cursor: pointer; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
-    .cart-badge { background: var(--brand-red); color: white; border-radius: 50%; padding: 2px 7px; font-size: 0.75rem; }
-
-    /* Hero */
-    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
-    .hero-badge { color: var(--brand-red); font-weight: 700; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; line-height: 1.15; margin: 12px 0 18px; }
-    .hero h1 span { font-style: italic; color: var(--brand-red); font-weight: 400; }
-    .hero p { color: var(--text-muted); font-size: 1.05rem; line-height: 1.6; margin-bottom: 28px; }
-    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn-primary { background: var(--brand-red); color: white; padding: 14px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; display: inline-block; cursor: pointer; border: none; font-family: inherit; }
-    .btn-secondary { background: white; border: 1px solid var(--sand-200); color: var(--text-dark); padding: 14px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; }
-
-    /* Carrusel en el Hero */
-    .hero-carousel-container { position: relative; width: 100%; height: 380px; border-radius: 28px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.06); background: var(--sand-100); }
-    .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; }
-    .hero-slide.active { opacity: 1; }
-    .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
-    
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1.3rem; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; backdrop-filter: blur(2px); }
-    .carousel-btn:hover { background: white; color: var(--brand-red); transform: translateY(-50%) scale(1.08); }
-    .carousel-prev { left: 14px; }
-    .carousel-next { right: 14px; }
-
-    .carousel-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
-    .carousel-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.3s; }
-    .carousel-dot.active { background: var(--brand-red); width: 22px; border-radius: 10px; }
-
-    /* Catálogo */
-    .catalogo-section { max-width: 1200px; margin: 0 auto; padding: 60px 24px 80px; }
-    .section-title { text-align: center; margin-bottom: 35px; }
-    .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.6rem; margin-bottom: 8px; }
-    .section-title p { color: var(--text-muted); font-size: 1rem; }
-    .filter-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 45px; }
-    .filter-btn { background: var(--sand-100); color: #4A443A; border: 1px solid transparent; padding: 10px 22px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .filter-btn.active, .filter-btn:hover { background: var(--brand-red); color: white; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; }
-    
-    /* Tarjeta de Producto / Blog */
-    .card { background: white; border-radius: 22px; border: 1px solid var(--sand-200); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); }
-    .card-img { position: relative; height: 240px; }
-    .card-img img { width: 100%; height: 100%; object-fit: cover; }
-    .card-badge { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.92); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; }
-    .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-    .card-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-    .card-desc { color: var(--text-muted); font-size: 0.84rem; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-line; }
-    .card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--sand-100); }
-    .card-price { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--brand-red); }
-    .card-btn { background: var(--sand-100); border: 1px solid var(--sand-200); padding: 8px 16px; border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .card-btn:hover { background: var(--brand-red); color: white; border-color: var(--brand-red); }
-
-    /* Modales */
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
-    .modal-overlay.open { display: flex; }
-    .modal-card { background: white; border-radius: 24px; max-width: 860px; width: 100%; max-height: 88vh; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 32px; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow: hidden; }
-    .modal-close { position: absolute; top: 16px; right: 18px; background: var(--sand-100); border: none; font-size: 1.4rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
-    .modal-gallery { display: flex; flex-direction: column; gap: 12px; }
-    .modal-main-img { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; border: 1px solid var(--sand-200); background-color: var(--sand-100); }
-    .modal-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-    .modal-thumb { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: all 0.2s; flex-shrink: 0; background-color: var(--sand-100); }
-    .modal-thumb.active, .modal-thumb:hover { border-color: var(--brand-red); opacity: 1; }
-    .modal-info { display: flex; flex-direction: column; max-height: calc(88vh - 64px); overflow-y: auto; padding-right: 12px; }
-    .modal-cat { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--brand-red); font-weight: 700; margin-bottom: 6px; }
-    .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; line-height: 1.2; margin-bottom: 12px; }
-    .modal-price { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--brand-red); font-weight: 700; margin-bottom: 16px; }
-    .modal-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; white-space: pre-line; }
-    .btn-modal-cart { background: var(--brand-red); color: white; border: none; padding: 14px 20px; border-radius: 30px; font-weight: 600; cursor: pointer; font-size: 1rem; width: 100%; transition: background 0.2s; }
-    .btn-modal-cart:hover { background: var(--brand-red-hover); }
-
-    /* Carrito Drawer */
-    .cart-drawer-backdrop { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); z-index: 150; display: none; }
-    .cart-drawer-backdrop.open { display: block; }
-    .cart-drawer { position: fixed; top: 0; right: -490px; width: 100%; max-width: 440px; height: 100%; background: white; box-shadow: -8px 0 35px rgba(0,0,0,0.25); z-index: 200; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-    .cart-drawer.open { right: 0; }
-    
-    .cart-drawer-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--sand-200); padding: 16px 20px; background: #FAF7F2; }
-    .cart-drawer-header h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; }
-    .cart-header-actions { display: flex; align-items: center; gap: 8px; }
-    .btn-header-continue { background: none; border: none; color: var(--brand-red); font-size: 0.82rem; font-weight: 700; cursor: pointer; padding: 4px 8px; border-radius: 6px; }
-    .btn-header-continue:hover { background: var(--brand-red-light); }
-    .btn-close-drawer { background: white; border: 1px solid var(--sand-200); font-size: 1.2rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-    .cart-drawer-body { flex-grow: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
-    .cart-items-list { display: flex; flex-direction: column; gap: 10px; }
-    .cart-item-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #FAF8F5; border-radius: 14px; border: 1px solid var(--sand-200); }
-    .cart-item-thumb { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; background: white; border: 1px solid var(--sand-200); flex-shrink: 0; }
-    .cart-item-info { flex-grow: 1; min-width: 0; }
-    .cart-item-name { font-weight: 700; font-size: 0.88rem; line-height: 1.25; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cart-item-meta { display: flex; align-items: baseline; gap: 6px; }
-    .cart-item-unit-price { color: var(--text-muted); font-size: 0.78rem; }
-    .cart-item-total-price { color: var(--brand-red); font-weight: 700; font-size: 0.92rem; }
-    
-    .cart-qty-controls { display: flex; align-items: center; gap: 5px; background: white; border: 1px solid var(--sand-200); border-radius: 20px; padding: 2px 8px; }
-    .btn-qty { background: none; border: none; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); cursor: pointer; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
-    .btn-qty:hover { color: var(--brand-red); }
-    .cart-qty-number { font-weight: 700; font-size: 0.85rem; min-width: 16px; text-align: center; }
-    .btn-delete-item { background: none; border: none; color: #BBB; cursor: pointer; font-size: 1.1rem; padding: 4px; transition: color 0.2s; }
-    .btn-delete-item:hover { color: #DC2626; }
-
-    .delivery-info-banner { background: #F8F4EE; border: 1px dashed var(--sand-200); border-radius: 12px; padding: 12px; font-size: 0.82rem; color: #5A5248; line-height: 1.45; }
-    .delivery-info-banner strong { color: var(--brand-red); display: block; margin-bottom: 2px; }
-
-    .breakdown-box { background: white; border: 1px solid var(--sand-200); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
-    .breakdown-row { display: flex; justify-content: space-between; font-size: 0.86rem; color: var(--text-muted); }
-    .breakdown-row.total-final { font-size: 1.18rem; font-weight: 700; color: var(--text-dark); border-top: 1px solid var(--sand-200); padding-top: 8px; margin-top: 4px; }
-    .breakdown-row.total-final .cart-total-val { font-family: 'Playfair Display', serif; color: var(--brand-red); font-size: 1.4rem; }
-
-    .billing-toggle { background: white; border: 1px solid var(--sand-200); padding: 8px 12px; border-radius: 10px; font-size: 0.78rem; font-weight: 600; color: var(--text-dark); cursor: pointer; text-align: left; display: flex; justify-content: space-between; align-items: center; width: 100%; }
-    .billing-fields { display: none; flex-direction: column; gap: 6px; background: #FAF7F2; padding: 10px; border-radius: 10px; border: 1px solid var(--sand-200); margin-top: 4px; }
-    .billing-fields.open { display: flex; }
-    .billing-fields input { padding: 6px 10px; border: 1px solid var(--sand-200); border-radius: 6px; font-size: 0.8rem; font-family: inherit; }
-
-    .cart-drawer-footer { padding: 12px 20px 16px; border-top: 1px solid var(--sand-200); background: white; display: flex; flex-direction: column; gap: 8px; }
-    .btn-payphone { background: #FF6A00; color: white; border: none; padding: 11px; border-radius: 25px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
-    .btn-payphone:hover { background: #e55e00; }
-    .btn-checkout-wa { background: #25D366; color: white; border: none; padding: 12px; border-radius: 25px; font-weight: 700; font-size: 0.92rem; cursor: pointer; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 8px; transition: background 0.2s; }
-    .btn-checkout-wa:hover { background: #1eb857; }
-    .btn-show-bank { background: none; border: 1px solid var(--sand-200); color: var(--text-dark); padding: 7px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
-    .btn-show-bank:hover { background: var(--sand-100); }
-
-    .modal-bank-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 250; display: none; align-items: center; justify-content: center; padding: 20px; }
-    .modal-bank-card { background: white; max-width: 440px; width: 100%; border-radius: 22px; padding: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); text-align: left; }
-
-    /* Talleres */
-    .workshops-section { background: #F4EFEB; border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200); padding: 80px 24px; }
-    .workshops-container { max-width: 1200px; margin: 0 auto; }
-    .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
-
-    /* Blog Section */
-    .blog-section { padding: 80px 24px; background: white; border-top: 1px solid var(--sand-200); }
-
-    /* Newsletter */
-    .newsletter-section { background: #EFE8DF; border-top: 1px solid var(--sand-200); padding: 50px 24px; text-align: center; }
-    .newsletter-container { max-width: 640px; margin: 0 auto; }
-    .newsletter-container h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 8px; }
-    .newsletter-container p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 22px; }
-    .newsletter-form { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .newsletter-form input { padding: 12px 18px; border-radius: 25px; border: 1px solid var(--sand-200); outline: none; font-family: inherit; font-size: 0.9rem; flex: 1 1 180px; max-width: 200px; }
-    .newsletter-form button { background: var(--brand-red); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-size: 0.9rem; }
-    .newsletter-form button:hover { background: var(--brand-red-hover); }
-
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background-color: #faf9f6;
+      line-height: 1.6;
+    }
+    /* Barra de Navegación con Menú Desplegable */
+    .navbar-handmade {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar-handmade .logo a {
+      font-weight: 600;
+      font-size: 1.3rem;
+      color: #333;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      margin: 0;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #555;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #b8977e;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #fff;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      z-index: 100;
+      padding: 8px 0;
+    }
+    .dropdown-content a {
+      color: #555;
+      padding: 10px 16px;
+      display: block;
+      text-align: left;
+    }
+    .dropdown-content a:hover {
+      background-color: #f9f6f0;
+      color: #b8977e;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* Sección Hero Principal */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(rgba(0,0,0,0.03), rgba(0,0,0,0.03)), url('logo.jpg') no-repeat center center/cover;
+      background-size: 250px;
+      background-color: #f4efe6;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: #2c2c2c;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+    }
+    .btn-main {
+      display: inline-block;
+      background-color: #b8977e;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .btn-main:hover {
+        background-color: #9e7f67;
+    }
+    /* Contenedor General */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #333;
+    }
+    /* Estilos de Talleres */
+    .talleres-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .taller-card {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+    }
+    .taller-card h3 {
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    .taller-card p {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
     /* Footer */
-    .main-footer { background: #231F1C; color: #FAF7F2; padding: 70px 24px 30px; }
-    .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 50px; }
-    .footer-brand .logo-card img { height: 44px; margin-bottom: 12px; }
-    .footer-brand .brand-main { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: white; }
-    .footer-brand .brand-sub { color: var(--brand-red); font-size: 0.65rem; letter-spacing: 2px; }
-    .footer-desc { color: #A89F94; font-size: 0.88rem; margin-top: 12px; line-height: 1.6; }
-    .footer-col h4 { font-size: 0.78rem; letter-spacing: 2px; font-weight: 700; margin-bottom: 18px; color: #FAF7F2; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a, .footer-links button { color: #A89F94; text-decoration: none; font-size: 0.88rem; background: none; border: none; cursor: pointer; text-align: left; padding: 0; }
-    .footer-links a:hover, .footer-links button:hover { color: white; }
-    .btn-wa-footer { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white !important; padding: 10px 18px; border-radius: 30px; font-weight: 600; text-decoration: none; margin-top: 12px; font-size: 0.88rem; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding-top: 24px; color: #7A7268; font-size: 0.82rem; }
-
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-carousel-container { height: 300px; }
-      .nav-links { display: none; }
-      .modal-card { grid-template-columns: 1fr; padding: 24px; gap: 20px; overflow-y: auto; }
-      .modal-info { max-height: none; padding-right: 0; }
-      .modal-main-img { height: 260px; }
-      .footer-container { grid-template-columns: 1fr; gap: 30px; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #fff;
+      color: #888;
+      font-size: 0.85rem;
+      border-top: 1px solid #eee;
     }
   </style>
 </head>
 <body>
 
-  <div class="top-banner">✨ Envíos a todo el país | Cupos limitados para talleres presenciales en Samborondón ✨</div>
+  <!-- Barra de Navegación con Menú Desplegable -->
+  <nav class="navbar-handmade">
+    <div class="logo">
+      <a href="index.html">Handmade Love by E.L.E</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      
+      <!-- Menú Desplegable de Categorías Principales -->
+      <li class="dropdown">
+        <a href="#" class="dropbtn">Categorías ▾</a>
+        <div class="dropdown-content">
+          <a href="velas.html">Velas Aromáticas</a>
+          <a href="bisuteria.html">Bisutería Fina</a>
+          <a href="bordado.html">Bordado Botánico</a>
+          <a href="pintura.html">Pintura</a>
+          <a href="crochet.html">Crochet & Accesorios</a>
+        </div>
+      </li>
 
-  <header class="navbar">
-    <a href="#" class="logo-container">
-      <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
-      <div class="brand-text">
-        <span class="brand-main">handmade love</span>
-        <span class="brand-sub">BY E.L.E · EMOCION-ARTE</span>
-      </div>
-    </a>
-    <nav class="nav-links">
-      <button onclick="filtrar('todos')">Catálogo</button>
-      <button onclick="filtrar('velas')">🕯️ Velas</button>
-      <button onclick="filtrar('crochet')">🧶 Crochet</button>
-      <button onclick="filtrar('bordado')">🪡 Bordado</button>
-      <button onclick="filtrar('bisuteria')">💍 Bisutería</button>
-      <a href="#talleres" class="pill-talleres">🎨 Talleres</a>
-      <a href="#blog">📖 Blog</a>
-    </nav>
-    <button class="cart-btn" onclick="abrirCarrito()">
-      🛍️ <span class="cart-badge" id="cart-num">0</span>
-    </button>
+      <li><a href="blog.html">Blog & Técnicas</a></li>
+      <li><a href="#talleres">Talleres Almax</a></li>
+    </ul>
+  </nav>
+
+  <!-- Sección de Bienvenida Principal -->
+  <header class="hero">
+    <h1>Hecho a mano con el corazón</h1>
+    <p>Descubre piezas únicas creadas especialmente para ti y aprende nuevas técnicas artesanales en Samborondón.</p>
+    <a href="velas.html" class="btn-main">Explorar Catálogo</a>
   </header>
 
-  <!-- SECCIÓN HERO -->
-  <section class="hero">
-    <div>
-      <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
-      <h1>El valor de lo artesanal, en cada <span>detalle.</span></h1>
-      <p>Piezas exclusivas en velas aromáticas, accesorios de crochet, bordado contemporáneo y joyería de piedras naturales. Además, vive experiencias presenciales únicas en nuestros talleres.</p>
-      <div class="hero-buttons">
-        <a href="#catalogo" class="btn-primary">Explorar Tienda ↓</a>
-        <a href="#talleres" class="btn-secondary">Ver Talleres Presenciales</a>
+  <!-- Sección de Talleres Presenciales (Intacta y Segura) -->
+  <main class="container">
+    <section id="talleres">
+      <h2>Talleres Presenciales en Almax Center</h2>
+      <div class="talleres-grid" id="lista-talleres">
+        <!-- Los talleres registrados desde Decap CMS se mostrarán aquí de forma dinámica -->
+        <div class="taller-card">
+          <h3>Taller de Velas de Soja y Cera</h3>
+          <p><strong>Lugar:</strong> Almax Center, Samborondón</p>
+          <p>Aprende desde cero a crear tus propias velas aromáticas artesanales con pabilo de madera.</p>
+          <a href="#" class="btn-main" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Reservar Cupo</a>
+        </div>
       </div>
-    </div>
-    
-    <div class="hero-carousel-container" id="hero-carousel">
-      <div class="hero-slide active">
-        <img src="img/uploads/bordado-crochet-varios.jpg" alt="Bordado y Crochet">
-      </div>
-      <div class="hero-slide">
-        <img src="img/uploads/velas-varias.jpg" alt="Velas aromáticas">
-      </div>
-      <div class="hero-slide">
-        <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería">
-      </div>
-
-      <button class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
-      <button class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
-
-      <div class="carousel-dots" id="carousel-dots"></div>
-    </div>
-  </section>
-
-  <!-- CATÁLOGO -->
-  <main class="catalogo-section" id="catalogo">
-    <div class="section-title">
-      <h2>Catálogo de Creaciones</h2>
-      <p>Haz clic en cualquier pieza para ver más detalles y fotografías.</p>
-    </div>
-
-    <div class="filter-tabs">
-      <button class="filter-btn active" onclick="filtrar('todos')">Todas las Piezas</button>
-      <button class="filter-btn" onclick="filtrar('velas')">🕯️ Velas</button>
-      <button class="filter-btn" onclick="filtrar('crochet')">🧶 Crochet</button>
-      <button class="filter-btn" onclick="filtrar('bordado')">🪡 Bordado</button>
-      <button class="filter-btn" onclick="filtrar('bisuteria')">💍 Bisutería</button>
-    </div>
-
-    <div class="products-grid" id="grid-productos">
-      <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Cargando creaciones...</p>
-    </div>
+    </section>
   </main>
 
-  <!-- MODAL PRODUCTO -->
-  <div class="modal-overlay" id="modal-producto" onclick="cerrarModalExterno(event)">
-    <div class="modal-card">
-      <button class="modal-close" onclick="cerrarModal()">×</button>
-      <div class="modal-gallery">
-        <img src="" alt="" class="modal-main-img" id="modal-img-principal">
-        <div class="modal-thumbnails" id="modal-galeria-thumbs"></div>
-      </div>
-      <div class="modal-info">
-        <span class="modal-cat" id="modal-categoria"></span>
-        <h2 class="modal-title" id="modal-titulo"></h2>
-        <div class="modal-price" id="modal-precio"></div>
-        <div class="modal-desc" id="modal-descripcion"></div>
-        <div class="modal-actions">
-          <button class="btn-modal-cart" id="modal-btn-comprar">+ Agregar al Carrito</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CARRITO DRAWER -->
-  <div class="cart-drawer-backdrop" id="cart-backdrop" onclick="cerrarCarrito()"></div>
-  <aside class="cart-drawer" id="cart-drawer">
-    <div class="cart-drawer-header">
-      <div><h3>Tu Carrito</h3></div>
-      <div class="cart-header-actions">
-        <button class="btn-header-continue" onclick="cerrarCarrito()">+ Seguir comprando</button>
-        <button class="btn-close-drawer" onclick="cerrarCarrito()">×</button>
-      </div>
-    </div>
-    
-    <div class="cart-drawer-body">
-      <div class="cart-items-list" id="cart-items-list">
-        <p style="text-align: center; color: var(--text-muted); margin-top: 30px;">Tu carrito está vacío.</p>
-      </div>
-
-      <div class="delivery-info-banner">
-        <strong>🚚 Entrega & Envío:</strong>
-        Retiro personal gratis o envío a domicilio. Coordinamos el costo exacto según tu ubicación al confirmar por WhatsApp.
-      </div>
-
-      <div class="breakdown-box">
-        <div class="breakdown-row">
-          <span>Subtotal Productos:</span>
-          <span id="cart-subtotal">$0.00</span>
-        </div>
-        <div class="breakdown-row">
-          <span>IVA (15%):</span>
-          <span id="cart-iva">$0.00</span>
-        </div>
-        <div class="breakdown-row total-final">
-          <span>TOTAL PRODUCTOS:</span>
-          <span class="cart-total-val" id="cart-total">$0.00</span>
-        </div>
-      </div>
-
-      <div>
-        <button type="button" class="billing-toggle" onclick="toggleFacturacion()">
-          <span>🧾 Datos para Factura Electrónica (Opcional)</span>
-          <span id="billing-arrow">▼</span>
-        </button>
-        <div class="billing-fields" id="billing-fields">
-          <input type="text" id="fac-nombre" placeholder="Nombre completo o Razón Social">
-          <input type="text" id="fac-cedula" placeholder="Cédula o RUC (10 o 13 dígitos)">
-          <input type="text" id="fac-direccion" placeholder="Dirección para entrega / factura">
-          <input type="email" id="fac-correo" placeholder="Correo electrónico para la factura">
-        </div>
-      </div>
-    </div>
-
-    <div class="cart-drawer-footer">
-      <button class="btn-payphone" onclick="pagarConTarjeta()">
-        💳 Pagar con Tarjeta (Payphone)
-      </button>
-      <button class="btn-checkout-wa" onclick="checkoutWhatsApp()">
-        💬 Finalizar Pedido por WhatsApp
-      </button>
-      <button class="btn-show-bank" onclick="abrirModalBanco()">
-        🏦 Ver datos de Transferencia Bancaria
-      </button>
-    </div>
-  </aside>
-
-  <!-- MODAL BANCO -->
-  <div class="modal-bank-overlay" id="modal-banco" onclick="cerrarModalBancoExterno(event)">
-    <div class="modal-bank-card">
-      <h3 style="font-family:'Playfair Display', serif; font-size:1.35rem; margin-bottom:10px;">Datos para Transferencia</h3>
-      <p style="font-size:0.85rem; color:#555; margin-bottom:16px;">Realiza el pago directo sin comisiones y envía el comprobante a nuestro WhatsApp[cite: 1]:</p>
-      
-      <div style="background:var(--sand-100); padding:16px; border-radius:14px; font-size:0.88rem; line-height:1.7; border:1px solid var(--sand-200); margin-bottom:18px;">
-        <strong>Banco:</strong> Banco Internacional[cite: 1]<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 1]<br>
-        <strong>Número de Cuenta:</strong> 1000900044[cite: 1]<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 1]<br>
-        <strong>C.I.:</strong> 0922683552[cite: 1]<br>
-        <strong>Correo:</strong> katnisseverdeen1306@gmail.com[cite: 1]
-      </div>
-
-      <button onclick="cerrarModalBanco()" style="background:var(--brand-red); color:white; border:none; width:100%; padding:12px; border-radius:25px; font-weight:600; cursor:pointer;">
-        Cerrar Ventana
-      </button>
-    </div>
-  </div>
-
-  <!-- SECCIÓN TALLERES -->
-  <section class="workshops-section" id="talleres">
-    <div class="workshops-container">
-      <div class="section-title">
-        <span style="color: var(--brand-red); font-weight:700; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">Experiencias Presenciales</span>
-        <h2>Talleres EMOCION-ARTE</h2>
-        <p>Aprende, desconéctate y crea tus propias piezas de arte en Samborondón.</p>
-      </div>
-
-      <div class="workshops-grid" id="grid-talleres">
-        <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px;">Cargando talleres disponibles...</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN BLOG -->
-  <section class="blog-section" id="blog">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <div class="section-title">
-        <span style="color: var(--brand-red); font-weight:700; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;">APRENDIZAJE Y TÉCNICAS</span>
-        <h2>Nuestro Blog Artesanal</h2>
-        <p>Descubre el proceso detrás de cada creación, tips de cuidado y patrones descargables.</p>
-      </div>
-
-      <div class="products-grid" id="grid-blog" style="margin-top: 40px;">
-        <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Cargando artículos...</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODAL LECTURA BLOG -->
-  <div class="modal-overlay" id="modal-blog" onclick="cerrarModalBlogExterno(event)">
-    <div class="modal-card" style="max-width: 800px;">
-      <button class="modal-close" onclick="cerrarModalBlog()">×</button>
-      <div class="modal-info" style="max-height: 75vh; overflow-y: auto; width: 100%;">
-        <span class="modal-cat" id="blog-modal-cat"></span>
-        <h2 class="modal-title" id="blog-modal-titulo" style="font-size: 2rem; margin-bottom: 8px;"></h2>
-        <span style="font-size: 0.82rem; color: var(--text-muted); display: block; margin-bottom: 20px;" id="blog-modal-fecha"></span>
-        <img src="" id="blog-modal-img" style="width: 100%; height: 320px; object-fit: cover; border-radius: 16px; margin-bottom: 20px;">
-        <div class="modal-desc" id="blog-modal-texto" style="font-size: 1rem; line-height: 1.8; color: var(--text-dark);"></div>
-        
-        <div id="blog-modal-download-box" style="margin-top: 30px; display: none;">
-          <a href="" id="blog-modal-file-btn" target="_blank" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
-            📥 Descargar Patrón / Guía en PDF
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECCIÓN NEWSLETTER -->
-  <section class="newsletter-section">
-    <div class="newsletter-container">
-      <span style="color: var(--brand-red); font-weight:700; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;">COMUNIDAD HANDMADE LOVE</span>
-      <h3>Únete a nuestra lista VIP de WhatsApp y Talleres</h3>
-      <p>Suscríbete para recibir invitaciones anticipadas a nuevos talleres presenciales, lanzamientos y beneficios exclusivos.</p>
-      <form class="newsletter-form" onsubmit="suscribirNewsletter(event)">
-        <input type="text" id="news-nombre" placeholder="Tu Nombre" required>
-        <input type="tel" id="news-telefono" placeholder="WhatsApp / Teléfono" required>
-        <input type="email" id="news-correo" placeholder="Tu Correo" required>
-        <button type="submit" id="news-btn">Unirme</button>
-      </form>
-      <p id="news-msg" style="font-size:0.84rem; margin-top:12px; display:none; font-weight:600;"></p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-brand">
-        <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
-        <div class="brand-main">handmade love</div>
-        <div class="brand-sub">BY E.L.E</div>
-        <p class="footer-desc">
-          Creaciones con identidad, ternura y detalle hechas a mano por Erika Alvarado. Talleres presenciales en Samborondón.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4>CATEGORÍAS</h4>
-        <ul class="footer-links">
-          <li><button onclick="filtrar('velas')">Velas de Soja</button></li>
-          <li><button onclick="filtrar('crochet')">Crochet & Accesorios</button></li>
-          <li><button onclick="filtrar('bordado')">Bordado Botánico</button></li>
-          <li><button onclick="filtrar('bisuteria')">Bisutería Fina</button></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>TALLERES</h4>
-        <ul class="footer-links">
-          <li><a href="#talleres">Almax Center - Samborondón</a></li>
-          <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
-          <li><a href="#talleres">Talleres Privados y Corporativos</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>CONTACTO DIRECTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">¿Tienes una consulta o encargo personalizado?</p>
-        <p style="margin-bottom: 12px;">
-          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
-          </a>
-        </p>
-        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.
-    </div>
+  <!-- Pie de Página -->
+  <footer>
+    <p>© 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados. Samborondón, Ecuador.</p>
   </footer>
 
-  <script>
-    let todosLosProductos = [];
-    let todosLosTalleres = [];
-    let todosLosArticulos = [];
-    let carrito = [];
-    const TASA_IVA = 0.15;
-    
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynetQYmHNjBVhwcHL8kqlO3j9ohaz3v4UlcIraDHjNiHFHyq1A3xpnBfQIe-c1g-3pIA/exec";
-
-    /* CARRUSEL HERO */
-    let slideActual = 0;
-    let timerCarrusel = null;
-
-    function iniciarCarrusel() {
-      const slides = document.querySelectorAll('.hero-slide');
-      const dotsCont = document.getElementById('carousel-dots');
-      if (!slides.length || !dotsCont) return;
-
-      dotsCont.innerHTML = '';
-      slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-        dot.onclick = () => irASlide(i);
-        dotsCont.appendChild(dot);
-      });
-
-      reiniciarTimerCarrusel();
-    }
-
-    function mostrarSlide(indice) {
-      const slides = document.querySelectorAll('.hero-slide');
-      const dots = document.querySelectorAll('.carousel-dot');
-      if (!slides.length) return;
-
-      if (indice >= slides.length) slideActual = 0;
-      else if (indice < 0) slideActual = slides.length - 1;
-      else slideActual = indice;
-
-      slides.forEach((s, i) => s.classList.toggle('active', i === slideActual));
-      dots.forEach((d, i) => d.classList.toggle('active', i === slideActual));
-    }
-
-    function moverCarrusel(delta) {
-      mostrarSlide(slideActual + delta);
-      reiniciarTimerCarrusel();
-    }
-
-    function irASlide(i) {
-      mostrarSlide(i);
-      reiniciarTimerCarrusel();
-    }
-
-    function reiniciarTimerCarrusel() {
-      clearInterval(timerCarrusel);
-      timerCarrusel = setInterval(() => {
-        mostrarSlide(slideActual + 1);
-      }, 4000);
-    }
-
-    /* GOOGLE SHEETS & NEWSLETTER */
-    function registrarEnBaseDeDatos(datos) {
-      if (!SCRIPT_URL) return;
-      try {
-        fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(datos)
-        }).catch(err => console.log("Envío en segundo plano:", err));
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    function suscribirNewsletter(e) {
-      e.preventDefault();
-      const nombre = document.getElementById('news-nombre').value.trim();
-      const telefono = document.getElementById('news-telefono').value.trim();
-      const correo = document.getElementById('news-correo').value.trim();
-      const btn = document.getElementById('news-btn');
-      const msg = document.getElementById('news-msg');
-
-      btn.disabled = true;
-      btn.textContent = "Guardando...";
-
-      registrarEnBaseDeDatos({
-        tipo: "Suscripción WhatsApp / VIP",
-        nombre: nombre,
-        telefono: telefono,
-        correo: correo,
-        detalle: "Suscripción lista VIP web",
-        total: ""
-      });
-
-      setTimeout(() => {
-        msg.style.display = "block";
-        msg.style.color = "#2E7D32";
-        msg.textContent = "¡Bienvenida a nuestra comunidad VIP! Te hemos enviado un correo de confirmación.";
-        document.getElementById('news-nombre').value = "";
-        document.getElementById('news-telefono').value = "";
-        document.getElementById('news-correo').value = "";
-        btn.disabled = false;
-        btn.textContent = "Unirme";
-      }, 700);
-    }
-
-    /* CARRITO */
-    function abrirCarrito() {
-      document.getElementById('cart-drawer').classList.add('open');
-      document.getElementById('cart-backdrop').classList.add('open');
-    }
-
-    function cerrarCarrito() {
-      document.getElementById('cart-drawer').classList.remove('open');
-      document.getElementById('cart-backdrop').classList.remove('open');
-    }
-
-    function agregarAlCarrito(nombre, precio, imagen = '') {
-      const index = carrito.findIndex(item => item.nombre === nombre);
-      if (index > -1) {
-        carrito[index].cantidad += 1;
-      } else {
-        carrito.push({
-          nombre,
-          precio: parseFloat(precio) || 0,
-          cantidad: 1,
-          imagen: imagen || 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=200'
-        });
-      }
-      actualizarCarritoUI();
-      abrirCarrito();
-    }
-
-    function cambiarCantidad(index, delta) {
-      if (carrito[index]) {
-        carrito[index].cantidad += delta;
-        if (carrito[index].cantidad <= 0) {
-          carrito.splice(index, 1);
-        }
-        actualizarCarritoUI();
-      }
-    }
-
-    function eliminarDelCarrito(index) {
-      carrito.splice(index, 1);
-      actualizarCarritoUI();
-    }
-
-    function toggleFacturacion() {
-      const box = document.getElementById('billing-fields');
-      const arrow = document.getElementById('billing-arrow');
-      box.classList.toggle('open');
-      arrow.textContent = box.classList.contains('open') ? '▲' : '▼';
-    }
-
-    function actualizarCarritoUI() {
-      const itemsList = document.getElementById('cart-items-list');
-      const badge = document.getElementById('cart-num');
-      const subtotalEl = document.getElementById('cart-subtotal');
-      const ivaEl = document.getElementById('cart-iva');
-      const totalEl = document.getElementById('cart-total');
-
-      const totalUnidades = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-      badge.textContent = totalUnidades;
-
-      if (carrito.length === 0) {
-        itemsList.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 30px;">Tu carrito está vacío.</p>';
-        subtotalEl.textContent = '$0.00';
-        ivaEl.textContent = '$0.00';
-        totalEl.textContent = '$0.00';
-        return;
-      }
-
-      let subtotal = 0;
-      itemsList.innerHTML = carrito.map((item, index) => {
-        const itemSubtotal = item.precio * item.cantidad;
-        subtotal += itemSubtotal;
-        return `
-          <div class="cart-item-row">
-            <img src="${item.imagen}" class="cart-item-thumb" alt="${item.nombre}" onerror="this.src='https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=200'">
-            <div class="cart-item-info">
-              <div class="cart-item-name" title="${item.nombre}">${item.nombre}</div>
-              <div class="cart-item-meta">
-                <span class="cart-item-unit-price">$${item.precio.toFixed(2)} c/u</span>
-                <span class="cart-item-total-price">$${itemSubtotal.toFixed(2)}</span>
-              </div>
-            </div>
-            <div class="cart-qty-controls">
-              <button class="btn-qty" onclick="cambiarCantidad(${index}, -1)">-</button>
-              <span class="cart-qty-number">${item.cantidad}</span>
-              <button class="btn-qty" onclick="cambiarCantidad(${index}, 1)">+</button>
-            </div>
-            <button class="btn-delete-item" onclick="eliminarDelCarrito(${index})">×</button>
-          </div>
-        `;
-      }).join('');
-
-      const valorIva = subtotal * TASA_IVA;
-      const totalProductos = subtotal + valorIva;
-
-      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-      ivaEl.textContent = `$${valorIva.toFixed(2)}`;
-      totalEl.textContent = `$${totalProductos.toFixed(2)}`;
-    }
-
-    function pagarConTarjeta() {
-      if (carrito.length === 0) {
-        alert("Agrega al menos una creación o cupo de taller al carrito antes de pagar.");
-        return;
-      }
-      const confirmar = confirm("💳 Te enviaremos tu link oficial de Payphone por WhatsApp con el monto exacto de tus productos y el envío acordado.\n\n¿Deseas enviar tu pedido por WhatsApp ahora?");
-      if (confirmar) checkoutWhatsApp(true);
-    }
-
-    function abrirModalBanco() { document.getElementById('modal-banco').style.display = 'flex'; }
-    function cerrarModalBanco() { document.getElementById('modal-banco').style.display = 'none'; }
-    function cerrarModalBancoExterno(e) { if (e.target.id === 'modal-banco') cerrarModalBanco(); }
-
-    function checkoutWhatsApp(pagoConTarjeta = false) {
-      if (carrito.length === 0) {
-        alert('Tu carrito está vacío.');
-        return;
-      }
-
-      let subtotal = 0;
-      let detalle = "";
-      let textoDetalleSimple = "";
-      let tieneTaller = false;
-
-      carrito.forEach((it) => {
-        const itemTot = it.precio * it.cantidad;
-        detalle += `• ${it.cantidad}x ${it.nombre} ($${it.precio.toFixed(2)} c/u) = $${itemTot.toFixed(2)}%0A`;
-        textoDetalleSimple += `${it.cantidad}x ${it.nombre}; `;
-        if (it.nombre.toLowerCase().includes('cupo') || it.nombre.toLowerCase().includes('taller')) {
-          tieneTaller = true;
-        }
-        subtotal += itemTot;
-      });
-
-      const iva = subtotal * TASA_IVA;
-      const total = subtotal + iva;
-
-      const facNombre = document.getElementById('fac-nombre').value.trim();
-      const facCedula = document.getElementById('fac-cedula').value.trim();
-      const facDireccion = document.getElementById('fac-direccion').value.trim();
-      const facCorreo = document.getElementById('fac-correo').value.trim();
-
-      registrarEnBaseDeDatos({
-        tipo: tieneTaller ? "Reserva Taller" : "Compra Web",
-        nombre: facNombre || "Cliente Web",
-        telefono: "",
-        correo: facCorreo || "",
-        detalle: textoDetalleSimple,
-        total: `$${total.toFixed(2)}`
-      });
-
-      let mensaje = "¡Hola Handmade Love! ✨ Deseo concretar el siguiente pedido desde su tienda web:%0A%0A";
-      mensaje += "*DETALLE DEL PEDIDO:*%0A" + detalle + "%0A";
-      mensaje += `*Subtotal:* $${subtotal.toFixed(2)}%0A`;
-      mensaje += `*IVA (15%):* $${iva.toFixed(2)}%0A`;
-      mensaje += `*TOTAL PRODUCTOS / CUPOS:* $${total.toFixed(2)}%0A`;
-
-      if (pagoConTarjeta) mensaje += "*MÉTODO DE PAGO:* 💳 Tarjeta (Payphone)%0A%0A";
-
-      if (facDireccion || facNombre || facCedula) {
-        mensaje += "*DATOS DE ENTREGA Y FACTURACIÓN:*%0A";
-        if (facNombre) mensaje += `• *Nombre:* ${facNombre}%0A`;
-        if (facCedula) mensaje += `• *C.I./RUC:* ${facCedula}%0A`;
-        if (facDireccion) mensaje += `• *Dirección:* ${facDireccion}%0A`;
-        if (facCorreo) mensaje += `• *Correo:* ${facCorreo}%0A%0A`;
-      }
-
-      window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
-    }
-
-    function normalizarRuta(src) {
-      if (!src) return '';
-      src = String(src).trim();
-      if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) return src;
-      src = src.replace(/^(\.\/|\/|\.\.\/)+/, '');
-      if (!src.startsWith('img/uploads/')) {
-        src = src.replace(/^uploads\//, '').replace(/^img\//, '');
-        src = 'img/uploads/' + src;
-      }
-      return src;
-    }
-
-    function parseFrontmatter(texto) {
-      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
-      if (!match) return null;
-      const yaml = match[1];
-      const data = { fotos: [] };
-      const lines = yaml.split('\n');
-      let currentKey = null;
-      let buffer = [];
-      let enListaFotos = false;
-
-      function guardarCampo() {
-        if (!currentKey) return;
-        if (currentKey !== 'fotos' && currentKey !== 'imagenes' && currentKey !== 'galeria') {
-          let val = buffer.join('\n').trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
-          }
-          data[currentKey] = val;
-        }
-        buffer = [];
-      }
-
-      lines.forEach(line => {
-        const trimmed = line.trim();
-        if (enListaFotos && (trimmed.startsWith('-') || trimmed.startsWith('url:') || trimmed.startsWith('foto:'))) {
-          let item = trimmed.replace(/^-\s*/, '').replace(/^url:\s*/, '').replace(/^foto:\s*/, '').replace(/^["']|["']$/g, '').trim();
-          item = normalizarRuta(item);
-          if (item && !data.fotos.includes(item)) data.fotos.push(item);
-          return;
-        }
-
-        const matchPropiedad = line.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
-        if (matchPropiedad) {
-          guardarCampo();
-          currentKey = matchPropiedad[1];
-          let val = matchPropiedad[2].trim();
-          if (currentKey === 'fotos' || currentKey === 'imagenes' || currentKey === 'galeria') {
-            enListaFotos = true;
-            if (val && val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
-              let itemDirecto = normalizarRuta(val.replace(/^["']|["']$/g, '').trim());
-              if (itemDirecto && !data.fotos.includes(itemDirecto)) data.fotos.push(itemDirecto);
-            }
-          } else {
-            enListaFotos = false;
-            if (val !== '>' && val !== '>-' && val !== '|' && val !== '|-') {
-              if (val.length > 0) buffer.push(val);
-            }
-          }
-        } else if (currentKey && trimmed.length > 0) {
-          buffer.push(line);
-        }
-      });
-
-      guardarCampo();
-      data.descripcion = data.descripcion || data.description || '';
-      if (data.imagen) {
-        const fotoPortada = normalizarRuta(data.imagen);
-        if (!data.fotos.includes(fotoPortada)) data.fotos.unshift(fotoPortada);
-      }
-      return data;
-    }
-
-    function parseFrontmatterBlog(texto) {
-      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
-      if (!match) return null;
-      const yaml = match[1];
-      const cuerpoMarkdown = match[2].trim();
-      const data = { body: cuerpoMarkdown };
-      
-      yaml.split('\n').forEach(line => {
-        const colon = line.indexOf(':');
-        if (colon > 0) {
-          const key = line.slice(0, colon).trim();
-          let val = line.slice(colon + 1).trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
-          }
-          data[key] = val;
-        }
-      });
-      data.imagen = normalizarRuta(data.imagen || '');
-      if (data.archivo) data.archivo = normalizarRuta(data.archivo);
-      return data;
-    }
-
-    function formatearFechaTaller(fechaRaw) {
-      if (!fechaRaw) return 'Horario por coordinar';
-      const f = new Date(fechaRaw);
-      if (!isNaN(f.getTime())) {
-        const opciones = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', hour12: true };
-        const formateada = f.toLocaleDateString('es-EC', opciones);
-        return formateada.charAt(0).toUpperCase() + formateada.slice(1);
-      }
-      return fechaRaw;
-    }
-
-    /* CARGAS DINÁMICAS (PRODUCTOS, TALLERES, BLOG) */
-    async function cargarCatalogo() {
-      try {
-        const timestamp = new Date().getTime();
-        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos?t=${timestamp}`);
-        const archivos = await res.json();
-        if (Array.isArray(archivos)) {
-          const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(`${f.download_url}?t=${timestamp}`).then(r => r.text()));
-          const contenidos = await Promise.all(promesas);
-          todosLosProductos = contenidos.map(parseFrontmatter).filter(Boolean);
-        } else {
-          todosLosProductos = [];
-        }
-      } catch (err) {
-        todosLosProductos = [];
-      }
-      render(todosLosProductos);
-    }
-
-    async function cargarTalleres() {
-      const gridTalleres = document.getElementById('grid-talleres');
-      try {
-        const timestamp = new Date().getTime();
-        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres?t=${timestamp}`);
-        const archivos = await res.json();
-
-        if (Array.isArray(archivos) && archivos.length > 0) {
-          const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(`${f.download_url}?t=${timestamp}`).then(r => r.text()));
-          const contenidos = await Promise.all(promesas);
-          todosLosTalleres = contenidos.map(parseFrontmatter).filter(Boolean);
-          renderTalleres(todosLosTalleres);
-        } else {
-          gridTalleres.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; background: white; border-radius: 20px;"><p style="font-size: 1.1rem; font-weight: 600;">Próximamente nuevas fechas de talleres presenciales.</p></div>`;
-        }
-      } catch (err) {
-        gridTalleres.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; background: white; border-radius: 20px;"><p style="font-size: 1.1rem; font-weight: 600;">Próximamente nuevas fechas de talleres presenciales.</p></div>`;
-      }
-    }
-
-    async function cargarBlog() {
-      const gridBlog = document.getElementById('grid-blog');
-      try {
-        const timestamp = new Date().getTime();
-        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/blog?t=${timestamp}`);
-        const archivos = await res.json();
-
-        if (Array.isArray(archivos) && archivos.length > 0) {
-          const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(`${f.download_url}?t=${timestamp}`).then(r => r.text()));
-          const contenidos = await Promise.all(promesas);
-          todosLosArticulos = contenidos.map(parseFrontmatterBlog).filter(Boolean);
-          renderBlog(todosLosArticulos);
-        } else {
-          gridBlog.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Próximamente publicaremos artículos y guías sobre nuestras técnicas.</p>`;
-        }
-      } catch (err) {
-        gridBlog.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Próximamente publicaremos artículos y guías sobre nuestras técnicas.</p>`;
-      }
-    }
-
-    function renderTalleres(lista) {
-      const gridTalleres = document.getElementById('grid-talleres');
-      gridTalleres.innerHTML = lista.map((t) => {
-        let portada = 'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600';
-        if (t.imagen) portada = normalizarRuta(t.imagen);
-        const max = parseInt(t.cupoMax) || 10;
-        const ocup = parseInt(t.ocupados) || 0;
-        const libres = Math.max(0, max - ocup);
-        const fechaTexto = formatearFechaTaller(t.fecha);
-
-        let badgeTexto = 'Cupos Abiertos';
-        let badgeColor = '#526E59';
-        if (libres <= 0) { badgeTexto = 'Cupos Agotados'; badgeColor = '#888'; }
-        else if (libres <= 4) { badgeTexto = `Solo ${libres} cupos libres`; badgeColor = 'var(--brand-red)'; }
-
-        return `
-          <div class="card" style="cursor: default;">
-            <div class="card-img">
-              <img src="${portada}" alt="${t.title}" onerror="this.src='https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=600'">
-              <span class="card-badge" style="color: ${badgeColor};">${badgeTexto}</span>
-            </div>
-            <div class="card-body">
-              <span style="font-size:0.75rem; color:#888;">📅 ${fechaTexto}</span>
-              <h3 class="card-title" style="margin-top:6px;">${t.title}</h3>
-              <p style="font-size:0.78rem; color:var(--text-muted); margin-bottom:6px;">📍 ${t.lugar || 'Almax Center, Samborondón'}</p>
-              <p class="card-desc">${t.descripcion || ''}</p>
-              <div class="card-footer">
-                <span class="card-price">$${parseFloat(t.precio || 0).toFixed(2)}</span>
-                ${libres > 0 ? `<button class="card-btn" onclick="agregarAlCarrito('Cupo: ${t.title}', ${t.precio || 0}, '${portada}')">Reservar Cupo</button>` : `<button class="card-btn" style="opacity:0.6; cursor:not-allowed;" disabled>Agotado</button>`}
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function renderBlog(lista) {
-      const gridBlog = document.getElementById('grid-blog');
-      gridBlog.innerHTML = lista.map((art, index) => `
-        <div class="card" onclick="abrirModalBlog(${index})">
-          <div class="card-img">
-            <img src="${art.imagen || 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600'}" alt="${art.title}">
-            <span class="card-badge">${art.categoria || 'Técnica'}</span>
-          </div>
-          <div class="card-body">
-            <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-bottom: 4px;">📅 ${art.fecha || art.date || ''}</span>
-            <h3 class="card-title">${art.title}</h3>
-            <p class="card-desc">${art.descripcion || ''}</p>
-            <div class="card-footer">
-              <span style="font-size: 0.85rem; font-weight: 700; color: var(--brand-red);">Leer artículo →</span>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function render(lista) {
-      const grid = document.getElementById('grid-productos');
-      if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay creaciones disponibles en esta categoría.</p>';
-        return;
-      }
-      grid.innerHTML = lista.map((p, index) => {
-        let portada = 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600';
-        if (p.fotos && p.fotos.length > 0) portada = normalizarRuta(p.fotos[0]);
-        else if (p.imagen) portada = normalizarRuta(p.imagen);
-
-        return `
-          <div class="card" data-category="${p.categoria || ''}" onclick="abrirModal(${index})">
-            <div class="card-img">
-              <img src="${portada}" alt="${p.title}" onerror="this.src='https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'">
-              <span class="card-badge">${p.categoria || 'Artesanía'}</span>
-            </div>
-            <div class="card-body">
-              <h3 class="card-title">${p.title}</h3>
-              <p class="card-desc">${p.descripcion || ''}</p>
-              <div class="card-footer">
-                <span class="card-price">$${parseFloat(p.precio || 0).toFixed(2)}</span>
-                <button class="card-btn" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${p.precio || 0}, '${portada}')">+ Agregar</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function abrirModal(index) {
-      const p = todosLosProductos[index];
-      if (!p) return;
-
-      document.getElementById('modal-categoria').textContent = p.categoria || 'Artesanía';
-      document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
-      document.getElementById('modal-descripcion').innerText = p.descripcion || 'Sin descripción adicional.';
-
-      let galeria = [];
-      if (p.fotos && p.fotos.length > 0) galeria = p.fotos.map(normalizarRuta);
-      else if (p.imagen) galeria = [normalizarRuta(p.imagen)];
-      else galeria = ['https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'];
-
-      const imgPrincipal = document.getElementById('modal-img-principal');
-      const contThumbs = document.getElementById('modal-galeria-thumbs');
-      imgPrincipal.src = galeria[0];
-      contThumbs.innerHTML = '';
-
-      if (galeria.length > 1) {
-        galeria.forEach((src, i) => {
-          const thumb = document.createElement('img');
-          thumb.src = normalizarRuta(src);
-          thumb.className = `modal-thumb ${i === 0 ? 'active' : ''}`;
-          thumb.onclick = () => {
-            imgPrincipal.src = normalizarRuta(src);
-            document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
-            thumb.classList.add('active');
-          };
-          contThumbs.appendChild(thumb);
-        });
-      }
-
-      document.getElementById('modal-btn-comprar').onclick = () => {
-        agregarAlCarrito(p.title, p.precio || 0, galeria[0]);
-        cerrarModal();
-      };
-
-      document.getElementById('modal-producto').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function cerrarModal() {
-      document.getElementById('modal-producto').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function cerrarModalExterno(e) { if (e.target.id === 'modal-producto') cerrarModal(); }
-
-    function abrirModalBlog(index) {
-      const art = todosLosArticulos[index];
-      if (!art) return;
-
-      document.getElementById('blog-modal-cat').textContent = art.categoria || 'Técnica';
-      document.getElementById('blog-modal-titulo').textContent = art.title || '';
-      document.getElementById('blog-modal-fecha').textContent = art.fecha || art.date || '';
-      document.getElementById('blog-modal-img').src = art.imagen || '';
-      document.getElementById('blog-modal-texto').innerHTML = art.body.replace(/\n/g, '<br>');
-
-      const downloadBox = document.getElementById('blog-modal-download-box');
-      const fileBtn = document.getElementById('blog-modal-file-btn');
-      if (art.archivo) {
-        fileBtn.href = art.archivo;
-        downloadBox.style.display = 'block';
-      } else {
-        downloadBox.style.display = 'none';
-      }
-
-      document.getElementById('modal-blog').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function cerrarModalBlog() {
-      document.getElementById('modal-blog').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function cerrarModalBlogExterno(e) { if (e.target.id === 'modal-blog') cerrarModalBlog(); }
-
-    function filtrar(cat) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b => b.textContent.toLowerCase().includes(cat === 'todos' ? 'todas' : cat));
-      if (activeBtn) activeBtn.classList.add('active');
-
-      if (cat === 'todos') {
-        render(todosLosProductos);
-      } else {
-        const filtrados = todosLosProductos.filter(p => (p.categoria || '').toLowerCase() === cat.toLowerCase());
-        render(filtrados);
-      }
-      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Inicializaciones
-    iniciarCarrusel();
-    cargarCatalogo();
-    cargarTalleres();
-    cargarBlog();
-  </script>
 </body>
 </html>
