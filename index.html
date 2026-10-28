@@ -150,6 +150,16 @@
     .workshops-container { max-width: 1200px; margin: 0 auto; }
     .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
 
+    /* Sección de Newsletter */
+    .newsletter-section { background: #EFE8DF; border-top: 1px solid var(--sand-200); padding: 50px 24px; text-align: center; }
+    .newsletter-container { max-width: 600px; margin: 0 auto; }
+    .newsletter-container h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 8px; }
+    .newsletter-container p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 22px; }
+    .newsletter-form { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .newsletter-form input { padding: 12px 18px; border-radius: 25px; border: 1px solid var(--sand-200); outline: none; font-family: inherit; font-size: 0.9rem; flex: 1 1 220px; max-width: 280px; }
+    .newsletter-form button { background: var(--brand-red); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-size: 0.9rem; }
+    .newsletter-form button:hover { background: var(--brand-red-hover); }
+
     /* Footer */
     .main-footer { background: #231F1C; color: #FAF7F2; padding: 70px 24px 30px; }
     .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px; margin-bottom: 50px; }
@@ -327,12 +337,12 @@
       <p style="font-size:0.85rem; color:#555; margin-bottom:16px;">Realiza el pago directo sin comisiones y envía el comprobante a nuestro WhatsApp:</p>
       
       <div style="background:var(--sand-100); padding:16px; border-radius:14px; font-size:0.88rem; line-height:1.7; border:1px solid var(--sand-200); margin-bottom:18px;">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>C.I.:</strong> 0922683552<br>
-        <strong>Correo:</strong> katnisseverdeen1306@gmail.com
+        <strong>Banco:</strong> Banco Internacional[cite: 1]<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 1]<br>
+        <strong>Número de Cuenta:</strong> 1000900044[cite: 1]<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 1]<br>
+        <strong>C.I.:</strong> 0922683552[cite: 1]<br>
+        <strong>Correo:</strong> katnisseverdeen1306@gmail.com[cite: 1]
       </div>
 
       <button onclick="cerrarModalBanco()" style="background:var(--brand-red); color:white; border:none; width:100%; padding:12px; border-radius:25px; font-weight:600; cursor:pointer;">
@@ -353,6 +363,21 @@
       <div class="workshops-grid" id="grid-talleres">
         <p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 30px;">Cargando talleres disponibles...</p>
       </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE NEWSLETTER / COMUNIDAD -->
+  <section class="newsletter-section">
+    <div class="newsletter-container">
+      <span style="color: var(--brand-red); font-weight:700; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;">COMUNIDAD HANDMADE LOVE</span>
+      <h3>Sé la primera en conocer nuevos talleres</h3>
+      <p>Suscríbete para recibir invitaciones anticipadas a nuestras fechas de talleres presenciales, lanzamientos y promociones exclusivas.</p>
+      <form class="newsletter-form" onsubmit="suscribirNewsletter(event)">
+        <input type="text" id="news-nombre" placeholder="Tu Nombre" required>
+        <input type="email" id="news-correo" placeholder="Tu Correo Electrónico" required>
+        <button type="submit" id="news-btn">Suscribirme</button>
+      </form>
+      <p id="news-msg" style="font-size:0.84rem; margin-top:12px; display:none; font-weight:600;"></p>
     </div>
   </section>
 
@@ -411,6 +436,55 @@
     let todosLosTalleres = [];
     let carrito = [];
     const TASA_IVA = 0.15;
+    
+    // Conector a tu Google Apps Script
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcYeIxJ8nWwH-Vp_sr5PgkCd9AIM2fji7pxOMQoiIZLUnbZhxrQMYBw8jOkXah6eAGjQ/exec";
+
+    // Función para enviar datos a tu Google Sheet en segundo plano
+    function registrarEnBaseDeDatos(datos) {
+      if (!SCRIPT_URL) return;
+      try {
+        fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(datos)
+        }).catch(err => console.log("Envío en segundo plano:", err));
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    // Suscripción al Newsletter
+    function suscribirNewsletter(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('news-nombre').value.trim();
+      const correo = document.getElementById('news-correo').value.trim();
+      const btn = document.getElementById('news-btn');
+      const msg = document.getElementById('news-msg');
+
+      btn.disabled = true;
+      btn.textContent = "Guardando...";
+
+      registrarEnBaseDeDatos({
+        tipo: "Suscripción Newsletter",
+        nombre: nombre,
+        telefono: "",
+        correo: correo,
+        detalle: "Suscripción desde formulario web",
+        total: ""
+      });
+
+      setTimeout(() => {
+        msg.style.display = "block";
+        msg.style.color = "#2E7D32";
+        msg.textContent = "¡Gracias por suscribirte! Te avisaremos de nuevos talleres y lanzamientos.";
+        document.getElementById('news-nombre').value = "";
+        document.getElementById('news-correo').value = "";
+        btn.disabled = false;
+        btn.textContent = "Suscribirme";
+      }, 700);
+    }
 
     function abrirCarrito() {
       document.getElementById('cart-drawer').classList.add('open');
@@ -544,15 +618,36 @@
 
       let subtotal = 0;
       let detalle = "";
+      let textoDetalleSimple = "";
+      let tieneTaller = false;
 
       carrito.forEach((it) => {
         const itemTot = it.precio * it.cantidad;
         detalle += `• ${it.cantidad}x ${it.nombre} ($${it.precio.toFixed(2)} c/u) = $${itemTot.toFixed(2)}%0A`;
+        textoDetalleSimple += `${it.cantidad}x ${it.nombre}; `;
+        if (it.nombre.toLowerCase().includes('cupo') || it.nombre.toLowerCase().includes('taller')) {
+          tieneTaller = true;
+        }
         subtotal += itemTot;
       });
 
       const iva = subtotal * TASA_IVA;
       const total = subtotal + iva;
+
+      const facNombre = document.getElementById('fac-nombre').value.trim();
+      const facCedula = document.getElementById('fac-cedula').value.trim();
+      const facDireccion = document.getElementById('fac-direccion').value.trim();
+      const facCorreo = document.getElementById('fac-correo').value.trim();
+
+      // Guardar en la Base de Datos Google Sheets
+      registrarEnBaseDeDatos({
+        tipo: tieneTaller ? "Reserva Taller" : "Compra Web",
+        nombre: facNombre || "Cliente Web",
+        telefono: "",
+        correo: facCorreo || "",
+        detalle: textoDetalleSimple,
+        total: `$${total.toFixed(2)}`
+      });
 
       let mensaje = "¡Hola Handmade Love! ✨ Deseo concretar el siguiente pedido desde su tienda web:%0A%0A";
       mensaje += "*DETALLE DEL PEDIDO:*%0A" + detalle + "%0A";
@@ -564,11 +659,6 @@
       if (pagoConTarjeta) {
         mensaje += "*MÉTODO DE PAGO PREFERIDO:* 💳 Tarjeta de Crédito/Débito (Payphone)%0A%0A";
       }
-
-      const facNombre = document.getElementById('fac-nombre').value.trim();
-      const facCedula = document.getElementById('fac-cedula').value.trim();
-      const facDireccion = document.getElementById('fac-direccion').value.trim();
-      const facCorreo = document.getElementById('fac-correo').value.trim();
 
       if (facDireccion || facNombre || facCedula) {
         mensaje += "*DATOS DE ENTREGA Y FACTURACIÓN:*%0A";
@@ -659,7 +749,6 @@
       return data;
     }
 
-    // Formatear fechas de talleres (soporta YYYY-MM-DD HH:mm y texto libre)
     function formatearFechaTaller(fechaRaw) {
       if (!fechaRaw) return 'Horario por coordinar';
       const f = new Date(fechaRaw);
