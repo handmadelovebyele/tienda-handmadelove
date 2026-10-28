@@ -6,6 +6,13 @@
   <title>Handmade Love by E.L.E & EMOCION-ARTE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --brand-brown: #b8977e;
+      --brand-brown-dark: #9e7f67;
+      --bg-color: #faf9f6;
+      --text-main: #333;
+      --text-muted: #666;
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,20 +20,20 @@
     }
     body {
       font-family: 'Poppins', sans-serif;
-      color: #333;
-      background-color: #faf9f6;
+      color: var(--text-main);
+      background-color: var(--bg-color);
       line-height: 1.6;
     }
-    /* Barra Superior y Navbar */
+    /* Banner Superior */
     .top-banner {
-      background-color: #b8977e;
+      background-color: var(--brand-brown);
       color: white;
       text-align: center;
       padding: 0.5rem;
       font-size: 0.85rem;
-      font-weight: 400;
     }
-    header {
+    /* Navbar */
+    header.navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,6 +52,7 @@
     }
     .logo-card img {
       height: 40px;
+      width: 40px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -60,28 +68,35 @@
     }
     .brand-sub {
       font-size: 0.6rem;
-      color: #b8977e;
+      color: var(--brand-brown);
       letter-spacing: 1.5px;
       font-weight: 700;
     }
-    nav ul {
+    .nav-links {
       list-style: none;
       display: flex;
       gap: 20px;
       align-items: center;
+      margin: 0;
     }
-    nav ul li a, nav ul li button {
+    .nav-links button, .nav-links a {
       text-decoration: none;
-      color: #555;
+      color: var(--text-muted);
       font-size: 0.92rem;
       background: none;
       border: none;
       cursor: pointer;
-      transition: color 0.3s;
       font-family: 'Poppins', sans-serif;
+      transition: color 0.3s;
     }
-    nav ul li a:hover, nav ul li button:hover {
-      color: #b8977e;
+    .nav-links button:hover, .nav-links a:hover {
+      color: var(--brand-brown);
+    }
+    .pill-talleres {
+      background-color: #f4efe6;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 500;
     }
     /* Menú Desplegable de Categorías */
     .dropdown {
@@ -100,24 +115,107 @@
       padding: 8px 0;
     }
     .dropdown-content a {
-      color: #555;
+      color: var(--text-muted);
       padding: 10px 16px;
       display: block;
       text-align: left;
     }
     .dropdown-content a:hover {
       background-color: #f9f6f0;
-      color: #b8977e;
+      color: var(--brand-brown);
     }
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    /* Carrusel de Portada */
+    /* Botón del Carrito */
+    .cart-btn {
+      background-color: var(--brand-brown);
+      color: white !important;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+    .cart-badge {
+      background: white;
+      color: var(--brand-brown);
+      padding: 1px 6px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    /* Sección Hero y Mensaje Principal */
+    .hero {
+      max-width: 1100px;
+      margin: 2.5rem auto 1.5rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-badge {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--brand-brown);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .hero h1 {
+      font-size: 2.3rem;
+      color: var(--text-main);
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    .hero h1 span {
+      color: var(--brand-brown);
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    .btn-primary {
+      background-color: var(--brand-brown);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: var(--brand-brown-dark);
+    }
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-main);
+      border: 1px solid #ccc;
+      padding: 0.7rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--brand-brown);
+      color: var(--brand-brown);
+    }
+    /* Carrusel */
     .hero-carousel-container {
       position: relative;
-      max-width: 1000px;
-      margin: 2rem auto;
-      height: 380px;
+      width: 100%;
+      height: 350px;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 15px rgba(0,0,0,0.08);
@@ -151,12 +249,12 @@
       padding: 0 12px;
       cursor: pointer;
       border-radius: 50%;
-      transition: background 0.3s;
       z-index: 10;
+      transition: background 0.3s;
     }
     .carousel-btn:hover {
       background-color: #fff;
-      color: #b8977e;
+      color: var(--brand-brown);
     }
     .carousel-prev { left: 15px; }
     .carousel-next { right: 15px; }
@@ -178,28 +276,25 @@
       transition: background 0.3s;
     }
     .dot.active {
-      background-color: #b8977e;
+      background-color: var(--brand-brown);
     }
-    /* Contenedor y Catálogo Dinámico */
-    .main-container {
+    /* Catálogo y Secciones */
+    .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 2rem 2rem;
+      padding: 2rem;
     }
-    section {
-      margin-bottom: 3rem;
-    }
-    section h2 {
+    .section-title {
       text-align: center;
-      font-size: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-title h2 {
+      font-size: 2rem;
+      color: var(--text-main);
       margin-bottom: 0.5rem;
-      color: #333;
     }
-    .section-subtitle {
-      text-align: center;
-      color: #666;
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
+    .section-title p {
+      color: var(--text-muted);
     }
     .grid-productos {
       display: grid;
@@ -208,11 +303,15 @@
     }
     .card {
       background: #fff;
-      border-radius: 8px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
     }
     .card img {
       width: 100%;
@@ -229,11 +328,10 @@
       font-size: 1.05rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
-      color: #333;
     }
     .card-desc {
       font-size: 0.85rem;
-      color: #666;
+      color: var(--text-muted);
       margin-bottom: 1rem;
       flex-grow: 1;
     }
@@ -246,10 +344,10 @@
     .card-price {
       font-weight: 600;
       font-size: 1.1rem;
-      color: #b8977e;
+      color: var(--brand-brown);
     }
     .card-btn {
-      background-color: #b8977e;
+      background-color: var(--brand-brown);
       color: white;
       border: none;
       padding: 0.5rem 1rem;
@@ -259,9 +357,14 @@
       transition: background 0.3s;
     }
     .card-btn:hover {
-      background-color: #9e7f67;
+      background-color: var(--brand-brown-dark);
     }
-    /* Talleres en Almax Center */
+    /* Talleres */
+    .talleres-section {
+      max-width: 1100px;
+      margin: 0 auto 3rem auto;
+      padding: 0 2rem;
+    }
     .talleres-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -269,25 +372,84 @@
     }
     .taller-card {
       background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border-radius: 10px;
       padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
     .btn-main {
       display: inline-block;
-      background-color: #b8977e;
+      background-color: var(--brand-brown);
       color: white;
       padding: 0.6rem 1.2rem;
       border-radius: 20px;
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;
-      transition: background 0.3s;
       margin-top: 1rem;
+      transition: background 0.3s;
     }
     .btn-main:hover {
-      background-color: #9e7f67;
+      background-color: var(--brand-brown-dark);
+    }
+    /* Modal del Carrito */
+    .carrito-modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      justify-content: flex-end;
+      z-index: 2000;
+      transition: opacity 0.3s;
+    }
+    .carrito-modal.oculto {
+      display: none;
+    }
+    .carrito-contenido {
+      width: 100%;
+      max-width: 400px;
+      background: #fff;
+      height: 100%;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+    .cerrar-carrito {
+      font-size: 1.5rem;
+      cursor: pointer;
+      align-self: flex-end;
+      margin-bottom: 1rem;
+    }
+    #lista-carrito {
+      flex-grow: 1;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+    .item-carrito {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 0.9rem;
+    }
+    .carrito-total {
+      border-top: 2px solid #eee;
+      padding-top: 1rem;
+    }
+    .btn-pagar {
+      width: 100%;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 0.8rem;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 10px;
     }
     /* Footer Original de 4 Columnas */
     .main-footer {
@@ -357,20 +519,27 @@
       font-size: 0.82rem;
     }
     @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
       .footer-container {
         grid-template-columns: 1fr;
         gap: 30px;
+      }
+      .nav-links {
+        display: none;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Banner Superior -->
+  <!-- Top Banner -->
   <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales en Almax Center, Samborondón ✨[cite: 9]</div>
 
-  <!-- Barra de Navegación -->
-  <header>
+  <!-- Navbar -->
+  <header class="navbar">
     <a href="index.html" class="logo-container">
       <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
       <div class="brand-text">
@@ -379,8 +548,8 @@
       </div>
     </a>
     <nav>
-      <ul>
-        <li><a href="index.html">Inicio</a></li>
+      <ul class="nav-links">
+        <li><button onclick="filtrar('todos')">Catálogo</button></li>
         
         <!-- Menú Desplegable con tus 5 Categorías -->
         <li class="dropdown">
@@ -395,58 +564,89 @@
         </li>
 
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="#talleres">Talleres Almax</a></li>
-        <li><button onclick="alert('Tu carrito tiene ' + cartCount + ' artículos.')">🛒 <span id="cart-num">0</span></button></li>
+        <li><a href="#talleres" class="pill-talleres">Talleres Almax</a></li>
+        <li>
+          <button class="cart-btn" onclick="toggleCarrito()">
+            🛒 <span id="cart-num">0</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
 
-  <!-- Carrusel Interactivo con tus fotos reales -->
-  <div class="hero-carousel-container" id="hero-carousel">
-    <div class="hero-slide active">
-      <img src="img/uploads/bordado-crochet-varios.jpg" alt="Bordado y Crochet Handmade Love">
+  <!-- Sección Hero / Mensaje de Portada -->
+  <section class="hero">
+    <div>
+      <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
+      <h1>El valor de lo artesanal, en cada <span>detalle.</span></h1>
+      <p>Piezas exclusivas en velas aromáticas, accesorios de crochet, bordado contemporáneo y joyería artesanal. Además, vive experiencias presenciales únicas en nuestros talleres.</p>
+      <div class="hero-buttons">
+        <a href="#catalogo" class="btn-primary">Explorar Tienda ↓</a>
+        <a href="#talleres" class="btn-secondary">Ver Talleres Presenciales</a>
+      </div>
     </div>
-    <div class="hero-slide">
-      <img src="img/uploads/velas-varias.jpg" alt="Velas aromáticas artesanales">
+    <!-- Carrusel de Portada -->
+    <div class="hero-carousel-container" id="hero-carousel">
+      <div class="hero-slide active">
+        <img src="img/uploads/bordado-crochet-varios.jpg" alt="Bordado y Crochet Handmade Love">
+      </div>
+      <div class="hero-slide">
+        <img src="img/uploads/velas-varias.jpg" alt="Velas aromáticas artesanales">
+      </div>
+      <div class="hero-slide">
+        <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería artesanal">
+      </div>
+
+      <!-- Flechas de navegación -->
+      <button class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
+      <button class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
+
+      <!-- Indicadores de puntos -->
+      <div class="carousel-dots" id="carousel-dots"></div>
     </div>
-    <div class="hero-slide">
-      <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería artesanal">
-    </div>
+  </section>
 
-    <!-- Flechas de navegación -->
-    <button class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
-    <button class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
-
-    <!-- Indicadores de puntos -->
-    <div class="carousel-dots" id="carousel-dots"></div>
-  </div>
-
-  <!-- Contenido Principal -->
-  <main class="main-container">
-    
-    <!-- Catálogo Conectado a Decap CMS -->
-    <section id="catalogo">
+  <!-- Catálogo Dinámico con Decap CMS -->
+  <main class="catalogo-section" id="catalogo">
+    <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
-      <p class="section-subtitle">Piezas elaboradas a mano con dedicación y listas para ti.</p>
-      <div class="grid-productos" id="grid-productos">
-        <!-- Los productos cargan dinámicamente aquí -->
-      </div>
-    </section>
-
-    <!-- Sección de Talleres Presenciales en Almax Center -->
-    <section id="talleres">
-      <h2>Talleres Presenciales en Almax Center (Samborondón)[cite: 9]</h2>
-      <p class="section-subtitle">Vive experiencias únicas de aprendizaje artesanal.</p>
-      <div class="talleres-grid">
-        <div class="taller-card">
-          <h3>Taller de Velas Artesanales</h3>
-          <p><strong>Lugar:</strong> Almax Center, Samborondón[cite: 9]</p>
-          <p>Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
-          <a href="#" class="btn-main">Reservar Cupo</a>
-        </div>
-      </div>
-    </section>
+      <p>Piezas elaboradas a mano con dedicación y listas para ti.</p>
+    </div>
+    <div class="grid-productos" id="grid-productos">
+      <!-- Los productos cargan aquí -->
+    </div>
   </main>
+
+  <!-- Talleres en Almax Center -->
+  <section class="talleres-section" id="talleres">
+    <div class="section-title" style="margin-bottom: 1.5rem;">
+      <h2>Talleres Presenciales en Almax Center (Samborondón)[cite: 9]</h2>
+      <p>Vive experiencias únicas de aprendizaje artesanal.</p>
+    </div>
+    <div class="talleres-grid">
+      <div class="taller-card">
+        <h3>Taller de Velas Artesanales</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 9]</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
+        <a href="#" class="btn-main">Reservar Cupo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal del Carrito -->
+  <div id="modal-carrito" class="carrito-modal oculto">
+    <div class="carrito-contenido">
+      <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
+      <h3>Tu Carrito de Compras</h3>
+      <div id="lista-carrito">
+        <p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">El carrito está vacío</p>
+      </div>
+      <div class="carrito-total">
+        <p style="font-weight: 600; margin-bottom: 10px;">Total: $<span id="total-precio">0.00</span></p>
+        <button class="btn-pagar" onclick="procesarCompra()">Finalizar por WhatsApp 💬</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Pie de Página Original de 4 Columnas -->
   <footer class="main-footer">
@@ -502,8 +702,9 @@
     </div>
   </footer>
 
-  <!-- Scripts del Carrusel y Decap CMS -->
+  <!-- Scripts -->
   <script>
+    // Carrusel
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
     const dotsContainer = document.getElementById('carousel-dots');
@@ -521,7 +722,6 @@
     function updateSlide(index) {
       slides.forEach(slide => slide.classList.remove('active'));
       dots.forEach(dot => dot.classList.remove('active'));
-      
       currentSlide = (index + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
       dots[currentSlide].classList.add('active');
@@ -539,27 +739,76 @@
       moverCarrusel(1);
     }, 4000);
 
-    // Lógica del Carrito y CMS
-    let cartCount = 0;
-    function agregarAlCarrito(nombre, precio) {
-      cartCount++;
-      document.getElementById('cart-num').textContent = cartCount;
-      alert(`¡"${nombre}" se agregó a tu carrito!`);
-    }
+    // Carrito y Decap CMS
+    let carrito = [];
+    let todosLosProductos = [];
 
     const productosBase = [
       { title: "Pulsera de Hilo Rojo", categoria: "Bisutería", precio: 12.00, descripcion: "Protección y diseño artesanal.", imagen: "pulsera-secundaria.jpg" }
     ];
 
+    function toggleCarrito() {
+      const modal = document.getElementById('modal-carrito');
+      modal.classList.toggle('oculto');
+    }
+
+    function agregarAlCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });
+      actualizarCarrito();
+      alert(`¡"${nombre}" se agregó a tu carrito!`);
+    }
+
+    function actualizarCarrito() {
+      const lista = document.getElementById('lista-carrito');
+      const contador = document.getElementById('cart-num');
+      const totalPrecio = document.getElementById('total-precio');
+
+      contador.textContent = carrito.length;
+
+      if (carrito.length === 0) {
+        lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">El carrito está vacío</p>';
+        totalPrecio.textContent = '0.00';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+      carrito.forEach((item) => {
+        total += item.precio;
+        html += `<div class="item-carrito">
+          <span>${item.nombre}</span>
+          <span>$${item.precio.toFixed(2)}</span>
+        </div>`;
+      });
+
+      lista.innerHTML = html;
+      totalPrecio.textContent = total.toFixed(2);
+    }
+
+    function procesarCompra() {
+      if (carrito.length === 0) {
+        alert('Tu carrito está vacío.');
+        return;
+      }
+      let mensaje = "Hola Handmade Love! Quisiera pedir lo siguiente:%0A";
+      let total = 0;
+      carrito.forEach(item => {
+        mensaje += `- ${item.nombre} ($${item.precio.toFixed(2)})%0A`;
+        total += item.precio;
+      });
+      mensaje += `%0ATotal a pagar: $${total.toFixed(2)}`;
+      window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
+    }
+
     function render(lista) {
       const grid = document.getElementById('grid-productos');
       if (!grid) return;
       if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: #666; padding: 20px;">No hay productos disponibles.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles.</p>';
         return;
       }
       grid.innerHTML = lista.map(p => `
-        <div class="card">
+        <div class="card" data-category="${p.categoria || ''}">
           <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}">
           <div class="card-body">
             <h3 class="card-title">${p.title}</h3>
@@ -573,7 +822,58 @@
       `).join('');
     }
 
-    render(productosBase);
+    function filtrar(cat) {
+      if (cat === 'todos') {
+        render(todosLosProductos);
+      } else {
+        const filtrados = todosLosProductos.filter(p => (p.categoria || '').toLowerCase().includes(cat.toLowerCase()));
+        render(filtrados);
+      }
+    }
+
+    async function cargarCatalogo() {
+      try {
+        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos');
+        const archivos = await res.json();
+        if (Array.isArray(archivos)) {
+          const promesas = archivos
+            .filter(f => f.name.endsWith('.md'))
+            .map(f => fetch(f.download_url).then(r => r.text()));
+          const contenidos = await Promise.all(promesas);
+          
+          const productosCMS = contenidos.map(texto => {
+            const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
+            if (!match) return null;
+            const yaml = match[1];
+            const data = {};
+            yaml.split('\n').forEach(line => {
+              const colon = line.indexOf(':');
+              if (colon > 0) {
+                const key = line.slice(0, colon).trim();
+                let val = line.slice(colon + 1).trim();
+                if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+                  val = val.slice(1, -1);
+                }
+                data[key] = val;
+              }
+            });
+            if (data.imagen && !data.imagen.startsWith('http')) {
+              data.imagen = 'img/uploads/' + data.imagen;
+            }
+            return data;
+          }).filter(Boolean);
+
+          todosLosProductos = [...productosCMS, ...productosBase];
+        } else {
+          todosLosProductos = productosBase;
+        }
+      } catch (err) {
+        todosLosProductos = productosBase;
+      }
+      render(todosLosProductos);
+    }
+
+    cargarCatalogo();
   </script>
 
 </body>
