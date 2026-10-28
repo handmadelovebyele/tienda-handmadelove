@@ -164,13 +164,13 @@
     .workshops-container { max-width: 1200px; margin: 0 auto; }
     .workshops-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 40px; }
 
-    /* Newsletter */
+    /* Newsletter con Teléfono */
     .newsletter-section { background: #EFE8DF; border-top: 1px solid var(--sand-200); padding: 50px 24px; text-align: center; }
-    .newsletter-container { max-width: 600px; margin: 0 auto; }
+    .newsletter-container { max-width: 640px; margin: 0 auto; }
     .newsletter-container h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 8px; }
     .newsletter-container p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 22px; }
     .newsletter-form { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-    .newsletter-form input { padding: 12px 18px; border-radius: 25px; border: 1px solid var(--sand-200); outline: none; font-family: inherit; font-size: 0.9rem; flex: 1 1 220px; max-width: 280px; }
+    .newsletter-form input { padding: 12px 18px; border-radius: 25px; border: 1px solid var(--sand-200); outline: none; font-family: inherit; font-size: 0.9rem; flex: 1 1 180px; max-width: 200px; }
     .newsletter-form button { background: var(--brand-red); color: white; border: none; padding: 12px 24px; border-radius: 25px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-size: 0.9rem; }
     .newsletter-form button:hover { background: var(--brand-red-hover); }
 
@@ -399,16 +399,17 @@
     </div>
   </section>
 
-  <!-- SECCIÓN DE NEWSLETTER / COMUNIDAD -->
+  <!-- SECCIÓN DE NEWSLETTER / COMUNIDAD (AHORA CON TELÉFONO PARA WHATSAPP) -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <span style="color: var(--brand-red); font-weight:700; font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;">COMUNIDAD HANDMADE LOVE</span>
-      <h3>Sé la primera en conocer nuevos talleres</h3>
-      <p>Suscríbete para recibir invitaciones anticipadas a nuestras fechas de talleres presenciales, lanzamientos y promociones exclusivas.</p>
+      <h3>Únete a nuestra lista VIP de WhatsApp y Talleres</h3>
+      <p>Suscríbete para recibir invitaciones anticipadas a nuevos talleres presenciales, lanzamientos y beneficios exclusivos.</p>
       <form class="newsletter-form" onsubmit="suscribirNewsletter(event)">
         <input type="text" id="news-nombre" placeholder="Tu Nombre" required>
-        <input type="email" id="news-correo" placeholder="Tu Correo Electrónico" required>
-        <button type="submit" id="news-btn">Suscribirme</button>
+        <input type="tel" id="news-telefono" placeholder="WhatsApp / Teléfono" required>
+        <input type="email" id="news-correo" placeholder="Tu Correo" required>
+        <button type="submit" id="news-btn">Unirme</button>
       </form>
       <p id="news-msg" style="font-size:0.84rem; margin-top:12px; display:none; font-weight:600;"></p>
     </div>
@@ -470,7 +471,7 @@
     let carrito = [];
     const TASA_IVA = 0.15;
     
-    // Conector a Google Apps Script actualizado con tu nueva URL
+    // Conector a Google Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
 
     /* LÓGICA DEL CARRUSEL HERO */
@@ -541,6 +542,7 @@
     function suscribirNewsletter(e) {
       e.preventDefault();
       const nombre = document.getElementById('news-nombre').value.trim();
+      const telefono = document.getElementById('news-telefono').value.trim();
       const correo = document.getElementById('news-correo').value.trim();
       const btn = document.getElementById('news-btn');
       const msg = document.getElementById('news-msg');
@@ -549,22 +551,23 @@
       btn.textContent = "Guardando...";
 
       registrarEnBaseDeDatos({
-        tipo: "Suscripción Newsletter",
+        tipo: "Suscripción WhatsApp / VIP",
         nombre: nombre,
-        telefono: "",
+        telefono: telefono,
         correo: correo,
-        detalle: "Suscripción desde formulario web",
+        detalle: "Suscripción lista VIP web",
         total: ""
       });
 
       setTimeout(() => {
         msg.style.display = "block";
         msg.style.color = "#2E7D32";
-        msg.textContent = "¡Gracias por suscribirte! Te avisaremos de nuevos talleres y lanzamientos.";
+        msg.textContent = "¡Bienvenida a nuestra comunidad VIP! Te contactaremos pronto.";
         document.getElementById('news-nombre').value = "";
+        document.getElementById('news-telefono').value = "";
         document.getElementById('news-correo').value = "";
         btn.disabled = false;
-        btn.textContent = "Suscribirme";
+        btn.textContent = "Unirme";
       }, 700);
     }
 
