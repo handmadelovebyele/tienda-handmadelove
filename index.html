@@ -599,9 +599,30 @@
       font-size: 0.9rem;
     }
 
-    /* Caja de Datos de Entrega sin desplegables */
-    .caja-entrega {
+    /* Pestaña Acordeón Desplegable para Datos */
+    .btn-acordeon-datos {
+      width: 100%;
+      background: #faf7f2;
+      border: 1px dashed #d9cbbe;
+      border-radius: 8px;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-acordeon-datos:hover {
+      background: #f5eee6;
+    }
+    .caja-entrega {
+      display: none;
       flex-direction: column;
       gap: 8px;
       margin-bottom: 14px;
@@ -610,13 +631,8 @@
       border: 1px solid #ebdcd5;
       border-radius: 10px;
     }
-    .caja-entrega-titulo {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 2px;
+    .caja-entrega.abierta {
+      display: flex;
     }
     .caja-entrega label {
       font-size: 0.76rem;
@@ -1006,6 +1022,7 @@
         </div>
       </a>
 
+      <!-- Controles móviles -->
       <div class="mobile-controls">
         <button type="button" class="cart-btn" onclick="toggleCarrito()">
           🛒 <span class="cart-badge cart-num-mobile">0</span>
@@ -1015,6 +1032,7 @@
         </button>
       </div>
 
+      <!-- Menú Desktop y Móvil -->
       <nav class="nav-wrapper">
         <ul class="nav-links" id="menu-navegacion">
           <li><button type="button" onclick="filtrar('todos'); cerrarMenuMovil();">Catálogo</button></li>
@@ -1126,7 +1144,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito -->
+  <!-- Modal del Carrito con Acordeón Desplegable -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -1140,9 +1158,14 @@
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
 
-      <!-- Datos de Entrega directos y visibles -->
-      <div class="caja-entrega">
-        <div class="caja-entrega-titulo">Datos para la entrega</div>
+      <!-- Botón Pestaña Desplegable -->
+      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
+        <span>📝 Ingresar datos de entrega</span>
+        <span id="flecha-acordeon">▾</span>
+      </button>
+
+      <!-- Campos ocultos por defecto -->
+      <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="input-nombre">Tu Nombre:</label>
         <input type="text" id="input-nombre" placeholder="Nombre y Apellido">
         <label for="input-telefono">Celular / WhatsApp:</label>
@@ -1187,7 +1210,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer Limpio -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -1254,6 +1277,18 @@
         if (sub) {
           sub.style.display = (sub.style.display === 'block') ? 'none' : 'block';
         }
+      }
+    }
+
+    function toggleDesplegableDatos() {
+      const caja = document.getElementById('caja-formulario-entrega');
+      const flecha = document.getElementById('flecha-acordeon');
+      if (caja.classList.contains('abierta')) {
+        caja.classList.remove('abierta');
+        flecha.textContent = '▾';
+      } else {
+        caja.classList.add('abierta');
+        flecha.textContent = '▴';
       }
     }
 
