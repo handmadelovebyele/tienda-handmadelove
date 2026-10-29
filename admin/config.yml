@@ -49,4 +49,8 @@ collections:
     fields:
       - { label: "Título del Artículo", name: "title", widget: "string" }
       - { label: "Categoría del Blog", name: "categoria", widget: "select", options: ["Paso a Paso", "Patrones & Descargables", "Tips de Cuidado", "Detrás de Escenas"] }
-      - { label: "Fecha", name: "date", widget: "date", format
+      - { label: "Fecha", name: "date", widget: "date", format: "YYYY-MM-DD" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - { label: "Resumen Corto", name: "descripcion", widget: "text" }
+      - { label: "Contenido Completo", name: "body", widget: "markdown" }
+      - { label: "Archivo Descargable (PDF)", name: "archivo", widget: "file", required: false }
