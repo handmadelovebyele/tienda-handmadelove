@@ -405,7 +405,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Modal del Carrito Rediseñado */
+    /* Modal del Carrito con Acordeón Desplegable */
     .carrito-modal {
       position: fixed;
       top: 0;
@@ -457,13 +457,13 @@
       text-align: center;
     }
     
-    /* Contenedor de productos visible y destacado */
+    /* Contenedor amplio para productos */
     #lista-carrito {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      min-height: 90px;
-      max-height: 220px;
+      gap: 10px;
+      min-height: 130px;
+      max-height: 280px;
       overflow-y: auto;
       margin-bottom: 14px;
       border: 1px solid #ebdcd5;
@@ -475,20 +475,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 10px;
+      padding: 10px 12px;
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
     .item-info strong {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-main);
       display: block;
     }
     .item-info span {
       color: var(--brand-red);
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
     }
     .item-controls {
       display: flex;
@@ -498,31 +498,59 @@
     .item-controls button {
       background: #f4efe6;
       border: 1px solid #e2dacd;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       cursor: pointer;
       font-weight: 700;
       color: var(--brand-red);
-      font-size: 0.95rem;
+      font-size: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .item-controls span {
       font-weight: 600;
-      min-width: 14px;
+      min-width: 16px;
       text-align: center;
     }
 
-    .form-cliente {
+    /* Acordeón de datos de entrega y contacto */
+    .accordion-toggle {
+      width: 100%;
+      background: #faf7f2;
+      border: 1px dashed #d9cbbe;
+      border-radius: 8px;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .accordion-toggle:hover {
+      background: #f4efe6;
+    }
+    .form-cliente {
+      display: none;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      background: #fff;
+      border: 1px solid #ebdcd5;
+      border-radius: 8px;
+    }
+    .form-cliente.open {
+      display: flex;
     }
     .form-cliente label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
     }
     .form-cliente input, .form-cliente select {
@@ -530,9 +558,10 @@
       border-radius: 8px;
       border: 1px solid #ccc;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.83rem;
       outline: none;
     }
+
     .carrito-resumen {
       background: #fdf8f8;
       border: 1px solid #f5e6e6;
@@ -794,7 +823,7 @@
 <body>
 
   <!-- Top Banner -->
-  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
+  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨[cite: 1]</div>
 
   <!-- Navbar -->
   <header class="navbar">
@@ -869,19 +898,19 @@
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
-      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón.</p>
+      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón[cite: 1].</p>
     </div>
     <div class="talleres-grid">
       <div class="taller-card">
         <h3>Taller de Velas Artesanales</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 1]</p>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
         <a href="#" class="btn-main">Reservar Cupo</a>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter -->
+  <!-- Newsletter con Teléfono, Nombre y Correo -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
@@ -915,7 +944,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito -->
+  <!-- Modal del Carrito con Acordeón Desplegable -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -930,7 +959,14 @@
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
 
-      <div class="form-cliente">
+      <!-- Botón Desplegable para Datos del Cliente -->
+      <button type="button" class="accordion-toggle" onclick="toggleFormCliente()">
+        <span>📝 Datos de contacto y entrega</span>
+        <span id="accordion-arrow">▾</span>
+      </button>
+
+      <!-- Formulario de Entrega Desplegable -->
+      <div class="form-cliente" id="form-cliente-desplegable">
         <label for="input-nombre">Tu Nombre:</label>
         <input type="text" id="input-nombre" placeholder="Ej. María Pérez" required>
         <label for="input-telefono">Celular / WhatsApp:</label>
@@ -986,7 +1022,7 @@
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
         </p>
       </div>
       <div class="footer-col">
@@ -1013,11 +1049,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
+            ✉️ hadmadelovebyele@gmail.com[cite: 1]
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
+          <span>💬 WhatsApp de Atención[cite: 1]</span>
         </a>
       </div>
     </div>
@@ -1063,6 +1099,18 @@
     setInterval(() => {
       moverCarrusel(1);
     }, 4000);
+
+    function toggleFormCliente() {
+      const f = document.getElementById('form-cliente-desplegable');
+      const arrow = document.getElementById('accordion-arrow');
+      if (f.classList.contains('open')) {
+        f.classList.remove('open');
+        arrow.textContent = '▾';
+      } else {
+        f.classList.add('open');
+        arrow.textContent = '▴';
+      }
+    }
 
     async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
       if (!SCRIPT_URL) return;
@@ -1193,7 +1241,12 @@
       const correo = document.getElementById('input-correo').value.trim();
 
       if (!nombre || !telefono || !correo) {
-        alert('Por favor completa tu Nombre, Teléfono y Correo antes de continuar.');
+        // Abre el formulario desplegable si faltan datos
+        const formEl = document.getElementById('form-cliente-desplegable');
+        const arrow = document.getElementById('accordion-arrow');
+        formEl.classList.add('open');
+        arrow.textContent = '▴';
+        alert('Por favor completa tu Nombre, Celular y Correo en la sección "Datos de contacto y entrega" para continuar.');
         return false;
       }
       return { nombre, telefono, correo };
