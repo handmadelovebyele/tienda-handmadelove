@@ -803,6 +803,82 @@
       line-height: 1.6;
     }
 
+    /* Footer Principal */
+    .main-footer {
+      background: #231F1C;
+      color: #FAF7F2;
+      padding: 50px 24px 30px;
+      width: 100%;
+    }
+    .footer-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 30px;
+      margin-bottom: 35px;
+      width: 100%;
+    }
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-col h4 {
+      font-size: 0.82rem;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #FAF7F2;
+      text-transform: uppercase;
+    }
+    .footer-desc {
+      color: #A89F94;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .footer-links a, .footer-links button {
+      color: #A89F94;
+      text-decoration: none;
+      font-size: 0.88rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    .footer-links a:hover, .footer-links button:hover {
+      color: white;
+    }
+    .btn-wa-footer {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #25D366;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 10px;
+      font-size: 0.88rem;
+      max-width: 250px;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      padding-top: 20px;
+      color: #7A7268;
+      font-size: 0.8rem;
+    }
+
     /* Reglas para Celulares */
     @media (max-width: 768px) {
       header.navbar {
@@ -810,7 +886,7 @@
         flex-wrap: wrap;
       }
       .nav-links li:last-child {
-        display: none; /* Se oculta el botón repetido del menú desplegable */
+        display: none;
       }
       .mobile-controls {
         display: flex;
@@ -866,80 +942,23 @@
       .hero h1 {
         font-size: 1.8rem;
       }
-      .footer-container {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-    }
 
-    .main-footer {
-      background: #231F1C;
-      color: #FAF7F2;
-      padding: 50px 20px 30px;
-      width: 100%;
-    }
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-      gap: 30px;
-      margin-bottom: 35px;
-    }
-    .footer-col h4 {
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      color: #FAF7F2;
-    }
-    .footer-desc {
-      color: #A89F94;
-      font-size: 0.88rem;
-      margin-top: 8px;
-      line-height: 1.6;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-    .footer-links a, .footer-links button {
-      color: #A89F94;
-      text-decoration: none;
-      font-size: 0.88rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-    .footer-links a:hover, .footer-links button:hover {
-      color: white;
-    }
-    .btn-wa-footer {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #25D366;
-      color: white !important;
-      padding: 10px 18px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 10px;
-      font-size: 0.88rem;
-      max-width: 100%;
-      white-space: nowrap;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      padding-top: 20px;
-      color: #7A7268;
-      font-size: 0.8rem;
+      /* Footer en una sola columna vertical limpia en móvil */
+      .footer-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        width: 100% !important;
+      }
+      .footer-col {
+        width: 100% !important;
+      }
+      .footer-col h4 {
+        margin-bottom: 8px !important;
+      }
+      .btn-wa-footer {
+        max-width: 100% !important;
+      }
     }
   </style>
 </head>
@@ -984,7 +1003,7 @@
         </li>
         <li><a href="blog.html" onclick="cerrarMenuMovil()">Blog</a></li>
         <li><a href="#talleres" class="pill-talleres" onclick="cerrarMenuMovil()">Talleres EMOCION-ARTE</a></li>
-        <!-- Carrito al extremo derecho en Computadoras -->
+        <!-- Carrito a la derecha en Desktop -->
         <li>
           <button type="button" class="cart-btn" onclick="toggleCarrito()">
             🛒 <span id="cart-num">0</span>
@@ -1138,11 +1157,11 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
+        <strong>Banco:</strong> Banco Internacional[cite: 4]<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 4]<br>
+        <strong>Número de Cuenta:</strong> 1000900044[cite: 4]<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 4]<br>
+        <strong>Cédula / R.U.C.:</strong> 0922683552[cite: 4]<br>
         <strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
@@ -1153,9 +1172,9 @@
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
-        <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
+        <h4>Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
         </p>
       </div>
       <div class="footer-col">
@@ -1182,11 +1201,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
+            ✉️ hadmadelovebyele@gmail.com[cite: 1]
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
+          <span>💬 WhatsApp de Atención[cite: 1]</span>
         </a>
       </div>
     </div>
