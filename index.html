@@ -39,7 +39,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.8rem 1.5rem;
+      padding: 0.8rem 2.5rem;
       background-color: #fff;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       position: sticky;
@@ -75,15 +75,14 @@
       letter-spacing: 1.2px;
       font-weight: 700;
     }
-    .nav-actions {
+    .nav-wrapper {
       display: flex;
       align-items: center;
-      gap: 12px;
     }
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 18px;
+      gap: 20px;
       align-items: center;
       margin: 0;
     }
@@ -138,7 +137,7 @@
     .cart-btn {
       background-color: var(--brand-red);
       color: white !important;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       display: inline-flex;
       align-items: center;
@@ -147,10 +146,14 @@
       border: none;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
+    }
+    .mobile-controls {
+      display: none;
+      align-items: center;
+      gap: 10px;
     }
     .btn-menu-hamburguesa {
-      display: none;
       background: none;
       border: none;
       font-size: 1.6rem;
@@ -806,8 +809,14 @@
         padding: 0.7rem 1.2rem;
         flex-wrap: wrap;
       }
-      .btn-menu-hamburguesa {
-        display: block;
+      .nav-links li:last-child {
+        display: none; /* Se oculta el botón repetido del menú desplegable */
+      }
+      .mobile-controls {
+        display: flex;
+      }
+      .nav-wrapper {
+        width: 100%;
       }
       .nav-links {
         display: none;
@@ -949,30 +958,40 @@
       </div>
     </a>
 
-    <div class="nav-actions">
+    <!-- Controles para móvil (Carrito + Menú Hamburguesa) -->
+    <div class="mobile-controls">
       <button type="button" class="cart-btn" onclick="toggleCarrito()">
-        🛒 <span id="cart-num">0</span>
+        🛒 <span class="cart-num-mobile">0</span>
       </button>
       <button type="button" class="btn-menu-hamburguesa" onclick="toggleMenuMovil()" aria-label="Abrir Menú">
         ☰
       </button>
     </div>
 
-    <ul class="nav-links" id="menu-navegacion">
-      <li><button type="button" onclick="filtrar('todos'); cerrarMenuMovil();">Catálogo</button></li>
-      <li class="dropdown">
-        <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdownMovil(event)">Categorías ▾</a>
-        <div class="dropdown-content" id="submenu-categorias">
-          <a href="velas.html" onclick="cerrarMenuMovil()">Velas</a>
-          <a href="bisuteria.html" onclick="cerrarMenuMovil()">Bisutería</a>
-          <a href="bordado.html" onclick="cerrarMenuMovil()">Bordado</a>
-          <a href="pintura.html" onclick="cerrarMenuMovil()">Pintura</a>
-          <a href="crochet.html" onclick="cerrarMenuMovil()">Crochet</a>
-        </div>
-      </li>
-      <li><a href="blog.html" onclick="cerrarMenuMovil()">Blog</a></li>
-      <li><a href="#talleres" class="pill-talleres" onclick="cerrarMenuMovil()">Talleres EMOCION-ARTE</a></li>
-    </ul>
+    <!-- Menú Desktop y Móvil -->
+    <nav class="nav-wrapper">
+      <ul class="nav-links" id="menu-navegacion">
+        <li><button type="button" onclick="filtrar('todos'); cerrarMenuMovil();">Catálogo</button></li>
+        <li class="dropdown">
+          <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdownMovil(event)">Categorías ▾</a>
+          <div class="dropdown-content" id="submenu-categorias">
+            <a href="velas.html" onclick="cerrarMenuMovil()">Velas</a>
+            <a href="bisuteria.html" onclick="cerrarMenuMovil()">Bisutería</a>
+            <a href="bordado.html" onclick="cerrarMenuMovil()">Bordado</a>
+            <a href="pintura.html" onclick="cerrarMenuMovil()">Pintura</a>
+            <a href="crochet.html" onclick="cerrarMenuMovil()">Crochet</a>
+          </div>
+        </li>
+        <li><a href="blog.html" onclick="cerrarMenuMovil()">Blog</a></li>
+        <li><a href="#talleres" class="pill-talleres" onclick="cerrarMenuMovil()">Talleres EMOCION-ARTE</a></li>
+        <!-- Carrito al extremo derecho en Computadoras -->
+        <li>
+          <button type="button" class="cart-btn" onclick="toggleCarrito()">
+            🛒 <span id="cart-num">0</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
   </header>
 
   <!-- Sección Hero -->
@@ -1354,6 +1373,7 @@
     function actualizarCarrito() {
       const lista = document.getElementById('lista-carrito');
       const contador = document.getElementById('cart-num');
+      const contadorMobile = document.querySelector('.cart-num-mobile');
       const subtotalEl = document.getElementById('cart-subtotal');
       const ivaEl = document.getElementById('cart-iva');
       const shippingValEl = document.getElementById('cart-shipping-val');
@@ -1363,6 +1383,7 @@
       let totalItems = 0;
       carrito.forEach(item => totalItems += item.cantidad);
       if (contador) contador.textContent = totalItems;
+      if (contadorMobile) contadorMobile.textContent = totalItems;
 
       if (carrito.length === 0) {
         if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
