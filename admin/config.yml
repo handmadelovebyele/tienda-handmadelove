@@ -14,13 +14,17 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Título de la Pieza", name: "title", widget: "string"}
-      - {label: "Categoría Principal", name: "categoria", widget: "select", options: ["Velas", "Bisutería", "Bordado", "Pintura", "Crochet"]}
-      - {label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false}
-      - {label: "Precio ($)", name: "precio", widget: "number", value_type: "float"}
-      - {label: "Descripción", name: "descripcion", widget: "text"}
-      - {label: "Imagen de Portada", name: "imagen", widget: "image"}
-      - {label: "Galería de Fotos Adicionales", name: "fotos", widget: "list", required: false}
+      - { label: "Título de la Pieza", name: "title", widget: "string" }
+      - { label: "Categoría Principal", name: "categoria", widget: "select", options: ["Velas", "Bisutería", "Bordado", "Pintura", "Crochet"] }
+      - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
 
   - name: "talleres"
     label: "Talleres Presenciales"
@@ -28,14 +32,14 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Nombre del Taller", name: "title", widget: "string"}
-      - {label: "Fecha y Hora", name: "fecha", widget: "datetime"}
-      - {label: "Lugar", name: "lugar", widget: "string", default: "Almax Center, Samborondón"}
-      - {label: "Precio ($)", name: "precio", widget: "number", value_type: "float"}
-      - {label: "Cupo Máximo", name: "cupoMax", widget: "number", value_type: "int", default: 10}
-      - {label: "Cupos Ocupados", name: "ocupados", widget: "number", value_type: "int", default: 0}
-      - {label: "Descripción", name: "descripcion", widget: "text"}
-      - {label: "Imagen", name: "imagen", widget: "image"}
+      - { label: "Nombre del Taller", name: "title", widget: "string" }
+      - { label: "Fecha y Hora", name: "fecha", widget: "datetime" }
+      - { label: "Lugar", name: "lugar", widget: "string", default: "Almax Center, Samborondón" }
+      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Cupo Máximo", name: "cupoMax", widget: "number", value_type: "int", default: 10 }
+      - { label: "Cupos Ocupados", name: "ocupados", widget: "number", value_type: "int", default: 0 }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen", name: "imagen", widget: "image" }
 
   - name: "blog"
     label: "Blog y Técnicas"
@@ -43,10 +47,6 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Título del Artículo", name: "title", widget: "string"}
-      - {label: "Categoría del Blog", name: "categoria", widget: "select", options: ["Paso a Paso", "Patrones & Descargables", "Tips de Cuidado", "Detrás de Escenas"]}
-      - {label: "Fecha", name: "date", widget: "date", format: "YYYY-MM-DD"}
-      - {label: "Imagen de Portada", name: "imagen", widget: "image"}
-      - {label: "Resumen Corto", name: "descripcion", widget: "text"}
-      - {label: "Contenido Completo", name: "body", widget: "markdown"}
-      - {label: "Archivo Descargable (PDF)", name: "archivo", widget: "file", required: false}
+      - { label: "Título del Artículo", name: "title", widget: "string" }
+      - { label: "Categoría del Blog", name: "categoria", widget: "select", options: ["Paso a Paso", "Patrones & Descargables", "Tips de Cuidado", "Detrás de Escenas"] }
+      - { label: "Fecha", name: "date", widget: "date", format
