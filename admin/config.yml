@@ -7,6 +7,17 @@ media_folder: "img/uploads"
 public_folder: "img/uploads"
 
 collections:
+  - name: "banners"
+    label: "Banners y Promociones"
+    folder: "contenido/banners"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Identificador de Página (ej: velas, bisuteria, crochet)", name: "title", widget: "string" }
+      - { label: "Título Principal del Banner", name: "titulo", widget: "string" }
+      - { label: "Mensaje / Promoción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Fondo", name: "imagen", widget: "image" }
+
   - name: "productos"
     label: "Productos y Creaciones"
     folder: "contenido/productos"
