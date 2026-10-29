@@ -479,10 +479,33 @@
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
+    .item-izq {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+    .item-thumb-carrito {
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #f0ebe4;
+      border: 1px solid #e8dec8;
+    }
+    .item-info {
+      flex: 1;
+      min-width: 0;
+    }
     .item-info strong {
-      font-size: 0.92rem;
+      font-size: 0.90rem;
       color: var(--text-main);
       display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .item-info span {
       color: var(--brand-red);
@@ -493,6 +516,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      margin-left: 10px;
     }
     .item-controls button {
       background: #f4efe6;
@@ -956,7 +980,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito con Acordeón Desplegable -->
+  <!-- Modal del Carrito con Miniaturas -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -966,7 +990,7 @@
 
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
 
-      <!-- Lista visible de productos añadidos -->
+      <!-- Lista visible de productos añadidos con fotos miniaturas -->
       <div id="lista-carrito">
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
@@ -1005,7 +1029,7 @@
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
 
-      <!-- Botones de Acción -->
+      <!-- Botones de Pago -->
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -1018,11 +1042,11 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional[cite: 4]<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 4]<br>
-        <strong>Número de Cuenta:</strong> 1000900044[cite: 4]<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 4]<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552[cite: 4]<br>
+        <strong>Banco:</strong> Banco Internacional<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros<br>
+        <strong>Número de Cuenta:</strong> 1000900044<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
+        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
         <strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
@@ -1196,14 +1220,25 @@
       if (modal) modal.classList.toggle('oculto');
     }
 
-    function agregarAlCarrito(nombre, precio) {
+    function normalizarRutaImagen(ruta) {
+      if (!ruta) return 'logo.jpg';
+      let r = String(ruta).trim().replace(/^["']|["']$/g, '');
+      if (r.startsWith('http://') || r.startsWith('https://')) return r;
+      r = r.replace(/^\.?\/?img\/uploads\//, '').replace(/^\.?\//, '');
+      return 'img/uploads/' + r;
+    }
+
+    // Guarda imagen en el carrito para mostrar la miniatura
+    function agregarAlCarrito(nombre, precio, imagen) {
       const precioNumerico = parseFloat(precio) || 0;
+      const fotoItem = normalizarRutaImagen(imagen);
       const encontrado = carrito.find(item => item.nombre === nombre);
       
       if (encontrado) {
         encontrado.cantidad += 1;
+        if (!encontrado.imagen && fotoItem) encontrado.imagen = fotoItem;
       } else {
-        carrito.push({ nombre, precio: precioNumerico, cantidad: 1 });
+        carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem });
       }
 
       actualizarCarrito();
@@ -1248,11 +1283,15 @@
           const precioItem = parseFloat(item.precio) || 0;
           const totalLinea = precioItem * item.cantidad;
           subtotal += totalLinea;
+          const miniatura = item.imagen || 'logo.jpg';
           return `
             <div class="item-carrito">
-              <div class="item-info">
-                <strong>${item.nombre}</strong>
-                <span>$${totalLinea.toFixed(2)}</span>
+              <div class="item-izq">
+                <img src="${miniatura}" alt="${item.nombre}" class="item-thumb-carrito" onerror="this.src='logo.jpg'">
+                <div class="item-info">
+                  <strong title="${item.nombre}">${item.nombre}</strong>
+                  <span>$${totalLinea.toFixed(2)}</span>
+                </div>
               </div>
               <div class="item-controls">
                 <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
@@ -1322,7 +1361,6 @@
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
 
-    // Pagar Payphone: Abre chat de WhatsApp con el pedido y solicitud de link cerrado de Payphone
     function pagarPayphone() {
       if (carrito.length === 0) {
         alert('Tu carrito está vacío.');
@@ -1366,14 +1404,6 @@
 
     function cerrarDatosBancarios() {
       document.getElementById('modal-banco').classList.remove('open');
-    }
-
-    function normalizarRutaImagen(ruta) {
-      if (!ruta) return 'logo.jpg';
-      let r = String(ruta).trim().replace(/^["']|["']$/g, '');
-      if (r.startsWith('http://') || r.startsWith('https://')) return r;
-      r = r.replace(/^\.?\/?img\/uploads\//, '').replace(/^\.?\//, '');
-      return 'img/uploads/' + r;
     }
 
     function abrirModalProducto(index) {
@@ -1421,7 +1451,7 @@
       const btnComprar = document.getElementById('modal-btn-comprar');
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(p.title, p.precio);
+        agregarAlCarrito(p.title, p.precio, portada);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -1452,7 +1482,7 @@
               <p class="card-desc">${p.descripcion || ''}</p>
               <div class="card-footer">
                 <span class="card-price">$${precioNum.toFixed(2)}</span>
-                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum})">+ Agregar</button>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}')">+ Agregar</button>
               </div>
             </div>
           </div>
