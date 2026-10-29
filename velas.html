@@ -18,10 +18,7 @@
       margin: 0;
       padding: 0;
     }
-    html {
-      overflow-x: hidden;
-    }
-    body {
+    html, body {
       width: 100%;
       max-width: 100vw;
       font-family: 'Poppins', sans-serif;
@@ -29,15 +26,20 @@
       background-color: var(--bg-color);
       line-height: 1.6;
     }
+    body {
+      padding-top: 105px;
+    }
 
-    /* Cabecera Fija Completa */
+    /* Cabecera 100% Fija */
     .header-fijo {
-      position: -webkit-sticky;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 1000;
+      left: 0;
+      right: 0;
       width: 100%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      z-index: 1500;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      background-color: #fff;
     }
     .top-banner {
       background-color: var(--brand-red);
@@ -187,17 +189,17 @@
       line-height: 1;
     }
 
-    /* Hero de Categoría */
+    /* Hero */
     .categoria-hero {
       background: linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url('img/uploads/velas-varias.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
-      padding: 4.5rem 1.5rem 3.5rem;
+      padding: 4rem 1.5rem 3rem;
       margin-bottom: 2rem;
       transition: background 0.5s ease;
     }
     .categoria-hero h1 {
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
       text-shadow: 0 2px 5px rgba(0,0,0,0.4);
@@ -205,11 +207,11 @@
     .categoria-hero p {
       max-width: 650px;
       margin: 0 auto;
-      font-size: 1rem;
+      font-size: 0.98rem;
       text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
-    /* Pestañas de Subcategorías */
+    /* Pestañas Subcategorías */
     .subcat-container {
       max-width: 1100px;
       margin: 0 auto 1.5rem auto;
@@ -237,7 +239,7 @@
       border-color: var(--brand-red);
     }
 
-    /* Cuadrícula compacta */
+    /* Cuadrícula */
     .catalogo-section {
       max-width: 1200px;
       margin: 0 auto 3rem auto;
@@ -317,7 +319,7 @@
       background-color: var(--brand-red-dark);
     }
 
-    /* Modal del Carrito */
+    /* Modal Carrito */
     .carrito-modal {
       position: fixed;
       top: 0;
@@ -373,7 +375,7 @@
       flex-direction: column;
       gap: 10px;
       min-height: 120px;
-      max-height: 270px;
+      max-height: 250px;
       overflow-y: auto;
       margin-bottom: 14px;
       border: 1px solid #ebdcd5;
@@ -449,7 +451,9 @@
       text-align: center;
       font-size: 0.9rem;
     }
-    .accordion-toggle {
+
+    /* Acordeón de Datos */
+    .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
       border: 1px dashed #d9cbbe;
@@ -465,32 +469,42 @@
       align-items: center;
       margin-bottom: 8px;
       font-family: 'Poppins', sans-serif;
+      transition: background 0.2s;
     }
-    .form-cliente {
+    .btn-acordeon-datos:hover {
+      background: #f5eee6;
+    }
+    .caja-entrega {
       display: none;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
       margin-bottom: 14px;
-      padding: 10px 12px;
+      padding: 12px;
       background: #fff;
       border: 1px solid #ebdcd5;
-      border-radius: 8px;
+      border-radius: 10px;
     }
-    .form-cliente.open {
+    .caja-entrega.abierta {
       display: flex;
     }
-    .form-cliente label {
-      font-size: 0.78rem;
+    .caja-entrega label {
+      font-size: 0.76rem;
       font-weight: 600;
+      color: var(--text-main);
     }
-    .form-cliente input {
+    .caja-entrega input {
       padding: 0.55rem 0.8rem;
       border-radius: 8px;
-      border: 1px solid #ccc;
+      border: 1px solid #d5c8be;
       font-family: 'Poppins', sans-serif;
       font-size: 0.83rem;
       outline: none;
+      width: 100%;
     }
+    .caja-entrega input:focus {
+      border-color: var(--brand-red);
+    }
+
     .carrito-resumen {
       background: #fdf8f8;
       border: 1px solid #f5e6e6;
@@ -582,7 +596,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
-    /* Modal de Detalle de Producto */
+    /* Modal Detalle Producto */
     .product-modal {
       position: fixed;
       top: 0;
@@ -768,6 +782,9 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        padding-top: 95px;
+      }
       header.navbar {
         padding: 0.7rem 1.2rem;
         flex-wrap: wrap;
@@ -816,7 +833,7 @@
         display: block;
       }
       .categoria-hero h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       .product-modal-content {
         grid-template-columns: 1fr;
@@ -890,21 +907,21 @@
     </header>
   </div>
 
-  <!-- Hero de la Categoría -->
+  <!-- Hero Categoría -->
   <section class="categoria-hero" id="banner-categoria">
     <h1 id="banner-titulo">Velas Aromáticas Artesanales</h1>
     <p id="banner-desc">Elaboradas con cera de soya botánica, fragancias premium y decoradas cuidadosamente con detalles florales hechos a mano.</p>
   </section>
 
-  <!-- Pestañas dinámicas de Subcategorías -->
+  <!-- Pestañas de Subcategorías -->
   <div class="subcat-container" id="subcat-container"></div>
 
-  <!-- Cuadrícula de Productos -->
+  <!-- Cuadrícula -->
   <main class="catalogo-section">
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
-  <!-- Modal Detalle de Producto -->
+  <!-- Modal Detalle -->
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
@@ -924,7 +941,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito -->
+  <!-- Modal Carrito -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -938,20 +955,21 @@
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
 
-      <button type="button" class="accordion-toggle" onclick="toggleFormCliente()">
-        <span>📝 Datos de entrega (Opcional)</span>
-        <span id="accordion-arrow">▾</span>
+      <!-- Acordeón Desplegable -->
+      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
+        <span>📝 Ingresar datos de entrega</span>
+        <span id="flecha-acordeon">▾</span>
       </button>
 
-      <div class="form-cliente" id="form-cliente-desplegable">
+      <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="input-nombre">Tu Nombre:</label>
-        <input type="text" id="input-nombre" placeholder="Ej. María Pérez">
+        <input type="text" id="input-nombre" placeholder="Nombre y Apellido">
         <label for="input-telefono">Celular / WhatsApp:</label>
-        <input type="tel" id="input-telefono" placeholder="Ej. 0980526007">
+        <input type="tel" id="input-telefono" placeholder="Ej: 0980526007">
         <label for="input-correo">Correo Electrónico:</label>
-        <input type="email" id="input-correo" placeholder="Ej. correo@gmail.com">
-        <label for="input-ubicacion">Sector / Ciudad de Entrega:</label>
-        <input type="text" id="input-ubicacion" placeholder="Ej. La Aurora (Daule), Samborondón o Guayaquil">
+        <input type="email" id="input-correo" placeholder="correo@ejemplo.com">
+        <label for="input-ubicacion">Sector o Ciudad:</label>
+        <input type="text" id="input-ubicacion" placeholder="Ej: Samborondón, Daule, Guayaquil, etc.">
       </div>
 
       <div class="carrito-resumen">
@@ -988,7 +1006,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer Limpio -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -1058,15 +1076,15 @@
       }
     }
 
-    function toggleFormCliente() {
-      const f = document.getElementById('form-cliente-desplegable');
-      const arrow = document.getElementById('accordion-arrow');
-      if (f.classList.contains('open')) {
-        f.classList.remove('open');
-        arrow.textContent = '▾';
+    function toggleDesplegableDatos() {
+      const caja = document.getElementById('caja-formulario-entrega');
+      const flecha = document.getElementById('flecha-acordeon');
+      if (caja.classList.contains('abierta')) {
+        caja.classList.remove('abierta');
+        flecha.textContent = '▾';
       } else {
-        f.classList.add('open');
-        arrow.textContent = '▴';
+        caja.classList.add('abierta');
+        flecha.textContent = '▴';
       }
     }
 
@@ -1117,9 +1135,13 @@
       }
     }
 
-    let carrito = [];
+    let carrito = JSON.parse(localStorage.getItem('carrito_hml') || '[]');
     let todasLasVelas = [];
     const TASA_IVA = 0.15;
+
+    function guardarCarrito() {
+      localStorage.setItem('carrito_hml', JSON.stringify(carrito));
+    }
 
     function toggleCarrito() {
       const modal = document.getElementById('modal-carrito');
@@ -1146,6 +1168,7 @@
         carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem });
       }
 
+      guardarCarrito();
       actualizarCarrito();
       cerrarModalProducto();
       mostrarAvisoToast(`"${nombre}" añadido al carrito 🛒`);
@@ -1157,6 +1180,7 @@
       if (carrito[index].cantidad <= 0) {
         carrito.splice(index, 1);
       }
+      guardarCarrito();
       actualizarCarrito();
     }
 
@@ -1536,6 +1560,7 @@
       }
       construirBotonesSubcategorias();
       render(todasLasVelas);
+      actualizarCarrito();
     }
 
     cargarCatalogoVelas();
