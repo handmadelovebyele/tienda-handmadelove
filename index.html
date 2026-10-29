@@ -24,7 +24,6 @@
       background-color: var(--bg-color);
       line-height: 1.6;
     }
-    /* Banner Superior */
     .top-banner {
       background-color: var(--brand-red);
       color: white;
@@ -32,7 +31,6 @@
       padding: 0.5rem;
       font-size: 0.85rem;
     }
-    /* Navbar */
     header.navbar {
       display: flex;
       justify-content: space-between;
@@ -99,7 +97,6 @@
       font-weight: 500;
       color: var(--brand-red) !important;
     }
-    /* Menú Desplegable */
     .dropdown {
       position: relative;
     }
@@ -128,7 +125,6 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    /* Carrito */
     .cart-btn {
       background-color: var(--brand-red);
       color: white !important;
@@ -139,7 +135,6 @@
       gap: 6px;
       font-weight: 500;
     }
-    /* Hero */
     .hero {
       max-width: 1100px;
       margin: 2.5rem auto 1.5rem auto;
@@ -204,7 +199,6 @@
       border-color: var(--brand-red);
       color: var(--brand-red);
     }
-    /* Carrusel */
     .hero-carousel-container {
       position: relative;
       width: 100%;
@@ -271,7 +265,6 @@
     .dot.active {
       background-color: var(--brand-red);
     }
-    /* Catálogo */
     .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
@@ -360,7 +353,6 @@
     .card-btn:hover {
       background-color: var(--brand-red-dark);
     }
-    /* Talleres */
     .talleres-section {
       max-width: 1100px;
       margin: 0 auto 3rem auto;
@@ -392,7 +384,6 @@
     .btn-main:hover {
       background-color: var(--brand-red-dark);
     }
-    /* Newsletter */
     .newsletter-section {
       background-color: #fdf2f2;
       padding: 4rem 2rem;
@@ -400,7 +391,7 @@
       margin-bottom: 3rem;
     }
     .newsletter-container {
-      max-width: 600px;
+      max-width: 720px;
       margin: 0 auto;
     }
     .newsletter-section h2 {
@@ -413,33 +404,6 @@
       font-size: 0.95rem;
       margin-bottom: 1.5rem;
     }
-    .newsletter-form {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-    }
-    .newsletter-form input {
-      padding: 0.7rem 1rem;
-      border-radius: 25px;
-      border: 1px solid #ccc;
-      width: 70%;
-      font-family: 'Poppins', sans-serif;
-      outline: none;
-    }
-    .newsletter-form button {
-      background-color: var(--brand-red);
-      color: white;
-      border: none;
-      padding: 0.7rem 1.5rem;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 500;
-      transition: background 0.3s;
-    }
-    .newsletter-form button:hover {
-      background-color: var(--brand-red-dark);
-    }
-    /* Modal del Carrito */
     .carrito-modal {
       position: fixed;
       top: 0;
@@ -591,8 +555,6 @@
       cursor: pointer;
       margin-top: 8px;
     }
-
-    /* Modal Datos Bancarios */
     .modal-banco {
       position: fixed;
       top: 0;
@@ -617,8 +579,6 @@
       padding: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-
-    /* Modal Detalle Producto */
     .product-modal {
       position: fixed;
       top: 0;
@@ -712,7 +672,6 @@
       color: var(--text-muted);
       line-height: 1.6;
     }
-
     @media (max-width: 768px) {
       .product-modal-content {
         grid-template-columns: 1fr;
@@ -726,8 +685,6 @@
         display: none;
       }
     }
-
-    /* Footer */
     .main-footer {
       background: #231F1C;
       color: #FAF7F2;
@@ -812,9 +769,7 @@
     </a>
     <nav>
       <ul class="nav-links">
-        <li><button onclick="filtrar('todos')">Catálogo</button></li>
-        
-        <!-- Menú Desplegable -->
+        <li><button type="button" onclick="filtrar('todos')">Catálogo</button></li>
         <li class="dropdown">
           <a href="#" class="dropbtn">Categorías ▾</a>
           <div class="dropdown-content">
@@ -825,11 +780,10 @@
             <a href="crochet.html">Crochet</a>
           </div>
         </li>
-
         <li><a href="blog.html">Blog</a></li>
         <li><a href="#talleres" class="pill-talleres">Talleres EMOCION-ARTE</a></li>
         <li>
-          <button class="cart-btn" onclick="toggleCarrito()">
+          <button type="button" class="cart-btn" onclick="toggleCarrito()">
             🛒 <span id="cart-num">0</span>
           </button>
         </li>
@@ -848,7 +802,6 @@
         <a href="#talleres" class="btn-secondary">Ver Talleres EMOCION-ARTE</a>
       </div>
     </div>
-    <!-- Carrusel -->
     <div class="hero-carousel-container" id="hero-carousel">
       <div class="hero-slide active">
         <img src="img/uploads/bordado-crochet-varios.jpg" alt="Bordado y Crochet Handmade Love">
@@ -859,9 +812,8 @@
       <div class="hero-slide">
         <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería artesanal">
       </div>
-
-      <button class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
-      <button class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
+      <button type="button" class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
+      <button type="button" class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </section>
@@ -891,14 +843,16 @@
     </div>
   </section>
 
-  <!-- Newsletter -->
+  <!-- Newsletter con Teléfono, Nombre y Correo -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
       <p>Recibe sorpresas, patrones exclusivos y entérate antes que nadie de las nuevas fechas de nuestros talleres.</p>
-      <form class="newsletter-form" onsubmit="suscribirNewsletter(event)">
-        <input type="email" id="newsletter-email" placeholder="Ingresa tu correo electrónico..." required>
-        <button type="submit">Suscribirme</button>
+      <form class="newsletter-form" onsubmit="suscribirNewsletter(event)" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <input type="text" id="newsletter-nombre" placeholder="Tu Nombre..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1; min-width: 160px; font-family: 'Poppins', sans-serif; outline: none;">
+        <input type="tel" id="newsletter-telefono" placeholder="Número de Celular / WhatsApp..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1; min-width: 180px; font-family: 'Poppins', sans-serif; outline: none;">
+        <input type="email" id="newsletter-email" placeholder="Correo electrónico..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1.2; min-width: 200px; font-family: 'Poppins', sans-serif; outline: none;">
+        <button type="submit" style="background-color: var(--brand-red); color: white; border: none; padding: 0.7rem 1.8rem; border-radius: 25px; cursor: pointer; font-weight: 500; font-family: 'Poppins', sans-serif;">Suscribirme</button>
       </form>
     </div>
   </section>
@@ -907,22 +861,18 @@
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
-      
       <div class="modal-gallery">
         <img id="modal-img-principal" src="" alt="Producto">
         <div class="modal-thumbs" id="modal-galeria-thumbs"></div>
       </div>
-
       <div class="modal-details">
         <span class="modal-category" id="modal-categoria">Categoría</span>
         <h2 class="modal-title" id="modal-titulo">Título</h2>
         <p class="modal-price" id="modal-precio">$0.00</p>
-        
         <div class="modal-desc-box">
           <p id="modal-descripcion" style="white-space: pre-line;"></p>
         </div>
-
-        <button class="card-btn" id="modal-btn-comprar" style="margin-top: auto; padding: 0.7rem; font-size: 0.95rem;">+ Agregar al Carrito</button>
+        <button type="button" class="card-btn" id="modal-btn-comprar" style="margin-top: auto; padding: 0.7rem; font-size: 0.95rem;">+ Agregar al Carrito</button>
       </div>
     </div>
   </div>
@@ -935,19 +885,14 @@
       <div id="lista-carrito">
         <p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>
       </div>
-      
-      <button class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
-
+      <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
       <div class="form-cliente">
         <label for="input-nombre">Tu Nombre:</label>
         <input type="text" id="input-nombre" placeholder="Ej. María Pérez" required>
-        
         <label for="input-telefono">Celular / WhatsApp:</label>
         <input type="tel" id="input-telefono" placeholder="Ej. 0980526007" required>
-        
         <label for="input-correo">Correo Electrónico:</label>
         <input type="email" id="input-correo" placeholder="Ej. correo@gmail.com" required>
-
         <label for="select-envio">Zona de Envío:</label>
         <select id="select-envio" onchange="actualizarCarrito()">
           <option value="0">Retiro en Taller (Almax Center) - $0.00</option>
@@ -956,22 +901,18 @@
           <option value="5.50">Resto del País (Servientrega) - $5.50</option>
         </select>
       </div>
-
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
         <div><span>Envío:</span> <span id="cart-shipping-val">$0.00</span></div>
       </div>
-
       <div class="carrito-total">
         <span>TOTAL:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
-
-      <!-- Botones de Pago -->
-      <button class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone)</button>
-      <button class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
-      <button class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
+      <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone)</button>
+      <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
+      <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
     </div>
   </div>
 
@@ -988,7 +929,7 @@
         <strong>Cédula / R.U.C.:</strong> 0922683552<br>
         <strong>Deuna:</strong> 0980526007
       </div>
-      <button onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
+      <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
     </div>
   </div>
 
@@ -1001,7 +942,6 @@
           Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
         </p>
       </div>
-
       <div class="footer-col">
         <h4>CATEGORÍAS</h4>
         <ul class="footer-links">
@@ -1012,7 +952,6 @@
           <li><a href="crochet.html">Crochet</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>TALLERES</h4>
         <ul class="footer-links">
@@ -1020,7 +959,6 @@
           <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
         </ul>
       </div>
-
       <div class="footer-col">
         <h4>CONTACTO DIRECTO</h4>
         <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
@@ -1036,7 +974,6 @@
         </a>
       </div>
     </div>
-
     <div class="footer-bottom">
       © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.
     </div>
@@ -1046,7 +983,6 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
 
-    // Carrusel
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
     const dotsContainer = document.getElementById('carousel-dots');
@@ -1081,7 +1017,6 @@
       moverCarrusel(1);
     }, 4000);
 
-    // Enviar datos al Google Sheet (Base de datos)
     async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
       if (!SCRIPT_URL) return;
       try {
@@ -1096,41 +1031,54 @@
       }
     }
 
-    // Newsletter
     function suscribirNewsletter(e) {
       e.preventDefault();
-      const correo = document.getElementById('newsletter-email').value;
-      enviarBaseDatos('Suscripción Newsletter', 'Susccriptor Web', 'N/D', correo, 'Suscripción al boletín VIP', '$0.00');
-      alert(`¡Gracias por unirte a nuestra Comunidad VIP, ${correo}!`);
+      const nombre = document.getElementById('newsletter-nombre').value.trim();
+      const telefono = document.getElementById('newsletter-telefono').value.trim();
+      const correo = document.getElementById('newsletter-email').value.trim();
+
+      enviarBaseDatos('Suscripción Comunidad VIP', nombre, telefono, correo, 'Alta en boletín de noticias y talleres', '$0.00');
+      alert(`¡Bienvenida a la Comunidad VIP, ${nombre}! Te hemos registrado con éxito.`);
+      
+      document.getElementById('newsletter-nombre').value = '';
+      document.getElementById('newsletter-telefono').value = '';
       document.getElementById('newsletter-email').value = '';
     }
 
-    // Carrito, IVA (15%), Envío y CMS
     let carrito = [];
     let todosLosProductos = [];
     const TASA_IVA = 0.15;
 
     const productosBase = [
-      { title: "Pulsera de Hilo Rojo", categoria: "Bisutería", precio: 12.00, descripcion: "Protección y diseño artesanal con perlas y detalles finos.", imagen: "pulsera-secundaria.jpg" }
+      { title: "Pulsera de Hilo Rojo", categoria: "Bisutería", precio: 9.99, descripcion: "Protección y diseño artesanal con perlas y detalles finos.", imagen: "pulsera-secundaria.jpg" }
     ];
 
     function toggleCarrito() {
       const modal = document.getElementById('modal-carrito');
-      modal.classList.toggle('oculto');
+      if (modal) modal.classList.toggle('oculto');
     }
 
     function agregarAlCarrito(nombre, precio) {
+      const precioNumerico = parseFloat(precio) || 0;
       const encontrado = carrito.find(item => item.nombre === nombre);
+      
       if (encontrado) {
         encontrado.cantidad += 1;
       } else {
-        carrito.push({ nombre, precio, cantidad: 1 });
+        carrito.push({ nombre, precio: precioNumerico, cantidad: 1 });
       }
+
       actualizarCarrito();
-      alert(`¡"${nombre}" se agregó a tu carrito!`);
+      cerrarModalProducto();
+
+      const modalCarrito = document.getElementById('modal-carrito');
+      if (modalCarrito && modalCarrito.classList.contains('oculto')) {
+        modalCarrito.classList.remove('oculto');
+      }
     }
 
     function cambiarCantidad(index, delta) {
+      if (!carrito[index]) return;
       carrito[index].cantidad += delta;
       if (carrito[index].cantidad <= 0) {
         carrito.splice(index, 1);
@@ -1149,43 +1097,47 @@
 
       let totalItems = 0;
       carrito.forEach(item => totalItems += item.cantidad);
-      contador.textContent = totalItems;
+      if (contador) contador.textContent = totalItems;
 
       if (carrito.length === 0) {
-        lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>';
-        subtotalEl.textContent = '$0.00';
-        ivaEl.textContent = '$0.00';
-        shippingValEl.textContent = '$0.00';
-        totalEl.textContent = '$0.00';
+        if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>';
+        if (subtotalEl) subtotalEl.textContent = '$0.00';
+        if (ivaEl) ivaEl.textContent = '$0.00';
+        if (shippingValEl) shippingValEl.textContent = '$0.00';
+        if (totalEl) totalEl.textContent = '$0.00';
         return;
       }
 
       let subtotal = 0;
-      lista.innerHTML = carrito.map((item, index) => {
-        subtotal += item.precio * item.cantidad;
-        return `
-          <div class="item-carrito">
-            <div>
-              <strong>${item.nombre}</strong><br>
-              <span style="color:var(--brand-red);">$${(item.precio * item.cantidad).toFixed(2)}</span>
+      if (lista) {
+        lista.innerHTML = carrito.map((item, index) => {
+          const precioItem = parseFloat(item.precio) || 0;
+          const totalLinea = precioItem * item.cantidad;
+          subtotal += totalLinea;
+          return `
+            <div class="item-carrito">
+              <div>
+                <strong>${item.nombre}</strong><br>
+                <span style="color:var(--brand-red); font-weight:600;">$${totalLinea.toFixed(2)}</span>
+              </div>
+              <div class="item-controls">
+                <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
+                <span>${item.cantidad}</span>
+                <button type="button" onclick="cambiarCantidad(${index}, 1)">+</button>
+              </div>
             </div>
-            <div class="item-controls">
-              <button onclick="cambiarCantidad(${index}, -1)">-</button>
-              <span>${item.cantidad}</span>
-              <button onclick="cambiarCantidad(${index}, 1)">+</button>
-            </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      }
 
-      const costoEnvio = parseFloat(selectEnvio.value) || 0;
+      const costoEnvio = selectEnvio ? (parseFloat(selectEnvio.value) || 0) : 0;
       const valorIva = subtotal * TASA_IVA;
       const totalDefinitivo = subtotal + valorIva + costoEnvio;
 
-      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-      ivaEl.textContent = `$${valorIva.toFixed(2)}`;
-      shippingValEl.textContent = `$${costoEnvio.toFixed(2)}`;
-      totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
+      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      if (ivaEl) ivaEl.textContent = `$${valorIva.toFixed(2)}`;
+      if (shippingValEl) shippingValEl.textContent = `$${costoEnvio.toFixed(2)}`;
+      if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
 
     function validarCliente() {
@@ -1216,19 +1168,20 @@
       let subtotal = 0;
       let detalleStr = "";
       carrito.forEach(item => {
-        detalleStr += `${item.nombre} (x${item.cantidad}) - $${(item.precio * item.cantidad).toFixed(2)}; `;
-        subtotal += item.precio * item.cantidad;
+        const pVal = parseFloat(item.precio) || 0;
+        detalleStr += `${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}; `;
+        subtotal += pVal * item.cantidad;
       });
 
       const valorIva = subtotal * TASA_IVA;
       const totalFinal = subtotal + valorIva + costoEnvio;
 
-      // Registrar en Google Sheet
       enviarBaseDatos('Compra Web (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, detalleStr, `$${totalFinal.toFixed(2)}`);
 
       let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono} | Correo: ${cliente.correo}). Deseo realizar el siguiente pedido:%0A`;
       carrito.forEach(item => {
-        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(item.precio * item.cantidad).toFixed(2)}%0A`;
+        const pVal = parseFloat(item.precio) || 0;
+        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
       });
 
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
@@ -1250,8 +1203,9 @@
       let subtotal = 0;
       let detalleStr = "";
       carrito.forEach(item => {
+        const pVal = parseFloat(item.precio) || 0;
         detalleStr += `${item.nombre} (x${item.cantidad}); `;
-        subtotal += item.precio * item.cantidad;
+        subtotal += pVal * item.cantidad;
       });
       const costoEnvio = parseFloat(document.getElementById('select-envio').value) || 0;
       const totalFinal = subtotal + (subtotal * TASA_IVA) + costoEnvio;
@@ -1268,14 +1222,13 @@
       document.getElementById('modal-banco').classList.remove('open');
     }
 
-    // Modal Detalle Producto
     function abrirModalProducto(index) {
       const p = todosLosProductos[index];
       if (!p) return;
 
       document.getElementById('modal-categoria').textContent = p.categoria || 'Creación';
       document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${parseFloat(p.precio || 0).toFixed(2)}`;
+      document.getElementById('modal-precio').textContent = `$${(parseFloat(p.precio) || 0).toFixed(2)}`;
       document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
 
       let galeria = [];
@@ -1306,9 +1259,9 @@
       }
 
       const btnComprar = document.getElementById('modal-btn-comprar');
-      btnComprar.onclick = () => {
-        agregarAlCarrito(p.title, p.precio || 0);
-        cerrarModalProducto();
+      btnComprar.onclick = (e) => {
+        e.stopPropagation();
+        agregarAlCarrito(p.title, p.precio);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -1316,7 +1269,8 @@
     }
 
     function cerrarModalProducto() {
-      document.getElementById('modal-producto').classList.remove('open');
+      const modal = document.getElementById('modal-producto');
+      if (modal) modal.classList.remove('open');
       document.body.style.overflow = 'auto';
     }
 
@@ -1327,19 +1281,22 @@
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay productos disponibles.</p>';
         return;
       }
-      grid.innerHTML = lista.map((p, index) => `
-        <div class="card" onclick="abrirModalProducto(${index})">
-          <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}" onerror="this.src='logo.jpg'">
-          <div class="card-body">
-            <h3 class="card-title" title="${p.title}">${p.title}</h3>
-            <p class="card-desc">${p.descripcion || ''}</p>
-            <div class="card-footer">
-              <span class="card-price">$${parseFloat(p.precio || 0).toFixed(2)}</span>
-              <button class="card-btn" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${p.precio || 0})">+ Agregar</button>
+      grid.innerHTML = lista.map((p, index) => {
+        const precioNum = parseFloat(p.precio) || 0;
+        return `
+          <div class="card" onclick="abrirModalProducto(${index})">
+            <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}" onerror="this.src='logo.jpg'">
+            <div class="card-body">
+              <h3 class="card-title" title="${p.title}">${p.title}</h3>
+              <p class="card-desc">${p.descripcion || ''}</p>
+              <div class="card-footer">
+                <span class="card-price">$${precioNum.toFixed(2)}</span>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum})">+ Agregar</button>
+              </div>
             </div>
           </div>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     function filtrar(cat) {
@@ -1378,11 +1335,11 @@
               }
             });
 
+            data.precio = parseFloat(data.precio) || 0;
+
             if (data.imagen) {
               if (data.imagen.startsWith('http')) {
-                // externa
               } else if (data.imagen.startsWith('img/uploads/')) {
-                // correcta
               } else {
                 data.imagen = 'img/uploads/' + data.imagen.replace(/^.*[\\\/]/, '');
               }
@@ -1404,6 +1361,5 @@
 
     cargarCatalogo();
   </script>
-
 </body>
 </html>
