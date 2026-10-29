@@ -137,16 +137,32 @@
     .cart-btn {
       background-color: var(--brand-red);
       color: white !important;
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 20px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-weight: 500;
+      gap: 8px;
+      font-weight: 600;
       border: none;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
+      box-shadow: 0 2px 6px rgba(201, 74, 74, 0.25);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .cart-btn:hover {
+      background-color: var(--brand-red-dark);
+      transform: translateY(-1px);
+    }
+    .cart-badge {
+      background: white;
+      color: var(--brand-red);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 12px;
+      min-width: 20px;
+      text-align: center;
     }
     .mobile-controls {
       display: none;
@@ -943,7 +959,6 @@
         font-size: 1.8rem;
       }
 
-      /* Footer en una sola columna vertical limpia en móvil */
       .footer-container {
         display: flex !important;
         flex-direction: column !important;
@@ -977,10 +992,10 @@
       </div>
     </a>
 
-    <!-- Controles para móvil (Carrito + Menú Hamburguesa) -->
+    <!-- Controles para móvil (Carrito con contador + Menú Hamburguesa) -->
     <div class="mobile-controls">
       <button type="button" class="cart-btn" onclick="toggleCarrito()">
-        🛒 <span class="cart-num-mobile">0</span>
+        🛒 <span class="cart-badge cart-num-mobile">0</span>
       </button>
       <button type="button" class="btn-menu-hamburguesa" onclick="toggleMenuMovil()" aria-label="Abrir Menú">
         ☰
@@ -1003,10 +1018,10 @@
         </li>
         <li><a href="blog.html" onclick="cerrarMenuMovil()">Blog</a></li>
         <li><a href="#talleres" class="pill-talleres" onclick="cerrarMenuMovil()">Talleres EMOCION-ARTE</a></li>
-        <!-- Carrito a la derecha en Desktop -->
+        <!-- Carrito con contador al extremo derecho en Computadoras -->
         <li>
           <button type="button" class="cart-btn" onclick="toggleCarrito()">
-            🛒 <span id="cart-num">0</span>
+            🛒 <span class="cart-badge" id="cart-num">0</span>
           </button>
         </li>
       </ul>
@@ -1157,11 +1172,11 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional[cite: 4]<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 4]<br>
-        <strong>Número de Cuenta:</strong> 1000900044[cite: 4]<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 4]<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552[cite: 4]<br>
+        <strong>Banco:</strong> Banco Internacional<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros<br>
+        <strong>Número de Cuenta:</strong> 1000900044<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
+        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
         <strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
@@ -1174,7 +1189,7 @@
       <div class="footer-col">
         <h4>Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
         </p>
       </div>
       <div class="footer-col">
@@ -1201,11 +1216,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com[cite: 1]
+            ✉️ hadmadelovebyele@gmail.com
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención[cite: 1]</span>
+          <span>💬 WhatsApp de Atención</span>
         </a>
       </div>
     </div>
@@ -1391,7 +1406,7 @@
 
     function actualizarCarrito() {
       const lista = document.getElementById('lista-carrito');
-      const contador = document.getElementById('cart-num');
+      const contadorDesktop = document.getElementById('cart-num');
       const contadorMobile = document.querySelector('.cart-num-mobile');
       const subtotalEl = document.getElementById('cart-subtotal');
       const ivaEl = document.getElementById('cart-iva');
@@ -1401,7 +1416,9 @@
 
       let totalItems = 0;
       carrito.forEach(item => totalItems += item.cantidad);
-      if (contador) contador.textContent = totalItems;
+      
+      // Actualiza el indicador numérico tanto en computadoras como en celulares
+      if (contadorDesktop) contadorDesktop.textContent = totalItems;
       if (contadorMobile) contadorMobile.textContent = totalItems;
 
       if (carrito.length === 0) {
