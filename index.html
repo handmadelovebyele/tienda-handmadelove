@@ -821,7 +821,7 @@
 <body>
 
   <!-- Top Banner -->
-  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
+  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨[cite: 1]</div>
 
   <!-- Navbar -->
   <header class="navbar">
@@ -896,12 +896,12 @@
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
-      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón.</p>
+      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón[cite: 1].</p>
     </div>
     <div class="talleres-grid">
       <div class="taller-card">
         <h3>Taller de Velas Artesanales</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 1]</p>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
         <a href="#" class="btn-main">Reservar Cupo</a>
       </div>
@@ -942,7 +942,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito con Acordeón Desplegable -->
+  <!-- Modal del Carrito -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -1020,7 +1020,7 @@
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
         </p>
       </div>
       <div class="footer-col">
@@ -1047,11 +1047,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
+            ✉️ hadmadelovebyele@gmail.com[cite: 1]
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
+          <span>💬 WhatsApp de Atención[cite: 1]</span>
         </a>
       </div>
     </div>
@@ -1175,9 +1175,8 @@
     let todosLosProductos = [];
     const TASA_IVA = 0.15;
 
-    const productosBase = [
-      { title: "Pulsera de Hilo Rojo", categoria: "Bisutería", precio: 9.99, descripcion: "Protección y diseño artesanal con perlas y detalles finos.", imagen: "pulsera-secundaria.jpg" }
-    ];
+    // Arreglo base vacío para no duplicar productos creados desde Decap CMS
+    const productosBase = [];
 
     function toggleCarrito() {
       const modal = document.getElementById('modal-carrito');
