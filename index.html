@@ -404,6 +404,8 @@
       font-size: 0.95rem;
       margin-bottom: 1.5rem;
     }
+
+    /* Modal del Carrito Rediseñado */
     .carrito-modal {
       position: fixed;
       top: 0;
@@ -420,76 +422,124 @@
     }
     .carrito-contenido {
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       background: #fff;
       height: 100%;
-      padding: 2rem;
+      padding: 1.8rem 1.5rem;
       display: flex;
       flex-direction: column;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+      box-shadow: -5px 0 20px rgba(0,0,0,0.15);
       overflow-y: auto;
+    }
+    .carrito-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
     }
     .cerrar-carrito {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       cursor: pointer;
-      align-self: flex-end;
-      margin-bottom: 1rem;
+      line-height: 1;
+      color: #777;
     }
+    .btn-seguir-comprando {
+      width: 100%;
+      background: #fdf2f2;
+      border: 1px solid #f9dede;
+      color: var(--brand-red);
+      padding: 0.6rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    
+    /* Contenedor de productos visible y destacado */
     #lista-carrito {
-      max-height: 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 90px;
+      max-height: 220px;
       overflow-y: auto;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
+      margin-bottom: 14px;
+      border: 1px solid #ebdcd5;
+      border-radius: 10px;
+      padding: 10px;
+      background: #faf8f5;
     }
     .item-carrito {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 6px 0;
+      padding: 8px 10px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .item-info strong {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      display: block;
+    }
+    .item-info span {
+      color: var(--brand-red);
+      font-weight: 600;
       font-size: 0.85rem;
-      border-bottom: 1px dashed #f2f2f2;
     }
     .item-controls {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
     .item-controls button {
-      background: #fdf2f2;
-      border: none;
-      width: 22px;
-      height: 22px;
+      background: #f4efe6;
+      border: 1px solid #e2dacd;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--brand-red);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .item-controls span {
+      font-weight: 600;
+      min-width: 14px;
+      text-align: center;
+    }
+
     .form-cliente {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin: 8px 0;
+      margin-bottom: 12px;
     }
     .form-cliente label {
       font-size: 0.8rem;
       font-weight: 600;
     }
     .form-cliente input, .form-cliente select {
-      padding: 0.5rem;
+      padding: 0.55rem 0.8rem;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       outline: none;
     }
     .carrito-resumen {
       background: #fdf8f8;
       border: 1px solid #f5e6e6;
       border-radius: 8px;
-      padding: 10px;
+      padding: 10px 12px;
       font-size: 0.85rem;
-      margin: 10px 0;
+      margin-bottom: 12px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -504,8 +554,8 @@
       display: flex;
       justify-content: space-between;
       font-weight: 700;
-      font-size: 1.05rem;
-      margin-bottom: 10px;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
     }
     .btn-pagar-tarjeta {
       width: 100%;
@@ -542,18 +592,6 @@
       font-weight: 600;
       cursor: pointer;
       margin-top: 5px;
-    }
-    .btn-seguir-comprando {
-      width: 100%;
-      background: #fdf2f2;
-      border: none;
-      color: var(--brand-red);
-      padding: 0.5rem;
-      border-radius: 15px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 8px;
     }
     .modal-banco {
       position: fixed;
@@ -843,7 +881,7 @@
     </div>
   </section>
 
-  <!-- Newsletter con Teléfono, Nombre y Correo -->
+  <!-- Newsletter -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
@@ -880,12 +918,18 @@
   <!-- Modal del Carrito -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
-      <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
-      <h3>Tu Carrito de Compras</h3>
-      <div id="lista-carrito">
-        <p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>
+      <div class="carrito-header">
+        <h3 style="margin:0; font-size:1.3rem;">Tu Carrito de Compras</h3>
+        <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       </div>
+
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
+
+      <!-- Lista visible de productos añadidos -->
+      <div id="lista-carrito">
+        <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
+      </div>
+
       <div class="form-cliente">
         <label for="input-nombre">Tu Nombre:</label>
         <input type="text" id="input-nombre" placeholder="Ej. María Pérez" required>
@@ -901,15 +945,18 @@
           <option value="5.50">Resto del País (Servientrega) - $5.50</option>
         </select>
       </div>
+
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
         <div><span>Envío:</span> <span id="cart-shipping-val">$0.00</span></div>
       </div>
+
       <div class="carrito-total">
         <span>TOTAL:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
+
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -1100,7 +1147,7 @@
       if (contador) contador.textContent = totalItems;
 
       if (carrito.length === 0) {
-        if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 1rem;">El carrito está vacío</p>';
+        if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
         if (subtotalEl) subtotalEl.textContent = '$0.00';
         if (ivaEl) ivaEl.textContent = '$0.00';
         if (shippingValEl) shippingValEl.textContent = '$0.00';
@@ -1116,9 +1163,9 @@
           subtotal += totalLinea;
           return `
             <div class="item-carrito">
-              <div>
-                <strong>${item.nombre}</strong><br>
-                <span style="color:var(--brand-red); font-weight:600;">$${totalLinea.toFixed(2)}</span>
+              <div class="item-info">
+                <strong>${item.nombre}</strong>
+                <span>$${totalLinea.toFixed(2)}</span>
               </div>
               <div class="item-controls">
                 <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
