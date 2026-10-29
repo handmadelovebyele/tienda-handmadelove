@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Handmade Love by E.L.E & EMOCION-ARTE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
@@ -18,7 +18,10 @@
       margin: 0;
       padding: 0;
     }
-    body {
+    html, body {
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
       font-family: 'Poppins', sans-serif;
       color: var(--text-main);
       background-color: var(--bg-color);
@@ -29,28 +32,30 @@
       color: white;
       text-align: center;
       padding: 0.5rem;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
+      width: 100%;
     }
     header.navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2.5rem;
+      padding: 0.8rem 1.5rem;
       background-color: #fff;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       position: sticky;
       top: 0;
       z-index: 1000;
+      width: 100%;
     }
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
     }
     .logo-card img {
-      height: 40px;
-      width: 40px;
+      height: 38px;
+      width: 38px;
       border-radius: 50%;
       object-fit: cover;
     }
@@ -60,25 +65,25 @@
     }
     .brand-main {
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: #333;
       text-transform: lowercase;
     }
     .brand-sub {
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       color: var(--brand-red);
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       font-weight: 700;
     }
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
     }
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 20px;
+      gap: 18px;
       align-items: center;
       margin: 0;
     }
@@ -133,7 +138,7 @@
     .cart-btn {
       background-color: var(--brand-red);
       color: white !important;
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 20px;
       display: inline-flex;
       align-items: center;
@@ -142,7 +147,7 @@
       border: none;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
     .btn-menu-hamburguesa {
       display: none;
@@ -151,18 +156,19 @@
       font-size: 1.6rem;
       color: var(--text-main);
       cursor: pointer;
-      padding: 4px;
+      padding: 2px 6px;
       line-height: 1;
     }
 
     .hero {
       max-width: 1100px;
-      margin: 2.5rem auto 1.5rem auto;
-      padding: 0 2rem;
+      margin: 2rem auto 1.5rem auto;
+      padding: 0 1.5rem;
       display: grid;
       grid-template-columns: 1.2fr 1fr;
-      gap: 40px;
+      gap: 35px;
       align-items: center;
+      width: 100%;
     }
     .hero-badge {
       font-size: 0.75rem;
@@ -173,29 +179,29 @@
       display: block;
     }
     .hero h1 {
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       color: var(--text-main);
       margin-bottom: 15px;
-      line-height: 1.2;
+      line-height: 1.25;
     }
     .hero h1 span {
       color: var(--brand-red);
     }
     .hero p {
       color: var(--text-muted);
-      font-size: 0.98rem;
-      margin-bottom: 25px;
+      font-size: 0.95rem;
+      margin-bottom: 22px;
       line-height: 1.6;
     }
     .hero-buttons {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .btn-primary {
       background-color: var(--brand-red);
       color: white;
-      padding: 0.7rem 1.5rem;
+      padding: 0.65rem 1.4rem;
       border-radius: 25px;
       text-decoration: none;
       font-weight: 500;
@@ -209,7 +215,7 @@
       background-color: transparent;
       color: var(--text-main);
       border: 1px solid #ccc;
-      padding: 0.7rem 1.5rem;
+      padding: 0.65rem 1.4rem;
       border-radius: 25px;
       text-decoration: none;
       font-weight: 500;
@@ -223,7 +229,7 @@
     .hero-carousel-container {
       position: relative;
       width: 100%;
-      height: 350px;
+      height: 340px;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 15px rgba(0,0,0,0.08);
@@ -250,38 +256,36 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background-color: rgba(255,255,255,0.7);
+      background-color: rgba(255,255,255,0.75);
       border: none;
       color: #333;
-      font-size: 2rem;
-      padding: 0 12px;
+      font-size: 1.8rem;
+      padding: 0 10px;
       cursor: pointer;
       border-radius: 50%;
       z-index: 10;
-      transition: background 0.3s;
     }
     .carousel-btn:hover {
       background-color: #fff;
       color: var(--brand-red);
     }
-    .carousel-prev { left: 15px; }
-    .carousel-next { right: 15px; }
+    .carousel-prev { left: 10px; }
+    .carousel-next { right: 10px; }
     .carousel-dots {
       position: absolute;
-      bottom: 15px;
+      bottom: 12px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 8px;
+      gap: 7px;
       z-index: 10;
     }
     .dot {
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background-color: rgba(255,255,255,0.6);
       border-radius: 50%;
       cursor: pointer;
-      transition: background 0.3s;
     }
     .dot.active {
       background-color: var(--brand-red);
@@ -289,24 +293,27 @@
     .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 2rem;
+      padding: 2rem 1.5rem;
+      width: 100%;
     }
     .section-title {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
     .section-title h2 {
-      font-size: 2rem;
+      font-size: 1.9rem;
       color: var(--text-main);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     .section-title p {
       color: var(--text-muted);
+      font-size: 0.95rem;
     }
     .grid-productos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
+      gap: 1.8rem;
+      width: 100%;
     }
     .card {
       background: #fff;
@@ -328,7 +335,7 @@
       object-fit: cover;
     }
     .card-body {
-      padding: 1.2rem;
+      padding: 1.1rem;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -369,25 +376,26 @@
       border-radius: 20px;
       font-size: 0.85rem;
       cursor: pointer;
-      transition: background 0.3s;
     }
     .card-btn:hover {
       background-color: var(--brand-red-dark);
     }
     .talleres-section {
       max-width: 1100px;
-      margin: 0 auto 3rem auto;
-      padding: 0 2rem;
+      margin: 0 auto 2.5rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
     }
     .talleres-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      width: 100%;
     }
     .taller-card {
       background: #fff;
       border-radius: 10px;
-      padding: 1.5rem;
+      padding: 1.4rem;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
     .btn-main {
@@ -400,30 +408,27 @@
       font-weight: 500;
       font-size: 0.9rem;
       margin-top: 1rem;
-      transition: background 0.3s;
-    }
-    .btn-main:hover {
-      background-color: var(--brand-red-dark);
     }
     .newsletter-section {
       background-color: #fdf2f2;
-      padding: 4rem 2rem;
+      padding: 3.5rem 1.5rem;
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
+      width: 100%;
     }
     .newsletter-container {
-      max-width: 720px;
+      max-width: 700px;
       margin: 0 auto;
     }
     .newsletter-section h2 {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       color: var(--text-main);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
     .newsletter-section p {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
+      font-size: 0.92rem;
+      margin-bottom: 1.4rem;
     }
 
     /* Modal del Carrito */
@@ -443,10 +448,10 @@
     }
     .carrito-contenido {
       width: 100%;
-      max-width: 440px;
+      max-width: 420px;
       background: #fff;
       height: 100%;
-      padding: 1.8rem 1.5rem;
+      padding: 1.5rem 1.2rem;
       display: flex;
       flex-direction: column;
       box-shadow: -5px 0 20px rgba(0,0,0,0.15);
@@ -482,8 +487,8 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      min-height: 130px;
-      max-height: 280px;
+      min-height: 120px;
+      max-height: 270px;
       overflow-y: auto;
       margin-bottom: 14px;
       border: 1px solid #ebdcd5;
@@ -495,7 +500,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 12px;
+      padding: 10px;
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.06);
@@ -521,7 +526,7 @@
       min-width: 0;
     }
     .item-info strong {
-      font-size: 0.90rem;
+      font-size: 0.88rem;
       color: var(--text-main);
       display: block;
       white-space: nowrap;
@@ -531,24 +536,24 @@
     .item-info span {
       color: var(--brand-red);
       font-weight: 600;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
     }
     .item-controls {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-left: 10px;
+      gap: 6px;
+      margin-left: 8px;
     }
     .item-controls button {
       background: #f4efe6;
       border: 1px solid #e2dacd;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       cursor: pointer;
       font-weight: 700;
       color: var(--brand-red);
-      font-size: 1rem;
+      font-size: 0.95rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -557,6 +562,7 @@
       font-weight: 600;
       min-width: 16px;
       text-align: center;
+      font-size: 0.9rem;
     }
 
     .accordion-toggle {
@@ -575,9 +581,6 @@
       align-items: center;
       margin-bottom: 8px;
       font-family: 'Poppins', sans-serif;
-    }
-    .accordion-toggle:hover {
-      background: #f4efe6;
     }
     .form-cliente {
       display: none;
@@ -626,7 +629,7 @@
       display: flex;
       justify-content: space-between;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       margin-bottom: 12px;
     }
     .btn-pagar-tarjeta {
@@ -639,7 +642,7 @@
       font-weight: 600;
       cursor: pointer;
       margin-top: 5px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
     .btn-pagar-whatsapp {
       width: 100%;
@@ -651,7 +654,7 @@
       font-weight: 600;
       cursor: pointer;
       margin-top: 5px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
     .btn-banco {
       width: 100%;
@@ -708,21 +711,21 @@
     .product-modal-content {
       background: #fff;
       border-radius: 12px;
-      max-width: 800px;
+      max-width: 780px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
-      padding: 2rem;
+      padding: 1.8rem;
       position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 25px;
+      gap: 22px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
     .close-product-modal {
       position: absolute;
-      top: 15px;
-      right: 20px;
+      top: 12px;
+      right: 18px;
       font-size: 1.8rem;
       cursor: pointer;
       color: #555;
@@ -733,21 +736,21 @@
     }
     .modal-gallery img#modal-img-principal {
       width: 100%;
-      height: 300px;
+      height: 290px;
       object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       border: 1px solid #f2ece4;
     }
     .modal-thumbs {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      min-height: 60px;
+      min-height: 55px;
     }
     .modal-thumb {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       object-fit: cover;
       border-radius: 6px;
       cursor: pointer;
@@ -777,30 +780,30 @@
       margin-bottom: 5px;
     }
     .modal-title {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .modal-price {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--brand-red);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .modal-desc-box {
-      max-height: 240px;
+      max-height: 220px;
       overflow-y: auto;
-      padding-right: 8px;
-      margin-bottom: 18px;
-      font-size: 0.9rem;
+      padding-right: 6px;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.65;
+      line-height: 1.6;
     }
 
-    /* Adaptabilidad Móvil */
+    /* Reglas para Celulares */
     @media (max-width: 768px) {
       header.navbar {
-        padding: 0.8rem 1.2rem;
+        padding: 0.7rem 1.2rem;
         flex-wrap: wrap;
       }
       .btn-menu-hamburguesa {
@@ -811,10 +814,10 @@
         width: 100%;
         flex-direction: column;
         align-items: flex-start;
-        padding: 1.2rem 0 0.5rem 0;
-        gap: 14px;
+        padding: 1rem 0 0.4rem 0;
+        gap: 12px;
         border-top: 1px solid #f0ebe4;
-        margin-top: 10px;
+        margin-top: 8px;
       }
       .nav-links.open {
         display: flex;
@@ -823,7 +826,7 @@
         width: 100%;
       }
       .nav-links a, .nav-links button {
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
         display: block;
         width: 100%;
         text-align: left;
@@ -833,7 +836,7 @@
         box-shadow: none;
         background: #fdf8f8;
         padding: 6px 12px;
-        margin-top: 6px;
+        margin-top: 4px;
         border-radius: 8px;
         min-width: unset;
       }
@@ -842,17 +845,17 @@
       }
       .product-modal-content {
         grid-template-columns: 1fr;
-        max-height: 95vh;
-        padding: 1.5rem 1.2rem;
+        max-height: 94vh;
+        padding: 1.4rem 1.1rem;
       }
       .hero {
         grid-template-columns: 1fr;
-        gap: 25px;
-        margin-top: 1.5rem;
+        gap: 22px;
+        margin-top: 1.2rem;
         padding: 0 1.2rem;
       }
       .hero h1 {
-        font-size: 1.85rem;
+        font-size: 1.8rem;
       }
       .footer-container {
         grid-template-columns: 1fr;
@@ -863,7 +866,8 @@
     .main-footer {
       background: #231F1C;
       color: #FAF7F2;
-      padding: 60px 24px 30px;
+      padding: 50px 20px 30px;
+      width: 100%;
     }
     .footer-container {
       max-width: 1100px;
@@ -871,26 +875,26 @@
       display: grid;
       grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
       gap: 30px;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
     .footer-col h4 {
       font-size: 0.8rem;
       letter-spacing: 2px;
       font-weight: 700;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       color: #FAF7F2;
     }
     .footer-desc {
       color: #A89F94;
       font-size: 0.88rem;
-      margin-top: 10px;
+      margin-top: 8px;
       line-height: 1.6;
     }
     .footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 9px;
     }
     .footer-links a, .footer-links button {
       color: #A89F94;
@@ -916,22 +920,24 @@
       border-radius: 30px;
       font-weight: 600;
       text-decoration: none;
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 0.88rem;
+      max-width: 100%;
+      white-space: nowrap;
     }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.1);
       text-align: center;
-      padding-top: 24px;
+      padding-top: 20px;
       color: #7A7268;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
     }
   </style>
 </head>
 <body>
 
   <!-- Top Banner -->
-  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨[cite: 1]</div>
+  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
 
   <!-- Navbar -->
   <header class="navbar">
@@ -943,7 +949,6 @@
       </div>
     </a>
 
-    <!-- Acciones en barra superior (Carrito + Botón Menú Móvil) -->
     <div class="nav-actions">
       <button type="button" class="cart-btn" onclick="toggleCarrito()">
         🛒 <span id="cart-num">0</span>
@@ -953,7 +958,6 @@
       </button>
     </div>
 
-    <!-- Menú de Enlaces (Desktop normal / Móvil desplegable) -->
     <ul class="nav-links" id="menu-navegacion">
       <li><button type="button" onclick="filtrar('todos'); cerrarMenuMovil();">Catálogo</button></li>
       <li class="dropdown">
@@ -1011,12 +1015,12 @@
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
-      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón[cite: 1].</p>
+      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón.</p>
     </div>
     <div class="talleres-grid">
       <div class="taller-card">
         <h3>Taller de Velas Artesanales</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 1]</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón</p>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
         <a href="#" class="btn-main">Reservar Cupo</a>
       </div>
@@ -1029,10 +1033,10 @@
       <h2>Únete a nuestra Comunidad VIP</h2>
       <p>Recibe sorpresas, patrones exclusivos y entérate antes que nadie de las nuevas fechas de nuestros talleres.</p>
       <form class="newsletter-form" onsubmit="suscribirNewsletter(event)" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-        <input type="text" id="newsletter-nombre" placeholder="Tu Nombre..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1; min-width: 160px; font-family: 'Poppins', sans-serif; outline: none;">
-        <input type="tel" id="newsletter-telefono" placeholder="Número de Celular / WhatsApp..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1; min-width: 180px; font-family: 'Poppins', sans-serif; outline: none;">
-        <input type="email" id="newsletter-email" placeholder="Correo electrónico..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1.2; min-width: 200px; font-family: 'Poppins', sans-serif; outline: none;">
-        <button type="submit" style="background-color: var(--brand-red); color: white; border: none; padding: 0.7rem 1.8rem; border-radius: 25px; cursor: pointer; font-weight: 500; font-family: 'Poppins', sans-serif;">Suscribirme</button>
+        <input type="text" id="newsletter-nombre" placeholder="Tu Nombre..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1; min-width: 150px; font-family: 'Poppins', sans-serif; outline: none;">
+        <input type="tel" id="newsletter-telefono" placeholder="Número de Celular / WhatsApp..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1; min-width: 170px; font-family: 'Poppins', sans-serif; outline: none;">
+        <input type="email" id="newsletter-email" placeholder="Correo electrónico..." required style="padding: 0.7rem 1rem; border-radius: 25px; border: 1px solid #ccc; flex: 1.2; min-width: 180px; font-family: 'Poppins', sans-serif; outline: none;">
+        <button type="submit" style="background-color: var(--brand-red); color: white; border: none; padding: 0.7rem 1.6rem; border-radius: 25px; cursor: pointer; font-weight: 500; font-family: 'Poppins', sans-serif;">Suscribirme</button>
       </form>
     </div>
   </section>
@@ -1067,18 +1071,15 @@
 
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
 
-      <!-- Lista visible de productos añadidos con fotos miniaturas -->
       <div id="lista-carrito">
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
 
-      <!-- Botón Desplegable para Datos del Cliente (Opcional) -->
       <button type="button" class="accordion-toggle" onclick="toggleFormCliente()">
         <span>📝 Datos de entrega (Opcional)</span>
         <span id="accordion-arrow">▾</span>
       </button>
 
-      <!-- Formulario de Entrega Desplegable -->
       <div class="form-cliente" id="form-cliente-desplegable">
         <label for="input-nombre">Tu Nombre:</label>
         <input type="text" id="input-nombre" placeholder="Ej. María Pérez">
@@ -1106,7 +1107,6 @@
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
 
-      <!-- Botones de Pago -->
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -1119,11 +1119,11 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional[cite: 4]<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 4]<br>
-        <strong>Número de Cuenta:</strong> 1000900044[cite: 4]<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 4]<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552[cite: 4]<br>
+        <strong>Banco:</strong> Banco Internacional<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros<br>
+        <strong>Número de Cuenta:</strong> 1000900044<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
+        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
         <strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
@@ -1136,7 +1136,7 @@
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
         </p>
       </div>
       <div class="footer-col">
@@ -1163,11 +1163,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com[cite: 1]
+            ✉️ hadmadelovebyele@gmail.com
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención[cite: 1]</span>
+          <span>💬 WhatsApp de Atención</span>
         </a>
       </div>
     </div>
