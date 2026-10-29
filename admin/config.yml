@@ -3,7 +3,6 @@ backend:
   repo: handmadelovebyele/tienda-handmadelove
   branch: main
 
-publish_mode: editorial_workflow
 media_folder: "img/uploads"
 public_folder: "img/uploads"
 
