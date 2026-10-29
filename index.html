@@ -633,7 +633,7 @@
       font-size: 0.78rem;
       font-weight: 600;
     }
-    .form-cliente input, .form-cliente select {
+    .form-cliente input {
       padding: 0.55rem 0.8rem;
       border-radius: 8px;
       border: 1px solid #ccc;
@@ -656,6 +656,12 @@
     .carrito-resumen div {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+    }
+    .envio-nota {
+      font-size: 0.78rem;
+      color: var(--brand-red);
+      font-weight: 600;
     }
     .carrito-total {
       border-top: 2px solid #eee;
@@ -1128,7 +1134,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito -->
+  <!-- Modal del Carrito con Envío a Cotizar -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -1154,23 +1160,18 @@
         <input type="tel" id="input-telefono" placeholder="Ej. 0980526007">
         <label for="input-correo">Correo Electrónico:</label>
         <input type="email" id="input-correo" placeholder="Ej. correo@gmail.com">
-        <label for="select-envio">Zona de Envío:</label>
-        <select id="select-envio" onchange="actualizarCarrito()">
-          <option value="0">Retiro en Taller (Almax Center) - $0.00</option>
-          <option value="3.00">Samborondón / Daule - $3.00</option>
-          <option value="3.50">Guayaquil - $3.50</option>
-          <option value="5.50">Resto del País (Servientrega) - $5.50</option>
-        </select>
+        <label for="input-ubicacion">Sector / Ciudad de Entrega:</label>
+        <input type="text" id="input-ubicacion" placeholder="Ej. La Aurora (Daule), Samborondón o Guayaquil">
       </div>
 
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
-        <div><span>Envío:</span> <span id="cart-shipping-val">$0.00</span></div>
+        <div><span>Envío:</span> <span class="envio-nota">Por cotizar según dirección</span></div>
       </div>
 
       <div class="carrito-total">
-        <span>TOTAL:</span>
+        <span>TOTAL PRODUCTOS:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
 
@@ -1186,11 +1187,11 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
+        <strong>Banco:</strong> Banco Internacional[cite: 8]<br>
+        <strong>Tipo de Cuenta:</strong> Ahorros[cite: 8]<br>
+        <strong>Número de Cuenta:</strong> 1000900044[cite: 8]<br>
+        <strong>Titular:</strong> Erika Michelle Alvarado Torres[cite: 8]<br>
+        <strong>Cédula / R.U.C.:</strong> 0922683552[cite: 8]<br>
         <strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
@@ -1203,7 +1204,7 @@
       <div class="footer-col">
         <h4>Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 3].
         </p>
       </div>
       <div class="footer-col">
@@ -1226,20 +1227,20 @@
       <div class="footer-col">
         <h4>CONTACTO DIRECTO</h4>
         <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
-          ¿Consultas o encargos personalizados?
+          ¿Consultas o encargos personalizados?[cite: 3]
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
+            ✉️ hadmadelovebyele@gmail.com[cite: 3, 7]
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
+          <span>💬 WhatsApp de Atención</span>[cite: 3, 7]
         </a>
       </div>
     </div>
     <div class="footer-bottom">
-      © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.
+      © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.[cite: 3]
     </div>
   </footer>
 
@@ -1424,9 +1425,7 @@
       const contadorMobile = document.querySelector('.cart-num-mobile');
       const subtotalEl = document.getElementById('cart-subtotal');
       const ivaEl = document.getElementById('cart-iva');
-      const shippingValEl = document.getElementById('cart-shipping-val');
       const totalEl = document.getElementById('total-precio');
-      const selectEnvio = document.getElementById('select-envio');
 
       let totalItems = 0;
       carrito.forEach(item => totalItems += item.cantidad);
@@ -1438,7 +1437,6 @@
         if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
         if (subtotalEl) subtotalEl.textContent = '$0.00';
         if (ivaEl) ivaEl.textContent = '$0.00';
-        if (shippingValEl) shippingValEl.textContent = '$0.00';
         if (totalEl) totalEl.textContent = '$0.00';
         return;
       }
@@ -1469,13 +1467,11 @@
         }).join('');
       }
 
-      const costoEnvio = selectEnvio ? (parseFloat(selectEnvio.value) || 0) : 0;
       const valorIva = subtotal * TASA_IVA;
-      const totalDefinitivo = subtotal + valorIva + costoEnvio;
+      const totalDefinitivo = subtotal + valorIva;
 
       if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
       if (ivaEl) ivaEl.textContent = `$${valorIva.toFixed(2)}`;
-      if (shippingValEl) shippingValEl.textContent = `$${costoEnvio.toFixed(2)}`;
       if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
 
@@ -1483,7 +1479,8 @@
       const nombre = (document.getElementById('input-nombre').value || '').trim() || 'Cliente Web';
       const telefono = (document.getElementById('input-telefono').value || '').trim() || 'Por coordinar';
       const correo = (document.getElementById('input-correo').value || '').trim() || 'Sin registrar';
-      return { nombre, telefono, correo };
+      const ubicacion = (document.getElementById('input-ubicacion').value || '').trim() || 'Por coordinar';
+      return { nombre, telefono, correo, ubicacion };
     }
 
     function procesarCompraWhatsApp() {
@@ -1493,9 +1490,6 @@
       }
 
       const cliente = obtenerDatosCliente();
-      const selectEnvio = document.getElementById('select-envio');
-      const textoEnvio = selectEnvio ? selectEnvio.options[selectEnvio.selectedIndex].text : 'Retiro en taller';
-      const costoEnvio = selectEnvio ? (parseFloat(selectEnvio.value) || 0) : 0;
 
       let subtotal = 0;
       let detalleStr = "";
@@ -1506,9 +1500,9 @@
       });
 
       const valorIva = subtotal * TASA_IVA;
-      const totalFinal = subtotal + valorIva + costoEnvio;
+      const totalFinal = subtotal + valorIva;
 
-      enviarBaseDatos('Compra Web (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, detalleStr, `$${totalFinal.toFixed(2)}`);
+      enviarBaseDatos('Compra Web (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, `[Ubicación: ${cliente.ubicacion}] ${detalleStr}`, `$${totalFinal.toFixed(2)} + Envío`);
 
       let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}*`;
       if (cliente.telefono !== 'Por coordinar') mensaje += ` (Tel: ${cliente.telefono})`;
@@ -1521,8 +1515,12 @@
 
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
       mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
-      mensaje += `%0AEnvío (${textoEnvio}): $${costoEnvio.toFixed(2)}`;
-      mensaje += `%0A*TOTAL A PAGAR: $${totalFinal.toFixed(2)}*`;
+      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
+      
+      if (cliente.ubicacion !== 'Por coordinar') {
+        mensaje += `%0AMi sector/ciudad para entrega es: *${cliente.ubicacion}*`;
+      }
+      mensaje += `%0A¿Me podrían indicar el valor del envío y los datos para coordinar la entrega?`;
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
@@ -1542,12 +1540,9 @@
         subtotal += pVal * item.cantidad;
       });
 
-      const selectEnvio = document.getElementById('select-envio');
-      const textoEnvio = selectEnvio ? selectEnvio.options[selectEnvio.selectedIndex].text : 'Retiro en taller';
-      const costoEnvio = selectEnvio ? (parseFloat(selectEnvio.value) || 0) : 0;
-      const totalFinal = subtotal + (subtotal * TASA_IVA) + costoEnvio;
+      const totalFinal = subtotal + (subtotal * TASA_IVA);
 
-      enviarBaseDatos('Solicitud Link Payphone (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, detalleStr, `$${totalFinal.toFixed(2)}`);
+      enviarBaseDatos('Solicitud Link Payphone (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, `[Ubicación: ${cliente.ubicacion}] ${detalleStr}`, `$${totalFinal.toFixed(2)} + Envío`);
 
       let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}*. Deseo pagar con *Tarjeta de Crédito/Débito (Payphone)* el siguiente pedido:%0A`;
       carrito.forEach(item => {
@@ -1557,9 +1552,12 @@
 
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
       mensaje += `%0AIVA (15%): $${(subtotal * TASA_IVA).toFixed(2)}`;
-      mensaje += `%0AEnvío (${textoEnvio}): $${costoEnvio.toFixed(2)}`;
-      mensaje += `%0A*TOTAL A PAGAR: $${totalFinal.toFixed(2)}*%0A`;
-      mensaje += `%0A¿Me podrían enviar el link de cobro cerrado de Payphone para realizar el pago con mi tarjeta?`;
+      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
+
+      if (cliente.ubicacion !== 'Por coordinar') {
+        mensaje += `%0AMi sector/ciudad de entrega es: *${cliente.ubicacion}*`;
+      }
+      mensaje += `%0A¿Me podrían cotizar el valor del envío y enviarme el link de Payphone con el total incluido?`;
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
