@@ -405,7 +405,7 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Modal del Carrito con Acordeón Desplegable */
+    /* Modal del Carrito */
     .carrito-modal {
       position: fixed;
       top: 0;
@@ -457,7 +457,6 @@
       text-align: center;
     }
     
-    /* Contenedor amplio para productos */
     #lista-carrito {
       display: flex;
       flex-direction: column;
@@ -515,7 +514,6 @@
       text-align: center;
     }
 
-    /* Acordeón de datos de entrega y contacto */
     .accordion-toggle {
       width: 100%;
       background: #faf7f2;
@@ -823,7 +821,7 @@
 <body>
 
   <!-- Top Banner -->
-  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨[cite: 1]</div>
+  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
 
   <!-- Navbar -->
   <header class="navbar">
@@ -898,19 +896,19 @@
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
-      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón[cite: 1].</p>
+      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón.</p>
     </div>
     <div class="talleres-grid">
       <div class="taller-card">
         <h3>Taller de Velas Artesanales</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 1]</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón</p>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
         <a href="#" class="btn-main">Reservar Cupo</a>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter con Teléfono, Nombre y Correo -->
+  <!-- Newsletter -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
@@ -1022,7 +1020,7 @@
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
         </p>
       </div>
       <div class="footer-col">
@@ -1049,11 +1047,11 @@
         </p>
         <p style="margin-bottom: 12px;">
           <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com[cite: 1]
+            ✉️ hadmadelovebyele@gmail.com
           </a>
         </p>
         <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención[cite: 1]</span>
+          <span>💬 WhatsApp de Atención</span>
         </a>
       </div>
     </div>
@@ -1112,6 +1110,39 @@
       }
     }
 
+    function mostrarAvisoToast(mensaje) {
+      let toast = document.getElementById('toast-aviso');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-aviso';
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 25px;
+          right: 25px;
+          background: #231F1C;
+          color: #FAF7F2;
+          padding: 12px 20px;
+          border-radius: 30px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+          font-size: 0.88rem;
+          font-weight: 500;
+          z-index: 4000;
+          opacity: 0;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          transform: translateY(10px);
+          pointer-events: none;
+        `;
+        document.body.appendChild(toast);
+      }
+      toast.textContent = mensaje;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+      }, 2000);
+    }
+
     async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
       if (!SCRIPT_URL) return;
       try {
@@ -1166,10 +1197,7 @@
       actualizarCarrito();
       cerrarModalProducto();
 
-      const modalCarrito = document.getElementById('modal-carrito');
-      if (modalCarrito && modalCarrito.classList.contains('oculto')) {
-        modalCarrito.classList.remove('oculto');
-      }
+      mostrarAvisoToast(`"${nombre}" añadido al carrito 🛒`);
     }
 
     function cambiarCantidad(index, delta) {
@@ -1241,7 +1269,6 @@
       const correo = document.getElementById('input-correo').value.trim();
 
       if (!nombre || !telefono || !correo) {
-        // Abre el formulario desplegable si faltan datos
         const formEl = document.getElementById('form-cliente-desplegable');
         const arrow = document.getElementById('accordion-arrow');
         formEl.classList.add('open');
