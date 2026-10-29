@@ -663,7 +663,7 @@
     .product-modal-content {
       background: #fff;
       border-radius: 12px;
-      max-width: 750px;
+      max-width: 800px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -682,32 +682,46 @@
       cursor: pointer;
       color: #555;
     }
-    .modal-gallery img {
+    .modal-gallery {
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-gallery img#modal-img-principal {
       width: 100%;
-      height: 280px;
+      height: 300px;
       object-fit: cover;
       border-radius: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #f2ece4;
     }
     .modal-thumbs {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
+      min-height: 60px;
     }
     .modal-thumb {
-      width: 55px;
-      height: 55px;
+      width: 60px;
+      height: 60px;
       object-fit: cover;
       border-radius: 6px;
       cursor: pointer;
       border: 2px solid transparent;
+      opacity: 0.65;
+      transition: all 0.2s ease;
+      background: #f8f8f8;
+    }
+    .modal-thumb:hover {
+      opacity: 1;
     }
     .modal-thumb.active {
       border-color: var(--brand-red);
+      opacity: 1;
     }
     .modal-details {
       display: flex;
       flex-direction: column;
+      justify-content: flex-start;
     }
     .modal-category {
       font-size: 0.75rem;
@@ -720,22 +734,22 @@
     .modal-title {
       font-size: 1.4rem;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .modal-price {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       color: var(--brand-red);
-      margin-bottom: 15px;
+      margin-bottom: 12px;
     }
     .modal-desc-box {
-      max-height: 150px;
+      max-height: 240px;
       overflow-y: auto;
-      padding-right: 5px;
-      margin-bottom: 20px;
+      padding-right: 8px;
+      margin-bottom: 18px;
       font-size: 0.9rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
     }
     @media (max-width: 768px) {
       .product-modal-content {
@@ -821,7 +835,7 @@
 <body>
 
   <!-- Top Banner -->
-  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨[cite: 1]</div>
+  <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
 
   <!-- Navbar -->
   <header class="navbar">
@@ -896,12 +910,12 @@
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
-      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón[cite: 1].</p>
+      <p>Vive experiencias únicas de aprendizaje artesanal en Almax Center, Samborondón.</p>
     </div>
     <div class="talleres-grid">
       <div class="taller-card">
         <h3>Taller de Velas Artesanales</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón[cite: 1]</p>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 8px 0;"><strong>Lugar:</strong> Almax Center, Samborondón</p>
         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aprende las mejores técnicas de cerería y llévate tu propia creación aromática.</p>
         <a href="#" class="btn-main">Reservar Cupo</a>
       </div>
@@ -942,7 +956,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito -->
+  <!-- Modal del Carrito con Acordeón Desplegable -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -1020,7 +1034,7 @@
       <div class="footer-col">
         <h4 style="font-size: 1rem; margin-bottom: 12px; color: white;">Handmade Love by E.L.E</h4>
         <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón[cite: 1].
+          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
         </p>
       </div>
       <div class="footer-col">
@@ -1174,8 +1188,6 @@
     let carrito = [];
     let todosLosProductos = [];
     const TASA_IVA = 0.15;
-
-    // Arreglo base vacío para no duplicar productos creados desde Decap CMS
     const productosBase = [];
 
     function toggleCarrito() {
@@ -1195,7 +1207,6 @@
 
       actualizarCarrito();
       cerrarModalProducto();
-
       mostrarAvisoToast(`"${nombre}" añadido al carrito 🛒`);
     }
 
@@ -1348,6 +1359,14 @@
       document.getElementById('modal-banco').classList.remove('open');
     }
 
+    function normalizarRutaImagen(ruta) {
+      if (!ruta) return 'logo.jpg';
+      let r = String(ruta).trim().replace(/^["']|["']$/g, '');
+      if (r.startsWith('http://') || r.startsWith('https://')) return r;
+      r = r.replace(/^\.?\/?img\/uploads\//, '').replace(/^\.?\//, '');
+      return 'img/uploads/' + r;
+    }
+
     function abrirModalProducto(index) {
       const p = todosLosProductos[index];
       if (!p) return;
@@ -1357,17 +1376,24 @@
       document.getElementById('modal-precio').textContent = `$${(parseFloat(p.precio) || 0).toFixed(2)}`;
       document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
 
+      // Armar la lista completa de fotos
       let galeria = [];
-      if (p.fotos && Array.isArray(p.fotos) && p.fotos.length > 0) {
-        galeria = p.fotos.map(f => f.startsWith('http') ? f : 'img/uploads/' + f.replace(/^.*[\\\/]/, ''));
-      } else {
-        galeria = [p.imagen || 'logo.jpg'];
+      const portada = normalizarRutaImagen(p.imagen);
+      if (portada) galeria.push(portada);
+
+      if (p.fotos && Array.isArray(p.fotos)) {
+        p.fotos.forEach(f => {
+          let rutaNorm = normalizarRutaImagen(f);
+          if (rutaNorm && !galeria.includes(rutaNorm)) {
+            galeria.push(rutaNorm);
+          }
+        });
       }
 
       const imgPrincipal = document.getElementById('modal-img-principal');
       const thumbsContainer = document.getElementById('modal-galeria-thumbs');
 
-      imgPrincipal.src = galeria[0];
+      imgPrincipal.src = galeria[0] || 'logo.jpg';
       thumbsContainer.innerHTML = '';
 
       if (galeria.length > 1) {
@@ -1409,9 +1435,10 @@
       }
       grid.innerHTML = lista.map((p, index) => {
         const precioNum = parseFloat(p.precio) || 0;
+        const fotoCard = normalizarRutaImagen(p.imagen);
         return `
           <div class="card" onclick="abrirModalProducto(${index})">
-            <img src="${p.imagen || 'logo.jpg'}" alt="${p.title}" onerror="this.src='logo.jpg'">
+            <img src="${fotoCard}" alt="${p.title}" onerror="this.src='logo.jpg'">
             <div class="card-body">
               <h3 class="card-title" title="${p.title}">${p.title}</h3>
               <p class="card-desc">${p.descripcion || ''}</p>
@@ -1434,47 +1461,84 @@
       }
     }
 
+    function parsearMarkdownCompleto(texto) {
+      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
+      if (!match) return null;
+      
+      const frontmatter = match[1];
+      const cuerpoMarkdown = match[2].trim();
+      const lineas = frontmatter.split('\n');
+      const data = { fotos: [] };
+      let claveActual = null;
+      let enFotos = false;
+
+      lineas.forEach(line => {
+        const lineaTrim = line.trim();
+        if (!lineaTrim) return;
+
+        // Detección de fotos adicionales
+        if (lineaTrim.startsWith('fotos:')) {
+          enFotos = true;
+          claveActual = 'fotos';
+          const resto = lineaTrim.replace('fotos:', '').trim();
+          if (resto && !resto.startsWith('-') && resto !== '[]') {
+            data.fotos.push(resto.replace(/^["']|["']$/g, ''));
+          }
+          return;
+        }
+
+        if (enFotos) {
+          if (lineaTrim.startsWith('-')) {
+            const fItem = lineaTrim.replace(/^[-\s*]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
+            if (fItem) data.fotos.push(fItem);
+            return;
+          } else if (lineaTrim.startsWith('foto:') || lineaTrim.startsWith('url:')) {
+            const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
+            if (fItem) data.fotos.push(fItem);
+            return;
+          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
+            enFotos = false;
+          }
+        }
+
+        // Detección de propiedades normales
+        const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
+        if (matchClave) {
+          claveActual = matchClave[1];
+          let val = matchClave[2].trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          data[claveActual] = (val === '>' || val === '|' || val === '>-' || val === '|-') ? '' : val;
+        } else if (claveActual && !enFotos) {
+          // Captura todo el texto multilínea sin cortes
+          const textoContinuacion = lineaTrim.replace(/^["']|["']$/g, '');
+          data[claveActual] = data[claveActual] ? (data[claveActual] + ' ' + textoContinuacion) : textoContinuacion;
+        }
+      });
+
+      if (!data.descripcion && cuerpoMarkdown) {
+        data.descripcion = cuerpoMarkdown;
+      }
+
+      data.precio = parseFloat(data.precio) || 0;
+      return data;
+    }
+
     async function cargarCatalogo() {
       try {
-        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos');
+        // Se añade timestamp (?t=...) para saltar cualquier memoria caché de GitHub
+        const cacheBuster = '?t=' + new Date().getTime();
+        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         const archivos = await res.json();
+        
         if (Array.isArray(archivos)) {
           const promesas = archivos
             .filter(f => f.name.endsWith('.md'))
-            .map(f => fetch(f.download_url).then(r => r.text()));
+            .map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
           const contenidos = await Promise.all(promesas);
           
-          const productosCMS = contenidos.map(texto => {
-            const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
-            if (!match) return null;
-            const yaml = match[1];
-            const data = {};
-            yaml.split('\n').forEach(line => {
-              const colon = line.indexOf(':');
-              if (colon > 0) {
-                const key = line.slice(0, colon).trim();
-                let val = line.slice(colon + 1).trim();
-                if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-                  val = val.slice(1, -1);
-                }
-                data[key] = val;
-              }
-            });
-
-            data.precio = parseFloat(data.precio) || 0;
-
-            if (data.imagen) {
-              if (data.imagen.startsWith('http')) {
-              } else if (data.imagen.startsWith('img/uploads/')) {
-              } else {
-                data.imagen = 'img/uploads/' + data.imagen.replace(/^.*[\\\/]/, '');
-              }
-            } else {
-              data.imagen = 'logo.jpg';
-            }
-            return data;
-          }).filter(Boolean);
-
+          const productosCMS = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
           todosLosProductos = [...productosCMS, ...productosBase];
         } else {
           todosLosProductos = productosBase;
