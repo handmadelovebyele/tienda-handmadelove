@@ -179,31 +179,32 @@
       line-height: 1;
     }
 
-    /* Hero de Categoría */
+    /* Hero de Categoría (Banner Promocional Dinámico) */
     .categoria-hero {
-      background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('img/uploads/velas-varias.jpg') center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url('img/uploads/velas-varias.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
-      padding: 5rem 1.5rem 4rem;
+      padding: 4.5rem 1.5rem 3.5rem;
       margin-bottom: 2rem;
+      transition: background 0.5s ease;
     }
     .categoria-hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 5px rgba(0,0,0,0.4);
     }
     .categoria-hero p {
       max-width: 650px;
       margin: 0 auto;
-      font-size: 1.05rem;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      font-size: 1rem;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
 
     /* Pestañas de Subcategorías */
     .subcat-container {
       max-width: 1100px;
-      margin: 0 auto 2rem auto;
+      margin: 0 auto 1.5rem auto;
       padding: 0 1.5rem;
       display: flex;
       justify-content: center;
@@ -214,9 +215,9 @@
       background: #fff;
       border: 1px solid #ebdcd5;
       color: var(--text-main);
-      padding: 8px 18px;
+      padding: 7px 16px;
       border-radius: 20px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
@@ -228,26 +229,27 @@
       border-color: var(--brand-red);
     }
 
+    /* Cuadrícula con 3 a 4 productos por fila en pantallas de escritorio */
     .catalogo-section {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto 3rem auto;
       padding: 0 1.5rem;
       width: 100%;
     }
     .grid-productos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
       width: 100%;
     }
     .card {
       background: #fff;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      height: 420px;
+      height: 360px;
       cursor: pointer;
       transition: transform 0.3s;
     }
@@ -256,31 +258,32 @@
     }
     .card img {
       width: 100%;
-      height: 200px;
+      height: 160px;
       object-fit: cover;
     }
     .card-body {
-      padding: 1.1rem;
+      padding: 0.9rem;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
     }
     .card-title {
-      font-size: 1.05rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .card-desc {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      line-height: 1.4;
     }
     .card-footer {
       display: flex;
@@ -290,16 +293,16 @@
     }
     .card-price {
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--brand-red);
     }
     .card-btn {
       background-color: var(--brand-red);
       color: white;
       border: none;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       cursor: pointer;
     }
     .card-btn:hover {
@@ -799,7 +802,7 @@
         display: block;
       }
       .categoria-hero h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       .product-modal-content {
         grid-template-columns: 1fr;
@@ -872,10 +875,10 @@
     </nav>
   </header>
 
-  <!-- Hero de la Categoría -->
-  <section class="categoria-hero">
-    <h1>Velas Aromáticas Artesanales</h1>
-    <p>Elaboradas con cera de soya botánica, fragancias premium y decoradas cuidadosamente con detalles florales hechos a mano.</p>
+  <!-- Hero / Banner Dinámico de Velas -->
+  <section class="categoria-hero" id="banner-categoria">
+    <h1 id="banner-titulo">Velas Aromáticas Artesanales</h1>
+    <p id="banner-desc">Elaboradas con cera de soya botánica, fragancias premium y decoradas cuidadosamente con detalles florales hechos a mano.</p>
   </section>
 
   <!-- Pestañas dinámicas de Subcategorías -->
@@ -975,7 +978,7 @@
     </div>
   </div>
 
-  <!-- Footer Completo -->
+  <!-- Footer -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -1385,10 +1388,9 @@
       }).join('');
     }
 
-    // Filtrado por subcategorías
-    function filtrarSubcat(sub) {
+    function filtrarSubcat(sub, btnElement) {
       document.querySelectorAll('.subcat-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
+      if (btnElement) btnElement.classList.add('active');
 
       if (sub === 'todas') {
         render(todasLasVelas);
@@ -1398,7 +1400,6 @@
       }
     }
 
-    // Generador automático de botones de subcategoría
     function construirBotonesSubcategorias() {
       const cont = document.getElementById('subcat-container');
       if (!cont) return;
@@ -1410,11 +1411,10 @@
         }
       });
 
-      // Si hay al menos una subcategoría definida, se muestran los botones de filtro
       if (subcategoriasUnicas.size > 0) {
-        let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas')">Todas las Velas</button>`;
+        let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas', this)">Todas las Velas</button>`;
         subcategoriasUnicas.forEach(sub => {
-          htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}')">${sub}</button>`;
+          htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`;
         });
         cont.innerHTML = htmlBotones;
       } else {
@@ -1483,9 +1483,36 @@
       return data;
     }
 
+    // Carga de configuración del banner desde Decap CMS
+    async function cargarBannerVelas(cacheBuster) {
+      try {
+        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/banners' + cacheBuster);
+        const archivos = await res.json();
+        if (Array.isArray(archivos)) {
+          const archivoVelas = archivos.find(f => f.name.toLowerCase().includes('velas'));
+          if (archivoVelas) {
+            const texto = await fetch(archivoVelas.download_url + cacheBuster).then(r => r.text());
+            const data = parsearMarkdownCompleto(texto);
+            if (data) {
+              if (data.titulo) document.getElementById('banner-titulo').textContent = data.titulo;
+              if (data.descripcion) document.getElementById('banner-desc').textContent = data.descripcion;
+              if (data.imagen) {
+                const fondoUrl = normalizarRutaImagen(data.imagen);
+                document.getElementById('banner-categoria').style.background = `linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url('${fondoUrl}') center/cover no-repeat`;
+              }
+            }
+          }
+        }
+      } catch (err) {
+        // Mantiene el diseño por defecto si aún no se ha creado un banner
+      }
+    }
+
     async function cargarCatalogoVelas() {
       try {
         const cacheBuster = '?t=' + new Date().getTime();
+        await cargarBannerVelas(cacheBuster);
+
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         const archivos = await res.json();
         
@@ -1496,7 +1523,6 @@
           const contenidos = await Promise.all(promesas);
           
           const productosCMS = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-          // Filtrar solo productos cuya categoría sea Velas
           todasLasVelas = productosCMS.filter(p => (p.categoria || '').toLowerCase().includes('vela'));
         } else {
           todasLasVelas = [];
