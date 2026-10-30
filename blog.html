@@ -448,8 +448,8 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      min-height: 120px;
-      max-height: 250px;
+      min-height: 110px;
+      max-height: 230px;
       overflow-y: auto;
       margin-bottom: 14px;
       border: 1px solid #ebdcd5;
@@ -526,7 +526,7 @@
       font-size: 0.9rem;
     }
 
-    /* Acordeón de Datos */
+    /* Pestaña Acordeón Desplegable para Datos Requeridos */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -566,7 +566,10 @@
       font-weight: 600;
       color: var(--text-main);
     }
-    .caja-entrega input {
+    .caja-entrega label span.req {
+      color: var(--brand-red);
+    }
+    .caja-entrega input, .caja-entrega select {
       padding: 0.55rem 0.8rem;
       border-radius: 8px;
       border: 1px solid #d5c8be;
@@ -575,7 +578,7 @@
       outline: none;
       width: 100%;
     }
-    .caja-entrega input:focus {
+    .caja-entrega input:focus, .caja-entrega select:focus {
       border-color: var(--brand-red);
     }
 
@@ -873,7 +876,7 @@
   <!-- Hero Categoría -->
   <section class="categoria-hero" id="banner-blog">
     <h1 id="banner-titulo">Blog, Técnicas & Procesos</h1>
-    <p id="banner-desc">Descubre el detrás de escena de cada pieza, guías paso a paso y patrones descargables para crear con el corazón[cite: 1].</p>
+    <p id="banner-desc">Descubre el detrás de escena de cada pieza, guías paso a paso y patrones descargables para crear con el corazón.</p>
   </section>
 
   <!-- Pestañas de Subcategorías -->
@@ -899,12 +902,12 @@
       <!-- Descarga de Archivo Adicional (PDF) -->
       <div class="article-download-box" id="modal-art-download" style="display: none;">
         <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 10px; color: var(--brand-red);">📄 Material Adicional Disponible</p>
-        <a href="#" id="modal-art-btn-download" target="_blank" class="btn-download-pdf">Descargar Guía / Patrón en PDF[cite: 1]</a>
+        <a href="#" id="modal-art-btn-download" target="_blank" class="btn-download-pdf">Descargar Guía / Patrón en PDF</a>
       </div>
     </div>
   </div>
 
-  <!-- Modal Carrito -->
+  <!-- Modal Carrito con Validación Requerida -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -918,27 +921,39 @@
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
 
-      <!-- Acordeón Desplegable -->
+      <!-- Botón Acordeón Desplegable -->
       <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
-        <span>📝 Ingresar datos de entrega</span>
+        <span>📝 Datos para la Entrega y Pedido</span>
         <span id="flecha-acordeon">▾</span>
       </button>
 
+      <!-- Campos de Entrega Requeridos -->
       <div class="caja-entrega" id="caja-formulario-entrega">
-        <label for="input-nombre">Tu Nombre:</label>
-        <input type="text" id="input-nombre" placeholder="Nombre y Apellido">
-        <label for="input-telefono">Celular / WhatsApp:</label>
-        <input type="tel" id="input-telefono" placeholder="Ej: 0980526007">
-        <label for="input-correo">Correo Electrónico:</label>
-        <input type="email" id="input-correo" placeholder="correo@ejemplo.com">
-        <label for="input-ubicacion">Sector o Ciudad:</label>
-        <input type="text" id="input-ubicacion" placeholder="Ej: Samborondón, Daule, Guayaquil, etc.">
+        <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
+        <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
+          <option value="envio">Envío a Domicilio (Por cotizar)</option>
+          <option value="retiro">Retiro en Taller (Almax Center, Samborondón)</option>
+        </select>
+
+        <label for="input-nombre">Tu Nombre y Apellido: <span class="req">*</span></label>
+        <input type="text" id="input-nombre" placeholder="Ej: María Pérez" required>
+
+        <label for="input-telefono">Celular / WhatsApp: <span class="req">*</span></label>
+        <input type="tel" id="input-telefono" placeholder="Ej: 0980526007" required>
+
+        <label for="input-correo">Correo Electrónico: <span class="req">*</span></label>
+        <input type="email" id="input-correo" placeholder="correo@ejemplo.com" required>
+
+        <div id="campo-sector-entrega">
+          <label for="input-ubicacion">Sector o Dirección de Entrega: <span class="req">*</span></label>
+          <input type="text" id="input-ubicacion" placeholder="Ej: Samborondón, Daule, Ceibos, Guayaquil, etc.">
+        </div>
       </div>
 
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
-        <div><span>Envío:</span> <span class="envio-nota">Por cotizar según dirección</span></div>
+        <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
 
       <div class="carrito-total">
@@ -1048,6 +1063,19 @@
       } else {
         caja.classList.add('abierta');
         flecha.textContent = '▴';
+      }
+    }
+
+    function cambiarModalidadEntrega() {
+      const modalidad = document.getElementById('select-modalidad').value;
+      const campoSector = document.getElementById('campo-sector-entrega');
+      const resumenTexto = document.getElementById('resumen-envio-texto');
+      if (modalidad === 'retiro') {
+        campoSector.style.display = 'none';
+        resumenTexto.textContent = 'Retiro en Taller (Gratis)';
+      } else {
+        campoSector.style.display = 'block';
+        resumenTexto.textContent = 'Por cotizar según dirección';
       }
     }
 
@@ -1185,12 +1213,45 @@
       if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
 
-    function obtenerDatosCliente() {
-      const nombre = (document.getElementById('input-nombre').value || '').trim() || 'Cliente Web';
-      const telefono = (document.getElementById('input-telefono').value || '').trim() || 'Por coordinar';
-      const correo = (document.getElementById('input-correo').value || '').trim() || 'Sin registrar';
-      const ubicacion = (document.getElementById('input-ubicacion').value || '').trim() || 'Por coordinar';
-      return { nombre, telefono, correo, ubicacion };
+    // Validación y captura de datos obligatorios
+    function validarYObtenerDatosCliente() {
+      const nombre = (document.getElementById('input-nombre').value || '').trim();
+      const telefono = (document.getElementById('input-telefono').value || '').trim();
+      const correo = (document.getElementById('input-correo').value || '').trim();
+      const modalidad = document.getElementById('select-modalidad').value;
+      const ubicacion = (document.getElementById('input-ubicacion').value || '').trim();
+
+      const caja = document.getElementById('caja-formulario-entrega');
+      const flecha = document.getElementById('flecha-acordeon');
+
+      if (!nombre || !telefono || !correo || (modalidad === 'envio' && !ubicacion)) {
+        caja.classList.add('abierta');
+        flecha.textContent = '▴';
+
+        if (!nombre) {
+          alert('Por favor ingresa tu Nombre y Apellido para continuar.');
+          document.getElementById('input-nombre').focus();
+          return null;
+        }
+        if (!telefono) {
+          alert('Por favor ingresa tu número de Celular o WhatsApp para coordinar.');
+          document.getElementById('input-telefono').focus();
+          return null;
+        }
+        if (!correo || !correo.includes('@')) {
+          alert('Por favor ingresa un Correo Electrónico válido para tu comprobante.');
+          document.getElementById('input-correo').focus();
+          return null;
+        }
+        if (modalidad === 'envio' && !ubicacion) {
+          alert('Por favor ingresa tu Sector, Ciudad o Dirección de entrega para cotizar el flete.');
+          document.getElementById('input-ubicacion').focus();
+          return null;
+        }
+      }
+
+      const entregaTexto = (modalidad === 'retiro') ? 'Retiro en Taller (Almax Center)' : `Envío a domicilio (${ubicacion})`;
+      return { nombre, telefono, correo, modalidad, ubicacion, entregaTexto };
     }
 
     function procesarCompraWhatsApp() {
@@ -1199,7 +1260,8 @@
         return;
       }
 
-      const cliente = obtenerDatosCliente();
+      const cliente = validarYObtenerDatosCliente();
+      if (!cliente) return;
 
       let subtotal = 0;
       let detalleStr = "";
@@ -1212,11 +1274,17 @@
       const valorIva = subtotal * TASA_IVA;
       const totalFinal = subtotal + valorIva;
 
-      enviarBaseDatos('Compra Web (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, `[Ubicación: ${cliente.ubicacion}] ${detalleStr}`, `$${totalFinal.toFixed(2)} + Envío`);
+      // Registro en Google Sheets
+      enviarBaseDatos(
+        'Compra Web (WhatsApp)',
+        cliente.nombre,
+        cliente.telefono,
+        cliente.correo,
+        `[Entrega: ${cliente.entregaTexto}] ${detalleStr}`,
+        `$${totalFinal.toFixed(2)} ${cliente.modalidad === 'envio' ? '+ Envío por cotizar' : '(Retiro)'}`
+      );
 
-      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}*`;
-      if (cliente.telefono !== 'Por coordinar') mensaje += ` (Tel: ${cliente.telefono})`;
-      mensaje += `. Deseo realizar el siguiente pedido:%0A`;
+      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo realizar el siguiente pedido:%0A%0A`;
 
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
@@ -1226,11 +1294,13 @@
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
       mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
       mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
-      
-      if (cliente.ubicacion !== 'Por coordinar') {
-        mensaje += `%0AMi sector/ciudad para entrega es: *${cliente.ubicacion}*`;
+      mensaje += `%0AModalidad de Entrega: *${cliente.entregaTexto}*`;
+
+      if (cliente.modalidad === 'envio') {
+        mensaje += `%0A¿Me podrían cotizar el valor del envío para concretar el pago?`;
+      } else {
+        mensaje += `%0A¿Me podrían indicar los horarios disponibles para retirar en Almax Center?`;
       }
-      mensaje += `%0A¿Me podrían indicar el valor del envío y los datos para coordinar la entrega?`;
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
@@ -1240,7 +1310,9 @@
         alert('Tu carrito está vacío.');
         return;
       }
-      const cliente = obtenerDatosCliente();
+
+      const cliente = validarYObtenerDatosCliente();
+      if (!cliente) return;
 
       let subtotal = 0;
       let detalleStr = "";
@@ -1252,9 +1324,17 @@
 
       const totalFinal = subtotal + (subtotal * TASA_IVA);
 
-      enviarBaseDatos('Solicitud Link Payphone (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, `[Ubicación: ${cliente.ubicacion}] ${detalleStr}`, `$${totalFinal.toFixed(2)} + Envío`);
+      // Registro en Google Sheets
+      enviarBaseDatos(
+        'Solicitud Link Payphone (WhatsApp)',
+        cliente.nombre,
+        cliente.telefono,
+        cliente.correo,
+        `[Entrega: ${cliente.entregaTexto}] ${detalleStr}`,
+        `$${totalFinal.toFixed(2)} ${cliente.modalidad === 'envio' ? '+ Envío por cotizar' : '(Retiro)'}`
+      );
 
-      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}*. Deseo pagar con *Tarjeta de Crédito/Débito (Payphone)* el siguiente pedido:%0A`;
+      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo pagar con *Tarjeta de Crédito/Débito (Payphone)*:%0A%0A`;
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
         mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
@@ -1263,11 +1343,13 @@
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
       mensaje += `%0AIVA (15%): $${(subtotal * TASA_IVA).toFixed(2)}`;
       mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
+      mensaje += `%0AModalidad: *${cliente.entregaTexto}*%0A`;
 
-      if (cliente.ubicacion !== 'Por coordinar') {
-        mensaje += `%0AMi sector/ciudad de entrega es: *${cliente.ubicacion}*`;
+      if (cliente.modalidad === 'envio') {
+        mensaje += `¿Me podrían cotizar el valor del envío y enviarme el link de cobro cerrado de Payphone con el total incluido?`;
+      } else {
+        mensaje += `¿Me podrían enviar el link de Payphone por este valor para realizar el pago?`;
       }
-      mensaje += `%0A¿Me podrían cotizar el valor del envío y enviarme el link de Payphone con el total incluido?`;
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
