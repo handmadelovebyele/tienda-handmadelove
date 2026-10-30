@@ -413,17 +413,18 @@
       background-color: var(--brand-red-dark);
     }
 
-    /* Talleres Dinámicos */
+    /* Talleres Dinámicos en 3 Columnas */
     .talleres-section {
       max-width: 1100px;
-      margin: 0 auto 2.5rem auto;
+      margin: 0 auto 3rem auto;
       padding: 0 1.5rem;
       width: 100%;
     }
     .talleres-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(290px, 340px));
       gap: 1.8rem;
+      justify-content: center;
       width: 100%;
     }
     .taller-card {
@@ -433,6 +434,7 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
+      height: 480px;
       transition: transform 0.3s;
     }
     .taller-card:hover {
@@ -440,17 +442,18 @@
     }
     .taller-card img {
       width: 100%;
-      height: 180px;
+      height: 190px;
       object-fit: cover;
+      background-color: #f7f2ed;
     }
     .taller-card-body {
-      padding: 1.3rem;
+      padding: 1.1rem;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
     }
     .taller-tag {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--brand-red);
       text-transform: uppercase;
@@ -458,43 +461,64 @@
       margin-bottom: 4px;
     }
     .taller-title {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      line-height: 1.35;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }
     .taller-info {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+    }
+    .taller-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 6px 0 10px 0;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      line-height: 1.45;
     }
     .taller-cupos {
       display: inline-block;
       background: #fdf2f2;
       color: var(--brand-red);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       padding: 3px 10px;
       border-radius: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       align-self: flex-start;
+    }
+    .taller-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid #f5ede6;
     }
     .taller-precio {
       font-size: 1.15rem;
       font-weight: 700;
       color: var(--brand-red);
-      margin-bottom: 12px;
     }
     .btn-reservar-taller {
       background-color: var(--brand-red);
       color: white;
       border: none;
-      padding: 0.65rem 1.2rem;
+      padding: 0.55rem 1.1rem;
       border-radius: 20px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       text-align: center;
-      margin-top: auto;
       transition: background 0.2s;
     }
     .btn-reservar-taller:hover {
@@ -657,7 +681,7 @@
       font-size: 0.9rem;
     }
 
-    /* Pestaña Acordeón Desplegable para Datos Requeridos */
+    /* Acordeón de Datos Requeridos */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -803,8 +827,6 @@
       padding: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-
-    /* Modal Detalle Producto */
     .product-modal {
       position: fixed;
       top: 0;
@@ -1157,7 +1179,7 @@
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
-  <!-- Talleres Dinámicos desde Decap CMS -->
+  <!-- Talleres Dinámicos en 3 Columnas -->
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
@@ -1490,6 +1512,22 @@
       return 'img/uploads/' + r;
     }
 
+    function formatearFechaLegible(fechaRaw) {
+      if (!fechaRaw) return 'Por coordinar';
+      try {
+        const d = new Date(fechaRaw);
+        if (isNaN(d.getTime())) return fechaRaw;
+        const dia = String(d.getDate()).padStart(2, '0');
+        const mes = String(d.getMonth() + 1).padStart(2, '0');
+        const anio = d.getFullYear();
+        const horas = String(d.getHours()).padStart(2, '0');
+        const minutos = String(d.getMinutes()).padStart(2, '0');
+        return `${dia}/${mes}/${anio} - ${horas}:${minutos}`;
+      } catch (e) {
+        return fechaRaw;
+      }
+    }
+
     function agregarAlCarrito(nombre, precio, imagen) {
       const precioNumerico = parseFloat(precio) || 0;
       const fotoItem = normalizarRutaImagen(imagen);
@@ -1574,7 +1612,6 @@
       if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
 
-    // Validación y captura de datos obligatorios
     function validarYObtenerDatosCliente() {
       const nombre = (document.getElementById('input-nombre').value || '').trim();
       const telefono = (document.getElementById('input-telefono').value || '').trim();
@@ -1635,7 +1672,6 @@
       const valorIva = subtotal * TASA_IVA;
       const totalFinal = subtotal + valorIva;
 
-      // Registro en Google Sheets
       enviarBaseDatos(
         'Compra Web (WhatsApp)',
         cliente.nombre,
@@ -1685,7 +1721,6 @@
 
       const totalFinal = subtotal + (subtotal * TASA_IVA);
 
-      // Registro en Google Sheets
       enviarBaseDatos(
         'Solicitud Link Payphone (WhatsApp)',
         cliente.nombre,
@@ -1817,26 +1852,29 @@
 
       grid.innerHTML = lista.map((t) => {
         const precioNum = parseFloat(t.precio) || 0;
-        const fotoTaller = normalizarRutaImagen(t.imagen);
+        const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
         const max = parseInt(t.cupoMax) || 10;
         const ocup = parseInt(t.ocupados) || 0;
         const disponibles = Math.max(0, max - ocup);
         const textoCupos = disponibles > 0 ? `Cupos disponibles: ${disponibles}` : '¡Cupos Agotados!';
+        const fechaFormateada = formatearFechaLegible(t.fecha);
 
         return `
           <div class="taller-card">
             <img src="${fotoTaller}" alt="${t.title}" onerror="this.src='logo.jpg'">
             <div class="taller-card-body">
               <span class="taller-tag">Taller Presencial</span>
-              <h3 class="taller-title">${t.title}</h3>
-              <p class="taller-info"><strong>Fecha:</strong> ${t.fecha || 'Por coordinar'}</p>
+              <h3 class="taller-title" title="${t.title}">${t.title}</h3>
+              <p class="taller-info"><strong>Fecha:</strong> ${fechaFormateada}</p>
               <p class="taller-info"><strong>Lugar:</strong> ${t.lugar || 'Almax Center, Samborondón'}</p>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">${t.descripcion || ''}</p>
+              <p class="taller-desc">${t.descripcion || ''}</p>
               <span class="taller-cupos">${textoCupos}</span>
-              ${precioNum > 0 ? `<div class="taller-precio">$${precioNum.toFixed(2)}</div>` : ''}
-              <button type="button" class="btn-reservar-taller" onclick="agregarAlCarrito('Taller: ${t.title}', ${precioNum}, '${fotoTaller}')">
-                ${disponibles > 0 ? 'Reservar Cupo' : 'Anotarme en Lista de Espera'}
-              </button>
+              <div class="taller-footer">
+                ${precioNum > 0 ? `<div class="taller-precio">$${precioNum.toFixed(2)}</div>` : '<div></div>'}
+                <button type="button" class="btn-reservar-taller" onclick="agregarAlCarrito('Taller: ${t.title}', ${precioNum}, '${fotoTaller}')">
+                  ${disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera'}
+                </button>
+              </div>
             </div>
           </div>
         `;
