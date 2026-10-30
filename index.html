@@ -321,7 +321,7 @@
       background-color: var(--brand-red);
     }
 
-    /* Catálogo */
+    /* Catálogo de Creaciones */
     .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
@@ -413,7 +413,7 @@
       background-color: var(--brand-red-dark);
     }
 
-    /* Talleres Dinámicos en 3 Columnas */
+    /* Talleres en 3 Columnas */
     .talleres-section {
       max-width: 1100px;
       margin: 0 auto 3rem auto;
@@ -435,6 +435,7 @@
       display: flex;
       flex-direction: column;
       height: 480px;
+      cursor: pointer;
       transition: transform 0.3s;
     }
     .taller-card:hover {
@@ -546,6 +547,115 @@
       color: var(--text-muted);
       font-size: 0.92rem;
       margin-bottom: 1.4rem;
+    }
+
+    /* Modal Detalle (Productos y Talleres) */
+    .product-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      padding: 20px;
+    }
+    .product-modal.open {
+      display: flex;
+    }
+    .product-modal-content {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 780px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.8rem;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .close-product-modal {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #555;
+    }
+    .modal-gallery {
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-gallery img#modal-img-principal {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #f2ece4;
+    }
+    .modal-thumbs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      min-height: 55px;
+    }
+    .modal-thumb {
+      width: 55px;
+      height: 55px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.65;
+      transition: all 0.2s ease;
+      background: #f8f8f8;
+    }
+    .modal-thumb:hover {
+      opacity: 1;
+    }
+    .modal-thumb.active {
+      border-color: var(--brand-red);
+      opacity: 1;
+    }
+    .modal-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .modal-category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--brand-red);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .modal-title {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .modal-price {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--brand-red);
+      margin-bottom: 10px;
+    }
+    .modal-desc-box {
+      max-height: 220px;
+      overflow-y: auto;
+      padding-right: 6px;
+      margin-bottom: 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
     /* Modal Carrito */
@@ -681,7 +791,7 @@
       font-size: 0.9rem;
     }
 
-    /* Acordeón de Datos Requeridos */
+    /* Pestaña Acordeón Desplegable para Datos Requeridos */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -826,113 +936,6 @@
       border-radius: 16px;
       padding: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-    .product-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-      padding: 20px;
-    }
-    .product-modal.open {
-      display: flex;
-    }
-    .product-modal-content {
-      background: #fff;
-      border-radius: 12px;
-      max-width: 780px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 1.8rem;
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    .close-product-modal {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: #555;
-    }
-    .modal-gallery {
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-gallery img#modal-img-principal {
-      width: 100%;
-      height: 290px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #f2ece4;
-    }
-    .modal-thumbs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      min-height: 55px;
-    }
-    .modal-thumb {
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
-      border-radius: 6px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      opacity: 0.65;
-      transition: all 0.2s ease;
-      background: #f8f8f8;
-    }
-    .modal-thumb:hover {
-      opacity: 1;
-    }
-    .modal-thumb.active {
-      border-color: var(--brand-red);
-      opacity: 1;
-    }
-    .modal-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    .modal-category {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-    .modal-title {
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .modal-price {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--brand-red);
-      margin-bottom: 10px;
-    }
-    .modal-desc-box {
-      max-height: 220px;
-      overflow-y: auto;
-      padding-right: 6px;
-      margin-bottom: 16px;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
     }
 
     /* Footer */
@@ -1202,12 +1205,12 @@
     </div>
   </section>
 
-  <!-- Modal Detalle de Producto -->
+  <!-- Modal Detalle Compartido (Productos y Talleres) -->
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
       <div class="modal-gallery">
-        <img id="modal-img-principal" src="" alt="Producto">
+        <img id="modal-img-principal" src="" alt="Detalle">
         <div class="modal-thumbs" id="modal-galeria-thumbs"></div>
       </div>
       <div class="modal-details">
@@ -1267,12 +1270,12 @@
 
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
-        <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
+        <div><span>IVA Productos (15%):</span> <span id="cart-iva">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
 
       <div class="carrito-total">
-        <span>TOTAL PRODUCTOS:</span>
+        <span>TOTAL COMPRA:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
 
@@ -1528,7 +1531,8 @@
       }
     }
 
-    function agregarAlCarrito(nombre, precio, imagen) {
+    // Agregar al carrito distinguiendo si es Taller (IVA 0%) o Producto Físico (IVA 15%)
+    function agregarAlCarrito(nombre, precio, imagen, esTaller = false) {
       const precioNumerico = parseFloat(precio) || 0;
       const fotoItem = normalizarRutaImagen(imagen);
       const encontrado = carrito.find(item => item.nombre === nombre);
@@ -1537,7 +1541,7 @@
         encontrado.cantidad += 1;
         if (!encontrado.imagen && fotoItem) encontrado.imagen = fotoItem;
       } else {
-        carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem });
+        carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem, esTaller: !!esTaller });
       }
 
       guardarCarrito();
@@ -1578,12 +1582,21 @@
         return;
       }
 
-      let subtotal = 0;
+      let subtotalGeneral = 0;
+      let baseImponibleProductos = 0;
+
       if (lista) {
         lista.innerHTML = carrito.map((item, index) => {
           const precioItem = parseFloat(item.precio) || 0;
           const totalLinea = precioItem * item.cantidad;
-          subtotal += totalLinea;
+          subtotalGeneral += totalLinea;
+
+          // Si NO es taller (es producto), suma a la base de IVA
+          const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
+          if (!esItemTaller) {
+            baseImponibleProductos += totalLinea;
+          }
+
           const miniatura = item.imagen || 'logo.jpg';
           return `
             <div class="item-carrito">
@@ -1591,7 +1604,7 @@
                 <img src="${miniatura}" alt="${item.nombre}" class="item-thumb-carrito" onerror="this.src='logo.jpg'">
                 <div class="item-info">
                   <strong title="${item.nombre}">${item.nombre}</strong>
-                  <span>$${totalLinea.toFixed(2)}</span>
+                  <span>$${totalLinea.toFixed(2)} ${esItemTaller ? '<small style="color:#2e7d32; font-size:0.75rem;">(IVA 0%)</small>' : ''}</span>
                 </div>
               </div>
               <div class="item-controls">
@@ -1604,10 +1617,11 @@
         }).join('');
       }
 
-      const valorIva = subtotal * TASA_IVA;
-      const totalDefinitivo = subtotal + valorIva;
+      // IVA calculado ÚNICAMENTE sobre productos físicos
+      const valorIva = baseImponibleProductos * TASA_IVA;
+      const totalDefinitivo = subtotalGeneral + valorIva;
 
-      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      if (subtotalEl) subtotalEl.textContent = `$${subtotalGeneral.toFixed(2)}`;
       if (ivaEl) ivaEl.textContent = `$${valorIva.toFixed(2)}`;
       if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
     }
@@ -1661,16 +1675,24 @@
       const cliente = validarYObtenerDatosCliente();
       if (!cliente) return;
 
-      let subtotal = 0;
+      let subtotalGeneral = 0;
+      let baseImponibleProductos = 0;
       let detalleStr = "";
+
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
-        detalleStr += `${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}; `;
-        subtotal += pVal * item.cantidad;
+        const totalLinea = pVal * item.cantidad;
+        detalleStr += `${item.nombre} (x${item.cantidad}) - $${totalLinea.toFixed(2)}; `;
+        subtotalGeneral += totalLinea;
+
+        const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
+        if (!esItemTaller) {
+          baseImponibleProductos += totalLinea;
+        }
       });
 
-      const valorIva = subtotal * TASA_IVA;
-      const totalFinal = subtotal + valorIva;
+      const valorIva = baseImponibleProductos * TASA_IVA;
+      const totalFinal = subtotalGeneral + valorIva;
 
       enviarBaseDatos(
         'Compra Web (WhatsApp)',
@@ -1685,18 +1707,19 @@
 
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
-        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
+        const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
+        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}${esItemTaller ? ' (Taller 0% IVA)' : ''}%0A`;
       });
 
-      mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
-      mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
-      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
+      mensaje += `%0ASubtotal: $${subtotalGeneral.toFixed(2)}`;
+      mensaje += `%0AIVA Productos (15%): $${valorIva.toFixed(2)}`;
+      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
       mensaje += `%0AModalidad de Entrega: *${cliente.entregaTexto}*`;
 
       if (cliente.modalidad === 'envio') {
         mensaje += `%0A¿Me podrían cotizar el valor del envío para concretar el pago?`;
       } else {
-        mensaje += `%0A¿Me podrían indicar los horarios disponibles para retirar en Almax Center?`;
+        mensaje += `%0A¿Me podrían indicar los horarios disponibles para coordinar la entrega o asistencia a taller?`;
       }
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
@@ -1711,15 +1734,24 @@
       const cliente = validarYObtenerDatosCliente();
       if (!cliente) return;
 
-      let subtotal = 0;
+      let subtotalGeneral = 0;
+      let baseImponibleProductos = 0;
       let detalleStr = "";
+
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
+        const totalLinea = pVal * item.cantidad;
         detalleStr += `${item.nombre} (x${item.cantidad}); `;
-        subtotal += pVal * item.cantidad;
+        subtotalGeneral += totalLinea;
+
+        const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
+        if (!esItemTaller) {
+          baseImponibleProductos += totalLinea;
+        }
       });
 
-      const totalFinal = subtotal + (subtotal * TASA_IVA);
+      const valorIva = baseImponibleProductos * TASA_IVA;
+      const totalFinal = subtotalGeneral + valorIva;
 
       enviarBaseDatos(
         'Solicitud Link Payphone (WhatsApp)',
@@ -1736,9 +1768,9 @@
         mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
       });
 
-      mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
-      mensaje += `%0AIVA (15%): $${(subtotal * TASA_IVA).toFixed(2)}`;
-      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
+      mensaje += `%0ASubtotal: $${subtotalGeneral.toFixed(2)}`;
+      mensaje += `%0AIVA Productos (15%): $${valorIva.toFixed(2)}`;
+      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
       mensaje += `%0AModalidad: *${cliente.entregaTexto}*%0A`;
 
       if (cliente.modalidad === 'envio') {
@@ -1758,6 +1790,7 @@
       document.getElementById('modal-banco').classList.remove('open');
     }
 
+    // Modal de Detalle de Producto
     function abrirModalProducto(index) {
       const p = todosLosProductos[index];
       if (!p) return;
@@ -1801,9 +1834,45 @@
       }
 
       const btnComprar = document.getElementById('modal-btn-comprar');
+      btnComprar.textContent = '+ Agregar al Carrito';
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(p.title, p.precio, portada);
+        agregarAlCarrito(p.title, p.precio, portada, false);
+      };
+
+      document.getElementById('modal-producto').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Modal de Detalle de Taller
+    function abrirModalTaller(index) {
+      const t = todosLosTalleres[index];
+      if (!t) return;
+
+      const precioNum = parseFloat(t.precio) || 0;
+      const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
+      const max = parseInt(t.cupoMax) || 10;
+      const ocup = parseInt(t.ocupados) || 0;
+      const disponibles = Math.max(0, max - ocup);
+      const fechaTexto = formatearFechaLegible(t.fecha);
+
+      document.getElementById('modal-categoria').textContent = 'Taller Presencial EMOCION-ARTE';
+      document.getElementById('modal-titulo').textContent = t.title || 'Taller';
+      document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)} (IVA 0%)` : 'Gratuito';
+
+      let descripcionDetallada = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
+      document.getElementById('modal-descripcion').textContent = descripcionDetallada;
+
+      const imgPrincipal = document.getElementById('modal-img-principal');
+      const thumbsContainer = document.getElementById('modal-galeria-thumbs');
+      imgPrincipal.src = fotoTaller;
+      thumbsContainer.innerHTML = '';
+
+      const btnComprar = document.getElementById('modal-btn-comprar');
+      btnComprar.textContent = disponibles > 0 ? 'Reservar Cupo (IVA 0%)' : 'Lista de Espera';
+      btnComprar.onclick = (e) => {
+        e.stopPropagation();
+        agregarAlCarrito(`Taller: ${t.title}`, precioNum, fotoTaller, true);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -1834,7 +1903,7 @@
               <p class="card-desc">${p.descripcion || ''}</p>
               <div class="card-footer">
                 <span class="card-price">$${precioNum.toFixed(2)}</span>
-                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}')">+ Agregar</button>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}', false)">+ Agregar</button>
               </div>
             </div>
           </div>
@@ -1850,7 +1919,7 @@
         return;
       }
 
-      grid.innerHTML = lista.map((t) => {
+      grid.innerHTML = lista.map((t, index) => {
         const precioNum = parseFloat(t.precio) || 0;
         const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
         const max = parseInt(t.cupoMax) || 10;
@@ -1860,7 +1929,7 @@
         const fechaFormateada = formatearFechaLegible(t.fecha);
 
         return `
-          <div class="taller-card">
+          <div class="taller-card" onclick="abrirModalTaller(${index})">
             <img src="${fotoTaller}" alt="${t.title}" onerror="this.src='logo.jpg'">
             <div class="taller-card-body">
               <span class="taller-tag">Taller Presencial</span>
@@ -1871,7 +1940,7 @@
               <span class="taller-cupos">${textoCupos}</span>
               <div class="taller-footer">
                 ${precioNum > 0 ? `<div class="taller-precio">$${precioNum.toFixed(2)}</div>` : '<div></div>'}
-                <button type="button" class="btn-reservar-taller" onclick="agregarAlCarrito('Taller: ${t.title}', ${precioNum}, '${fotoTaller}')">
+                <button type="button" class="btn-reservar-taller" onclick="event.stopPropagation(); agregarAlCarrito('Taller: ${t.title}', ${precioNum}, '${fotoTaller}', true)">
                   ${disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera'}
                 </button>
               </div>
