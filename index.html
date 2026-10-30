@@ -321,7 +321,7 @@
       background-color: var(--brand-red);
     }
 
-    /* Catálogo Destacado */
+    /* Catálogo Destacado - Cuadrícula Compacta de 3 Columnas */
     .catalogo-section {
       max-width: 1100px;
       margin: 0 auto;
@@ -343,15 +343,16 @@
     }
     .grid-productos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
       gap: 1.8rem;
+      justify-content: center;
       width: 100%;
     }
     .card {
       background: #fff;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
       height: 440px;
@@ -431,7 +432,7 @@
     }
     .talleres-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 340px));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
       gap: 1.8rem;
       justify-content: center;
       width: 100%;
@@ -558,7 +559,7 @@
       margin-bottom: 1.4rem;
     }
 
-    /* Modal Detalle Compartido */
+    /* Modal Detalle */
     .product-modal {
       position: fixed;
       top: 0;
@@ -815,7 +816,7 @@
       font-size: 0.9rem;
     }
 
-    /* Pestaña Acordeón Desplegable */
+    /* Acordeón de Datos */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -1495,9 +1496,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tipo, nombre, telefono, correo, detalle, total })
         });
-      } catch (err) {
-        console.error("Error al registrar en Google Sheet", err);
-      }
+      } catch (err) {}
     }
 
     function suscribirNewsletter(e) {
@@ -1529,7 +1528,6 @@
       if (modal) modal.classList.toggle('oculto');
     }
 
-    // Normalizador exacto idéntico al de las páginas de categorías
     function normalizarRutaImagen(ruta) {
       if (!ruta) return 'logo.jpg';
       let r = String(ruta).trim().replace(/^["']|["']$/g, '');
@@ -1903,7 +1901,7 @@
     }
 
     function obtenerUrlCategoria(cat) {
-      const c = (cat || '').toLowerCase();
+      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       if (c.includes('vela')) return 'velas.html';
       if (c.includes('bisuteria') || c.includes('joya') || c.includes('pulsera')) return 'bisuteria.html';
       if (c.includes('bordad')) return 'bordado.html';
@@ -1980,7 +1978,6 @@
       }).join('');
     }
 
-    // Parser idéntico al que usan velas.html, bisuteria.html y crochet.html
     function parsearMarkdownCompleto(texto) {
       if (!texto) return null;
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
@@ -2039,7 +2036,8 @@
         data.descripcion = cuerpoMarkdown;
       }
 
-      data.precio = parseFloat(data.precio) || 0;
+      data.title = data.title || data.nombre || 'Creación';
+      data.precio = parseFloat(data.precio || data.price || 0) || 0;
       data.imagen = data.imagen || data.foto || (data.fotos && data.fotos[0]) || '';
       return data;
     }
@@ -2061,19 +2059,21 @@
       renderTalleres(todosLosTalleres);
     }
 
+    // Clasificador sin sesgo de mayúsculas ni tildes
     function extraerDestacadosPorCategoria(productos) {
       if (!Array.isArray(productos) || productos.length === 0) return [];
       const mapa = new Map();
 
       productos.forEach(p => {
-        let cat = (p.categoria || '').trim().toLowerCase();
+        const cat = (p.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const tit = (p.title || '').toLowerCase();
         let grupo = null;
 
-        if (cat.includes('vela')) grupo = 'Velas';
-        else if (cat.includes('bisuteria') || cat.includes('joya') || cat.includes('pulsera')) grupo = 'Bisutería';
-        else if (cat.includes('crochet') || cat.includes('tejido') || cat.includes('bolso')) grupo = 'Crochet';
-        else if (cat.includes('bordad')) grupo = 'Bordado';
-        else if (cat.includes('pintur')) grupo = 'Pintura';
+        if (cat.includes('vela') || tit.includes('vela')) grupo = 'Velas';
+        else if (cat.includes('bisuteria') || cat.includes('joya') || cat.includes('pulsera') || tit.includes('pulsera')) grupo = 'Bisutería';
+        else if (cat.includes('crochet') || cat.includes('tejido') || cat.includes('bolso') || tit.includes('bolso')) grupo = 'Crochet';
+        else if (cat.includes('bordad') || tit.includes('bordad')) grupo = 'Bordado';
+        else if (cat.includes('pintur') || tit.includes('pintur')) grupo = 'Pintura';
 
         if (grupo && !mapa.has(grupo)) {
           p.categoria = grupo;
@@ -2087,10 +2087,8 @@
     async function cargarCatalogo() {
       const cacheBuster = '?t=' + new Date().getTime();
       
-      // 1. Cargar talleres
       cargarTalleres(cacheBuster);
 
-      // 2. Cargar productos desde contenido/productos
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         if (res.ok) {
@@ -2110,9 +2108,7 @@
             }
           }
         }
-      } catch (err) {
-        console.warn("Sincronizando productos...");
-      }
+      } catch (err) {}
 
       actualizarCarrito();
     }
