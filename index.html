@@ -558,7 +558,7 @@
       margin-bottom: 1.4rem;
     }
 
-    /* Modal Detalle Compartido (Productos y Talleres) */
+    /* Modal Detalle Compartido */
     .product-modal {
       position: fixed;
       top: 0;
@@ -1197,7 +1197,7 @@
     </div>
   </section>
 
-  <!-- Catálogo Destacado (1 Pieza por Categoría con su foto real) -->
+  <!-- Catálogo Destacado (1 Pieza por Categoría) -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
@@ -1529,7 +1529,7 @@
       if (modal) modal.classList.toggle('oculto');
     }
 
-    // Normalizador que conserva enlaces completos de internet y busca fotos en img/uploads
+    // Normalizador exacto idéntico al de las páginas de categorías
     function normalizarRutaImagen(ruta) {
       if (!ruta) return 'logo.jpg';
       let r = String(ruta).trim().replace(/^["']|["']$/g, '');
@@ -1980,11 +1980,10 @@
       }).join('');
     }
 
-    // Parser YAML que extrae directamente la foto real de cada producto
+    // Parser idéntico al que usan velas.html, bisuteria.html y crochet.html
     function parsearMarkdownCompleto(texto) {
       if (!texto) return null;
-      const textoLimpio = texto.replace(/^\s+/, '');
-      const match = textoLimpio.match(/^---([\s\S]*?)---([\s\S]*)$/);
+      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
       
       const frontmatter = match[1];
@@ -1994,56 +1993,54 @@
       let claveActual = null;
       let enFotos = false;
 
-      const clavesValidas = ['title', 'nombre', 'name', 'fecha', 'lugar', 'precio', 'price', 'cupoMax', 'ocupados', 'descripcion', 'description', 'imagen', 'image', 'foto', 'fotos', 'categoria', 'category', 'subcategoria', 'date', 'body', 'archivo'];
-
       lineas.forEach(line => {
-        const lineaSinEspacios = line.trim();
-        if (!lineaSinEspacios) {
-          if (claveActual && !enFotos) {
-            data[claveActual] = (data[claveActual] || '') + '\n';
-          }
-          return;
-        }
+        const lineaTrim = line.trim();
+        if (!lineaTrim) return;
 
-        const matchClavePrincipal = line.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
-        if (matchClavePrincipal && clavesValidas.includes(matchClavePrincipal[1])) {
-          claveActual = matchClavePrincipal[1];
-          enFotos = (claveActual === 'fotos');
-          let val = matchClavePrincipal[2].trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
+        if (lineaTrim.startsWith('fotos:')) {
+          enFotos = true;
+          claveActual = 'fotos';
+          const resto = lineaTrim.replace('fotos:', '').trim();
+          if (resto && !resto.startsWith('-') && resto !== '[]') {
+            data.fotos.push(resto.replace(/^["']|["']$/g, ''));
           }
-          data[claveActual] = (val === '>' || val === '|' || val === '>-' || val === '|-') ? '' : val;
           return;
         }
 
         if (enFotos) {
-          if (lineaSinEspacios.startsWith('-')) {
-            const fItem = lineaSinEspacios.replace(/^[-\s*]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
+          if (lineaTrim.startsWith('-')) {
+            const fItem = lineaTrim.replace(/^[-\s*]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
             if (fItem) data.fotos.push(fItem);
+            return;
+          } else if (lineaTrim.startsWith('foto:') || lineaTrim.startsWith('url:')) {
+            const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
+            if (fItem) data.fotos.push(fItem);
+            return;
+          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
+            enFotos = false;
           }
-          return;
         }
 
-        if (claveActual) {
-          const textoLinea = line.replace(/^\s{1,4}/, '').replace(/^["']|["']$/g, '');
-          if (data[claveActual]) {
-            data[claveActual] += '\n' + textoLinea;
-          } else {
-            data[claveActual] = textoLinea;
+        const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
+        if (matchClave) {
+          claveActual = matchClave[1];
+          let val = matchClave[2].trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
           }
+          data[claveActual] = (val === '>' || val === '|' || val === '>-' || val === '|-') ? '' : val;
+        } else if (claveActual && !enFotos) {
+          const textoContinuacion = lineaTrim.replace(/^["']|["']$/g, '');
+          data[claveActual] = data[claveActual] ? (data[claveActual] + '\n' + textoContinuacion) : textoContinuacion;
         }
       });
-
-      data.title = data.title || data.nombre || data.name || 'Creación Artesanal';
-      data.precio = parseFloat(data.precio || data.price || 0) || 0;
-      data.categoria = data.categoria || data.category || '';
-      data.imagen = data.imagen || data.image || data.foto || (data.fotos && data.fotos[0]) || '';
 
       if (!data.descripcion && cuerpoMarkdown) {
         data.descripcion = cuerpoMarkdown;
       }
 
+      data.precio = parseFloat(data.precio) || 0;
+      data.imagen = data.imagen || data.foto || (data.fotos && data.fotos[0]) || '';
       return data;
     }
 
@@ -2064,11 +2061,9 @@
       renderTalleres(todosLosTalleres);
     }
 
-    // Extrae exactamente 1 producto representativo por categoría desde tus archivos reales
     function extraerDestacadosPorCategoria(productos) {
       if (!Array.isArray(productos) || productos.length === 0) return [];
       const mapa = new Map();
-      const sinCategoria = [];
 
       productos.forEach(p => {
         let cat = (p.categoria || '').trim().toLowerCase();
@@ -2080,31 +2075,22 @@
         else if (cat.includes('bordad')) grupo = 'Bordado';
         else if (cat.includes('pintur')) grupo = 'Pintura';
 
-        if (grupo) {
-          if (!mapa.has(grupo)) {
-            p.categoria = grupo;
-            mapa.set(grupo, p);
-          }
-        } else {
-          sinCategoria.push(p);
+        if (grupo && !mapa.has(grupo)) {
+          p.categoria = grupo;
+          mapa.set(grupo, p);
         }
       });
 
-      const resultado = Array.from(mapa.values());
-      sinCategoria.forEach(item => {
-        if (resultado.length < 5) resultado.push(item);
-      });
-
-      return resultado;
+      return Array.from(mapa.values());
     }
 
     async function cargarCatalogo() {
       const cacheBuster = '?t=' + new Date().getTime();
       
-      // 1. Cargar talleres dinámicos
+      // 1. Cargar talleres
       cargarTalleres(cacheBuster);
 
-      // 2. Cargar directamente los productos reales desde el repositorio
+      // 2. Cargar productos desde contenido/productos
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         if (res.ok) {
@@ -2125,7 +2111,7 @@
           }
         }
       } catch (err) {
-        console.warn("Sincronizando creaciones...");
+        console.warn("Sincronizando productos...");
       }
 
       actualizarCarrito();
