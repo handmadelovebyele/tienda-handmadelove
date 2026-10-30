@@ -815,7 +815,7 @@
       font-size: 0.9rem;
     }
 
-    /* Acordeón de Datos */
+    /* Pestaña Acordeón Desplegable */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -1520,31 +1520,6 @@
     let todosLosTalleres = [];
     const TASA_IVA = 0.15;
 
-    // Productos de respaldo con sus fotos individuales REALES (no las del carrusel)
-    const productosBaseReales = [
-      { 
-        title: "Vainilla Silvestre 180g", 
-        categoria: "Velas", 
-        precio: 16.50, 
-        descripcion: "Cera vegetal de soya botánica con esencia de vainilla silvestre en frasco de vidrio.", 
-        imagen: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600" 
-      },
-      { 
-        title: "Pulsera de Hilo Rojo con Perlas", 
-        categoria: "Bisutería", 
-        precio: 9.99, 
-        descripcion: "Pulsera artesanal tejida a mano con hilo rojo de protección, perlas de río y dijes laminados en oro de 18k.", 
-        imagen: "pulsera-secundaria.jpg" 
-      },
-      { 
-        title: "Bolso Granny Square Margaritas", 
-        categoria: "Crochet", 
-        precio: 35.00, 
-        descripcion: "Bolso tipo tote tejido a mano en crochet con técnica granny square de flores en relieve.", 
-        imagen: "img/uploads/bolso-granny.jpg" 
-      }
-    ];
-
     function guardarCarrito() {
       localStorage.setItem('carrito_hml', JSON.stringify(carrito));
     }
@@ -1554,6 +1529,7 @@
       if (modal) modal.classList.toggle('oculto');
     }
 
+    // Normalizador que conserva enlaces completos de internet y busca fotos en img/uploads
     function normalizarRutaImagen(ruta) {
       if (!ruta) return 'logo.jpg';
       let r = String(ruta).trim().replace(/^["']|["']$/g, '');
@@ -2004,6 +1980,7 @@
       }).join('');
     }
 
+    // Parser YAML que extrae directamente la foto real de cada producto
     function parsearMarkdownCompleto(texto) {
       if (!texto) return null;
       const textoLimpio = texto.replace(/^\s+/, '');
@@ -2061,7 +2038,7 @@
       data.title = data.title || data.nombre || data.name || 'Creación Artesanal';
       data.precio = parseFloat(data.precio || data.price || 0) || 0;
       data.categoria = data.categoria || data.category || '';
-      data.imagen = data.imagen || data.image || data.foto || '';
+      data.imagen = data.imagen || data.image || data.foto || (data.fotos && data.fotos[0]) || '';
 
       if (!data.descripcion && cuerpoMarkdown) {
         data.descripcion = cuerpoMarkdown;
@@ -2087,6 +2064,7 @@
       renderTalleres(todosLosTalleres);
     }
 
+    // Extrae exactamente 1 producto representativo por categoría desde tus archivos reales
     function extraerDestacadosPorCategoria(productos) {
       if (!Array.isArray(productos) || productos.length === 0) return [];
       const mapa = new Map();
@@ -2123,14 +2101,10 @@
     async function cargarCatalogo() {
       const cacheBuster = '?t=' + new Date().getTime();
       
-      // 1. Cargar talleres
+      // 1. Cargar talleres dinámicos
       cargarTalleres(cacheBuster);
 
-      // 2. Establecer inicialmente los productos con sus fotos individuales reales
-      productosDestacadosHome = [...productosBaseReales];
-      renderDestacadosHome(productosDestacadosHome);
-
-      // 3. Consultar GitHub para sincronizar si hay nuevas publicaciones en contenido/productos
+      // 2. Cargar directamente los productos reales desde el repositorio
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         if (res.ok) {
@@ -2150,7 +2124,9 @@
             }
           }
         }
-      } catch (err) {}
+      } catch (err) {
+        console.warn("Sincronizando creaciones...");
+      }
 
       actualizarCarrito();
     }
