@@ -628,6 +628,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      height: 100%;
     }
     .modal-category {
       font-size: 0.75rem;
@@ -643,19 +644,34 @@
       margin-bottom: 6px;
     }
     .modal-price {
-      font-size: 1.25rem;
-      font-weight: 600;
+      font-size: 1.35rem;
+      font-weight: 700;
       color: var(--brand-red);
       margin-bottom: 10px;
     }
+    /* Scroll visible y suave para la descripción del modal */
     .modal-desc-box {
-      max-height: 220px;
+      max-height: 190px;
       overflow-y: auto;
-      padding-right: 6px;
+      padding-right: 8px;
       margin-bottom: 16px;
       font-size: 0.88rem;
       color: var(--text-muted);
       line-height: 1.6;
+      border: 1px solid #f0ebe4;
+      padding: 10px;
+      border-radius: 8px;
+      background: #faf8f5;
+    }
+    .modal-desc-box::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-desc-box::-webkit-scrollbar-thumb {
+      background: #d5c8be;
+      border-radius: 4px;
+    }
+    .modal-desc-box::-webkit-scrollbar-thumb:hover {
+      background: var(--brand-red);
     }
 
     /* Modal Carrito */
@@ -1531,7 +1547,7 @@
       }
     }
 
-    // Agregar al carrito distinguiendo si es Taller (IVA 0%) o Producto Físico (IVA 15%)
+    // Agregar al carrito distinguiendo si es Taller (exento de IVA) o Producto Físico (15% IVA)
     function agregarAlCarrito(nombre, precio, imagen, esTaller = false) {
       const precioNumerico = parseFloat(precio) || 0;
       const fotoItem = normalizarRutaImagen(imagen);
@@ -1591,7 +1607,6 @@
           const totalLinea = precioItem * item.cantidad;
           subtotalGeneral += totalLinea;
 
-          // Si NO es taller (es producto), suma a la base de IVA
           const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
           if (!esItemTaller) {
             baseImponibleProductos += totalLinea;
@@ -1604,7 +1619,7 @@
                 <img src="${miniatura}" alt="${item.nombre}" class="item-thumb-carrito" onerror="this.src='logo.jpg'">
                 <div class="item-info">
                   <strong title="${item.nombre}">${item.nombre}</strong>
-                  <span>$${totalLinea.toFixed(2)} ${esItemTaller ? '<small style="color:#2e7d32; font-size:0.75rem;">(IVA 0%)</small>' : ''}</span>
+                  <span>$${totalLinea.toFixed(2)}</span>
                 </div>
               </div>
               <div class="item-controls">
@@ -1617,7 +1632,6 @@
         }).join('');
       }
 
-      // IVA calculado ÚNICAMENTE sobre productos físicos
       const valorIva = baseImponibleProductos * TASA_IVA;
       const totalDefinitivo = subtotalGeneral + valorIva;
 
@@ -1707,8 +1721,7 @@
 
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
-        const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
-        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}${esItemTaller ? ' (Taller 0% IVA)' : ''}%0A`;
+        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
       });
 
       mensaje += `%0ASubtotal: $${subtotalGeneral.toFixed(2)}`;
@@ -1844,7 +1857,7 @@
       document.body.style.overflow = 'hidden';
     }
 
-    // Modal de Detalle de Taller
+    // Modal de Detalle de Taller (Con valor neto y scroll)
     function abrirModalTaller(index) {
       const t = todosLosTalleres[index];
       if (!t) return;
@@ -1858,7 +1871,7 @@
 
       document.getElementById('modal-categoria').textContent = 'Taller Presencial EMOCION-ARTE';
       document.getElementById('modal-titulo').textContent = t.title || 'Taller';
-      document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)} (IVA 0%)` : 'Gratuito';
+      document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)}` : 'Gratuito';
 
       let descripcionDetallada = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
       document.getElementById('modal-descripcion').textContent = descripcionDetallada;
@@ -1869,7 +1882,7 @@
       thumbsContainer.innerHTML = '';
 
       const btnComprar = document.getElementById('modal-btn-comprar');
-      btnComprar.textContent = disponibles > 0 ? 'Reservar Cupo (IVA 0%)' : 'Lista de Espera';
+      btnComprar.textContent = disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera';
       btnComprar.onclick = (e) => {
         e.stopPropagation();
         agregarAlCarrito(`Taller: ${t.title}`, precioNum, fotoTaller, true);
