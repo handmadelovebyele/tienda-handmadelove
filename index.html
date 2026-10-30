@@ -814,7 +814,7 @@
       font-size: 0.9rem;
     }
 
-    /* Pestaña Acordeón Desplegable para Datos Requeridos */
+    /* Acordeón de Datos */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -1519,6 +1519,13 @@
     let todosLosTalleres = [];
     const TASA_IVA = 0.15;
 
+    // Productos de respaldo en caso de cualquier retraso de red
+    const productosBase = [
+      { title: "Vela Aromática en Envase de Vidrio", categoria: "Velas", precio: 16.50, descripcion: "Cera vegetal de soya con esencias aromáticas botánicas.", imagen: "velas-varias.jpg" },
+      { title: "Pulsera de Hilo Rojo con Perlas", categoria: "Bisutería", precio: 9.99, descripcion: "Protección tejida a mano con perlas naturales y dijes laminados.", imagen: "pulseras-varias.jpg" },
+      { title: "Bolso Granny Square en Crochet", categoria: "Crochet", precio: 35.00, descripcion: "Bolso artesanal tejido en hilo de algodón con flores en relieve.", imagen: "bordado-crochet-varios.jpg" }
+    ];
+
     function guardarCarrito() {
       localStorage.setItem('carrito_hml', JSON.stringify(carrito));
     }
@@ -1787,7 +1794,7 @@
 
       mensaje += `%0ASubtotal: $${subtotalGeneral.toFixed(2)}`;
       mensaje += `%0AIVA Productos (15%): $${valorIva.toFixed(2)}`;
-      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
+      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
       mensaje += `%0AModalidad: *${cliente.entregaTexto}*%0A`;
 
       if (cliente.modalidad === 'envio') {
@@ -1978,9 +1985,11 @@
       }).join('');
     }
 
-    // Parser robusto
+    // Parser robusto que no confunde palabras con dos puntos (ej: "Incluye:")
     function parsearMarkdownCompleto(texto) {
-      const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
+      if (!texto) return null;
+      const textoLimpio = texto.replace(/^\s+/, '');
+      const match = textoLimpio.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
       
       const frontmatter = match[1];
@@ -1990,7 +1999,7 @@
       let claveActual = null;
       let enFotos = false;
 
-      const clavesValidas = ['title', 'fecha', 'lugar', 'precio', 'cupoMax', 'ocupados', 'descripcion', 'imagen', 'foto', 'fotos', 'categoria', 'subcategoria', 'date', 'body', 'archivo'];
+      const clavesValidas = ['title', 'nombre', 'name', 'fecha', 'lugar', 'precio', 'price', 'cupoMax', 'ocupados', 'descripcion', 'description', 'imagen', 'image', 'foto', 'fotos', 'categoria', 'category', 'subcategoria', 'date', 'body', 'archivo'];
 
       lineas.forEach(line => {
         const lineaSinEspacios = line.trim();
@@ -2022,26 +2031,32 @@
         }
 
         if (claveActual) {
-          const textoLimpio = line.replace(/^\s{1,4}/, '').replace(/^["']|["']$/g, '');
+          const textoLinea = line.replace(/^\s{1,4}/, '').replace(/^["']|["']$/g, '');
           if (data[claveActual]) {
-            data[claveActual] += '\n' + textoLimpio;
+            data[claveActual] += '\n' + textoLinea;
           } else {
-            data[claveActual] = textoLimpio;
+            data[claveActual] = textoLinea;
           }
         }
       });
+
+      // Homologar nombres de campos
+      data.title = data.title || data.nombre || data.name || 'Creación Artesanal';
+      data.precio = parseFloat(data.precio || data.price || 0) || 0;
+      data.categoria = data.categoria || data.category || '';
+      data.imagen = data.imagen || data.image || data.foto || '';
 
       if (!data.descripcion && cuerpoMarkdown) {
         data.descripcion = cuerpoMarkdown;
       }
 
-      data.precio = parseFloat(data.precio) || 0;
       return data;
     }
 
     async function cargarTalleres(cacheBuster) {
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres' + cacheBuster);
+        if (!res.ok) throw new Error();
         const archivos = await res.json();
         if (Array.isArray(archivos)) {
           const promesas = archivos
@@ -2058,36 +2073,51 @@
       renderTalleres(todosLosTalleres);
     }
 
-    // Selecciona 1 producto por cada categoría principal
+    // Filtra exactamente 1 pieza por categoría principal
     function obtenerUnoPorCategoria(productos) {
-      const mapaCategorias = new Map();
+      if (!Array.isArray(productos) || productos.length === 0) return [];
+      const mapa = new Map();
+      const sinCategoria = [];
 
       productos.forEach(p => {
-        let cat = (p.categoria || '').trim();
-        if (!cat) return;
-        let catNormalizada = cat.toLowerCase();
+        let cat = (p.categoria || '').trim().toLowerCase();
+        let grupo = null;
 
-        // Agrupar variaciones bajo la misma categoría oficial
-        if (catNormalizada.includes('vela')) catNormalizada = 'velas';
-        else if (catNormalizada.includes('bisuteria') || catNormalizada.includes('joya')) catNormalizada = 'bisuteria';
-        else if (catNormalizada.includes('bordad')) catNormalizada = 'bordado';
-        else if (catNormalizada.includes('pintur')) catNormalizada = 'pintura';
-        else if (catNormalizada.includes('crochet')) catNormalizada = 'crochet';
+        if (cat.includes('vela')) grupo = 'Velas';
+        else if (cat.includes('bisuteria') || cat.includes('joya') || cat.includes('pulsera')) grupo = 'Bisutería';
+        else if (cat.includes('crochet') || cat.includes('tejido') || cat.includes('bolso')) grupo = 'Crochet';
+        else if (cat.includes('bordad')) grupo = 'Bordado';
+        else if (cat.includes('pintur')) grupo = 'Pintura';
 
-        if (!mapaCategorias.has(catNormalizada)) {
-          mapaCategorias.set(catNormalizada, p);
+        if (grupo) {
+          if (!mapa.has(grupo)) {
+            p.categoria = grupo;
+            mapa.set(grupo, p);
+          }
+        } else {
+          sinCategoria.push(p);
         }
       });
 
-      return Array.from(mapaCategorias.values());
+      const resultado = Array.from(mapa.values());
+      // Si hay categorías aún no cubiertas, añade los productos restantes para que la pantalla nunca quede vacía
+      sinCategoria.forEach(item => {
+        if (resultado.length < 5) resultado.push(item);
+      });
+
+      return resultado;
     }
 
     async function cargarCatalogo() {
-      try {
-        const cacheBuster = '?t=' + new Date().getTime();
-        await cargarTalleres(cacheBuster);
+      const cacheBuster = '?t=' + new Date().getTime();
+      
+      // 1. Cargar talleres de forma autónoma
+      cargarTalleres(cacheBuster);
 
+      // 2. Cargar productos desde el repositorio
+      try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
+        if (!res.ok) throw new Error();
         const archivos = await res.json();
         
         if (Array.isArray(archivos)) {
@@ -2097,16 +2127,20 @@
           const contenidos = await Promise.all(promesas);
           
           todosLosProductos = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-          // 1 producto representativo por cada categoría
-          productosDestacadosHome = obtenerUnoPorCategoria(todosLosProductos);
+          const destacados = obtenerUnoPorCategoria(todosLosProductos);
+
+          if (destacados.length > 0) {
+            productosDestacadosHome = destacados;
+          } else {
+            productosDestacadosHome = productosBase;
+          }
         } else {
-          todosLosProductos = [];
-          productosDestacadosHome = [];
+          productosDestacadosHome = productosBase;
         }
       } catch (err) {
-        todosLosProductos = [];
-        productosDestacadosHome = [];
+        productosDestacadosHome = productosBase;
       }
+
       renderDestacadosHome(productosDestacadosHome);
       actualizarCarrito();
     }
