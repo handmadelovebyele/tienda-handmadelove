@@ -365,6 +365,7 @@
       width: 100%;
       height: 200px;
       object-fit: cover;
+      background: #f7f2ed;
     }
     .card-body {
       padding: 1.1rem;
@@ -814,7 +815,7 @@
       font-size: 0.9rem;
     }
 
-    /* Acordeón de Datos */
+    /* Pestaña Acordeón Desplegable para Datos Requeridos */
     .btn-acordeon-datos {
       width: 100%;
       background: #faf7f2;
@@ -1196,7 +1197,7 @@
     </div>
   </section>
 
-  <!-- Catálogo Destacado (1 Pieza por Categoría) -->
+  <!-- Catálogo Destacado (1 Pieza por Categoría con su foto real) -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
@@ -1518,13 +1519,6 @@
     let productosDestacadosHome = [];
     let todosLosTalleres = [];
     const TASA_IVA = 0.15;
-
-    // Productos de respaldo en caso de cualquier retraso de red
-    const productosBase = [
-      { title: "Vela Aromática en Envase de Vidrio", categoria: "Velas", precio: 16.50, descripcion: "Cera vegetal de soya con esencias aromáticas botánicas.", imagen: "velas-varias.jpg" },
-      { title: "Pulsera de Hilo Rojo con Perlas", categoria: "Bisutería", precio: 9.99, descripcion: "Protección tejida a mano con perlas naturales y dijes laminados.", imagen: "pulseras-varias.jpg" },
-      { title: "Bolso Granny Square en Crochet", categoria: "Crochet", precio: 35.00, descripcion: "Bolso artesanal tejido en hilo de algodón con flores en relieve.", imagen: "bordado-crochet-varios.jpg" }
-    ];
 
     function guardarCarrito() {
       localStorage.setItem('carrito_hml', JSON.stringify(carrito));
@@ -1910,10 +1904,10 @@
     function obtenerUrlCategoria(cat) {
       const c = (cat || '').toLowerCase();
       if (c.includes('vela')) return 'velas.html';
-      if (c.includes('bisuteria') || c.includes('joya')) return 'bisuteria.html';
+      if (c.includes('bisuteria') || c.includes('joya') || c.includes('pulsera')) return 'bisuteria.html';
       if (c.includes('bordad')) return 'bordado.html';
       if (c.includes('pintur')) return 'pintura.html';
-      if (c.includes('crochet')) return 'crochet.html';
+      if (c.includes('crochet') || c.includes('tejido') || c.includes('bolso')) return 'crochet.html';
       return '#';
     }
 
@@ -1985,7 +1979,6 @@
       }).join('');
     }
 
-    // Parser robusto que no confunde palabras con dos puntos (ej: "Incluye:")
     function parsearMarkdownCompleto(texto) {
       if (!texto) return null;
       const textoLimpio = texto.replace(/^\s+/, '');
@@ -2040,7 +2033,6 @@
         }
       });
 
-      // Homologar nombres de campos
       data.title = data.title || data.nombre || data.name || 'Creación Artesanal';
       data.precio = parseFloat(data.precio || data.price || 0) || 0;
       data.categoria = data.categoria || data.category || '';
@@ -2073,8 +2065,7 @@
       renderTalleres(todosLosTalleres);
     }
 
-    // Filtra exactamente 1 pieza por categoría principal
-    function obtenerUnoPorCategoria(productos) {
+    function extraerDestacadosPorCategoria(productos) {
       if (!Array.isArray(productos) || productos.length === 0) return [];
       const mapa = new Map();
       const sinCategoria = [];
@@ -2100,7 +2091,6 @@
       });
 
       const resultado = Array.from(mapa.values());
-      // Si hay categorías aún no cubiertas, añade los productos restantes para que la pantalla nunca quede vacía
       sinCategoria.forEach(item => {
         if (resultado.length < 5) resultado.push(item);
       });
@@ -2111,10 +2101,10 @@
     async function cargarCatalogo() {
       const cacheBuster = '?t=' + new Date().getTime();
       
-      // 1. Cargar talleres de forma autónoma
+      // 1. Cargar talleres
       cargarTalleres(cacheBuster);
 
-      // 2. Cargar productos desde el repositorio
+      // 2. Cargar productos desde el repositorio (leyendo su foto individual real)
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         if (!res.ok) throw new Error();
@@ -2127,18 +2117,14 @@
           const contenidos = await Promise.all(promesas);
           
           todosLosProductos = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-          const destacados = obtenerUnoPorCategoria(todosLosProductos);
+          const destacados = extraerDestacadosPorCategoria(todosLosProductos);
 
           if (destacados.length > 0) {
             productosDestacadosHome = destacados;
-          } else {
-            productosDestacadosHome = productosBase;
           }
-        } else {
-          productosDestacadosHome = productosBase;
         }
       } catch (err) {
-        productosDestacadosHome = productosBase;
+        console.warn("Cargando catálogo...");
       }
 
       renderDestacadosHome(productosDestacadosHome);
