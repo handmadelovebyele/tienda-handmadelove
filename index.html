@@ -651,7 +651,7 @@
     }
     /* Scroll visible y suave para la descripción del modal */
     .modal-desc-box {
-      max-height: 190px;
+      max-height: 200px;
       overflow-y: auto;
       padding-right: 8px;
       margin-bottom: 16px;
@@ -1800,6 +1800,7 @@
       document.getElementById('modal-banco').classList.remove('open');
     }
 
+    // Modal Producto
     function abrirModalProducto(index) {
       const p = todosLosProductos[index];
       if (!p) return;
@@ -1853,6 +1854,7 @@
       document.body.style.overflow = 'hidden';
     }
 
+    // Modal Taller (Con Scroll y Valor Neto)
     function abrirModalTaller(index) {
       const t = todosLosTalleres[index];
       if (!t) return;
@@ -1868,8 +1870,8 @@
       document.getElementById('modal-titulo').textContent = t.title || 'Taller';
       document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)}` : 'Gratuito';
 
-      let descripcionDetallada = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
-      document.getElementById('modal-descripcion').textContent = descripcionDetallada;
+      let textoCompleto = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
+      document.getElementById('modal-descripcion').textContent = textoCompleto;
 
       const imgPrincipal = document.getElementById('modal-img-principal');
       const thumbsContainer = document.getElementById('modal-galeria-thumbs');
@@ -1967,6 +1969,7 @@
       }
     }
 
+    // Parser robusto que no confunde palabras con dos puntos (ej: "Incluye:") con claves YAML
     function parsearMarkdownCompleto(texto) {
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
@@ -1978,45 +1981,48 @@
       let claveActual = null;
       let enFotos = false;
 
-      lineas.forEach(line => {
-        const lineaTrim = line.trim();
-        if (!lineaTrim) return;
+      // Claves YAML válidas de primer nivel
+      const clavesValidas = ['title', 'fecha', 'lugar', 'precio', 'cupoMax', 'ocupados', 'descripcion', 'imagen', 'foto', 'fotos', 'categoria', 'subcategoria', 'date', 'body', 'archivo'];
 
-        if (lineaTrim.startsWith('fotos:')) {
-          enFotos = true;
-          claveActual = 'fotos';
-          const resto = lineaTrim.replace('fotos:', '').trim();
-          if (resto && !resto.startsWith('-') && resto !== '[]') {
-            data.fotos.push(resto.replace(/^["']|["']$/g, ''));
+      lineas.forEach(line => {
+        const lineaSinEspacios = line.trim();
+        if (!lineaSinEspacios) {
+          if (claveActual && !enFotos) {
+            data[claveActual] = (data[claveActual] || '') + '\n';
           }
           return;
         }
 
-        if (enFotos) {
-          if (lineaTrim.startsWith('-')) {
-            const fItem = lineaTrim.replace(/^[-\s*]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
-            if (fItem) data.fotos.push(fItem);
-            return;
-          } else if (lineaTrim.startsWith('foto:') || lineaTrim.startsWith('url:')) {
-            const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
-            if (fItem) data.fotos.push(fItem);
-            return;
-          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
-            enFotos = false;
-          }
-        }
-
-        const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
-        if (matchClave) {
-          claveActual = matchClave[1];
-          let val = matchClave[2].trim();
+        // Si la línea NO tiene sangría inicial y contiene una clave oficial
+        const matchClavePrincipal = line.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
+        if (matchClavePrincipal && clavesValidas.includes(matchClavePrincipal[1])) {
+          claveActual = matchClavePrincipal[1];
+          enFotos = (claveActual === 'fotos');
+          let val = matchClavePrincipal[2].trim();
           if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
             val = val.slice(1, -1);
           }
           data[claveActual] = (val === '>' || val === '|' || val === '>-' || val === '|-') ? '' : val;
-        } else if (claveActual && !enFotos) {
-          const textoContinuacion = lineaTrim.replace(/^["']|["']$/g, '');
-          data[claveActual] = data[claveActual] ? (data[claveActual] + ' ' + textoContinuacion) : textoContinuacion;
+          return;
+        }
+
+        // Si está en la lista de fotos
+        if (enFotos) {
+          if (lineaSinEspacios.startsWith('-')) {
+            const fItem = lineaSinEspacios.replace(/^[-\s*]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
+            if (fItem) data.fotos.push(fItem);
+          }
+          return;
+        }
+
+        // Si es texto de continuación (respeta palabras con dos puntos como "Incluye:" y saltos de línea)
+        if (claveActual) {
+          const textoLimpio = line.replace(/^\s{1,4}/, '').replace(/^["']|["']$/g, '');
+          if (data[claveActual]) {
+            data[claveActual] += '\n' + textoLimpio;
+          } else {
+            data[claveActual] = textoLimpio;
+          }
         }
       });
 
