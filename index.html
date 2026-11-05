@@ -559,7 +559,7 @@
       margin-bottom: 1.4rem;
     }
 
-    /* Modal Detalle Compartido */
+    /* Modal Detalle */
     .product-modal {
       position: fixed;
       top: 0;
@@ -1016,20 +1016,33 @@
     .footer-links a:hover, .footer-links button:hover {
       color: white;
     }
-    .btn-wa-footer {
+    
+    /* Botones de Redes y Contacto en Footer */
+    .btn-footer-social {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: #25D366;
-      color: white !important;
-      padding: 10px 18px;
+      padding: 9px 18px;
       border-radius: 30px;
       font-weight: 600;
       text-decoration: none;
-      margin-top: 10px;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       max-width: 250px;
+      margin-top: 8px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn-footer-social:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+    .btn-instagram-footer {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: white !important;
+    }
+    .btn-wa-footer {
+      background: #25D366;
+      color: white !important;
     }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -1116,7 +1129,7 @@
       .footer-col h4 {
         margin-bottom: 8px !important;
       }
-      .btn-wa-footer {
+      .btn-footer-social {
         max-width: 100% !important;
       }
     }
@@ -1248,7 +1261,7 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito con Validación Requerida -->
+  <!-- Modal del Carrito SIN IVA -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -1293,7 +1306,6 @@
 
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
-        <div><span>IVA Productos (15%):</span> <span id="cart-iva">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
 
@@ -1325,7 +1337,7 @@
     </div>
   </div>
 
-  <!-- Footer Limpio -->
+  <!-- Footer con Instagram y WhatsApp -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -1352,16 +1364,19 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>CONTACTO DIRECTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
-          ¿Consultas o encargos personalizados?
+        <h4>SÍGUENOS Y CONTACTO</h4>
+        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 6px;">
+          Encuentra inspiración y novedades:
         </p>
-        <p style="margin-bottom: 12px;">
-          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
+        <p style="margin-bottom: 10px;">
+          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.86rem; font-weight: 500;">
             ✉️ hadmadelovebyele@gmail.com
           </a>
         </p>
-        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
+        <a href="https://instagram.com/handmadelovebyele" target="_blank" rel="noopener noreferrer" class="btn-footer-social btn-instagram-footer">
+          <span>📷 @handmadelovebyele</span>
+        </a>
+        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" class="btn-footer-social btn-wa-footer">
           <span>💬 WhatsApp de Atención</span>
         </a>
       </div>
@@ -1517,9 +1532,8 @@
     let todosLosProductos = [];
     let productosDestacadosHome = [];
     let todosLosTalleres = [];
-    const TASA_IVA = 0.15;
 
-    // Respaldo inmediato de tus productos reales con sus fotos individuales
+    // Respaldo de productos reales con sus fotos individuales
     const productosBaseReales = [
       {
         title: "Bolso Granny Square Margaritas",
@@ -1544,7 +1558,7 @@
       }
     ];
 
-    // Respaldo inmediato de tu taller real
+    // Respaldo de taller real
     const talleresBaseReales = [
       {
         title: "Taller de Arte en Concreto: Joyero Plano",
@@ -1619,12 +1633,12 @@
       actualizarCarrito();
     }
 
+    /* Carrito SIN cobro de IVA */
     function actualizarCarrito() {
       const lista = document.getElementById('lista-carrito');
       const contadorDesktop = document.getElementById('cart-num');
       const contadorMobile = document.querySelector('.cart-num-mobile');
       const subtotalEl = document.getElementById('cart-subtotal');
-      const ivaEl = document.getElementById('cart-iva');
       const totalEl = document.getElementById('total-precio');
 
       let totalItems = 0;
@@ -1636,24 +1650,17 @@
       if (carrito.length === 0) {
         if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
         if (subtotalEl) subtotalEl.textContent = '$0.00';
-        if (ivaEl) ivaEl.textContent = '$0.00';
         if (totalEl) totalEl.textContent = '$0.00';
         return;
       }
 
       let subtotalGeneral = 0;
-      let baseImponibleProductos = 0;
 
       if (lista) {
         lista.innerHTML = carrito.map((item, index) => {
           const precioItem = parseFloat(item.precio) || 0;
           const totalLinea = precioItem * item.cantidad;
           subtotalGeneral += totalLinea;
-
-          const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
-          if (!esItemTaller) {
-            baseImponibleProductos += totalLinea;
-          }
 
           const miniatura = item.imagen || 'logo.jpg';
           return `
@@ -1675,12 +1682,8 @@
         }).join('');
       }
 
-      const valorIva = baseImponibleProductos * TASA_IVA;
-      const totalDefinitivo = subtotalGeneral + valorIva;
-
       if (subtotalEl) subtotalEl.textContent = `$${subtotalGeneral.toFixed(2)}`;
-      if (ivaEl) ivaEl.textContent = `$${valorIva.toFixed(2)}`;
-      if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
+      if (totalEl) totalEl.textContent = `$${subtotalGeneral.toFixed(2)}`;
     }
 
     function validarYObtenerDatosCliente() {
@@ -1732,24 +1735,15 @@
       const cliente = validarYObtenerDatosCliente();
       if (!cliente) return;
 
-      let subtotalGeneral = 0;
-      let baseImponibleProductos = 0;
+      let totalFinal = 0;
       let detalleStr = "";
 
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
         const totalLinea = pVal * item.cantidad;
         detalleStr += `${item.nombre} (x${item.cantidad}) - $${totalLinea.toFixed(2)}; `;
-        subtotalGeneral += totalLinea;
-
-        const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
-        if (!esItemTaller) {
-          baseImponibleProductos += totalLinea;
-        }
+        totalFinal += totalLinea;
       });
-
-      const valorIva = baseImponibleProductos * TASA_IVA;
-      const totalFinal = subtotalGeneral + valorIva;
 
       enviarBaseDatos(
         'Compra Web (WhatsApp)',
@@ -1767,8 +1761,6 @@
         mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
       });
 
-      mensaje += `%0ASubtotal: $${subtotalGeneral.toFixed(2)}`;
-      mensaje += `%0AIVA Productos (15%): $${valorIva.toFixed(2)}`;
       mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
       mensaje += `%0AModalidad de Entrega: *${cliente.entregaTexto}*`;
 
@@ -1790,24 +1782,15 @@
       const cliente = validarYObtenerDatosCliente();
       if (!cliente) return;
 
-      let subtotalGeneral = 0;
-      let baseImponibleProductos = 0;
+      let totalFinal = 0;
       let detalleStr = "";
 
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
         const totalLinea = pVal * item.cantidad;
         detalleStr += `${item.nombre} (x${item.cantidad}); `;
-        subtotalGeneral += totalLinea;
-
-        const esItemTaller = item.esTaller || item.nombre.toLowerCase().includes('taller');
-        if (!esItemTaller) {
-          baseImponibleProductos += totalLinea;
-        }
+        totalFinal += totalLinea;
       });
-
-      const valorIva = baseImponibleProductos * TASA_IVA;
-      const totalFinal = subtotalGeneral + valorIva;
 
       enviarBaseDatos(
         'Solicitud Link Payphone (WhatsApp)',
@@ -1824,8 +1807,6 @@
         mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
       });
 
-      mensaje += `%0ASubtotal: $${subtotalGeneral.toFixed(2)}`;
-      mensaje += `%0AIVA Productos (15%): $${valorIva.toFixed(2)}`;
       mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
       mensaje += `%0AModalidad: *${cliente.entregaTexto}*%0A`;
 
@@ -2097,17 +2078,16 @@
     }
 
     async function cargarTodo() {
-      // 1. Mostrar de inmediato la base real para que la pantalla NUNCA esté vacía
+      // 1. Carga inmediata de respaldo
       productosDestacadosHome = [...productosBaseReales];
       todosLosTalleres = [...talleresBaseReales];
       renderDestacadosHome(productosDestacadosHome);
       renderTalleres(todosLosTalleres);
       actualizarCarrito();
 
-      // 2. Intentar actualizar desde GitHub si la API no está en pausa
+      // 2. Consulta a GitHub si está disponible
       const cacheBuster = '?t=' + new Date().getTime();
       try {
-        // Talleres
         const resT = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres' + cacheBuster);
         if (resT.ok) {
           const archivosT = await resT.json();
@@ -2122,7 +2102,6 @@
           }
         }
 
-        // Productos
         const resP = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
         if (resP.ok) {
           const archivosP = await resP.json();
