@@ -2,7 +2,7 @@
 title: Pulsera de Hilo Rojo
 categoria: Bisutería
 subcategoria: ""
-precio: 11.99
+precio: 9.99
 descripcion: Pulsera artesanal de hilo rojo de protección, tejida cuidadosamente
   a mano. Elaborada con auténticas perlas de río naturales, circones brillantes
   y piedras naturales seleccionadas, complementada con dijes finamente laminados
