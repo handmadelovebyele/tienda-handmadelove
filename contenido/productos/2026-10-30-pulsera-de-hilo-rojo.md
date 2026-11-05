@@ -8,7 +8,7 @@ descripcion: Pulsera artesanal de hilo rojo de protección, tejida cuidadosament
   y piedras naturales seleccionadas, complementada con dijes finamente laminados
   en oro de 18k. Diseño cómodo, ajustable y duradero, ideal para llevar contigo
   la mejor energía o como un obsequio especial lleno de significado.
-imagen: img/uploads/whatsapp-image-2026-10-23-at-2.08.13-pm-3-.jpeg
+imagen: img/uploads/pulsera-secundaria.jpg
 fotos:
-  - https://raw.githubusercontent.com/handmadelovebyele/tienda-handmadelove/main/pulsera-secundaria.jpg
+  - img/uploads/whatsapp-image-2026-10-23-at-2.08.15-pm.jpeg
 ---
