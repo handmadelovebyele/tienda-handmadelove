@@ -5,1186 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Handmade Love by E.L.E & EMOCION-ARTE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --brand-red: #c94a4a;
-      --brand-red-dark: #a83838;
-      --bg-color: #faf9f6;
-      --text-main: #333;
-      --text-muted: #666;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html, body {
-      width: 100%;
-      max-width: 100vw;
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-main);
-      background-color: var(--bg-color);
-      line-height: 1.6;
-    }
-    body {
-      padding-top: 105px;
-    }
-
-    /* Cabecera 100% Fija */
-    .header-fijo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 1500;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      background-color: #fff;
-    }
-    .top-banner {
-      background-color: var(--brand-red);
-      color: white;
-      text-align: center;
-      padding: 0.5rem;
-      font-size: 0.82rem;
-      width: 100%;
-    }
-    header.navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 2.5rem;
-      background-color: #fff;
-      width: 100%;
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .logo-card img {
-      height: 38px;
-      width: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-    .brand-main {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #333;
-      text-transform: lowercase;
-    }
-    .brand-sub {
-      font-size: 0.58rem;
-      color: var(--brand-red);
-      letter-spacing: 1.2px;
-      font-weight: 700;
-    }
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      margin: 0;
-    }
-    .nav-links button, .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      transition: color 0.3s;
-    }
-    .nav-links button:hover, .nav-links a:hover {
-      color: var(--brand-red);
-    }
-    .pill-talleres {
-      background-color: #fdf2f2;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 500;
-      color: var(--brand-red) !important;
-    }
-    .dropdown {
-      position: relative;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #fff;
-      min-width: 170px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-      border-radius: 6px;
-      z-index: 100;
-      padding: 8px 0;
-    }
-    .dropdown-content a {
-      color: var(--text-muted);
-      padding: 10px 16px;
-      display: block;
-      text-align: left;
-    }
-    .dropdown-content a:hover {
-      background-color: #fdf2f2;
-      color: var(--brand-red);
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    .cart-btn {
-      background-color: var(--brand-red);
-      color: white !important;
-      padding: 6px 16px;
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.92rem;
-      box-shadow: 0 2px 6px rgba(201, 74, 74, 0.25);
-      transition: background 0.3s, transform 0.2s;
-    }
-    .cart-btn:hover {
-      background-color: var(--brand-red-dark);
-      transform: translateY(-1px);
-    }
-    .cart-badge {
-      background: white;
-      color: var(--brand-red);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 1px 7px;
-      border-radius: 12px;
-      min-width: 20px;
-      text-align: center;
-    }
-    .mobile-controls {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    .btn-menu-hamburguesa {
-      background: none;
-      border: none;
-      font-size: 1.6rem;
-      color: var(--text-main);
-      cursor: pointer;
-      padding: 2px 6px;
-      line-height: 1;
-    }
-
-    /* Hero */
-    .hero {
-      max-width: 1100px;
-      margin: 2rem auto 1.5rem auto;
-      padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 35px;
-      align-items: center;
-      width: 100%;
-    }
-    .hero-badge {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      font-weight: 700;
-      color: var(--brand-red);
-      margin-bottom: 10px;
-      display: block;
-    }
-    .hero h1 {
-      font-size: 2.2rem;
-      color: var(--text-main);
-      margin-bottom: 15px;
-      line-height: 1.25;
-    }
-    .hero h1 span {
-      color: var(--brand-red);
-    }
-    .hero p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 22px;
-      line-height: 1.6;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background-color: var(--brand-red);
-      color: white;
-      padding: 0.65rem 1.4rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
-    .btn-primary:hover {
-      background-color: var(--brand-red-dark);
-    }
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--text-main);
-      border: 1px solid #ccc;
-      padding: 0.65rem 1.4rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-    .btn-secondary:hover {
-      border-color: var(--brand-red);
-      color: var(--brand-red);
-    }
-    .hero-carousel-container {
-      position: relative;
-      width: 100%;
-      height: 340px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      background-color: #fdf2f2;
-    }
-    .hero-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-    .hero-slide.active {
-      opacity: 1;
-    }
-    .hero-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(255,255,255,0.75);
-      border: none;
-      color: #333;
-      font-size: 1.8rem;
-      padding: 0 10px;
-      cursor: pointer;
-      border-radius: 50%;
-      z-index: 10;
-    }
-    .carousel-btn:hover {
-      background-color: #fff;
-      color: var(--brand-red);
-    }
-    .carousel-prev { left: 10px; }
-    .carousel-next { right: 10px; }
-    .carousel-dots {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 7px;
-      z-index: 10;
-    }
-    .dot {
-      width: 9px;
-      height: 9px;
-      background-color: rgba(255,255,255,0.6);
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    .dot.active {
-      background-color: var(--brand-red);
-    }
-
-    /* Catálogo Destacado - Cuadrícula Compacta de 3 Columnas */
-    .catalogo-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      width: 100%;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .section-title h2 {
-      font-size: 1.9rem;
-      color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    .grid-productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
-      gap: 1.8rem;
-      justify-content: center;
-      width: 100%;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      height: 440px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: #f7f2ed;
-    }
-    .card-body {
-      padding: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .card-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
-    .card-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .card-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-    }
-    .card-price {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: var(--brand-red);
-    }
-    .card-btn {
-      background-color: var(--brand-red);
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-    .card-btn:hover {
-      background-color: var(--brand-red-dark);
-    }
-
-    /* Talleres en 3 Columnas */
-    .talleres-section {
-      max-width: 1100px;
-      margin: 0 auto 3rem auto;
-      padding: 0 1.5rem;
-      width: 100%;
-    }
-    .talleres-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
-      gap: 1.8rem;
-      justify-content: center;
-      width: 100%;
-    }
-    .taller-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      height: 480px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .taller-card:hover {
-      transform: translateY(-3px);
-    }
-    .taller-card img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      background-color: #f7f2ed;
-    }
-    .taller-card-body {
-      padding: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .taller-tag {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
-    .taller-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      line-height: 1.35;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-    .taller-info {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-    .taller-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin: 6px 0 10px 0;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      line-height: 1.45;
-    }
-    .taller-cupos {
-      display: inline-block;
-      background: #fdf2f2;
-      color: var(--brand-red);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      align-self: flex-start;
-    }
-    .taller-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 10px;
-      border-top: 1px solid #f5ede6;
-    }
-    .taller-precio {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--brand-red);
-    }
-    .btn-reservar-taller {
-      background-color: var(--brand-red);
-      color: white;
-      border: none;
-      padding: 0.55rem 1.1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-align: center;
-      transition: background 0.2s;
-    }
-    .btn-reservar-taller:hover {
-      background-color: var(--brand-red-dark);
-    }
-
-    /* Newsletter */
-    .newsletter-section {
-      background-color: #fdf2f2;
-      padding: 3.5rem 1.5rem;
-      text-align: center;
-      margin-bottom: 2.5rem;
-      width: 100%;
-    }
-    .newsletter-container {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .newsletter-section h2 {
-      font-size: 1.7rem;
-      color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-    .newsletter-section p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.4rem;
-    }
-
-    /* Modal Detalle */
-    .product-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-      padding: 20px;
-    }
-    .product-modal.open {
-      display: flex;
-    }
-    .product-modal-content {
-      background: #fff;
-      border-radius: 12px;
-      max-width: 780px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 1.8rem;
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    .close-product-modal {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: #555;
-    }
-    .modal-gallery {
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-gallery img#modal-img-principal {
-      width: 100%;
-      height: 290px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #f2ece4;
-    }
-    .modal-thumbs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      min-height: 55px;
-    }
-    .modal-thumb {
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
-      border-radius: 6px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      opacity: 0.65;
-      transition: all 0.2s ease;
-      background: #f8f8f8;
-    }
-    .modal-thumb:hover {
-      opacity: 1;
-    }
-    .modal-thumb.active {
-      border-color: var(--brand-red);
-      opacity: 1;
-    }
-    .modal-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      height: 100%;
-    }
-    .modal-category {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-    .modal-title {
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .modal-price {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--brand-red);
-      margin-bottom: 10px;
-    }
-    .modal-desc-box {
-      max-height: 200px;
-      overflow-y: auto;
-      padding-right: 8px;
-      margin-bottom: 16px;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      border: 1px solid #f0ebe4;
-      padding: 10px;
-      border-radius: 8px;
-      background: #faf8f5;
-    }
-    .modal-desc-box::-webkit-scrollbar {
-      width: 6px;
-    }
-    .modal-desc-box::-webkit-scrollbar-thumb {
-      background: #d5c8be;
-      border-radius: 4px;
-    }
-    .modal-desc-box::-webkit-scrollbar-thumb:hover {
-      background: var(--brand-red);
-    }
-
-    /* Modal Carrito */
-    .carrito-modal {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: flex;
-      justify-content: flex-end;
-      z-index: 2000;
-    }
-    .carrito-modal.oculto {
-      display: none;
-    }
-    .carrito-contenido {
-      width: 100%;
-      max-width: 420px;
-      background: #fff;
-      height: 100%;
-      padding: 1.5rem 1.2rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.15);
-      overflow-y: auto;
-    }
-    .carrito-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .cerrar-carrito {
-      font-size: 1.8rem;
-      cursor: pointer;
-      line-height: 1;
-      color: #777;
-    }
-    .btn-seguir-comprando {
-      width: 100%;
-      background: #fdf2f2;
-      border: 1px solid #f9dede;
-      color: var(--brand-red);
-      padding: 0.6rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-    #lista-carrito {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-height: 110px;
-      max-height: 230px;
-      overflow-y: auto;
-      margin-bottom: 14px;
-      border: 1px solid #ebdcd5;
-      border-radius: 10px;
-      padding: 10px;
-      background: #faf8f5;
-    }
-    .item-carrito {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-    .item-izq {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-      min-width: 0;
-    }
-    .item-thumb-carrito {
-      width: 44px;
-      height: 44px;
-      border-radius: 6px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #f0ebe4;
-      border: 1px solid #e8dec8;
-    }
-    .item-info {
-      flex: 1;
-      min-width: 0;
-    }
-    .item-info strong {
-      font-size: 0.88rem;
-      color: var(--text-main);
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .item-info span {
-      color: var(--brand-red);
-      font-weight: 600;
-      font-size: 0.86rem;
-    }
-    .item-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-left: 8px;
-    }
-    .item-controls button {
-      background: #f4efe6;
-      border: 1px solid #e2dacd;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--brand-red);
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .item-controls span {
-      font-weight: 600;
-      min-width: 16px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    /* Acordeón de Datos */
-    .btn-acordeon-datos {
-      width: 100%;
-      background: #faf7f2;
-      border: 1px dashed #d9cbbe;
-      border-radius: 8px;
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--text-main);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      font-family: 'Poppins', sans-serif;
-      transition: background 0.2s;
-    }
-    .btn-acordeon-datos:hover {
-      background: #f5eee6;
-    }
-    .caja-entrega {
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-      padding: 12px;
-      background: #fff;
-      border: 1px solid #ebdcd5;
-      border-radius: 10px;
-    }
-    .caja-entrega.abierta {
-      display: flex;
-    }
-    .caja-entrega label {
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .caja-entrega label span.req {
-      color: var(--brand-red);
-    }
-    .caja-entrega input, .caja-entrega select {
-      padding: 0.55rem 0.8rem;
-      border-radius: 8px;
-      border: 1px solid #d5c8be;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.83rem;
-      outline: none;
-      width: 100%;
-    }
-    .caja-entrega input:focus, .caja-entrega select:focus {
-      border-color: var(--brand-red);
-    }
-
-    .carrito-resumen {
-      background: #fdf8f8;
-      border: 1px solid #f5e6e6;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 0.85rem;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .carrito-resumen div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .envio-nota {
-      font-size: 0.78rem;
-      color: var(--brand-red);
-      font-weight: 600;
-    }
-    .carrito-total {
-      border-top: 2px solid #eee;
-      padding-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-    .btn-pagar-tarjeta {
-      width: 100%;
-      background-color: #FF6A00;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 5px;
-      font-size: 0.88rem;
-    }
-    .btn-pagar-whatsapp {
-      width: 100%;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 5px;
-      font-size: 0.88rem;
-    }
-    .btn-banco {
-      width: 100%;
-      background: none;
-      border: 1px solid #ccc;
-      color: var(--text-main);
-      padding: 0.6rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-    .modal-banco {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-      padding: 20px;
-    }
-    .modal-banco.open {
-      display: flex;
-    }
-    .modal-banco-content {
-      background: white;
-      max-width: 380px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    /* Footer */
-    .main-footer {
-      background: #231F1C;
-      color: #FAF7F2;
-      padding: 50px 24px 30px;
-      width: 100%;
-    }
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-      gap: 30px;
-      margin-bottom: 35px;
-      width: 100%;
-    }
-    .footer-col {
-      display: flex;
-      flex-direction: column;
-    }
-    .footer-col h4 {
-      font-size: 0.82rem;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #FAF7F2;
-      text-transform: uppercase;
-    }
-    .footer-desc {
-      color: #A89F94;
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-    .footer-links a, .footer-links button {
-      color: #A89F94;
-      text-decoration: none;
-      font-size: 0.88rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-    .footer-links a:hover, .footer-links button:hover {
-      color: white;
-    }
-    
-    /* Botones de Redes y Contacto en Footer */
-    .btn-footer-social {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 9px 18px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      font-size: 0.86rem;
-      max-width: 250px;
-      margin-top: 8px;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-    .btn-footer-social:hover {
-      transform: translateY(-2px);
-      opacity: 0.95;
-    }
-    .btn-instagram-footer {
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-      color: white !important;
-    }
-    .btn-wa-footer {
-      background: #25D366;
-      color: white !important;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      padding-top: 20px;
-      color: #7A7268;
-      font-size: 0.8rem;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding-top: 95px;
-      }
-      header.navbar {
-        padding: 0.7rem 1.2rem;
-        flex-wrap: wrap;
-      }
-      .nav-links li:last-child {
-        display: none;
-      }
-      .mobile-controls {
-        display: flex;
-      }
-      .nav-wrapper {
-        width: 100%;
-      }
-      .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem 0 0.4rem 0;
-        gap: 12px;
-        border-top: 1px solid #f0ebe4;
-        margin-top: 8px;
-      }
-      .nav-links.open {
-        display: flex;
-      }
-      .nav-links li {
-        width: 100%;
-      }
-      .nav-links a, .nav-links button {
-        font-size: 0.95rem !important;
-        display: block;
-        width: 100%;
-        text-align: left;
-      }
-      .dropdown-content {
-        position: static;
-        box-shadow: none;
-        background: #fdf8f8;
-        padding: 6px 12px;
-        margin-top: 4px;
-        border-radius: 8px;
-        min-width: unset;
-      }
-      .dropdown:hover .dropdown-content {
-        display: block;
-      }
-      .product-modal-content {
-        grid-template-columns: 1fr;
-        max-height: 94vh;
-        padding: 1.4rem 1.1rem;
-      }
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        margin-top: 1.2rem;
-        padding: 0 1.2rem;
-      }
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      .footer-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        width: 100% !important;
-      }
-      .footer-col {
-        width: 100% !important;
-      }
-      .footer-col h4 {
-        margin-bottom: 8px !important;
-      }
-      .btn-footer-social {
-        max-width: 100% !important;
-      }
-    }
-  </style>
+  <!-- Estilos Globales Unificados -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Cabecera Fija -->
-  <div class="header-fijo">
-    <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
+  <!-- Cabecera Global Inyectada -->
+  <div id="header-global"></div>
 
-    <header class="navbar">
-      <a href="index.html" class="logo-container">
-        <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
-        <div class="brand-text">
-          <span class="brand-main">handmade love</span>
-          <span class="brand-sub">BY E.L.E · EMOCION-ARTE</span>
-        </div>
-      </a>
-
-      <div class="mobile-controls">
-        <button type="button" class="cart-btn" onclick="toggleCarrito()">
-          🛒 <span class="cart-badge cart-num-mobile">0</span>
-        </button>
-        <button type="button" class="btn-menu-hamburguesa" onclick="toggleMenuMovil()" aria-label="Abrir Menú">
-          ☰
-        </button>
-      </div>
-
-      <nav class="nav-wrapper">
-        <ul class="nav-links" id="menu-navegacion">
-          <li><a href="#catalogo" onclick="cerrarMenuMovil();">Catálogo</a></li>
-          <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdownMovil(event)">Categorías ▾</a>
-            <div class="dropdown-content" id="submenu-categorias">
-              <a href="velas.html" onclick="cerrarMenuMovil()">Velas</a>
-              <a href="bisuteria.html" onclick="cerrarMenuMovil()">Bisutería</a>
-              <a href="bordado.html" onclick="cerrarMenuMovil()">Bordado</a>
-              <a href="pintura.html" onclick="cerrarMenuMovil()">Pintura</a>
-              <a href="crochet.html" onclick="cerrarMenuMovil()">Crochet</a>
-            </div>
-          </li>
-          <li><a href="blog.html" onclick="cerrarMenuMovil()">Blog</a></li>
-          <li><a href="#talleres" class="pill-talleres" onclick="cerrarMenuMovil()">Talleres EMOCION-ARTE</a></li>
-          <li>
-            <button type="button" class="cart-btn" onclick="toggleCarrito()">
-              🛒 <span class="cart-badge" id="cart-num">0</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  </div>
-
-  <!-- Hero -->
+  <!-- Hero Principal con Carrusel -->
   <section class="hero">
     <div>
       <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
@@ -1205,13 +34,13 @@
       <div class="hero-slide">
         <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería artesanal">
       </div>
-      <button type="button" class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
-      <button type="button" class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
+      <button type="button" class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">&#8249;</button>
+      <button type="button" class="carousel-btn carousel-next" onclick="moverCarrusel(1)">&#8250;</button>
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </section>
 
-  <!-- Catálogo Destacado (1 Pieza por Categoría) -->
+  <!-- Catálogo Destacado (1 Pieza Representativa por Categoría) -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
@@ -1220,7 +49,7 @@
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
-  <!-- Talleres Dinámicos en 3 Columnas -->
+  <!-- Talleres Presenciales en Almax Center -->
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
@@ -1229,7 +58,7 @@
     <div class="talleres-grid" id="grid-talleres"></div>
   </section>
 
-  <!-- Newsletter -->
+  <!-- Newsletter / Comunidad VIP -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
@@ -1246,7 +75,7 @@
   <!-- Modal Detalle Compartido (Productos y Talleres) -->
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
-      <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
+      <span class="close-product-modal" onclick="cerrarModalProducto()">&times;</span>
       <div class="modal-gallery">
         <img id="modal-img-principal" src="" alt="Detalle">
         <div class="modal-thumbs" id="modal-galeria-thumbs"></div>
@@ -1266,7 +95,7 @@
     <div class="carrito-contenido">
       <div class="carrito-header">
         <h3 style="margin:0; font-size:1.3rem;">Tu Carrito de Compras</h3>
-        <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
+        <span class="cerrar-carrito" onclick="toggleCarrito()">&times;</span>
       </div>
 
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
@@ -1337,80 +166,16 @@
     </div>
   </div>
 
-  <!-- Footer con Instagram y WhatsApp -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-col">
-        <h4>Handmade Love by E.L.E</h4>
-        <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
-        </p>
-      </div>
-      <div class="footer-col">
-        <h4>CATEGORÍAS</h4>
-        <ul class="footer-links">
-          <li><a href="velas.html">Velas</a></li>
-          <li><a href="bisuteria.html">Bisutería</a></li>
-          <li><a href="bordado.html">Bordado</a></li>
-          <li><a href="pintura.html">Pintura</a></li>
-          <li><a href="crochet.html">Crochet</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>TALLERES</h4>
-        <ul class="footer-links">
-          <li><a href="#talleres">Almax Center, Samborondón</a></li>
-          <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>SÍGUENOS Y CONTACTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 6px;">
-          Encuentra inspiración y novedades:
-        </p>
-        <p style="margin-bottom: 10px;">
-          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.86rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
-          </a>
-        </p>
-        <a href="https://instagram.com/handmadelovebyele" target="_blank" rel="noopener noreferrer" class="btn-footer-social btn-instagram-footer">
-          <span>📷 @handmadelovebyele</span>
-        </a>
-        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" class="btn-footer-social btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
-        </a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.
-    </div>
-  </footer>
+  <!-- Pie de Página Global Inyectado -->
+  <div id="footer-global"></div>
 
-  <!-- Script Externo del Carrito Unificado -->
+  <!-- Scripts Globales Unificados -->
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
   <script src="carrito.js"></script>
 
-  <!-- Scripts Propios de la Portada (Carrusel, Catálogo y Talleres) -->
+  <!-- Lógica Exclusiva de Portada (Carrusel, Carga de Destacados y Talleres) -->
   <script>
-    function toggleMenuMovil() {
-      const menu = document.getElementById('menu-navegacion');
-      if (menu) menu.classList.toggle('open');
-    }
-
-    function cerrarMenuMovil() {
-      const menu = document.getElementById('menu-navegacion');
-      if (menu) menu.classList.remove('open');
-    }
-
-    function toggleDropdownMovil(e) {
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        const sub = document.getElementById('submenu-categorias');
-        if (sub) {
-          sub.style.display = (sub.style.display === 'block') ? 'none' : 'block';
-        }
-      }
-    }
-
     /* Carrusel de Portada */
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
@@ -1460,17 +225,15 @@
       document.getElementById('newsletter-email').value = '';
     }
 
-    let todosLosProductos = [];
     let productosDestacadosHome = [];
     let todosLosTalleres = [];
 
-    // Respaldo inmediato de productos
     const productosBaseReales = [
       {
         title: "Bolso Granny Square Margaritas",
         categoria: "Crochet",
         precio: 35.00,
-        descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos (granny squares) con margaritas en relieve tridimensional.",
+        descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.",
         imagen: "img/uploads/bolso-granny.jpg"
       },
       {
@@ -1489,7 +252,6 @@
       }
     ];
 
-    // Respaldo inmediato de taller
     const talleresBaseReales = [
       {
         title: "Taller de Arte en Concreto: Joyero Plano",
@@ -1498,7 +260,7 @@
         precio: 25.00,
         cupoMax: 12,
         ocupados: 0,
-        descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar. Aprende técnicas de diseño sobre texturas y llévate una pieza única y funcional lista para tus accesorios.\\n\\nIncluye:\\nJoyero plano de concreto y todos los materiales artísticos (pinturas, pinceles y sellador protector).\\n\\nBrunch completo (bocados salados y dulces).\\n\\nBebidas ilimitadas (café de especialidad, bebidas frías y mimosa de bienvenida).\\n\\nNo necesitas experiencia previa. Cupos limitados.",
+        descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar. Aprende técnicas de diseño sobre texturas y llévate una pieza única y funcional lista para tus accesorios.\n\nIncluye:\nJoyero plano de concreto y todos los materiales artísticos (pinturas, pinceles y sellador protector).\n\nBrunch completo (bocados salados y dulces).\n\nBebidas ilimitadas (café de especialidad, bebidas frías y mimosa de bienvenida).\n\nNo necesitas experiencia previa. Cupos limitados.",
         imagen: "img/uploads/bordado-crochet-varios.jpg"
       }
     ];
@@ -1535,15 +297,12 @@
       if (p.fotos && Array.isArray(p.fotos)) {
         p.fotos.forEach(f => {
           let rutaNorm = normalizarRutaImagen(f);
-          if (rutaNorm && !galeria.includes(rutaNorm)) {
-            galeria.push(rutaNorm);
-          }
+          if (rutaNorm && !galeria.includes(rutaNorm)) galeria.push(rutaNorm);
         });
       }
 
       const imgPrincipal = document.getElementById('modal-img-principal');
       const thumbsContainer = document.getElementById('modal-galeria-thumbs');
-
       imgPrincipal.src = galeria[0] || 'logo.jpg';
       thumbsContainer.innerHTML = '';
 
@@ -1587,7 +346,7 @@
       document.getElementById('modal-titulo').textContent = t.title || 'Taller';
       document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)}` : 'Gratuito';
 
-      let textoCompleto = `📅 Fecha: ${fechaTexto}\\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\\n\\n${t.descripcion || 'Sin descripción adicional.'}`;
+      let textoCompleto = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
       document.getElementById('modal-descripcion').textContent = textoCompleto;
 
       const imgPrincipal = document.getElementById('modal-img-principal');
@@ -1613,7 +372,7 @@
     }
 
     function obtenerUrlCategoria(cat) {
-      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "");
+      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       if (c.includes('vela')) return 'velas.html';
       if (c.includes('bisuteria') || c.includes('joya') || c.includes('pulsera')) return 'bisuteria.html';
       if (c.includes('bordad')) return 'bordado.html';
@@ -1685,7 +444,6 @@
       if (!texto) return null;
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
-      
       const frontmatter = match[1];
       const cuerpoMarkdown = match[2].trim();
       const lineas = frontmatter.split('\n');
@@ -1696,17 +454,13 @@
       lineas.forEach(line => {
         const lineaTrim = line.trim();
         if (!lineaTrim) return;
-
         if (lineaTrim.startsWith('fotos:')) {
           enFotos = true;
           claveActual = 'fotos';
           const resto = lineaTrim.replace('fotos:', '').trim();
-          if (resto && !resto.startsWith('-') && resto !== '[]') {
-            data.fotos.push(resto.replace(/^["']|["']$/g, ''));
-          }
+          if (resto && !resto.startsWith('-') && resto !== '[]') data.fotos.push(resto.replace(/^["']|["']$/g, ''));
           return;
         }
-
         if (enFotos) {
           if (lineaTrim.startsWith('-')) {
             const fItem = lineaTrim.replace(/^[-*\s]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
@@ -1720,14 +474,11 @@
             enFotos = false;
           }
         }
-
         const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
         if (matchClave) {
           claveActual = matchClave[1];
           let val = matchClave[2].trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
-          }
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1);
           data[claveActual] = (val === '>' || val === '|' || val === '>-' || val === '|-') ? '' : val;
         } else if (claveActual && !enFotos) {
           const textoContinuacion = lineaTrim.replace(/^["']|["']$/g, '');
@@ -1735,10 +486,7 @@
         }
       });
 
-      if (!data.descripcion && cuerpoMarkdown) {
-        data.descripcion = cuerpoMarkdown;
-      }
-
+      if (!data.descripcion && cuerpoMarkdown) data.descripcion = cuerpoMarkdown;
       data.title = data.title || data.nombre || 'Creación';
       data.precio = parseFloat(data.precio || data.price || 0) || 0;
       data.imagen = data.imagen || data.foto || (data.fotos && data.fotos[0]) || '';
@@ -1748,12 +496,10 @@
     function extraerDestacadosPorCategoria(productos) {
       if (!Array.isArray(productos) || productos.length === 0) return [];
       const mapa = new Map();
-
       productos.forEach(p => {
         const cat = (p.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         const tit = (p.title || '').toLowerCase();
         let grupo = null;
-
         if (cat.includes('vela') || tit.includes('vela')) grupo = 'Velas';
         else if (cat.includes('bisuteria') || cat.includes('joya') || cat.includes('pulsera') || tit.includes('pulsera')) grupo = 'Bisutería';
         else if (cat.includes('crochet') || cat.includes('tejido') || cat.includes('bolso') || tit.includes('bolso')) grupo = 'Crochet';
@@ -1765,18 +511,15 @@
           mapa.set(grupo, p);
         }
       });
-
       return Array.from(mapa.values());
     }
 
     async function cargarTodo() {
-      // 1. Carga inmediata de respaldo
       productosDestacadosHome = [...productosBaseReales];
       todosLosTalleres = [...talleresBaseReales];
       renderDestacadosHome(productosDestacadosHome);
       renderTalleres(todosLosTalleres);
 
-      // 2. Consulta a GitHub si está disponible
       const cacheBuster = '?t=' + new Date().getTime();
       try {
         const resT = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres' + cacheBuster);
