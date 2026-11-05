@@ -1498,7 +1498,7 @@
         precio: 25.00,
         cupoMax: 12,
         ocupados: 0,
-        descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar. Aprende técnicas de diseño sobre texturas y llévate una pieza única y funcional lista para tus accesorios.\n\nIncluye:\nJoyero plano de concreto y todos los materiales artísticos (pinturas, pinceles y sellador protector).\n\nBrunch completo (bocados salados y dulces).\n\nBebidas ilimitadas (café de especialidad, bebidas frías y mimosa de bienvenida).\n\nNo necesitas experiencia previa. Cupos limitados.",
+        descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar. Aprende técnicas de diseño sobre texturas y llévate una pieza única y funcional lista para tus accesorios.\\n\\nIncluye:\\nJoyero plano de concreto y todos los materiales artísticos (pinturas, pinceles y sellador protector).\\n\\nBrunch completo (bocados salados y dulces).\\n\\nBebidas ilimitadas (café de especialidad, bebidas frías y mimosa de bienvenida).\\n\\nNo necesitas experiencia previa. Cupos limitados.",
         imagen: "img/uploads/bordado-crochet-varios.jpg"
       }
     ];
@@ -1587,7 +1587,7 @@
       document.getElementById('modal-titulo').textContent = t.title || 'Taller';
       document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)}` : 'Gratuito';
 
-      let textoCompleto = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
+      let textoCompleto = `📅 Fecha: ${fechaTexto}\\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\\n\\n${t.descripcion || 'Sin descripción adicional.'}`;
       document.getElementById('modal-descripcion').textContent = textoCompleto;
 
       const imgPrincipal = document.getElementById('modal-img-principal');
@@ -1613,7 +1613,7 @@
     }
 
     function obtenerUrlCategoria(cat) {
-      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "");
       if (c.includes('vela')) return 'velas.html';
       if (c.includes('bisuteria') || c.includes('joya') || c.includes('pulsera')) return 'bisuteria.html';
       if (c.includes('bordad')) return 'bordado.html';
