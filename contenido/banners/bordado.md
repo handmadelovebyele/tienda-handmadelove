@@ -1,6 +1,6 @@
 ---
 title: BORDADO
-titulo: TALLER DE BORDADO BOTÁNICO
-descripcion: TALLER DE BORDADO BOTÁNICO
+titulo: ""
+descripcion: ""
 imagen: img/uploads/banner-web.jpg
 ---
