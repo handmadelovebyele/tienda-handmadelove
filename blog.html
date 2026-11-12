@@ -7,65 +7,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 340px));
-      gap: 2rem;
-      justify-content: center;
-      width: 100%;
-    }
-    .blog-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 340px)); gap: 2rem; justify-content: center; width: 100%; }
+    .blog-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); display: flex; flex-direction: column; cursor: pointer; transition: transform 0.3s; }
     .blog-card:hover { transform: translateY(-4px); }
-    .blog-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      background: #f7f2ed;
-    }
-    .blog-body {
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .blog-meta {
-      font-size: 0.75rem;
-      color: var(--brand-red);
-      font-weight: 600;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
-    .blog-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-    .blog-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-    .btn-leer-blog {
-      margin-top: auto;
-      color: var(--brand-red);
-      font-weight: 600;
-      font-size: 0.85rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
+    .blog-card img { width: 100%; height: 200px; object-fit: cover; background: #f7f2ed; }
+    .blog-body { padding: 1.2rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .blog-meta { font-size: 0.75rem; color: var(--brand-red); font-weight: 600; margin-bottom: 6px; text-transform: uppercase; }
+    .blog-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; line-height: 1.35; }
+    .blog-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+    .btn-leer-blog { margin-top: auto; color: var(--brand-red); font-weight: 600; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
   </style>
 </head>
 <body>
@@ -101,13 +51,8 @@
         <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       </div>
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
-      <div id="lista-carrito">
-        <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
-      </div>
-      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
-        <span>📝 Datos para la Entrega y Pedido</span>
-        <span id="flecha-acordeon">▾</span>
-      </button>
+      <div id="lista-carrito"><p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p></div>
+      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()"><span>📝 Datos para la Entrega y Pedido</span><span id="flecha-acordeon">▾</span></button>
       <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
         <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
@@ -129,10 +74,7 @@
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
-      <div class="carrito-total">
-        <span>TOTAL COMPRA:</span>
-        <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
-      </div>
+      <div class="carrito-total"><span>TOTAL COMPRA:</span><span id="total-precio" style="color: var(--brand-red);">$0.00</span></div>
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -144,12 +86,7 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
-        <strong>Deuna:</strong> 0980526007
+        <strong>Banco:</strong> Banco Internacional<br><strong>Tipo de Cuenta:</strong> Ahorros<br><strong>Número de Cuenta:</strong> 1000900044<br><strong>Titular:</strong> Erika Michelle Alvarado Torres<br><strong>Cédula / R.U.C.:</strong> 0922683552<br><strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
     </div>
@@ -160,26 +97,17 @@
   <script src="header.js"></script>
   <script src="footer.js"></script>
   <script src="carrito.js"></script>
+  <script src="banners.js"></script>
 
   <script>
     let todosLosArticulos = [];
-
     const articulosBase = [
-      {
-        title: "Guía para el cuidado de tus velas de soya",
-        categoria: "Tips de Cuidado",
-        date: "2026-11-01",
-        descripcion: "Descubre cómo prolongar la vida útil de tus velas botánicas, recortar el pabilo y lograr un quemado parejo y limpio.",
-        body: "Las velas de cera de soya son 100% ecológicas y naturales. Para aprovecharlas al máximo:\n\n1. La primera encendida debe durar al menos 2 horas hasta que la cera forme una piscina completa en la superficie.\n2. Recorta el pabilo de algodón a 5 mm antes de cada encendido.\n3. No las dejes expuestas al sol directo para proteger sus aceites esenciales.",
-        imagen: "img/uploads/velas-varias.jpg",
-        archivo: ""
-      }
+      { title: "Guía para el cuidado de tus velas de soya", categoria: "Tips de Cuidado", date: "2026-11-01", descripcion: "Descubre cómo prolongar la vida útil de tus velas botánicas, recortar el pabilo y lograr un quemado parejo y limpio.", body: "Las velas de cera de soya son 100% ecológicas y naturales. Para aprovecharlas al máximo:\n\n1. La primera encendida debe durar al menos 2 horas hasta que la cera forme una piscina completa en la superficie.\n2. Recorta el pabilo de algodón a 5 mm antes de cada encendido.\n3. No las dejes expuestas al sol directo para proteger sus aceites esenciales.", imagen: "img/uploads/velas-varias.jpg", archivo: "" }
     ];
 
     function abrirModalBlog(index) {
       const art = todosLosArticulos[index];
       if (!art) return;
-
       document.getElementById('modal-categoria').textContent = `${art.categoria || 'Técnicas'} · ${art.date || ''}`;
       document.getElementById('modal-titulo').textContent = art.title || '';
       document.getElementById('modal-descripcion').innerHTML = (art.body || art.descripcion || '').replace(/\n/g, '<br>');
@@ -237,9 +165,7 @@
         if (colon > 0) {
           const key = line.slice(0, colon).trim();
           let val = line.slice(colon + 1).trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
-          }
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1);
           data[key] = val;
         }
       });
