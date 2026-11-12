@@ -11,5 +11,5 @@ descripcion: ¿Quieres crear un accesorio de moda único y comercializable? En
   clave para bordar sobre tela de uso diario sin deformarla, elige los
   materiales duraderos correctos y aprende a costear tu pieza para iniciar tu
   propio emprendimiento de accesorios artesanales. ¡Lleva tu arte a la calle!
-imagen: img/uploads/post-bordado.jpg
+imagen: img/uploads/taller-bordado-botanico.jpg
 ---
