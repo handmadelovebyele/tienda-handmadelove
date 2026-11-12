@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Handmade Love by E.L.E & EMOCION-ARTE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <!-- Estilos Globales Unificados -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Cabecera Global Inyectada -->
   <div id="header-global"></div>
 
   <!-- Hero Principal con Carrusel -->
@@ -34,13 +32,13 @@
       <div class="hero-slide">
         <img src="img/uploads/pulseras-varias.jpg" alt="Pulseras y joyería artesanal">
       </div>
-      <button type="button" class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">&#8249;</button>
-      <button type="button" class="carousel-btn carousel-next" onclick="moverCarrusel(1)">&#8250;</button>
+      <button type="button" class="carousel-btn carousel-prev" onclick="moverCarrusel(-1)">‹</button>
+      <button type="button" class="carousel-btn carousel-next" onclick="moverCarrusel(1)">›</button>
       <div class="carousel-dots" id="carousel-dots"></div>
     </div>
   </section>
 
-  <!-- Catálogo Destacado (1 Pieza Representativa por Categoría) -->
+  <!-- Catálogo Destacado -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
@@ -49,7 +47,7 @@
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
-  <!-- Talleres Presenciales en Almax Center -->
+  <!-- Talleres Presenciales -->
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
@@ -58,7 +56,7 @@
     <div class="talleres-grid" id="grid-talleres"></div>
   </section>
 
-  <!-- Newsletter / Comunidad VIP -->
+  <!-- Newsletter -->
   <section class="newsletter-section">
     <div class="newsletter-container">
       <h2>Únete a nuestra Comunidad VIP</h2>
@@ -72,10 +70,10 @@
     </div>
   </section>
 
-  <!-- Modal Detalle Compartido (Productos y Talleres) -->
+  <!-- Modal Detalle Compartido -->
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
-      <span class="close-product-modal" onclick="cerrarModalProducto()">&times;</span>
+      <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
       <div class="modal-gallery">
         <img id="modal-img-principal" src="" alt="Detalle">
         <div class="modal-thumbs" id="modal-galeria-thumbs"></div>
@@ -90,59 +88,46 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito SIN IVA -->
+  <!-- Modal del Carrito -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
         <h3 style="margin:0; font-size:1.3rem;">Tu Carrito de Compras</h3>
-        <span class="cerrar-carrito" onclick="toggleCarrito()">&times;</span>
+        <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       </div>
-
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
-
       <div id="lista-carrito">
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
-
-      <!-- Botón Acordeón Desplegable -->
       <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
         <span>📝 Datos para la Entrega y Pedido</span>
         <span id="flecha-acordeon">▾</span>
       </button>
-
-      <!-- Campos de Entrega Requeridos -->
       <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
         <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
           <option value="envio">Envío a Domicilio (Por cotizar)</option>
           <option value="retiro">Retiro en Taller (Almax Center, Samborondón)</option>
         </select>
-
         <label for="input-nombre">Tu Nombre y Apellido: <span class="req">*</span></label>
         <input type="text" id="input-nombre" placeholder="Ej: María Pérez" required>
-
         <label for="input-telefono">Celular / WhatsApp: <span class="req">*</span></label>
         <input type="tel" id="input-telefono" placeholder="Ej: 0980526007" required>
-
         <label for="input-correo">Correo Electrónico: <span class="req">*</span></label>
         <input type="email" id="input-correo" placeholder="correo@ejemplo.com" required>
-
         <div id="campo-sector-entrega">
           <label for="input-ubicacion">Sector o Dirección de Entrega: <span class="req">*</span></label>
           <input type="text" id="input-ubicacion" placeholder="Ej: Samborondón, Daule, Ceibos, Guayaquil, etc.">
         </div>
       </div>
-
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
-
       <div class="carrito-total">
         <span>TOTAL COMPRA:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
-
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -166,17 +151,14 @@
     </div>
   </div>
 
-  <!-- Pie de Página Global Inyectado -->
   <div id="footer-global"></div>
 
-  <!-- Scripts Globales Unificados -->
   <script src="header.js"></script>
   <script src="footer.js"></script>
   <script src="carrito.js"></script>
+  <script src="promociones.js"></script>
 
-  <!-- Lógica Exclusiva de Portada (Carrusel, Carga de Destacados y Talleres) -->
   <script>
-    /* Carrusel de Portada */
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
     const dotsContainer = document.getElementById('carousel-dots');
@@ -199,27 +181,17 @@
       dots[currentSlide].classList.add('active');
     }
 
-    function moverCarrusel(direction) {
-      updateSlide(currentSlide + direction);
-    }
-
-    function goToSlide(index) {
-      updateSlide(index);
-    }
-
-    setInterval(() => {
-      moverCarrusel(1);
-    }, 4000);
+    function moverCarrusel(direction) { updateSlide(currentSlide + direction); }
+    function goToSlide(index) { updateSlide(index); }
+    setInterval(() => { moverCarrusel(1); }, 4000);
 
     function suscribirNewsletter(e) {
       e.preventDefault();
       const nombre = document.getElementById('newsletter-nombre').value.trim();
       const telefono = document.getElementById('newsletter-telefono').value.trim();
       const correo = document.getElementById('newsletter-email').value.trim();
-
       enviarBaseDatos('Suscripción Comunidad VIP', nombre, telefono, correo, 'Alta en boletín de noticias y talleres', '$0.00');
       alert(`¡Bienvenida a la Comunidad VIP, ${nombre}! Te hemos registrado con éxito.`);
-      
       document.getElementById('newsletter-nombre').value = '';
       document.getElementById('newsletter-telefono').value = '';
       document.getElementById('newsletter-email').value = '';
@@ -229,40 +201,13 @@
     let todosLosTalleres = [];
 
     const productosBaseReales = [
-      {
-        title: "Bolso Granny Square Margaritas",
-        categoria: "Crochet",
-        precio: 35.00,
-        descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.",
-        imagen: "img/uploads/bolso-granny.jpg"
-      },
-      {
-        title: "Vainilla Silvestre 180g",
-        categoria: "Velas",
-        precio: 16.50,
-        descripcion: "Vela artesanal de cera de soya con aroma dulce y cálido a vainilla en envase de vidrio.",
-        imagen: "img/uploads/velas-varias.jpg"
-      },
-      {
-        title: "Pulsera de Hilo Rojo con Perlas",
-        categoria: "Bisutería",
-        precio: 9.99,
-        descripcion: "Pulsera artesanal de hilo rojo de protección tejida a mano con perlas de río y dijes laminados en oro de 18k.",
-        imagen: "pulsera-secundaria.jpg"
-      }
+      { title: "Bolso Granny Square Margaritas", categoria: "Crochet", precio: 35.00, descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.", imagen: "img/uploads/bolso-granny.jpg" },
+      { title: "Vainilla Silvestre 180g", categoria: "Velas", precio: 16.50, descripcion: "Vela artesanal de cera de soya con aroma dulce y cálido a vainilla en envase de vidrio.", imagen: "img/uploads/velas-varias.jpg" },
+      { title: "Pulsera de Hilo Rojo con Perlas", categoria: "Bisutería", precio: 9.99, descripcion: "Pulsera artesanal de hilo rojo de protección tejida a mano con perlas de río y dijes laminados en oro de 18k.", imagen: "pulsera-secundaria.jpg" }
     ];
 
     const talleresBaseReales = [
-      {
-        title: "Taller de Arte en Concreto: Joyero Plano",
-        fecha: "2026-11-21T09:00:00.000-05:00",
-        lugar: "Almax Center, Samborondón",
-        precio: 25.00,
-        cupoMax: 12,
-        ocupados: 0,
-        descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar. Aprende técnicas de diseño sobre texturas y llévate una pieza única y funcional lista para tus accesorios.\n\nIncluye:\nJoyero plano de concreto y todos los materiales artísticos (pinturas, pinceles y sellador protector).\n\nBrunch completo (bocados salados y dulces).\n\nBebidas ilimitadas (café de especialidad, bebidas frías y mimosa de bienvenida).\n\nNo necesitas experiencia previa. Cupos limitados.",
-        imagen: "img/uploads/bordado-crochet-varios.jpg"
-      }
+      { title: "Taller de Arte en Concreto: Joyero Plano", fecha: "2026-11-21T09:00:00.000-05:00", lugar: "Almax Center, Samborondón", precio: 25.00, cupoMax: 12, ocupados: 0, descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar.", imagen: "img/uploads/bordado-crochet-varios.jpg" }
     ];
 
     function formatearFechaLegible(fechaRaw) {
@@ -270,30 +215,27 @@
       try {
         const d = new Date(fechaRaw);
         if (isNaN(d.getTime())) return fechaRaw;
-        const dia = String(d.getDate()).padStart(2, '0');
-        const mes = String(d.getMonth() + 1).padStart(2, '0');
-        const anio = d.getFullYear();
-        const horas = String(d.getHours()).padStart(2, '0');
-        const minutos = String(d.getMinutes()).padStart(2, '0');
-        return `${dia}/${mes}/${anio} - ${horas}:${minutos}`;
-      } catch (e) {
-        return fechaRaw;
-      }
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()} - ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+      } catch (e) { return fechaRaw; }
     }
 
     function abrirModalProducto(index) {
       const p = productosDestacadosHome[index];
       if (!p) return;
+      const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
 
       document.getElementById('modal-categoria').textContent = p.categoria || 'Creación';
       document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${(parseFloat(p.precio) || 0).toFixed(2)}`;
+      if (infoPrecio.tieneDescuento) {
+        document.getElementById('modal-precio').innerHTML = `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span> $${infoPrecio.precioFinal.toFixed(2)} <span style="font-size:0.75rem; background:#fdf2f2; padding:2px 8px; border-radius:10px;">-${infoPrecio.porcentaje}% OFF</span>`;
+      } else {
+        document.getElementById('modal-precio').textContent = `$${infoPrecio.precioFinal.toFixed(2)}`;
+      }
       document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
 
       let galeria = [];
       const portada = normalizarRutaImagen(p.imagen);
       if (portada) galeria.push(portada);
-
       if (p.fotos && Array.isArray(p.fotos)) {
         p.fotos.forEach(f => {
           let rutaNorm = normalizarRutaImagen(f);
@@ -324,7 +266,7 @@
       btnComprar.textContent = '+ Agregar al Carrito';
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(p.title, p.precio, portada, false);
+        agregarAlCarrito(p.title, infoPrecio.precioFinal, portada, false);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -334,7 +276,6 @@
     function abrirModalTaller(index) {
       const t = todosLosTalleres[index];
       if (!t) return;
-
       const precioNum = parseFloat(t.precio) || 0;
       const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
       const max = parseInt(t.cupoMax) || 10;
@@ -345,14 +286,10 @@
       document.getElementById('modal-categoria').textContent = 'Taller Presencial EMOCION-ARTE';
       document.getElementById('modal-titulo').textContent = t.title || 'Taller';
       document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)}` : 'Gratuito';
+      document.getElementById('modal-descripcion').textContent = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || ''}`;
 
-      let textoCompleto = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || 'Sin descripción adicional.'}`;
-      document.getElementById('modal-descripcion').textContent = textoCompleto;
-
-      const imgPrincipal = document.getElementById('modal-img-principal');
-      const thumbsContainer = document.getElementById('modal-galeria-thumbs');
-      imgPrincipal.src = fotoTaller;
-      thumbsContainer.innerHTML = '';
+      document.getElementById('modal-img-principal').src = fotoTaller;
+      document.getElementById('modal-galeria-thumbs').innerHTML = '';
 
       const btnComprar = document.getElementById('modal-btn-comprar');
       btnComprar.textContent = disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera';
@@ -385,19 +322,26 @@
       const grid = document.getElementById('grid-productos');
       if (!grid) return;
       grid.innerHTML = lista.map((p, index) => {
-        const precioNum = parseFloat(p.precio) || 0;
+        const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
         const fotoCard = normalizarRutaImagen(p.imagen);
         const urlCat = obtenerUrlCategoria(p.categoria);
+
+        const badgeHTML = infoPrecio.tieneDescuento ? `<span class="badge-descuento">-${infoPrecio.porcentaje}% OFF</span>` : '';
+        const precioHTML = infoPrecio.tieneDescuento 
+          ? `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span>$${infoPrecio.precioFinal.toFixed(2)}`
+          : `$${infoPrecio.precioFinal.toFixed(2)}`;
+
         return `
           <div class="card" onclick="abrirModalProducto(${index})">
+            ${badgeHTML}
             <img src="${fotoCard}" alt="${p.title}" onerror="this.src='logo.jpg'">
             <div class="card-body">
               <span class="card-tag">${p.categoria || 'Creación'}</span>
               <h3 class="card-title" title="${p.title}">${p.title}</h3>
               <p class="card-desc">${p.descripcion || ''}</p>
               <div class="card-footer">
-                <span class="card-price">$${precioNum.toFixed(2)}</span>
-                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}', false)">+ Agregar</button>
+                <span class="card-price">${precioHTML}</span>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${infoPrecio.precioFinal}, '${fotoCard}', false)">+ Agregar</button>
               </div>
               <a href="${urlCat}" onclick="event.stopPropagation();" style="display:block; text-align:center; margin-top:10px; font-size:0.8rem; color:var(--brand-red); font-weight:600; text-decoration:none;">Ver más en ${p.categoria} →</a>
             </div>
@@ -455,8 +399,7 @@
         const lineaTrim = line.trim();
         if (!lineaTrim) return;
         if (lineaTrim.startsWith('fotos:')) {
-          enFotos = true;
-          claveActual = 'fotos';
+          enFotos = true; claveActual = 'fotos';
           const resto = lineaTrim.replace('fotos:', '').trim();
           if (resto && !resto.startsWith('-') && resto !== '[]') data.fotos.push(resto.replace(/^["']|["']$/g, ''));
           return;
@@ -470,9 +413,7 @@
             const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
             if (fItem) data.fotos.push(fItem);
             return;
-          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
-            enFotos = false;
-          }
+          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) { enFotos = false; }
         }
         const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
         if (matchClave) {
@@ -553,6 +494,7 @@
       } catch (err) {}
     }
 
+    window.addEventListener('promocionesListas', () => renderDestacadosHome(productosDestacadosHome));
     cargarTodo();
   </script>
 </body>
