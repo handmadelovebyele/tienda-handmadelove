@@ -19,13 +19,13 @@ collections:
       - { label: "Imagen de Fondo", name: "imagen", widget: "image" }
 
   - name: "promociones"
-    label: "Descuentos por Fechas (Por Categoría o Tienda)"
+    label: "Descuentos por Fechas (Por Categoría, Talleres o Tienda)"
     folder: "contenido/promociones"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Nombre de la Campaña (ej: Especial Navidad)", name: "title", widget: "string" }
-      - { label: "Aplica a Categoría", name: "categoria", widget: "select", options: ["Todas", "Velas", "Bisutería", "Bordado", "Pintura", "Crochet"] }
+      - { label: "Nombre de la Campaña (ej: Pronto Pago Noviembre)", name: "title", widget: "string" }
+      - { label: "Aplica a", name: "categoria", widget: "select", options: ["Todas", "Talleres", "Velas", "Bisutería", "Bordado", "Pintura", "Crochet"] }
       - { label: "Porcentaje de Descuento (%)", name: "descuento", widget: "number", value_type: "int", min: 0, max: 90, default: 10 }
       - { label: "Fecha de Inicio", name: "fechaInicio", widget: "datetime" }
       - { label: "Fecha de Fin", name: "fechaFin", widget: "datetime" }
@@ -59,9 +59,12 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Nombre del Taller", name: "title", widget: "string" }
-      - { label: "Fecha y Hora", name: "fecha", widget: "datetime" }
+      - { label: "Fecha y Hora del Taller", name: "fecha", widget: "datetime" }
       - { label: "Lugar", name: "lugar", widget: "string", default: "Almax Center, Samborondón" }
-      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Pronto Pago (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio Pronto Pago (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fecha Límite Pronto Pago (Opcional)", name: "fechaFin", widget: "datetime", required: false }
       - { label: "Cupo Máximo", name: "cupoMax", widget: "number", value_type: "int", default: 10 }
       - { label: "Cupos Ocupados", name: "ocupados", widget: "number", value_type: "int", default: 0 }
       - { label: "Descripción", name: "descripcion", widget: "text" }
