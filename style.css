@@ -194,3 +194,26 @@ header.navbar {
   .footer-container { display: flex !important; flex-direction: column !important; }
   .btn-footer-social { max-width: 100% !important; }
 }
+/* Etiquetas de Descuento y Precios Promocionales */
+.card { position: relative; }
+.badge-descuento {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--brand-red);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 5;
+  letter-spacing: 0.5px;
+}
+.precio-tachado {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin-right: 6px;
+}
