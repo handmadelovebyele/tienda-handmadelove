@@ -99,9 +99,6 @@
 
   <script>
     let todasLasVelas = [];
-    const velasBaseReales = [
-      { title: "Vainilla Silvestre 180g", subcategoria: "Frascos de Vidrio", categoria: "Velas", precio: 16.50, descripcion: "Vela artesanal de cera de soya con aroma dulce y cálido a vainilla en envase de vidrio decorado con flores secas botánicas.", imagen: "img/uploads/velas-varias.jpg" }
-    ];
 
     function abrirModalProducto(index) {
       const p = todasLasVelas[index];
@@ -166,7 +163,7 @@
       const grid = document.getElementById('grid-productos');
       if (!grid) return;
       if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay velas en esta subcategoría.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">Próximamente nuevas velas artesanales en esta colección.</p>';
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
@@ -216,9 +213,8 @@
       const subcategoriasDetectadas = new Set();
       todasLasVelas.forEach(p => { if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim()); });
       if (subcategoriasDetectadas.size === 0) {
-        subcategoriasDetectadas.add("Frascos de Vidrio");
-        subcategoriasDetectadas.add("Escultóricas");
-        subcategoriasDetectadas.add("Edición Especial");
+        cont.innerHTML = '';
+        return;
       }
       let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas', this)">Todas las Velas</button>`;
       subcategoriasDetectadas.forEach(sub => { htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`; });
@@ -276,10 +272,6 @@
     }
 
     async function cargarCatalogo() {
-      todasLasVelas = [...velasBaseReales];
-      construirBotonesSubcategorias();
-      render(todasLasVelas);
-
       const cacheBuster = '?t=' + new Date().getTime();
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
@@ -289,19 +281,16 @@
             const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
             const contenidos = await Promise.all(promesas);
             const productosCMS = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-            const filtradas = productosCMS.filter(p => {
+            todasLasVelas = productosCMS.filter(p => {
               const c = (p.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
               const t = (p.title || '').toLowerCase();
               return c.includes('vela') || t.includes('vela');
             });
-            if (filtradas.length > 0) {
-              todasLasVelas = filtradas;
-              construirBotonesSubcategorias();
-              render(todasLasVelas);
-            }
           }
         }
       } catch (err) {}
+      construirBotonesSubcategorias();
+      render(todasLasVelas);
     }
 
     window.addEventListener('promocionesListas', () => render(todasLasVelas));
