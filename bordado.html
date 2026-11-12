@@ -9,19 +9,24 @@
 </head>
 <body>
 
+  <!-- Cabecera Global Inyectada -->
   <div id="header-global"></div>
 
+  <!-- Hero Categoría (Se actualiza automáticamente con banners.js) -->
   <section class="categoria-hero" id="banner-categoria" style="background: linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url('img/uploads/bordado-crochet-varios.jpg') center/cover no-repeat;">
     <h1>Bordado Contemporáneo & Botánico</h1>
     <p>Bastidores decorativos, accesorios en relieve y piezas botánicas bordadas puntada a puntada sobre lino natural.</p>
   </section>
 
+  <!-- Pestañas Dinámicas de Subcategorías -->
   <div class="subcat-container" id="subcat-container"></div>
 
+  <!-- Cuadrícula de Productos -->
   <main class="catalogo-section">
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
+  <!-- Modal Detalle Compartido -->
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
@@ -41,6 +46,7 @@
     </div>
   </div>
 
+  <!-- Modal del Carrito Global -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -86,6 +92,7 @@
     </div>
   </div>
 
+  <!-- Modal Datos Bancarios -->
   <div id="modal-banco" class="modal-banco" onclick="if(event.target.id === 'modal-banco') cerrarDatosBancarios()">
     <div class="modal-banco-content">
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
@@ -102,12 +109,17 @@
     </div>
   </div>
 
+  <!-- Pie de Página Global Inyectado -->
   <div id="footer-global"></div>
 
+  <!-- Scripts Globales Unificados -->
   <script src="header.js"></script>
   <script src="footer.js"></script>
   <script src="carrito.js"></script>
+  <script src="banners.js"></script>
+  <script src="promociones.js"></script>
 
+  <!-- Lógica Específica de Bordado -->
   <script>
     let todosLosBordados = [];
     const bordadosBaseReales = [
@@ -124,9 +136,15 @@
     function abrirModalProducto(index) {
       const p = todosLosBordados[index];
       if (!p) return;
+      const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
+
       document.getElementById('modal-categoria').textContent = p.subcategoria ? `Bordado · ${p.subcategoria}` : (p.categoria || 'Bordado');
       document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${(parseFloat(p.precio) || 0).toFixed(2)}`;
+      if (infoPrecio.tieneDescuento) {
+        document.getElementById('modal-precio').innerHTML = `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span> $${infoPrecio.precioFinal.toFixed(2)} <span style="font-size:0.75rem; background:#fdf2f2; padding:2px 8px; border-radius:10px;">-${infoPrecio.porcentaje}% OFF</span>`;
+      } else {
+        document.getElementById('modal-precio').textContent = `$${infoPrecio.precioFinal.toFixed(2)}`;
+      }
       document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
 
       let galeria = [];
@@ -161,7 +179,7 @@
       const btnComprar = document.getElementById('modal-btn-comprar');
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(p.title, p.precio, portada);
+        agregarAlCarrito(p.title, infoPrecio.precioFinal, portada);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -182,17 +200,23 @@
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
-        const precioNum = parseFloat(p.precio) || 0;
+        const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
         const fotoCard = normalizarRutaImagen(p.imagen);
+        const badgeHTML = infoPrecio.tieneDescuento ? `<span class="badge-descuento">-${infoPrecio.porcentaje}% OFF</span>` : '';
+        const precioHTML = infoPrecio.tieneDescuento 
+          ? `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span>$${infoPrecio.precioFinal.toFixed(2)}`
+          : `$${infoPrecio.precioFinal.toFixed(2)}`;
+
         return `
           <div class="card" onclick="abrirModalProducto(${index})">
+            ${badgeHTML}
             <img src="${fotoCard}" alt="${p.title}" onerror="this.src='logo.jpg'">
             <div class="card-body">
               <h3 class="card-title" title="${p.title}">${p.title}</h3>
               <p class="card-desc">${p.descripcion || ''}</p>
               <div class="card-footer">
-                <span class="card-price">$${precioNum.toFixed(2)}</span>
-                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}')">+ Agregar</button>
+                <span class="card-price">${precioHTML}</span>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${infoPrecio.precioFinal}, '${fotoCard}')">+ Agregar</button>
               </div>
             </div>
           </div>
@@ -220,17 +244,13 @@
       const cont = document.getElementById('subcat-container');
       if (!cont) return;
       const subcategoriasDetectadas = new Set();
-      todosLosBordados.forEach(p => {
-        if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim());
-      });
+      todosLosBordados.forEach(p => { if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim()); });
       if (subcategoriasDetectadas.size === 0) {
         subcategoriasDetectadas.add("Bastidores");
         subcategoriasDetectadas.add("Accesorios");
       }
       let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas', this)">Todas las Piezas</button>`;
-      subcategoriasDetectadas.forEach(sub => {
-        htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`;
-      });
+      subcategoriasDetectadas.forEach(sub => { htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`; });
       cont.innerHTML = htmlBotones;
     }
 
@@ -249,8 +269,7 @@
         const lineaTrim = line.trim();
         if (!lineaTrim) return;
         if (lineaTrim.startsWith('fotos:')) {
-          enFotos = true;
-          claveActual = 'fotos';
+          enFotos = true; claveActual = 'fotos';
           const resto = lineaTrim.replace('fotos:', '').trim();
           if (resto && !resto.startsWith('-') && resto !== '[]') data.fotos.push(resto.replace(/^["']|["']$/g, ''));
           return;
@@ -264,9 +283,7 @@
             const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
             if (fItem) data.fotos.push(fItem);
             return;
-          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
-            enFotos = false;
-          }
+          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) { enFotos = false; }
         }
         const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
         if (matchClave) {
@@ -316,6 +333,7 @@
       } catch (err) {}
     }
 
+    window.addEventListener('promocionesListas', () => render(todosLosBordados));
     cargarCatalogo();
   </script>
 </body>
