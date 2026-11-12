@@ -1,5 +1,5 @@
 /* =========================================================
-   MOTOR DE DESCUENTOS Y CUPONES | HANDMADE LOVE BY E.L.E
+   MOTOR DE DESCUENTOS Y CUPONES AVANZADOS | HANDMADE LOVE BY E.L.E
    ========================================================= */
 
 let campanasPromocionales = [];
@@ -105,9 +105,18 @@ function aplicarCodigoCupon() {
   } else {
     window.cuponAplicado = {
       codigo: codigoIngresado,
-      porcentaje: parseInt(encontrado.descuento) || 0
+      categoria: (encontrado.categoria || 'Todas').trim(),
+      porcentaje: parseInt(encontrado.descuento) || 0,
+      montoMinimo: parseFloat(encontrado.montoMinimo) || 0,
+      acumulable: String(encontrado.acumulable) === 'true',
+      usoUnico: String(encontrado.usoUnico) !== 'false'
     };
-    msg.textContent = `✅ Cupón ${codigoIngresado} aplicado (-${window.cuponAplicado.porcentaje}%)`;
+
+    const etiquetaCat = window.cuponAplicado.categoria.toLowerCase() === 'todas'
+      ? 'toda la tienda'
+      : window.cuponAplicado.categoria;
+
+    msg.textContent = `✅ Cupón ${codigoIngresado} (-${window.cuponAplicado.porcentaje}% en ${etiquetaCat})`;
     msg.style.color = '#2e7d32';
   }
 
