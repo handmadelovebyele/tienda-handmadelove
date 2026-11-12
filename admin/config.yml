@@ -13,10 +13,23 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Identificador de Página (ej: velas, bisuteria, crochet)", name: "title", widget: "string" }
-      - { label: "Título Principal del Banner", name: "titulo", widget: "string" }
-      - { label: "Mensaje / Promoción", name: "descripcion", widget: "text" }
+      - { label: "Identificador (velas, bisuteria, bordado, pintura, crochet, blog)", name: "title", widget: "string" }
+      - { label: "Título Principal del Banner", name: "titulo", widget: "string", required: false }
+      - { label: "Mensaje / Descripción Promocional", name: "descripcion", widget: "text", required: false }
       - { label: "Imagen de Fondo", name: "imagen", widget: "image" }
+
+  - name: "promociones"
+    label: "Descuentos por Fechas (Por Categoría o Tienda)"
+    folder: "contenido/promociones"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre de la Campaña (ej: Especial Navidad)", name: "title", widget: "string" }
+      - { label: "Aplica a Categoría", name: "categoria", widget: "select", options: ["Todas", "Velas", "Bisutería", "Bordado", "Pintura", "Crochet"] }
+      - { label: "Porcentaje de Descuento (%)", name: "descuento", widget: "number", value_type: "int", min: 0, max: 90, default: 10 }
+      - { label: "Fecha de Inicio", name: "fechaInicio", widget: "datetime" }
+      - { label: "Fecha de Fin", name: "fechaFin", widget: "datetime" }
+      - { label: "Activa", name: "activa", widget: "boolean", default: true }
 
   - name: "productos"
     label: "Productos y Creaciones"
@@ -27,7 +40,10 @@ collections:
       - { label: "Título de la Pieza", name: "title", widget: "string" }
       - { label: "Categoría Principal", name: "categoria", widget: "select", options: ["Velas", "Bisutería", "Bordado", "Pintura", "Crochet"] }
       - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
-      - { label: "Precio ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Individual (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio del Descuento (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fin del Descuento (Opcional)", name: "fechaFin", widget: "datetime", required: false }
       - { label: "Descripción", name: "descripcion", widget: "text" }
       - { label: "Imagen de Portada", name: "imagen", widget: "image" }
       - label: "Galería de Fotos Adicionales"
