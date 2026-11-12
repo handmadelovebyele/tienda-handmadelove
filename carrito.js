@@ -1,182 +1,18 @@
 /* =========================================================
-   CARRITO UNIFICADO | HANDMADE LOVE BY E.L.E & EMOCION-ARTE
+   CARRITO DE COMPRAS UNIFICADO + CUPONES | HANDMADE LOVE BY E.L.E
    ========================================================= */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
-let carrito = JSON.parse(localStorage.getItem('carrito_hml') || '[]');
 
-function guardarCarrito() {
-  localStorage.setItem('carrito_hml', JSON.stringify(carrito));
-}
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
+let carrito = JSON.parse(localStorage.getItem('carrito_handmadelove')) || [];
 
 function normalizarRutaImagen(ruta) {
   if (!ruta) return 'logo.jpg';
-  let r = String(ruta).trim().replace(/^["']|["']$/g, '');
-  if (r.startsWith('http://') || r.startsWith('https://')) return r;
-  r = r.replace(/^\.?\/?img\/uploads\//, '').replace(/^\.?\//, '');
-  return 'img/uploads/' + r;
-}
-
-function toggleCarrito() {
-  const modal = document.getElementById('modal-carrito');
-  if (modal) modal.classList.toggle('oculto');
-}
-
-function toggleDesplegableDatos() {
-  const caja = document.getElementById('caja-formulario-entrega');
-  const flecha = document.getElementById('flecha-acordeon');
-  if (caja) {
-    caja.classList.toggle('abierta');
-    if (flecha) flecha.textContent = caja.classList.contains('abierta') ? '▴' : '▾';
-  }
-}
-
-function cambiarModalidadEntrega() {
-  const selectMod = document.getElementById('select-modalidad');
-  const campoSector = document.getElementById('campo-sector-entrega');
-  const resumenTexto = document.getElementById('resumen-envio-texto');
-  if (!selectMod) return;
-
-  if (selectMod.value === 'retiro') {
-    if (campoSector) campoSector.style.display = 'none';
-    if (resumenTexto) resumenTexto.textContent = 'Retiro en Taller (Gratis)';
-  } else {
-    if (campoSector) campoSector.style.display = 'block';
-    if (resumenTexto) resumenTexto.textContent = 'Por cotizar según dirección';
-  }
-}
-
-function mostrarAvisoToast(mensaje) {
-  let toast = document.getElementById('toast-aviso');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toast-aviso';
-    toast.style.cssText = `
-      position: fixed; bottom: 25px; right: 25px;
-      background: #231F1C; color: #FAF7F2; padding: 12px 20px;
-      border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-      font-size: 0.88rem; font-weight: 500; z-index: 4000;
-      opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;
-      transform: translateY(10px); pointer-events: none;
-    `;
-    document.body.appendChild(toast);
-  }
-  toast.textContent = mensaje;
-  toast.style.opacity = '1';
-  toast.style.transform = 'translateY(0)';
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateY(10px)';
-  }, 2000);
-}
-
-function agregarAlCarrito(nombre, precio, imagen, esTaller = false) {
-  const precioNumerico = parseFloat(precio) || 0;
-  const fotoItem = normalizarRutaImagen(imagen);
-  const encontrado = carrito.find(item => item.nombre === nombre);
-  
-  if (encontrado) {
-    encontrado.cantidad += 1;
-    if (!encontrado.imagen && fotoItem) encontrado.imagen = fotoItem;
-  } else {
-    carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem, esTaller: !!esTaller });
-  }
-
-  guardarCarrito();
-  actualizarCarrito();
-  
-  const modalProd = document.getElementById('modal-producto');
-  if (modalProd) modalProd.classList.remove('open');
-  document.body.style.overflow = 'auto';
-
-  mostrarAvisoToast(`"${nombre}" añadido al carrito 🛒`);
-}
-
-function cambiarCantidad(index, delta) {
-  if (!carrito[index]) return;
-  carrito[index].cantidad += delta;
-  if (carrito[index].cantidad <= 0) {
-    carrito.splice(index, 1);
-  }
-  guardarCarrito();
-  actualizarCarrito();
-}
-
-/* Cálculo Neto - Cero IVA */
-function actualizarCarrito() {
-  const lista = document.getElementById('lista-carrito');
-  const contadorDesktop = document.getElementById('cart-num');
-  const contadorMobile = document.querySelector('.cart-num-mobile');
-  const subtotalEl = document.getElementById('cart-subtotal');
-  const totalEl = document.getElementById('total-precio');
-
-  let totalItems = 0;
-  carrito.forEach(item => totalItems += item.cantidad);
-  
-  if (contadorDesktop) contadorDesktop.textContent = totalItems;
-  if (contadorMobile) contadorMobile.textContent = totalItems;
-
-  if (carrito.length === 0) {
-    if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
-    if (subtotalEl) subtotalEl.textContent = '$0.00';
-    if (totalEl) totalEl.textContent = '$0.00';
-    return;
-  }
-
-  let totalGeneral = 0;
-
-  if (lista) {
-    lista.innerHTML = carrito.map((item, index) => {
-      const precioItem = parseFloat(item.precio) || 0;
-      const totalLinea = precioItem * item.cantidad;
-      totalGeneral += totalLinea;
-
-      const miniatura = item.imagen || 'logo.jpg';
-      return `
-        <div class="item-carrito">
-          <div class="item-izq">
-            <img src="${miniatura}" alt="${item.nombre}" class="item-thumb-carrito" onerror="this.src='logo.jpg'">
-            <div class="item-info">
-              <strong title="${item.nombre}">${item.nombre}</strong>
-              <span>$${totalLinea.toFixed(2)}</span>
-            </div>
-          </div>
-          <div class="item-controls">
-            <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
-            <span>${item.cantidad}</span>
-            <button type="button" onclick="cambiarCantidad(${index}, 1)">+</button>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  if (subtotalEl) subtotalEl.textContent = `$${totalGeneral.toFixed(2)}`;
-  if (totalEl) totalEl.textContent = `$${totalGeneral.toFixed(2)}`;
-}
-
-function validarYObtenerDatosCliente() {
-  const nombre = (document.getElementById('input-nombre')?.value || '').trim();
-  const telefono = (document.getElementById('input-telefono')?.value || '').trim();
-  const correo = (document.getElementById('input-correo')?.value || '').trim();
-  const selectMod = document.getElementById('select-modalidad');
-  const modalidad = selectMod ? selectMod.value : 'envio';
-  const ubicacion = (document.getElementById('input-ubicacion')?.value || '').trim();
-
-  const caja = document.getElementById('caja-formulario-entrega');
-  const flecha = document.getElementById('flecha-acordeon');
-
-  if (!nombre || !telefono || !correo || (modalidad === 'envio' && !ubicacion)) {
-    if (caja) caja.classList.add('abierta');
-    if (flecha) flecha.textContent = '▴';
-
-    if (!nombre) { alert('Por favor ingresa tu Nombre y Apellido para continuar.'); document.getElementById('input-nombre')?.focus(); return null; }
-    if (!telefono) { alert('Por favor ingresa tu número de Celular o WhatsApp para coordinar.'); document.getElementById('input-telefono')?.focus(); return null; }
-    if (!correo || !correo.includes('@')) { alert('Por favor ingresa un Correo Electrónico válido.'); document.getElementById('input-correo')?.focus(); return null; }
-    if (modalidad === 'envio' && !ubicacion) { alert('Por favor ingresa tu Sector o Dirección de entrega.'); document.getElementById('input-ubicacion')?.focus(); return null; }
-  }
-
-  const entregaTexto = (modalidad === 'retiro') ? 'Retiro en Taller (Almax Center)' : `Envío a domicilio (${ubicacion})`;
-  return { nombre, telefono, correo, modalidad, ubicacion, entregaTexto };
+  const r = String(ruta).trim();
+  if (r.startsWith('http') || r.startsWith('data:')) return r;
+  if (r.startsWith('img/uploads/')) return r;
+  if (r.startsWith('/img/uploads/')) return r.slice(1);
+  if (r === 'logo.jpg' || r === 'pulsera-secundaria.jpg') return r;
+  return 'img/uploads/' + r.replace(/^.*[\\\/]/, '');
 }
 
 async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
@@ -191,97 +27,247 @@ async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
   } catch (err) {}
 }
 
-function procesarCompraWhatsApp() {
+function guardarCarritoStorage() {
+  localStorage.setItem('carrito_handmadelove', JSON.stringify(carrito));
+}
+
+function toggleCarrito() {
+  const modal = document.getElementById('modal-carrito');
+  if (modal) modal.classList.toggle('oculto');
+}
+
+function toggleDesplegableDatos() {
+  const caja = document.getElementById('caja-formulario-entrega');
+  const flecha = document.getElementById('flecha-acordeon');
+  if (!caja) return;
+  caja.classList.toggle('abierto');
+  if (flecha) flecha.textContent = caja.classList.contains('abierto') ? '▴' : '▾';
+}
+
+function cambiarModalidadEntrega() {
+  const select = document.getElementById('select-modalidad');
+  const campoSector = document.getElementById('campo-sector-entrega');
+  const resumenEnvio = document.getElementById('resumen-envio-texto');
+  if (!select) return;
+
+  if (select.value === 'retiro') {
+    if (campoSector) campoSector.style.display = 'none';
+    if (resumenEnvio) resumenEnvio.textContent = 'Retiro en Taller ($0.00)';
+  } else {
+    if (campoSector) campoSector.style.display = 'block';
+    if (resumenEnvio) resumenEnvio.textContent = 'Por cotizar según dirección';
+  }
+}
+
+function inyectarCajaCuponEnCarrito() {
+  const resumenEl = document.querySelector('.carrito-resumen');
+  if (!resumenEl || document.getElementById('bloque-cupon-carrito')) return;
+
+  const divCupon = document.createElement('div');
+  divCupon.id = 'bloque-cupon-carrito';
+  divCupon.style.cssText = 'margin: 12px 0; padding: 10px; background: #fdf8f8; border: 1px dashed #e2bcbc; border-radius: 10px;';
+  divCupon.innerHTML = `
+    <label for="input-cupon" style="display:block; font-size:0.78rem; font-weight:600; color:#555; margin-bottom:6px;">🎟️ ¿Tienes un código promocional?</label>
+    <div style="display:flex; gap:6px;">
+      <input type="text" id="input-cupon" placeholder="Ej: VIP15" style="flex:1; padding:6px 10px; border:1px solid #ccc; border-radius:8px; font-size:0.82rem; text-transform:uppercase; font-family:'Poppins', sans-serif;">
+      <button type="button" onclick="if(typeof aplicarCodigoCupon === 'function') aplicarCodigoCupon()" style="background:var(--brand-red); color:#fff; border:none; padding:6px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; cursor:pointer;">Aplicar</button>
+    </div>
+    <p id="mensaje-cupon" style="font-size:0.75rem; margin:5px 0 0 0; font-weight:500;"></p>
+  `;
+  resumenEl.parentNode.insertBefore(divCupon, resumenEl);
+}
+
+function agregarAlCarrito(nombre, precio, imagen = 'logo.jpg', esTaller = false) {
+  const precioNum = parseFloat(precio) || 0;
+  const imgNorm = normalizarRutaImagen(imagen);
+  const existente = carrito.find(item => item.nombre === nombre);
+
+  if (existente) {
+    existente.cantidad += 1;
+  } else {
+    carrito.push({ nombre, precio: precioNum, imagen: imgNorm, cantidad: 1, esTaller });
+  }
+
+  guardarCarritoStorage();
+  actualizarCarrito();
+
+  if (typeof cerrarModalProducto === 'function') cerrarModalProducto();
+  const modalCarrito = document.getElementById('modal-carrito');
+  if (modalCarrito && modalCarrito.classList.contains('oculto')) {
+    modalCarrito.classList.remove('oculto');
+  }
+}
+
+function cambiarCantidad(index, delta) {
+  if (!carrito[index]) return;
+  carrito[index].cantidad += delta;
+  if (carrito[index].cantidad <= 0) {
+    carrito.splice(index, 1);
+  }
+  guardarCarritoStorage();
+  actualizarCarrito();
+}
+
+function calcularTotalesCarrito() {
+  let subtotal = 0;
+  carrito.forEach(item => {
+    subtotal += (parseFloat(item.precio) || 0) * item.cantidad;
+  });
+
+  let descuentoCupon = 0;
+  let porcentajeCupon = 0;
+  let codigoCupon = '';
+
+  if (window.cuponAplicado && window.cuponAplicado.porcentaje > 0 && subtotal > 0) {
+    porcentajeCupon = window.cuponAplicado.porcentaje;
+    codigoCupon = window.cuponAplicado.codigo;
+    descuentoCupon = Math.round((subtotal * (porcentajeCupon / 100)) * 100) / 100;
+  }
+
+  const totalFinal = Math.max(0, subtotal - descuentoCupon);
+  return { subtotal, descuentoCupon, porcentajeCupon, codigoCupon, totalFinal };
+}
+
+function actualizarCarrito() {
+  inyectarCajaCuponEnCarrito();
+
+  const lista = document.getElementById('lista-carrito');
+  const contador = document.getElementById('cart-num');
+  const subtotalEl = document.getElementById('cart-subtotal');
+  const totalEl = document.getElementById('total-precio');
+  const resumenEl = document.querySelector('.carrito-resumen');
+
+  let totalItems = 0;
+  carrito.forEach(item => totalItems += item.cantidad);
+  if (contador) contador.textContent = totalItems;
+
   if (carrito.length === 0) {
-    alert('Tu carrito está vacío.');
+    if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
+    if (subtotalEl) subtotalEl.textContent = '$0.00';
+    if (totalEl) totalEl.textContent = '$0.00';
+    const filaDesc = document.getElementById('fila-descuento-cupon');
+    if (filaDesc) filaDesc.remove();
     return;
   }
 
-  const cliente = validarYObtenerDatosCliente();
-  if (!cliente) return;
-
-  let totalFinal = 0;
-  let detalleStr = "";
-
-  carrito.forEach(item => {
-    const pVal = parseFloat(item.precio) || 0;
-    const totalLinea = pVal * item.cantidad;
-    detalleStr += `${item.nombre} (x${item.cantidad}) - $${totalLinea.toFixed(2)}; `;
-    totalFinal += totalLinea;
-  });
-
-  enviarBaseDatos(
-    'Compra Web (WhatsApp)',
-    cliente.nombre,
-    cliente.telefono,
-    cliente.correo,
-    `[Entrega: ${cliente.entregaTexto}] ${detalleStr}`,
-    `$${totalFinal.toFixed(2)} ${cliente.modalidad === 'envio' ? '+ Envío por cotizar' : '(Retiro)'}`
-  );
-
-  let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo realizar el siguiente pedido:%0A%0A`;
-
-  carrito.forEach(item => {
-    const pVal = parseFloat(item.precio) || 0;
-    mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
-  });
-
-  mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
-  mensaje += `%0AModalidad de Entrega: *${cliente.entregaTexto}*`;
-
-  if (cliente.modalidad === 'envio') {
-    mensaje += `%0A¿Me podrían cotizar el valor del envío para concretar el pago?`;
-  } else {
-    mensaje += `%0A¿Me podrían indicar los horarios disponibles para coordinar la entrega o asistencia a taller?`;
+  if (lista) {
+    lista.innerHTML = carrito.map((item, index) => {
+      const precioUnit = parseFloat(item.precio) || 0;
+      const totalLinea = precioUnit * item.cantidad;
+      return `
+        <div class="item-carrito">
+          <img src="${normalizarRutaImagen(item.imagen)}" alt="${item.nombre}" onerror="this.src='logo.jpg'">
+          <div class="item-info">
+            <div class="item-nombre">${item.nombre}</div>
+            <div class="item-precio">$${totalLinea.toFixed(2)}</div>
+          </div>
+          <div class="item-controls">
+            <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
+            <span>${item.cantidad}</span>
+            <button type="button" onclick="cambiarCantidad(${index}, 1)">+</button>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 
-  window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
+  const totales = calcularTotalesCarrito();
+  if (subtotalEl) subtotalEl.textContent = `$${totales.subtotal.toFixed(2)}`;
+  if (totalEl) totalEl.textContent = `$${totales.totalFinal.toFixed(2)}`;
+
+  if (resumenEl) {
+    let filaDesc = document.getElementById('fila-descuento-cupon');
+    if (totales.descuentoCupon > 0) {
+      if (!filaDesc) {
+        filaDesc = document.createElement('div');
+        filaDesc.id = 'fila-descuento-cupon';
+        filaDesc.style.cssText = 'color:#2e7d32; font-weight:600;';
+        resumenEl.insertBefore(filaDesc, resumenEl.children[1]);
+      }
+      filaDesc.innerHTML = `<span>Cupón (${totales.codigoCupon} -${totales.porcentajeCupon}%):</span> <span>-$${totales.descuentoCupon.toFixed(2)}</span>`;
+    } else if (filaDesc) {
+      filaDesc.remove();
+    }
+  }
+}
+
+function validarDatosCliente() {
+  const modalidad = document.getElementById('select-modalidad')?.value || 'envio';
+  const nombre = document.getElementById('input-nombre')?.value.trim() || '';
+  const telefono = document.getElementById('input-telefono')?.value.trim() || '';
+  const correo = document.getElementById('input-correo')?.value.trim() || '';
+  const ubicacion = document.getElementById('input-ubicacion')?.value.trim() || '';
+
+  if (!nombre || !telefono || !correo || (modalidad === 'envio' && !ubicacion)) {
+    const caja = document.getElementById('caja-formulario-entrega');
+    const flecha = document.getElementById('flecha-acordeon');
+    if (caja && !caja.classList.contains('abierto')) {
+      caja.classList.add('abierto');
+      if (flecha) flecha.textContent = '▴';
+    }
+    alert('Por favor completa tus datos de entrega (Nombre, Teléfono, Correo y Dirección) antes de continuar.');
+    return null;
+  }
+
+  return {
+    modalidad: modalidad === 'retiro' ? 'Retiro en Taller (Almax Center, Samborondón)' : `Envío a Domicilio (${ubicacion})`,
+    nombre,
+    telefono,
+    correo,
+    ubicacion
+  };
+}
+
+function procesarCompraWhatsApp() {
+  if (carrito.length === 0) return alert('Tu carrito está vacío.');
+  const cliente = validarDatosCliente();
+  if (!cliente) return;
+
+  const totales = calcularTotalesCarrito();
+  let detalleItems = '';
+  let mensaje = `¡Hola Handmade Love! ✨ Mi nombre es *${cliente.nombre}*.\n`;
+  mensaje += `📱 Tel: ${cliente.telefono}\n📧 Correo: ${cliente.correo}\n🚚 Entrega: ${cliente.modalidad}\n\n*Detalle de mi pedido:*\n`;
+
+  carrito.forEach(item => {
+    const linea = (parseFloat(item.precio) || 0) * item.cantidad;
+    detalleItems += `${item.nombre} (x${item.cantidad}) - $${linea.toFixed(2)}; `;
+    mensaje += `• ${item.nombre} (x${item.cantidad}) - $${linea.toFixed(2)}\n`;
+  });
+
+  mensaje += `\nSubtotal: $${totales.subtotal.toFixed(2)}`;
+  if (totales.descuentoCupon > 0) {
+    mensaje += `\n🎟️ Cupón ${totales.codigoCupon} (-${totales.porcentajeCupon}%): -$${totales.descuentoCupon.toFixed(2)}`;
+    detalleItems += `[Cupón ${totales.codigoCupon}: -$${totales.descuentoCupon.toFixed(2)}]`;
+  }
+  mensaje += `\n*TOTAL COMPRA: $${totales.totalFinal.toFixed(2)}*`;
+
+  enviarBaseDatos('Pedido Web (WhatsApp)', cliente.nombre, cliente.telefono, cliente.correo, `${cliente.modalidad} | ${detalleItems}`, `$${totales.totalFinal.toFixed(2)}`);
+  window.open(`https://wa.me/593980526007?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
 function pagarPayphone() {
-  if (carrito.length === 0) {
-    alert('Tu carrito está vacío.');
-    return;
-  }
-
-  const cliente = validarYObtenerDatosCliente();
+  if (carrito.length === 0) return alert('Tu carrito está vacío.');
+  const cliente = validarDatosCliente();
   if (!cliente) return;
 
-  let totalFinal = 0;
-  let detalleStr = "";
+  const totales = calcularTotalesCarrito();
+  let detalleItems = '';
+  let mensaje = `¡Hola Handmade Love! 💳 Deseo pagar mi pedido de *$${totales.totalFinal.toFixed(2)}* con tarjeta (Payphone).\n\n`;
+  mensaje += `👤 Cliente: *${cliente.nombre}*\n📱 Tel: ${cliente.telefono}\n🚚 Entrega: ${cliente.modalidad}\n\n*Detalle:*\n`;
 
   carrito.forEach(item => {
-    const pVal = parseFloat(item.precio) || 0;
-    const totalLinea = pVal * item.cantidad;
-    detalleStr += `${item.nombre} (x${item.cantidad}); `;
-    totalFinal += totalLinea;
+    const linea = (parseFloat(item.precio) || 0) * item.cantidad;
+    detalleItems += `${item.nombre} (x${item.cantidad}); `;
+    mensaje += `• ${item.nombre} (x${item.cantidad}) - $${linea.toFixed(2)}\n`;
   });
 
-  enviarBaseDatos(
-    'Solicitud Link Payphone (WhatsApp)',
-    cliente.nombre,
-    cliente.telefono,
-    cliente.correo,
-    `[Entrega: ${cliente.entregaTexto}] ${detalleStr}`,
-    `$${totalFinal.toFixed(2)} ${cliente.modalidad === 'envio' ? '+ Envío por cotizar' : '(Retiro)'}`
-  );
-
-  let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo pagar con *Tarjeta de Crédito/Débito (Payphone)*:%0A%0A`;
-  carrito.forEach(item => {
-    const pVal = parseFloat(item.precio) || 0;
-    mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
-  });
-
-  mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
-  mensaje += `%0AModalidad: *${cliente.entregaTexto}*%0A`;
-
-  if (cliente.modalidad === 'envio') {
-    mensaje += `¿Me podrían cotizar el valor del envío y enviarme el link de cobro cerrado de Payphone con el total incluido?`;
-  } else {
-    mensaje += `¿Me podrían enviar el link de Payphone por este valor para realizar el pago?`;
+  if (totales.descuentoCupon > 0) {
+    mensaje += `\n🎟️ Cupón aplicado: *${totales.codigoCupon}* (-$${totales.descuentoCupon.toFixed(2)})\n`;
   }
+  mensaje += `\n¿Me envían el link de cobro de Payphone por *$${totales.totalFinal.toFixed(2)}*, por favor?`;
 
-  window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
+  enviarBaseDatos('Pedido Web (Payphone)', cliente.nombre, cliente.telefono, cliente.correo, `${cliente.modalidad} | ${detalleItems}`, `$${totales.totalFinal.toFixed(2)}`);
+  window.open(`https://wa.me/593980526007?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
 function mostrarDatosBancarios() {
@@ -294,6 +280,4 @@ function cerrarDatosBancarios() {
   if (m) m.classList.remove('open');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  actualizarCarrito();
-});
+document.addEventListener('DOMContentLoaded', actualizarCarrito);
