@@ -48,13 +48,8 @@
         <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       </div>
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
-      <div id="lista-carrito">
-        <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
-      </div>
-      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
-        <span>📝 Datos para la Entrega y Pedido</span>
-        <span id="flecha-acordeon">▾</span>
-      </button>
+      <div id="lista-carrito"><p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p></div>
+      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()"><span>📝 Datos para la Entrega y Pedido</span><span id="flecha-acordeon">▾</span></button>
       <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
         <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
@@ -76,10 +71,7 @@
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
-      <div class="carrito-total">
-        <span>TOTAL COMPRA:</span>
-        <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
-      </div>
+      <div class="carrito-total"><span>TOTAL COMPRA:</span><span id="total-precio" style="color: var(--brand-red);">$0.00</span></div>
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -91,12 +83,7 @@
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
-        <strong>Deuna:</strong> 0980526007
+        <strong>Banco:</strong> Banco Internacional<br><strong>Tipo de Cuenta:</strong> Ahorros<br><strong>Número de Cuenta:</strong> 1000900044<br><strong>Titular:</strong> Erika Michelle Alvarado Torres<br><strong>Cédula / R.U.C.:</strong> 0922683552<br><strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
     </div>
@@ -107,27 +94,27 @@
   <script src="header.js"></script>
   <script src="footer.js"></script>
   <script src="carrito.js"></script>
+  <script src="banners.js"></script>
+  <script src="promociones.js"></script>
 
   <script>
     let todosLosCrochet = [];
-
     const crochetBaseReales = [
-      {
-        title: "Bolso Granny Square Margaritas",
-        subcategoria: "Bolsos & Totes",
-        categoria: "Crochet",
-        precio: 35.00,
-        descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.",
-        imagen: "img/uploads/bolso-granny.jpg"
-      }
+      { title: "Bolso Granny Square Margaritas", subcategoria: "Bolsos & Totes", categoria: "Crochet", precio: 35.00, descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.", imagen: "img/uploads/bolso-granny.jpg" }
     ];
 
     function abrirModalProducto(index) {
       const p = todosLosCrochet[index];
       if (!p) return;
+      const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
+
       document.getElementById('modal-categoria').textContent = p.subcategoria ? `Crochet · ${p.subcategoria}` : (p.categoria || 'Crochet');
       document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${(parseFloat(p.precio) || 0).toFixed(2)}`;
+      if (infoPrecio.tieneDescuento) {
+        document.getElementById('modal-precio').innerHTML = `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span> $${infoPrecio.precioFinal.toFixed(2)} <span style="font-size:0.75rem; background:#fdf2f2; padding:2px 8px; border-radius:10px;">-${infoPrecio.porcentaje}% OFF</span>`;
+      } else {
+        document.getElementById('modal-precio').textContent = `$${infoPrecio.precioFinal.toFixed(2)}`;
+      }
       document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
 
       let galeria = [];
@@ -162,7 +149,7 @@
       const btnComprar = document.getElementById('modal-btn-comprar');
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(p.title, p.precio, portada);
+        agregarAlCarrito(p.title, infoPrecio.precioFinal, portada);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -183,17 +170,23 @@
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
-        const precioNum = parseFloat(p.precio) || 0;
+        const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
         const fotoCard = normalizarRutaImagen(p.imagen);
+        const badgeHTML = infoPrecio.tieneDescuento ? `<span class="badge-descuento">-${infoPrecio.porcentaje}% OFF</span>` : '';
+        const precioHTML = infoPrecio.tieneDescuento 
+          ? `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span>$${infoPrecio.precioFinal.toFixed(2)}`
+          : `$${infoPrecio.precioFinal.toFixed(2)}`;
+
         return `
           <div class="card" onclick="abrirModalProducto(${index})">
+            ${badgeHTML}
             <img src="${fotoCard}" alt="${p.title}" onerror="this.src='logo.jpg'">
             <div class="card-body">
               <h3 class="card-title" title="${p.title}">${p.title}</h3>
               <p class="card-desc">${p.descripcion || ''}</p>
               <div class="card-footer">
-                <span class="card-price">$${precioNum.toFixed(2)}</span>
-                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}')">+ Agregar</button>
+                <span class="card-price">${precioHTML}</span>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${infoPrecio.precioFinal}, '${fotoCard}')">+ Agregar</button>
               </div>
             </div>
           </div>
@@ -221,18 +214,14 @@
       const cont = document.getElementById('subcat-container');
       if (!cont) return;
       const subcategoriasDetectadas = new Set();
-      todosLosCrochet.forEach(p => {
-        if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim());
-      });
+      todosLosCrochet.forEach(p => { if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim()); });
       if (subcategoriasDetectadas.size === 0) {
         subcategoriasDetectadas.add("Bolsos & Totes");
         subcategoriasDetectadas.add("Accesorios");
         subcategoriasDetectadas.add("Hogar & Deco");
       }
       let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas', this)">Todas las Piezas</button>`;
-      subcategoriasDetectadas.forEach(sub => {
-        htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`;
-      });
+      subcategoriasDetectadas.forEach(sub => { htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`; });
       cont.innerHTML = htmlBotones;
     }
 
@@ -251,8 +240,7 @@
         const lineaTrim = line.trim();
         if (!lineaTrim) return;
         if (lineaTrim.startsWith('fotos:')) {
-          enFotos = true;
-          claveActual = 'fotos';
+          enFotos = true; claveActual = 'fotos';
           const resto = lineaTrim.replace('fotos:', '').trim();
           if (resto && !resto.startsWith('-') && resto !== '[]') data.fotos.push(resto.replace(/^["']|["']$/g, ''));
           return;
@@ -266,9 +254,7 @@
             const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
             if (fItem) data.fotos.push(fItem);
             return;
-          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
-            enFotos = false;
-          }
+          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) { enFotos = false; }
         }
         const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
         if (matchClave) {
@@ -318,6 +304,7 @@
       } catch (err) {}
     }
 
+    window.addEventListener('promocionesListas', () => render(todosLosCrochet));
     cargarCatalogo();
   </script>
 </body>
