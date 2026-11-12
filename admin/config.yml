@@ -31,6 +31,17 @@ collections:
       - { label: "Fecha de Fin", name: "fechaFin", widget: "datetime" }
       - { label: "Activa", name: "activa", widget: "boolean", default: true }
 
+  - name: "cupones"
+    label: "Cupones por Código (Para Correos / Clientes VIP)"
+    folder: "contenido/cupones"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Código del Cupón (ej: VIP15)", name: "title", widget: "string" }
+      - { label: "Porcentaje de Descuento (%)", name: "descuento", widget: "number", value_type: "int", min: 1, max: 90, default: 10 }
+      - { label: "Fecha de Vencimiento", name: "fechaFin", widget: "datetime" }
+      - { label: "Activo", name: "activa", widget: "boolean", default: true }
+
   - name: "productos"
     label: "Productos y Creaciones"
     folder: "contenido/productos"
