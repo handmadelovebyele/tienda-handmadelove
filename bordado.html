@@ -9,24 +9,19 @@
 </head>
 <body>
 
-  <!-- Cabecera Global Inyectada -->
   <div id="header-global"></div>
 
-  <!-- Hero Categoría (Se actualiza automáticamente con banners.js) -->
   <section class="categoria-hero" id="banner-categoria" style="background: linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url('img/uploads/bordado-crochet-varios.jpg') center/cover no-repeat;">
     <h1>Bordado Contemporáneo & Botánico</h1>
     <p>Bastidores decorativos, accesorios en relieve y piezas botánicas bordadas puntada a puntada sobre lino natural.</p>
   </section>
 
-  <!-- Pestañas Dinámicas de Subcategorías -->
   <div class="subcat-container" id="subcat-container"></div>
 
-  <!-- Cuadrícula de Productos -->
   <main class="catalogo-section">
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
-  <!-- Modal Detalle Compartido -->
   <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
@@ -46,7 +41,6 @@
     </div>
   </div>
 
-  <!-- Modal del Carrito Global -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -54,13 +48,8 @@
         <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       </div>
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
-      <div id="lista-carrito">
-        <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
-      </div>
-      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
-        <span>📝 Datos para la Entrega y Pedido</span>
-        <span id="flecha-acordeon">▾</span>
-      </button>
+      <div id="lista-carrito"><p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p></div>
+      <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()"><span>📝 Datos para la Entrega y Pedido</span><span id="flecha-acordeon">▾</span></button>
       <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
         <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
@@ -82,56 +71,34 @@
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
-      <div class="carrito-total">
-        <span>TOTAL COMPRA:</span>
-        <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
-      </div>
+      <div class="carrito-total"><span>TOTAL COMPRA:</span><span id="total-precio" style="color: var(--brand-red);">$0.00</span></div>
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
     </div>
   </div>
 
-  <!-- Modal Datos Bancarios -->
   <div id="modal-banco" class="modal-banco" onclick="if(event.target.id === 'modal-banco') cerrarDatosBancarios()">
     <div class="modal-banco-content">
       <h3 style="font-size: 1.1rem; margin-bottom: 8px; color: var(--brand-red);">Datos para Transferencia / Deuna</h3>
       <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Realiza el pago y envía el comprobante por WhatsApp:</p>
       <div style="background: #fdf8f8; padding: 12px; border-radius: 8px; font-size: 0.82rem; line-height: 1.6; border: 1px solid #f5e6e6;">
-        <strong>Banco:</strong> Banco Internacional<br>
-        <strong>Tipo de Cuenta:</strong> Ahorros<br>
-        <strong>Número de Cuenta:</strong> 1000900044<br>
-        <strong>Titular:</strong> Erika Michelle Alvarado Torres<br>
-        <strong>Cédula / R.U.C.:</strong> 0922683552<br>
-        <strong>Deuna:</strong> 0980526007
+        <strong>Banco:</strong> Banco Internacional<br><strong>Tipo de Cuenta:</strong> Ahorros<br><strong>Número de Cuenta:</strong> 1000900044<br><strong>Titular:</strong> Erika Michelle Alvarado Torres<br><strong>Cédula / R.U.C.:</strong> 0922683552<br><strong>Deuna:</strong> 0980526007
       </div>
       <button type="button" onclick="cerrarDatosBancarios()" style="margin-top: 14px; background: var(--brand-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 15px; font-weight: 600; cursor:pointer; font-size: 0.85rem;">Cerrar</button>
     </div>
   </div>
 
-  <!-- Pie de Página Global Inyectado -->
   <div id="footer-global"></div>
 
-  <!-- Scripts Globales Unificados -->
   <script src="header.js"></script>
   <script src="footer.js"></script>
   <script src="carrito.js"></script>
   <script src="banners.js"></script>
   <script src="promociones.js"></script>
 
-  <!-- Lógica Específica de Bordado -->
   <script>
     let todosLosBordados = [];
-    const bordadosBaseReales = [
-      {
-        title: "Bastidor Botánico Silvestre 20cm",
-        subcategoria: "Bastidores",
-        categoria: "Bordado",
-        precio: 28.00,
-        descripcion: "Bordado floral en relieve tridimensional elaborado sobre lino crudo montado en bastidor de madera de haya.",
-        imagen: "img/uploads/bordado-crochet-varios.jpg"
-      }
-    ];
 
     function abrirModalProducto(index) {
       const p = todosLosBordados[index];
@@ -196,7 +163,7 @@
       const grid = document.getElementById('grid-productos');
       if (!grid) return;
       if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay piezas en esta subcategoría.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">Próximamente nuevas piezas bordadas en esta colección.</p>';
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
@@ -246,8 +213,8 @@
       const subcategoriasDetectadas = new Set();
       todosLosBordados.forEach(p => { if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim()); });
       if (subcategoriasDetectadas.size === 0) {
-        subcategoriasDetectadas.add("Bastidores");
-        subcategoriasDetectadas.add("Accesorios");
+        cont.innerHTML = '';
+        return;
       }
       let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas', this)">Todas las Piezas</button>`;
       subcategoriasDetectadas.forEach(sub => { htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`; });
@@ -305,10 +272,6 @@
     }
 
     async function cargarCatalogo() {
-      todosLosBordados = [...bordadosBaseReales];
-      construirBotonesSubcategorias();
-      render(todosLosBordados);
-
       const cacheBuster = '?t=' + new Date().getTime();
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
@@ -318,19 +281,16 @@
             const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
             const contenidos = await Promise.all(promesas);
             const productosCMS = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-            const filtradas = productosCMS.filter(p => {
+            todosLosBordados = productosCMS.filter(p => {
               const c = (p.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
               const t = (p.title || '').toLowerCase();
               return c.includes('bordad') || t.includes('bordad') || t.includes('bastidor');
             });
-            if (filtradas.length > 0) {
-              todosLosBordados = filtradas;
-              construirBotonesSubcategorias();
-              render(todosLosBordados);
-            }
           }
         }
       } catch (err) {}
+      construirBotonesSubcategorias();
+      render(todosLosBordados);
     }
 
     window.addEventListener('promocionesListas', () => render(todosLosBordados));
