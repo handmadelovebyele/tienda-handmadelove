@@ -14,8 +14,8 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Identificador (velas, bisuteria, bordado, pintura, crochet, blog)", name: "title", widget: "string" }
-      - { label: "Título Principal del Banner", name: "titulo", widget: "string", required: false }
-      - { label: "Mensaje / Descripción Promocional", name: "descripcion", widget: "text", required: false }
+      - { label: "Título Principal del Banner (Dejar vacío si el arte ya tiene texto)", name: "titulo", widget: "string", required: false }
+      - { label: "Mensaje / Descripción (Dejar vacío si el arte ya tiene texto)", name: "descripcion", widget: "text", required: false }
       - { label: "Imagen de Fondo", name: "imagen", widget: "image" }
 
   - name: "promociones"
