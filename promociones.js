@@ -36,18 +36,18 @@ function estaEnRangoFechas(inicioRaw, finRaw) {
   return true;
 }
 
-function calcularPrecioConDescuento(producto) {
-  const precioBase = parseFloat(producto.precio) || 0;
+function calcularPrecioConDescuento(item) {
+  const precioBase = parseFloat(item.precio) || 0;
   let porcentajeAplicable = 0;
 
-  // 1. Descuento individual en el producto
-  const descIndiv = parseInt(producto.descuento) || 0;
-  if (descIndiv > 0 && estaEnRangoFechas(producto.fechaInicio, producto.fechaFin)) {
+  // 1. Descuento individual en el producto o pronto pago en el taller
+  const descIndiv = parseInt(item.descuento) || 0;
+  if (descIndiv > 0 && estaEnRangoFechas(item.fechaInicio, item.fechaFin)) {
     porcentajeAplicable = descIndiv;
   }
 
-  // 2. Descuento por campaña general o por categoría
-  const catProd = (producto.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  // 2. Descuento por campaña general (Todas, Talleres o Categoría específica)
+  const catItem = (item.categoria || 'talleres').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   campanasPromocionales.forEach(camp => {
     if (String(camp.activa) === 'false') return;
     if (!estaEnRangoFechas(camp.fechaInicio, camp.fechaFin)) return;
@@ -55,7 +55,7 @@ function calcularPrecioConDescuento(producto) {
     const descCamp = parseInt(camp.descuento) || 0;
     const catCamp = (camp.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-    if (descCamp > porcentajeAplicable && (catCamp === 'todas' || catProd.includes(catCamp))) {
+    if (descCamp > porcentajeAplicable && (catCamp === 'todas' || catItem.includes(catCamp))) {
       porcentajeAplicable = descCamp;
     }
   });
