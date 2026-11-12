@@ -37,8 +37,12 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Código del Cupón (ej: VIP15)", name: "title", widget: "string" }
+      - { label: "Código del Cupón (ej: VELAS15)", name: "title", widget: "string" }
+      - { label: "Aplica a Categoría", name: "categoria", widget: "select", options: ["Todas", "Talleres", "Velas", "Bisutería", "Bordado", "Pintura", "Crochet"], default: "Todas" }
       - { label: "Porcentaje de Descuento (%)", name: "descuento", widget: "number", value_type: "int", min: 1, max: 90, default: 10 }
+      - { label: "Compra Mínima ($) (0 = sin mínimo)", name: "montoMinimo", widget: "number", value_type: "float", default: 0, required: false }
+      - { label: "Acumulable con otros descuentos", name: "acumulable", widget: "boolean", default: false, required: false }
+      - { label: "Un solo uso por correo electrónico", name: "usoUnico", widget: "boolean", default: true, required: false }
       - { label: "Fecha de Vencimiento", name: "fechaFin", widget: "datetime" }
       - { label: "Activo", name: "activa", widget: "boolean", default: true }
 
