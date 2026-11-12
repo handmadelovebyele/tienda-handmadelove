@@ -202,12 +202,11 @@
 
     const productosBaseReales = [
       { title: "Bolso Granny Square Margaritas", categoria: "Crochet", precio: 35.00, descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.", imagen: "img/uploads/bolso-granny.jpg" },
-      { title: "Vainilla Silvestre 180g", categoria: "Velas", precio: 16.50, descripcion: "Vela artesanal de cera de soya con aroma dulce y cálido a vainilla en envase de vidrio.", imagen: "img/uploads/velas-varias.jpg" },
       { title: "Pulsera de Hilo Rojo con Perlas", categoria: "Bisutería", precio: 9.99, descripcion: "Pulsera artesanal de hilo rojo de protección tejida a mano con perlas de río y dijes laminados en oro de 18k.", imagen: "pulsera-secundaria.jpg" }
     ];
 
     const talleresBaseReales = [
-      { title: "Taller de Arte en Concreto: Joyero Plano", fecha: "2026-11-21T09:00:00.000-05:00", lugar: "Almax Center, Samborondón", precio: 25.00, cupoMax: 12, ocupados: 0, descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar.", imagen: "img/uploads/bordado-crochet-varios.jpg" }
+      { title: "Taller de Arte en Concreto: Joyero Plano", categoria: "Talleres", fecha: "2026-11-21T09:00:00.000-05:00", lugar: "Almax Center, Samborondón", precio: 25.00, cupoMax: 12, ocupados: 0, descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar.", imagen: "img/uploads/bordado-crochet-varios.jpg" }
     ];
 
     function formatearFechaLegible(fechaRaw) {
@@ -276,7 +275,8 @@
     function abrirModalTaller(index) {
       const t = todosLosTalleres[index];
       if (!t) return;
-      const precioNum = parseFloat(t.precio) || 0;
+      t.categoria = 'Talleres';
+      const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(t) : { tieneDescuento: false, precioFinal: parseFloat(t.precio) || 0 };
       const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
       const max = parseInt(t.cupoMax) || 10;
       const ocup = parseInt(t.ocupados) || 0;
@@ -285,8 +285,17 @@
 
       document.getElementById('modal-categoria').textContent = 'Taller Presencial EMOCION-ARTE';
       document.getElementById('modal-titulo').textContent = t.title || 'Taller';
-      document.getElementById('modal-precio').textContent = precioNum > 0 ? `$${precioNum.toFixed(2)}` : 'Gratuito';
-      document.getElementById('modal-descripcion').textContent = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}\n\n${t.descripcion || ''}`;
+
+      if (infoPrecio.precioFinal <= 0) {
+        document.getElementById('modal-precio').textContent = 'Gratuito';
+      } else if (infoPrecio.tieneDescuento) {
+        document.getElementById('modal-precio').innerHTML = `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span> $${infoPrecio.precioFinal.toFixed(2)} <span style="font-size:0.75rem; background:#fdf2f2; padding:2px 8px; border-radius:10px;">-${infoPrecio.porcentaje}% PRONTO PAGO</span>`;
+      } else {
+        document.getElementById('modal-precio').textContent = `$${infoPrecio.precioFinal.toFixed(2)}`;
+      }
+
+      const notaProntoPago = (infoPrecio.tieneDescuento && t.fechaFin) ? `\n🏷️ Pronto pago válido hasta: ${formatearFechaLegible(t.fechaFin)}` : '';
+      document.getElementById('modal-descripcion').textContent = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}${notaProntoPago}\n\n${t.descripcion || ''}`;
 
       document.getElementById('modal-img-principal').src = fotoTaller;
       document.getElementById('modal-galeria-thumbs').innerHTML = '';
@@ -295,7 +304,7 @@
       btnComprar.textContent = disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera';
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(`Taller: ${t.title}`, precioNum, fotoTaller, true);
+        agregarAlCarrito(`Taller: ${t.title}`, infoPrecio.precioFinal, fotoTaller, true);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -354,7 +363,8 @@
       const grid = document.getElementById('grid-talleres');
       if (!grid) return;
       grid.innerHTML = lista.map((t, index) => {
-        const precioNum = parseFloat(t.precio) || 0;
+        t.categoria = 'Talleres';
+        const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(t) : { tieneDescuento: false, precioFinal: parseFloat(t.precio) || 0 };
         const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
         const max = parseInt(t.cupoMax) || 10;
         const ocup = parseInt(t.ocupados) || 0;
@@ -362,8 +372,16 @@
         const textoCupos = disponibles > 0 ? `Cupos disponibles: ${disponibles}` : '¡Cupos Agotados!';
         const fechaFormateada = formatearFechaLegible(t.fecha);
 
+        const badgeHTML = infoPrecio.tieneDescuento ? `<span class="badge-descuento">-${infoPrecio.porcentaje}% PRONTO PAGO</span>` : '';
+        const precioTallerHTML = infoPrecio.precioFinal <= 0 
+          ? '<div></div>'
+          : (infoPrecio.tieneDescuento 
+              ? `<div class="taller-precio"><span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span>$${infoPrecio.precioFinal.toFixed(2)}</div>`
+              : `<div class="taller-precio">$${infoPrecio.precioFinal.toFixed(2)}</div>`);
+
         return `
-          <div class="taller-card" onclick="abrirModalTaller(${index})">
+          <div class="taller-card" style="position:relative;" onclick="abrirModalTaller(${index})">
+            ${badgeHTML}
             <img src="${fotoTaller}" alt="${t.title}" onerror="this.src='logo.jpg'">
             <div class="taller-card-body">
               <span class="taller-tag">Taller Presencial</span>
@@ -373,8 +391,8 @@
               <p class="taller-desc">${t.descripcion || ''}</p>
               <span class="taller-cupos">${textoCupos}</span>
               <div class="taller-footer">
-                ${precioNum > 0 ? `<div class="taller-precio">$${precioNum.toFixed(2)}</div>` : '<div></div>'}
-                <button type="button" class="btn-reservar-taller" onclick="event.stopPropagation(); agregarAlCarrito('Taller: ${t.title}', ${precioNum}, '${fotoTaller}', true)">
+                ${precioTallerHTML}
+                <button type="button" class="btn-reservar-taller" onclick="event.stopPropagation(); agregarAlCarrito('Taller: ${t.title}', ${infoPrecio.precioFinal}, '${fotoTaller}', true)">
                   ${disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera'}
                 </button>
               </div>
@@ -494,7 +512,10 @@
       } catch (err) {}
     }
 
-    window.addEventListener('promocionesListas', () => renderDestacadosHome(productosDestacadosHome));
+    window.addEventListener('promocionesListas', () => {
+      renderDestacadosHome(productosDestacadosHome);
+      renderTalleres(todosLosTalleres);
+    });
     cargarTodo();
   </script>
 </body>
