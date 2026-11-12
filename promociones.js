@@ -1,8 +1,10 @@
 /* =========================================================
-   MOTOR DE DESCUENTOS POR FECHAS | HANDMADE LOVE BY E.L.E
+   MOTOR DE DESCUENTOS Y CUPONES | HANDMADE LOVE BY E.L.E
    ========================================================= */
 
 let campanasPromocionales = [];
+let cuponesDisponibles = [];
+window.cuponAplicado = null;
 
 function parsearFrontmatterPromo(texto) {
   if (!texto) return null;
@@ -40,13 +42,11 @@ function calcularPrecioConDescuento(item) {
   const precioBase = parseFloat(item.precio) || 0;
   let porcentajeAplicable = 0;
 
-  // 1. Descuento individual en el producto o pronto pago en el taller
   const descIndiv = parseInt(item.descuento) || 0;
   if (descIndiv > 0 && estaEnRangoFechas(item.fechaInicio, item.fechaFin)) {
     porcentajeAplicable = descIndiv;
   }
 
-  // 2. Descuento por campaña general (Todas, Talleres o Categoría específica)
   const catItem = (item.categoria || 'talleres').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   campanasPromocionales.forEach(camp => {
     if (String(camp.activa) === 'false') return;
@@ -78,12 +78,48 @@ function calcularPrecioConDescuento(item) {
   };
 }
 
-async function cargarCampanasPromocionales() {
+function aplicarCodigoCupon() {
+  const input = document.getElementById('input-cupon');
+  const msg = document.getElementById('mensaje-cupon');
+  if (!input || !msg) return;
+
+  const codigoIngresado = input.value.trim().toUpperCase();
+  if (!codigoIngresado) {
+    window.cuponAplicado = null;
+    msg.textContent = 'Escribe un código primero.';
+    msg.style.color = '#d9534f';
+    if (typeof actualizarCarrito === 'function') actualizarCarrito();
+    return;
+  }
+
+  const encontrado = cuponesDisponibles.find(c => (c.title || '').trim().toUpperCase() === codigoIngresado);
+
+  if (!encontrado || String(encontrado.activa) === 'false') {
+    window.cuponAplicado = null;
+    msg.textContent = '❌ Código inválido o inactivo.';
+    msg.style.color = '#d9534f';
+  } else if (!estaEnRangoFechas(null, encontrado.fechaFin)) {
+    window.cuponAplicado = null;
+    msg.textContent = '⏰ Este cupón ya expiró.';
+    msg.style.color = '#d9534f';
+  } else {
+    window.cuponAplicado = {
+      codigo: codigoIngresado,
+      porcentaje: parseInt(encontrado.descuento) || 0
+    };
+    msg.textContent = `✅ Cupón ${codigoIngresado} aplicado (-${window.cuponAplicado.porcentaje}%)`;
+    msg.style.color = '#2e7d32';
+  }
+
+  if (typeof actualizarCarrito === 'function') actualizarCarrito();
+}
+
+async function cargarCampanasYCupones() {
   const cacheBuster = '?t=' + new Date().getTime();
   try {
-    const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/promociones' + cacheBuster);
-    if (res.ok) {
-      const archivos = await res.json();
+    const resPromo = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/promociones' + cacheBuster);
+    if (resPromo.ok) {
+      const archivos = await resPromo.json();
       if (Array.isArray(archivos)) {
         const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
         const textos = await Promise.all(promesas);
@@ -92,6 +128,18 @@ async function cargarCampanasPromocionales() {
       }
     }
   } catch (e) {}
+
+  try {
+    const resCup = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/cupones' + cacheBuster);
+    if (resCup.ok) {
+      const archivosC = await resCup.json();
+      if (Array.isArray(archivosC)) {
+        const promesasC = archivosC.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
+        const textosC = await Promise.all(promesasC);
+        cuponesDisponibles = textosC.map(parsearFrontmatterPromo).filter(Boolean);
+      }
+    }
+  } catch (e) {}
 }
 
-document.addEventListener('DOMContentLoaded', cargarCampanasPromocionales);
+document.addEventListener('DOMContentLoaded', cargarCampanasYCupones);
