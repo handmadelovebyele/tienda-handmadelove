@@ -99,9 +99,6 @@
 
   <script>
     let todasLasPinturas = [];
-    const pinturasBaseReales = [
-      { title: "Bandeja Joyera de Concreto Artesanal", subcategoria: "Arte en Concreto", categoria: "Pintura", precio: 18.00, descripcion: "Joyero plano de concreto curado y pintado a mano con sellador mate protector impermeable.", imagen: "img/uploads/bordado-crochet-varios.jpg" }
-    ];
 
     function abrirModalProducto(index) {
       const p = todasLasPinturas[index];
@@ -166,7 +163,7 @@
       const grid = document.getElementById('grid-productos');
       if (!grid) return;
       if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">No hay obras en esta subcategoría.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 40px 0;">Próximamente nuevas obras artísticas en esta colección.</p>';
         return;
       }
       grid.innerHTML = lista.map((p, index) => {
@@ -216,8 +213,8 @@
       const subcategoriasDetectadas = new Set();
       todasLasPinturas.forEach(p => { if (p.subcategoria && p.subcategoria.trim()) subcategoriasDetectadas.add(p.subcategoria.trim()); });
       if (subcategoriasDetectadas.size === 0) {
-        subcategoriasDetectadas.add("Arte en Concreto");
-        subcategoriasDetectadas.add("Cuadros");
+        cont.innerHTML = '';
+        return;
       }
       let htmlBotones = `<button class="subcat-btn active" onclick="filtrarSubcat('todas', this)">Todas las Obras</button>`;
       subcategoriasDetectadas.forEach(sub => { htmlBotones += `<button class="subcat-btn" onclick="filtrarSubcat('${sub}', this)">${sub}</button>`; });
@@ -275,10 +272,6 @@
     }
 
     async function cargarCatalogo() {
-      todasLasPinturas = [...pinturasBaseReales];
-      construirBotonesSubcategorias();
-      render(todasLasPinturas);
-
       const cacheBuster = '?t=' + new Date().getTime();
       try {
         const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
@@ -288,19 +281,16 @@
             const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
             const contenidos = await Promise.all(promesas);
             const productosCMS = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-            const filtradas = productosCMS.filter(p => {
+            todasLasPinturas = productosCMS.filter(p => {
               const c = (p.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
               const t = (p.title || '').toLowerCase();
               return c.includes('pintur') || t.includes('pintur') || t.includes('concreto') || t.includes('joyero');
             });
-            if (filtradas.length > 0) {
-              todasLasPinturas = filtradas;
-              construirBotonesSubcategorias();
-              render(todasLasPinturas);
-            }
           }
         }
       } catch (err) {}
+      construirBotonesSubcategorias();
+      render(todasLasPinturas);
     }
 
     window.addEventListener('promocionesListas', () => render(todasLasPinturas));
