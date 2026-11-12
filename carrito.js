@@ -1,5 +1,5 @@
 /* =========================================================
-   CARRITO DE COMPRAS UNIFICADO + CUPONES | HANDMADE LOVE BY E.L.E
+   CARRITO DE COMPRAS UNIFICADO + CUPONES INTELIGENTES
    ========================================================= */
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
@@ -13,6 +13,24 @@ function normalizarRutaImagen(ruta) {
   if (r.startsWith('/img/uploads/')) return r.slice(1);
   if (r === 'logo.jpg' || r === 'pulsera-secundaria.jpg') return r;
   return 'img/uploads/' + r.replace(/^.*[\\\/]/, '');
+}
+
+function detectarCategoriaItem(nombre, esTaller) {
+  if (esTaller || (nombre || '').toLowerCase().startsWith('taller:')) return 'Talleres';
+  const ruta = window.location.pathname.toLowerCase();
+  if (ruta.includes('velas')) return 'Velas';
+  if (ruta.includes('bisuteria')) return 'Bisutería';
+  if (ruta.includes('bordado')) return 'Bordado';
+  if (ruta.includes('pintura')) return 'Pintura';
+  if (ruta.includes('crochet')) return 'Crochet';
+
+  const n = (nombre || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  if (n.includes('vela')) return 'Velas';
+  if (n.includes('pulsera') || n.includes('collar') || n.includes('arete')) return 'Bisutería';
+  if (n.includes('bordad') || n.includes('bastidor')) return 'Bordado';
+  if (n.includes('pintur') || n.includes('concreto') || n.includes('joyero')) return 'Pintura';
+  if (n.includes('bolso') || n.includes('granny') || n.includes('crochet')) return 'Crochet';
+  return 'Todas';
 }
 
 async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
@@ -69,7 +87,7 @@ function inyectarCajaCuponEnCarrito() {
   divCupon.innerHTML = `
     <label for="input-cupon" style="display:block; font-size:0.78rem; font-weight:600; color:#555; margin-bottom:6px;">🎟️ ¿Tienes un código promocional?</label>
     <div style="display:flex; gap:6px;">
-      <input type="text" id="input-cupon" placeholder="Ej: VIP15" style="flex:1; padding:6px 10px; border:1px solid #ccc; border-radius:8px; font-size:0.82rem; text-transform:uppercase; font-family:'Poppins', sans-serif;">
+      <input type="text" id="input-cupon" placeholder="Ej: VELAS15" style="flex:1; padding:6px 10px; border:1px solid #ccc; border-radius:8px; font-size:0.82rem; text-transform:uppercase; font-family:'Poppins', sans-serif;">
       <button type="button" onclick="if(typeof aplicarCodigoCupon === 'function') aplicarCodigoCupon()" style="background:var(--brand-red); color:#fff; border:none; padding:6px 14px; border-radius:8px; font-size:0.8rem; font-weight:600; cursor:pointer;">Aplicar</button>
     </div>
     <p id="mensaje-cupon" style="font-size:0.75rem; margin:5px 0 0 0; font-weight:500;"></p>
@@ -80,12 +98,13 @@ function inyectarCajaCuponEnCarrito() {
 function agregarAlCarrito(nombre, precio, imagen = 'logo.jpg', esTaller = false) {
   const precioNum = parseFloat(precio) || 0;
   const imgNorm = normalizarRutaImagen(imagen);
+  const categoria = detectarCategoriaItem(nombre, esTaller);
   const existente = carrito.find(item => item.nombre === nombre);
 
   if (existente) {
     existente.cantidad += 1;
   } else {
-    carrito.push({ nombre, precio: precioNum, imagen: imgNorm, cantidad: 1, esTaller });
+    carrito.push({ nombre, precio: precioNum, imagen: imgNorm, cantidad: 1, esTaller, categoria });
   }
 
   guardarCarritoStorage();
@@ -117,11 +136,43 @@ function calcularTotalesCarrito() {
   let descuentoCupon = 0;
   let porcentajeCupon = 0;
   let codigoCupon = '';
+  const msgEl = document.getElementById('mensaje-cupon');
 
   if (window.cuponAplicado && window.cuponAplicado.porcentaje > 0 && subtotal > 0) {
-    porcentajeCupon = window.cuponAplicado.porcentaje;
-    codigoCupon = window.cuponAplicado.codigo;
-    descuentoCupon = Math.round((subtotal * (porcentajeCupon / 100)) * 100) / 100;
+    const cup = window.cuponAplicado;
+    const catCup = (cup.categoria || 'Todas').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    if (cup.montoMinimo > 0 && subtotal < cup.montoMinimo) {
+      if (msgEl) {
+        msgEl.textContent = `⚠️ El cupón ${cup.codigo} requiere una compra mínima de $${cup.montoMinimo.toFixed(2)}.`;
+        msgEl.style.color = '#d97706';
+      }
+    } else {
+      let baseAplicable = 0;
+      carrito.forEach(item => {
+        const catItem = (item.categoria || detectarCategoriaItem(item.nombre, item.esTaller))
+          .toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        if (catCup === 'todas' || catItem.includes(catCup) || catCup.includes(catItem)) {
+          baseAplicable += (parseFloat(item.precio) || 0) * item.cantidad;
+        }
+      });
+
+      if (baseAplicable <= 0) {
+        if (msgEl) {
+          msgEl.textContent = `⚠️ El cupón ${cup.codigo} solo aplica a productos de ${cup.categoria}.`;
+          msgEl.style.color = '#d97706';
+        }
+      } else {
+        porcentajeCupon = cup.porcentaje;
+        codigoCupon = cup.codigo;
+        descuentoCupon = Math.round((baseAplicable * (porcentajeCupon / 100)) * 100) / 100;
+        if (msgEl) {
+          const alcance = catCup === 'todas' ? 'toda la tienda' : cup.categoria;
+          msgEl.textContent = `✅ Cupón ${cup.codigo} aplicado (-${porcentajeCupon}% en ${alcance})`;
+          msgEl.style.color = '#2e7d32';
+        }
+      }
+    }
   }
 
   const totalFinal = Math.max(0, subtotal - descuentoCupon);
@@ -191,6 +242,21 @@ function actualizarCarrito() {
   }
 }
 
+function verificarUsoUnicoCupon(correo, totales) {
+  if (!window.cuponAplicado || !window.cuponAplicado.usoUnico || totales.descuentoCupon <= 0) return true;
+  const usados = JSON.parse(localStorage.getItem('cupones_usados_handmadelove') || '{}');
+  const clave = `${window.cuponAplicado.codigo}_${correo.toLowerCase()}`;
+  if (usados[clave]) {
+    alert(`El cupón ${window.cuponAplicado.codigo} ya fue utilizado anteriormente con el correo ${correo}.`);
+    window.cuponAplicado = null;
+    actualizarCarrito();
+    return false;
+  }
+  usados[clave] = true;
+  localStorage.setItem('cupones_usados_handmadelove', JSON.stringify(usados));
+  return true;
+}
+
 function validarDatosCliente() {
   const modalidad = document.getElementById('select-modalidad')?.value || 'envio';
   const nombre = document.getElementById('input-nombre')?.value.trim() || '';
@@ -224,6 +290,8 @@ function procesarCompraWhatsApp() {
   if (!cliente) return;
 
   const totales = calcularTotalesCarrito();
+  if (!verificarUsoUnicoCupon(cliente.correo, totales)) return;
+
   let detalleItems = '';
   let mensaje = `¡Hola Handmade Love! ✨ Mi nombre es *${cliente.nombre}*.\n`;
   mensaje += `📱 Tel: ${cliente.telefono}\n📧 Correo: ${cliente.correo}\n🚚 Entrega: ${cliente.modalidad}\n\n*Detalle de mi pedido:*\n`;
@@ -251,6 +319,8 @@ function pagarPayphone() {
   if (!cliente) return;
 
   const totales = calcularTotalesCarrito();
+  if (!verificarUsoUnicoCupon(cliente.correo, totales)) return;
+
   let detalleItems = '';
   let mensaje = `¡Hola Handmade Love! 💳 Deseo pagar mi pedido de *$${totales.totalFinal.toFixed(2)}* con tarjeta (Payphone).\n\n`;
   mensaje += `👤 Cliente: *${cliente.nombre}*\n📱 Tel: ${cliente.telefono}\n🚚 Entrega: ${cliente.modalidad}\n\n*Detalle:*\n`;
