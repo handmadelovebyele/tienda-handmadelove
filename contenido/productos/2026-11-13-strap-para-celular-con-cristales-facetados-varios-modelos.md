@@ -1,7 +1,7 @@
 ---
 title: Strap para Celular con Cristales Facetados (Varios modelos)
 categoria: Bisutería
-subcategoria: Strap
+subcategoria: Accesorios para Celular
 precio: 12
 descuento: 0
 descripcion: Accesorio artesanal para teléfono celular elaborado cuidadosamente
