@@ -1,6 +1,6 @@
 ---
-title: Vainilla Silvestre 180g
-categoria: velas
+title: Vela Vainilla Silvestre 180g
+categoria: Velas
 precio: 12
 descripcion: Vela artesanal de cera de soya con aroma dulce y cálido a vainilla.
   Elaborada a mano con ingredientes naturales para garantizar un quemado
