@@ -2,7 +2,7 @@
 title: Collar en Turquesa Natural
 categoria: Bisutería
 subcategoria: Collares
-precio: 19
+precio: 20.99
 descuento: 0
 descripcion: Gargantilla artesanal elaborada a mano con cuentas esféricas de
   piedra turquesa en vibrante tono azul cielo con características vetas
