@@ -452,6 +452,21 @@
       return data;
     }
 
+    async function leerCarpetaProductos(rutaCarpeta, categoriaForzada, cacheBuster) {
+      try {
+        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/${rutaCarpeta}${cacheBuster}`);
+        if (!res.ok) return [];
+        const archivos = await res.json();
+        if (!Array.isArray(archivos)) return [];
+        const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
+        const contenidos = await Promise.all(promesas);
+        return contenidos.map(parsearMarkdownCompleto).filter(Boolean).map(p => {
+          if (categoriaForzada) p.categoria = categoriaForzada;
+          return p;
+        });
+      } catch (e) { return []; }
+    }
+
     function extraerDestacadosPorCategoria(productos) {
       if (!Array.isArray(productos) || productos.length === 0) return [];
       const mapa = new Map();
@@ -495,19 +510,20 @@
           }
         }
 
-        const resP = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
-        if (resP.ok) {
-          const archivosP = await resP.json();
-          if (Array.isArray(archivosP) && archivosP.length > 0) {
-            const promesasP = archivosP.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
-            const contenidosP = await Promise.all(promesasP);
-            const productosCMS = contenidosP.map(parsearMarkdownCompleto).filter(Boolean);
-            const destacados = extraerDestacadosPorCategoria(productosCMS);
-            if (destacados.length > 0) {
-              productosDestacadosHome = destacados;
-              renderDestacadosHome(productosDestacadosHome);
-            }
-          }
+        const [velas, bisuteria, bordado, pintura, crochet, anteriores] = await Promise.all([
+          leerCarpetaProductos('contenido/productos/velas', 'Velas', cacheBuster),
+          leerCarpetaProductos('contenido/productos/bisuteria', 'Bisutería', cacheBuster),
+          leerCarpetaProductos('contenido/productos/bordado', 'Bordado', cacheBuster),
+          leerCarpetaProductos('contenido/productos/pintura', 'Pintura', cacheBuster),
+          leerCarpetaProductos('contenido/productos/crochet', 'Crochet', cacheBuster),
+          leerCarpetaProductos('contenido/productos', null, cacheBuster)
+        ]);
+
+        const todosProductosCMS = [...velas, ...bisuteria, ...bordado, ...pintura, ...crochet, ...anteriores];
+        const destacados = extraerDestacadosPorCategoria(todosProductosCMS);
+        if (destacados.length > 0) {
+          productosDestacadosHome = destacados;
+          renderDestacadosHome(productosDestacadosHome);
         }
       } catch (err) {}
     }
