@@ -452,7 +452,7 @@
       background-color: var(--brand-red-dark);
     }
 
-    /* Talleres Dinámicos (Cuadrícula 3 columnas compacta) */
+    /* Talleres Dinámicos */
     .talleres-section {
       max-width: 1150px;
       margin: 0 auto 3rem auto;
@@ -2055,7 +2055,6 @@
             const contenidos = await Promise.all(promesas);
             const todos = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
 
-            // Tomar exactamente 1 producto representativo por cada categoría
             const porCategoria = new Map();
             todos.forEach(p => {
               const claveCat = (p.categoria || 'otros').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
