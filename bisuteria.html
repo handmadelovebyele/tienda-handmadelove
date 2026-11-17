@@ -32,6 +32,7 @@
       color: var(--text-main);
       background-color: var(--bg-color);
       line-height: 1.6;
+      overflow-x: hidden;
     }
     body {
       padding-top: 105px;
@@ -196,7 +197,7 @@
       line-height: 1;
     }
 
-    /* Hero */
+    /* Banner Superior Editable desde Decap CMS (contenido/banners -> bisuteria) */
     .categoria-hero {
       background: linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url('img/uploads/pulseras-varias.jpg') center/cover no-repeat;
       color: white;
@@ -340,7 +341,7 @@
       background: rgba(0,0,0,0.5);
       display: flex;
       justify-content: flex-end;
-      z-index: 2000;
+      z-index: 2500;
     }
     .carrito-modal.oculto {
       display: none;
@@ -480,10 +481,6 @@
       align-items: center;
       margin-bottom: 8px;
       font-family: 'Poppins', sans-serif;
-      transition: background 0.2s;
-    }
-    .btn-acordeon-datos:hover {
-      background: #f5eee6;
     }
     .caja-entrega {
       display: none;
@@ -514,9 +511,6 @@
       font-size: 0.83rem;
       outline: none;
       width: 100%;
-    }
-    .caja-entrega input:focus, .caja-entrega select:focus {
-      border-color: var(--brand-red);
     }
 
     .carrito-resumen {
@@ -595,7 +589,7 @@
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 3000;
+      z-index: 3500;
       padding: 20px;
     }
     .modal-banco.open {
@@ -678,10 +672,7 @@
       transition: all 0.2s ease;
       background: #f8f8f8;
     }
-    .modal-thumb:hover {
-      opacity: 1;
-    }
-    .modal-thumb.active {
+    .modal-thumb:hover, .modal-thumb.active {
       border-color: var(--brand-red);
       opacity: 1;
     }
@@ -689,7 +680,6 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      height: 100%;
     }
     .modal-category {
       font-size: 0.75rem;
@@ -711,15 +701,14 @@
       margin-bottom: 10px;
     }
     .modal-desc-box {
-      max-height: 200px;
+      max-height: 220px;
       overflow-y: auto;
-      padding-right: 6px;
+      padding: 10px 12px;
       margin-bottom: 16px;
       font-size: 0.88rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
       border: 1px solid #f0ebe4;
-      padding: 10px;
       border-radius: 8px;
       background: #faf8f5;
     }
@@ -868,9 +857,6 @@
       .footer-col {
         width: 100% !important;
       }
-      .footer-col h4 {
-        margin-bottom: 8px !important;
-      }
       .btn-wa-footer {
         max-width: 100% !important;
       }
@@ -926,7 +912,7 @@
     </header>
   </div>
 
-  <!-- Hero Categoría -->
+  <!-- Banner Superior Editable desde Decap CMS -->
   <section class="categoria-hero" id="banner-categoria">
     <h1 id="banner-titulo">Bisutería & Joyería Artesanal</h1>
     <p id="banner-desc">Accesorios únicos elaborados a mano con perlas de río naturales, piedras energéticas y acabados laminados en oro de 18k.</p>
@@ -941,7 +927,7 @@
   </main>
 
   <!-- Modal Detalle -->
-  <div id="modal-producto" class="product-modal">
+  <div id="modal-producto" class="product-modal" onclick="if(event.target.id === 'modal-producto') cerrarModalProducto()">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
       <div class="modal-gallery">
@@ -960,7 +946,7 @@
     </div>
   </div>
 
-  <!-- Modal Carrito con Validación Requerida -->
+  <!-- Modal Carrito -->
   <div id="modal-carrito" class="carrito-modal oculto">
     <div class="carrito-contenido">
       <div class="carrito-header">
@@ -974,13 +960,11 @@
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
 
-      <!-- Botón Acordeón Desplegable -->
       <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
         <span>📝 Datos para la Entrega y Pedido</span>
         <span id="flecha-acordeon">▾</span>
       </button>
 
-      <!-- Campos de Entrega Requeridos -->
       <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
         <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
@@ -1005,12 +989,12 @@
 
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
-        <div><span>IVA (15%):</span> <span id="cart-iva">$0.00</span></div>
+        <div><span>IVA (15% productos):</span> <span id="cart-iva">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
 
       <div class="carrito-total">
-        <span>TOTAL PRODUCTOS:</span>
+        <span>TOTAL:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
 
@@ -1037,7 +1021,7 @@
     </div>
   </div>
 
-  <!-- Footer Limpio -->
+  <!-- Footer -->
   <footer class="main-footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -1174,9 +1158,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ tipo, nombre, telefono, correo, detalle, total })
         });
-      } catch (err) {
-        console.error("Error al registrar en Google Sheet", err);
-      }
+      } catch (err) {}
     }
 
     let carrito = JSON.parse(localStorage.getItem('carrito_hml') || '[]');
@@ -1209,7 +1191,7 @@
         encontrado.cantidad += 1;
         if (!encontrado.imagen && fotoItem) encontrado.imagen = fotoItem;
       } else {
-        carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem });
+        carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem, esTaller: false });
       }
 
       guardarCarrito();
@@ -1251,11 +1233,15 @@
       }
 
       let subtotal = 0;
+      let baseGravableIva = 0;
       if (lista) {
         lista.innerHTML = carrito.map((item, index) => {
           const precioItem = parseFloat(item.precio) || 0;
           const totalLinea = precioItem * item.cantidad;
           subtotal += totalLinea;
+          if (!item.esTaller && !item.nombre.toLowerCase().includes('taller')) {
+            baseGravableIva += totalLinea;
+          }
           const miniatura = item.imagen || 'logo.jpg';
           return `
             <div class="item-carrito">
@@ -1263,7 +1249,7 @@
                 <img src="${miniatura}" alt="${item.nombre}" class="item-thumb-carrito" onerror="this.src='logo.jpg'">
                 <div class="item-info">
                   <strong title="${item.nombre}">${item.nombre}</strong>
-                  <span>$${totalLinea.toFixed(2)}</span>
+                  <span>$${totalLinea.toFixed(2)} ${item.esTaller ? '(IVA 0%)' : ''}</span>
                 </div>
               </div>
               <div class="item-controls">
@@ -1276,7 +1262,7 @@
         }).join('');
       }
 
-      const valorIva = subtotal * TASA_IVA;
+      const valorIva = baseGravableIva * TASA_IVA;
       const totalDefinitivo = subtotal + valorIva;
 
       if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
@@ -1290,11 +1276,12 @@
       const correo = (document.getElementById('input-correo').value || '').trim();
       const modalidad = document.getElementById('select-modalidad').value;
       const ubicacion = (document.getElementById('input-ubicacion').value || '').trim();
+      const soloTalleres = carrito.every(i => i.esTaller || i.nombre.toLowerCase().includes('taller'));
 
       const caja = document.getElementById('caja-formulario-entrega');
       const flecha = document.getElementById('flecha-acordeon');
 
-      if (!nombre || !telefono || !correo || (modalidad === 'envio' && !ubicacion)) {
+      if (!nombre || !telefono || !correo || (!soloTalleres && modalidad === 'envio' && !ubicacion)) {
         caja.classList.add('abierta');
         flecha.textContent = '▴';
 
@@ -1313,15 +1300,35 @@
           document.getElementById('input-correo').focus();
           return null;
         }
-        if (modalidad === 'envio' && !ubicacion) {
+        if (!soloTalleres && modalidad === 'envio' && !ubicacion) {
           alert('Por favor ingresa tu Sector, Ciudad o Dirección de entrega para cotizar el flete.');
           document.getElementById('input-ubicacion').focus();
           return null;
         }
       }
 
-      const entregaTexto = (modalidad === 'retiro') ? 'Retiro en Taller (Almax Center)' : `Envío a domicilio (${ubicacion})`;
+      const entregaTexto = soloTalleres
+        ? 'Reserva Taller Presencial (Almax Center)'
+        : ((modalidad === 'retiro') ? 'Retiro en Taller (Almax Center)' : `Envío a domicilio (${ubicacion})`);
       return { nombre, telefono, correo, modalidad, ubicacion, entregaTexto };
+    }
+
+    function calcularTotalesCarrito() {
+      let subtotal = 0;
+      let baseIva = 0;
+      let detalleStr = "";
+      carrito.forEach(item => {
+        const pVal = parseFloat(item.precio) || 0;
+        const linea = pVal * item.cantidad;
+        detalleStr += `${item.nombre} (x${item.cantidad}) - $${linea.toFixed(2)}; `;
+        subtotal += linea;
+        if (!item.esTaller && !item.nombre.toLowerCase().includes('taller')) {
+          baseIva += linea;
+        }
+      });
+      const valorIva = baseIva * TASA_IVA;
+      const totalFinal = subtotal + valorIva;
+      return { subtotal, valorIva, totalFinal, detalleStr };
     }
 
     function procesarCompraWhatsApp() {
@@ -1333,16 +1340,7 @@
       const cliente = validarYObtenerDatosCliente();
       if (!cliente) return;
 
-      let subtotal = 0;
-      let detalleStr = "";
-      carrito.forEach(item => {
-        const pVal = parseFloat(item.precio) || 0;
-        detalleStr += `${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}; `;
-        subtotal += pVal * item.cantidad;
-      });
-
-      const valorIva = subtotal * TASA_IVA;
-      const totalFinal = subtotal + valorIva;
+      const { subtotal, valorIva, totalFinal, detalleStr } = calcularTotalesCarrito();
 
       enviarBaseDatos(
         'Compra Web (WhatsApp)',
@@ -1350,26 +1348,19 @@
         cliente.telefono,
         cliente.correo,
         `[Entrega: ${cliente.entregaTexto}] ${detalleStr}`,
-        `$${totalFinal.toFixed(2)} ${cliente.modalidad === 'envio' ? '+ Envío por cotizar' : '(Retiro)'}`
+        `$${totalFinal.toFixed(2)}`
       );
 
       let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo realizar el siguiente pedido:%0A%0A`;
-
       carrito.forEach(item => {
         const pVal = parseFloat(item.precio) || 0;
         mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
       });
 
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
-      mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
-      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
+      if (valorIva > 0) mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
+      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
       mensaje += `%0AModalidad de Entrega: *${cliente.entregaTexto}*`;
-
-      if (cliente.modalidad === 'envio') {
-        mensaje += `%0A¿Me podrían cotizar el valor del envío para concretar el pago?`;
-      } else {
-        mensaje += `%0A¿Me podrían indicar los horarios disponibles para retirar en Almax Center?`;
-      }
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
@@ -1383,15 +1374,7 @@
       const cliente = validarYObtenerDatosCliente();
       if (!cliente) return;
 
-      let subtotal = 0;
-      let detalleStr = "";
-      carrito.forEach(item => {
-        const pVal = parseFloat(item.precio) || 0;
-        detalleStr += `${item.nombre} (x${item.cantidad}); `;
-        subtotal += pVal * item.cantidad;
-      });
-
-      const totalFinal = subtotal + (subtotal * TASA_IVA);
+      const { subtotal, valorIva, totalFinal, detalleStr } = calcularTotalesCarrito();
 
       enviarBaseDatos(
         'Solicitud Link Payphone (WhatsApp)',
@@ -1399,7 +1382,7 @@
         cliente.telefono,
         cliente.correo,
         `[Entrega: ${cliente.entregaTexto}] ${detalleStr}`,
-        `$${totalFinal.toFixed(2)} ${cliente.modalidad === 'envio' ? '+ Envío por cotizar' : '(Retiro)'}`
+        `$${totalFinal.toFixed(2)}`
       );
 
       let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo pagar con *Tarjeta de Crédito/Débito (Payphone)*:%0A%0A`;
@@ -1409,15 +1392,9 @@
       });
 
       mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
-      mensaje += `%0AIVA (15%): $${(subtotal * TASA_IVA).toFixed(2)}`;
-      mensaje += `%0A*TOTAL PRODUCTOS: $${totalFinal.toFixed(2)}*%0A`;
-      mensaje += `%0AModalidad: *${cliente.entregaTexto}*%0A`;
-
-      if (cliente.modalidad === 'envio') {
-        mensaje += `¿Me podrían cotizar el valor del envío y enviarme el link de cobro cerrado de Payphone con el total incluido?`;
-      } else {
-        mensaje += `¿Me podrían enviar el link de Payphone por este valor para realizar el pago?`;
-      }
+      if (valorIva > 0) mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
+      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
+      mensaje += `%0AModalidad: *${cliente.entregaTexto}*`;
 
       window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
     }
