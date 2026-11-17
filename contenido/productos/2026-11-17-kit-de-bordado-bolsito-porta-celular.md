@@ -1,7 +1,7 @@
 ---
 title: "Kit de Bordado: Bolsito Porta Celular"
 categoria: Bordado
-subcategoria: Celular
+subcategoria: Kits
 precio: 19.99
 descuento: 0
 descripcion: Kit completo de bordado artesanal diseñado para personalizar tu
