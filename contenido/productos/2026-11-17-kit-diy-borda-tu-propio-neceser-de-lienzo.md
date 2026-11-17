@@ -1,7 +1,7 @@
 ---
 title: "Kit DIY: Borda tu Propio Neceser de Lienzo"
 categoria: Bordado
-subcategoria: ""
+subcategoria: Kits
 precio: 21.99
 descuento: 0
 descripcion: Kit completo de bordado artesanal diseñado para personalizar tu
