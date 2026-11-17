@@ -46,10 +46,115 @@ collections:
       - { label: "Fecha de Vencimiento", name: "fechaFin", widget: "datetime" }
       - { label: "Activo", name: "activa", widget: "boolean", default: true }
 
-  - name: "productos"
-    label: "Productos y Creaciones"
-    folder: "contenido/productos"
+  - name: "productos_velas"
+    label: "Productos - Velas"
+    folder: "contenido/productos/velas"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título de la Pieza", name: "title", widget: "string" }
+      - { label: "Categoría Principal", name: "categoria", widget: "hidden", default: "Velas" }
+      - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Individual (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio del Descuento (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fin del Descuento (Opcional)", name: "fechaFin", widget: "datetime", required: false }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
+
+  - name: "productos_bisuteria"
+    label: "Productos - Bisutería"
+    folder: "contenido/productos/bisuteria"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título de la Pieza", name: "title", widget: "string" }
+      - { label: "Categoría Principal", name: "categoria", widget: "hidden", default: "Bisutería" }
+      - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Individual (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio del Descuento (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fin del Descuento (Opcional)", name: "fechaFin", widget: "datetime", required: false }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
+
+  - name: "productos_bordado"
+    label: "Productos - Bordado"
+    folder: "contenido/productos/bordado"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título de la Pieza", name: "title", widget: "string" }
+      - { label: "Categoría Principal", name: "categoria", widget: "hidden", default: "Bordado" }
+      - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Individual (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio del Descuento (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fin del Descuento (Opcional)", name: "fechaFin", widget: "datetime", required: false }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
+
+  - name: "productos_pintura"
+    label: "Productos - Pintura"
+    folder: "contenido/productos/pintura"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título de la Pieza", name: "title", widget: "string" }
+      - { label: "Categoría Principal", name: "categoria", widget: "hidden", default: "Pintura" }
+      - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Individual (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio del Descuento (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fin del Descuento (Opcional)", name: "fechaFin", widget: "datetime", required: false }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
+
+  - name: "productos_crochet"
+    label: "Productos - Crochet"
+    folder: "contenido/productos/crochet"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Título de la Pieza", name: "title", widget: "string" }
+      - { label: "Categoría Principal", name: "categoria", widget: "hidden", default: "Crochet" }
+      - { label: "Subcategoría / Temporada (Opcional)", name: "subcategoria", widget: "string", required: false }
+      - { label: "Precio Normal ($)", name: "precio", widget: "number", value_type: "float" }
+      - { label: "Descuento Individual (%) (Opcional)", name: "descuento", widget: "number", value_type: "int", default: 0, required: false }
+      - { label: "Inicio del Descuento (Opcional)", name: "fechaInicio", widget: "datetime", required: false }
+      - { label: "Fin del Descuento (Opcional)", name: "fechaFin", widget: "datetime", required: false }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
+      - { label: "Imagen de Portada", name: "imagen", widget: "image" }
+      - label: "Galería de Fotos Adicionales"
+        name: "fotos"
+        widget: "list"
+        required: false
+        field: { label: "Foto Adicional", name: "foto", widget: "image" }
+
+  - name: "productos_anteriores"
+    label: "Productos Anteriores (Sin clasificar en carpeta)"
+    folder: "contenido/productos"
+    create: false
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título de la Pieza", name: "title", widget: "string" }
