@@ -54,12 +54,36 @@ function toggleCarrito() {
   if (modal) modal.classList.toggle('oculto');
 }
 
-function toggleDesplegableDatos() {
+function abrirFormularioEntrega() {
   const caja = document.getElementById('caja-formulario-entrega');
   const flecha = document.getElementById('flecha-acordeon');
   if (!caja) return;
-  caja.classList.toggle('abierto');
-  if (flecha) flecha.textContent = caja.classList.contains('abierto') ? '▴' : '▾';
+  caja.classList.add('abierto', 'open');
+  caja.style.display = 'block';
+  caja.style.maxHeight = '1000px';
+  caja.style.opacity = '1';
+  caja.style.padding = '12px';
+  if (flecha) flecha.textContent = '▴';
+}
+
+function cerrarFormularioEntrega() {
+  const caja = document.getElementById('caja-formulario-entrega');
+  const flecha = document.getElementById('flecha-acordeon');
+  if (!caja) return;
+  caja.classList.remove('abierto', 'open');
+  caja.style.display = 'none';
+  if (flecha) flecha.textContent = '▾';
+}
+
+function toggleDesplegableDatos() {
+  const caja = document.getElementById('caja-formulario-entrega');
+  if (!caja) return;
+  const estaAbierto = caja.style.display === 'block' || caja.classList.contains('abierto') || caja.classList.contains('open');
+  if (estaAbierto) {
+    cerrarFormularioEntrega();
+  } else {
+    abrirFormularioEntrega();
+  }
 }
 
 function cambiarModalidadEntrega() {
@@ -202,20 +226,24 @@ function actualizarCarrito() {
   }
 
   if (lista) {
+    lista.style.maxHeight = '240px';
+    lista.style.overflowY = 'auto';
+    lista.style.overflowX = 'hidden';
+
     lista.innerHTML = carrito.map((item, index) => {
       const precioUnit = parseFloat(item.precio) || 0;
       const totalLinea = precioUnit * item.cantidad;
       return `
-        <div class="item-carrito">
-          <img src="${normalizarRutaImagen(item.imagen)}" alt="${item.nombre}" onerror="this.src='logo.jpg'">
-          <div class="item-info">
-            <div class="item-nombre">${item.nombre}</div>
-            <div class="item-precio">$${totalLinea.toFixed(2)}</div>
+        <div class="item-carrito" style="display:flex; align-items:center; gap:10px; padding:8px 4px; border-bottom:1px solid #f2e8e8; overflow:hidden;">
+          <img src="${normalizarRutaImagen(item.imagen)}" alt="${item.nombre}" onerror="this.src='logo.jpg'" style="width:52px !important; height:52px !important; min-width:52px; max-width:52px; object-fit:cover; border-radius:8px; flex-shrink:0; border:1px solid #eee;">
+          <div class="item-info" style="flex:1; min-width:0; overflow:hidden;">
+            <div class="item-nombre" style="font-size:0.82rem; font-weight:600; color:#333; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; word-break:break-word;">${item.nombre}</div>
+            <div class="item-precio" style="font-size:0.82rem; font-weight:700; color:var(--brand-red); margin-top:2px;">$${totalLinea.toFixed(2)}</div>
           </div>
-          <div class="item-controls">
-            <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
-            <span>${item.cantidad}</span>
-            <button type="button" onclick="cambiarCantidad(${index}, 1)">+</button>
+          <div class="item-controls" style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+            <button type="button" onclick="cambiarCantidad(${index}, -1)" style="width:24px; height:24px; border-radius:50%; border:1px solid #e0caca; background:#fdf8f8; color:var(--brand-red); font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;">-</button>
+            <span style="font-size:0.82rem; font-weight:600; min-width:14px; text-align:center;">${item.cantidad}</span>
+            <button type="button" onclick="cambiarCantidad(${index}, 1)" style="width:24px; height:24px; border-radius:50%; border:1px solid #e0caca; background:#fdf8f8; color:var(--brand-red); font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;">+</button>
           </div>
         </div>
       `;
@@ -265,12 +293,7 @@ function validarDatosCliente() {
   const ubicacion = document.getElementById('input-ubicacion')?.value.trim() || '';
 
   if (!nombre || !telefono || !correo || (modalidad === 'envio' && !ubicacion)) {
-    const caja = document.getElementById('caja-formulario-entrega');
-    const flecha = document.getElementById('flecha-acordeon');
-    if (caja && !caja.classList.contains('abierto')) {
-      caja.classList.add('abierto');
-      if (flecha) flecha.textContent = '▴';
-    }
+    abrirFormularioEntrega();
     alert('Por favor completa tus datos de entrega (Nombre, Teléfono, Correo y Dirección) antes de continuar.');
     return null;
   }
