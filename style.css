@@ -217,3 +217,39 @@ header.navbar {
   font-weight: 400;
   margin-right: 6px;
 }
+/* =========================================================
+   ALINEACIÓN Y ESPACIADO DE TARJETAS DE TALLERES
+   ========================================================= */
+.taller-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.taller-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 18px 20px 22px 20px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+.taller-desc {
+  margin-bottom: 12px !important;
+}
+
+.taller-cupos {
+  margin-top: auto !important;
+  margin-bottom: 12px !important;
+  align-self: flex-start;
+}
+
+.taller-footer {
+  margin-top: 0 !important;
+  padding-top: 12px !important;
+  padding-bottom: 4px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
