@@ -1,3 +1,19 @@
+/* Google Tag / Analytics (GTM-T74G5QJ2) */
+(function() {
+  if (document.getElementById('google-tag-gtm')) return;
+  const s = document.createElement('script');
+  s.id = 'google-tag-gtm';
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-T74G5QJ2';
+  document.head.appendChild(s);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', 'GTM-T74G5QJ2');
+})();
+
 /* =========================================================
    HEADER UNIFICADO | HANDMADE LOVE BY E.L.E & EMOCION-ARTE
    ========================================================= */
