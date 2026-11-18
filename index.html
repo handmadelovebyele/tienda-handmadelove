@@ -1,1175 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google Tag Manager / Analytics -->
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T74G5QJ2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Handmade Love by E.L.E & EMOCION-ARTE</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --brand-red: #c94a4a;
-      --brand-red-dark: #a83838;
-      --bg-color: #faf9f6;
-      --text-main: #333;
-      --text-muted: #666;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html, body {
-      width: 100%;
-      max-width: 100vw;
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-main);
-      background-color: var(--bg-color);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-    body {
-      padding-top: 105px;
-    }
-
-    /* Cabecera 100% Fija */
-    .header-fijo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      z-index: 1500;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      background-color: #fff;
-    }
-    .top-banner {
-      background-color: var(--brand-red);
-      color: white;
-      text-align: center;
-      padding: 0.5rem;
-      font-size: 0.82rem;
-      width: 100%;
-    }
-    header.navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.8rem 2.5rem;
-      background-color: #fff;
-      width: 100%;
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .logo-card img {
-      height: 38px;
-      width: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-    }
-    .brand-main {
-      font-weight: 600;
-      font-size: 1.05rem;
-      color: #333;
-      text-transform: lowercase;
-    }
-    .brand-sub {
-      font-size: 0.58rem;
-      color: var(--brand-red);
-      letter-spacing: 1.2px;
-      font-weight: 700;
-    }
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      margin: 0;
-    }
-    .nav-links button, .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      transition: color 0.3s;
-    }
-    .nav-links button:hover, .nav-links a:hover {
-      color: var(--brand-red);
-    }
-    .pill-talleres {
-      background-color: #fdf2f2;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-weight: 500;
-      color: var(--brand-red) !important;
-    }
-    .dropdown {
-      position: relative;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #fff;
-      min-width: 170px;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-      border-radius: 6px;
-      z-index: 100;
-      padding: 8px 0;
-    }
-    .dropdown-content a {
-      color: var(--text-muted);
-      padding: 10px 16px;
-      display: block;
-      text-align: left;
-    }
-    .dropdown-content a:hover {
-      background-color: #fdf2f2;
-      color: var(--brand-red);
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    .cart-btn {
-      background-color: var(--brand-red);
-      color: white !important;
-      padding: 6px 16px;
-      border-radius: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.92rem;
-      box-shadow: 0 2px 6px rgba(201, 74, 74, 0.25);
-      transition: background 0.3s, transform 0.2s;
-    }
-    .cart-btn:hover {
-      background-color: var(--brand-red-dark);
-      transform: translateY(-1px);
-    }
-    .cart-badge {
-      background: white;
-      color: var(--brand-red);
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 1px 7px;
-      border-radius: 12px;
-      min-width: 20px;
-      text-align: center;
-    }
-    .mobile-controls {
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    .btn-menu-hamburguesa {
-      background: none;
-      border: none;
-      font-size: 1.6rem;
-      color: var(--text-main);
-      cursor: pointer;
-      padding: 2px 6px;
-      line-height: 1;
-    }
-
-    /* Hero */
-    .hero {
-      max-width: 1100px;
-      margin: 2rem auto 1.5rem auto;
-      padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 35px;
-      align-items: center;
-      width: 100%;
-    }
-    .hero-badge {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      font-weight: 700;
-      color: var(--brand-red);
-      margin-bottom: 10px;
-      display: block;
-    }
-    .hero h1 {
-      font-size: 2.2rem;
-      color: var(--text-main);
-      margin-bottom: 15px;
-      line-height: 1.25;
-    }
-    .hero h1 span {
-      color: var(--brand-red);
-    }
-    .hero p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 22px;
-      line-height: 1.6;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background-color: var(--brand-red);
-      color: white;
-      padding: 0.65rem 1.4rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
-    .btn-primary:hover {
-      background-color: var(--brand-red-dark);
-    }
-    .btn-secondary {
-      background-color: transparent;
-      color: var(--text-main);
-      border: 1px solid #ccc;
-      padding: 0.65rem 1.4rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-    .btn-secondary:hover {
-      border-color: var(--brand-red);
-      color: var(--brand-red);
-    }
-    .hero-carousel-container {
-      position: relative;
-      width: 100%;
-      height: 340px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      background-color: #fdf2f2;
-    }
-    .hero-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-    .hero-slide.active {
-      opacity: 1;
-    }
-    .hero-slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(255,255,255,0.75);
-      border: none;
-      color: #333;
-      font-size: 1.8rem;
-      padding: 0 10px;
-      cursor: pointer;
-      border-radius: 50%;
-      z-index: 10;
-    }
-    .carousel-btn:hover {
-      background-color: #fff;
-      color: var(--brand-red);
-    }
-    .carousel-prev { left: 10px; }
-    .carousel-next { right: 10px; }
-    .carousel-dots {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 7px;
-      z-index: 10;
-    }
-    .dot {
-      width: 9px;
-      height: 9px;
-      background-color: rgba(255,255,255,0.6);
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    .dot.active {
-      background-color: var(--brand-red);
-    }
-
-    /* Catálogo Destacado (1 por categoría) */
-    .catalogo-section {
-      max-width: 1150px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-      width: 100%;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .section-title h2 {
-      font-size: 1.9rem;
-      color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    .grid-productos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 310px));
-      gap: 1.8rem;
-      justify-content: center;
-      width: 100%;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      height: 430px;
-      cursor: pointer;
-      transition: transform 0.3s;
-      position: relative;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-    }
-    .card-cat-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: rgba(255, 255, 255, 0.94);
-      color: var(--brand-red);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 4px 11px;
-      border-radius: 15px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    }
-    .card img {
-      width: 100%;
-      height: 205px;
-      object-fit: cover;
-      background: #f7f2ed;
-    }
-    .card-body {
-      padding: 1.1rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .card-title {
-      font-size: 1.02rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .card-desc {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      margin-bottom: 0.8rem;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      line-height: 1.45;
-    }
-    .card-cat-link {
-      font-size: 0.78rem;
-      color: var(--brand-red);
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      display: inline-block;
-    }
-    .card-cat-link:hover {
-      text-decoration: underline;
-    }
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 8px;
-      border-top: 1px solid #f5ede6;
-    }
-    .card-price {
-      font-weight: 600;
-      font-size: 1.08rem;
-      color: var(--brand-red);
-    }
-    .card-btn {
-      background-color: var(--brand-red);
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.83rem;
-      cursor: pointer;
-    }
-    .card-btn:hover {
-      background-color: var(--brand-red-dark);
-    }
-
-    /* Talleres Dinámicos */
-    .talleres-section {
-      max-width: 1150px;
-      margin: 0 auto 3rem auto;
-      padding: 1rem 1.5rem;
-      width: 100%;
-    }
-    .talleres-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 340px));
-      gap: 1.8rem;
-      justify-content: center;
-      width: 100%;
-    }
-    .taller-card {
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.3s;
-      position: relative;
-    }
-    .taller-card:hover {
-      transform: translateY(-4px);
-    }
-    .taller-cupos-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(255, 255, 255, 0.95);
-      color: var(--brand-red);
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 4px 11px;
-      border-radius: 15px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    }
-    .taller-cupos-badge.agotado {
-      background: #333;
-      color: #fff;
-    }
-    .taller-card img {
-      width: 100%;
-      height: 195px;
-      object-fit: cover;
-      background: #fdf2f2;
-    }
-    .taller-body {
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .taller-body h3 {
-      font-size: 1.08rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--text-main);
-    }
-    .taller-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.3rem;
-    }
-    .taller-desc-corta {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      margin: 0.6rem 0 1rem 0;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      line-height: 1.5;
-    }
-    .taller-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: auto;
-      padding-top: 10px;
-      border-top: 1px solid #f5ede6;
-    }
-    .taller-precio {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--brand-red);
-    }
-    .btn-reservar-taller {
-      background-color: var(--brand-red);
-      color: white;
-      border: none;
-      padding: 0.55rem 1.1rem;
-      border-radius: 20px;
-      font-size: 0.84rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    .btn-reservar-taller:hover {
-      background-color: var(--brand-red-dark);
-    }
-    .btn-reservar-taller:disabled {
-      background-color: #aaa;
-      cursor: not-allowed;
-    }
-
-    /* Newsletter */
-    .newsletter-section {
-      background-color: #fdf2f2;
-      padding: 3.5rem 1.5rem;
-      text-align: center;
-      margin-bottom: 2.5rem;
-      width: 100%;
-    }
-    .newsletter-container {
-      max-width: 750px;
-      margin: 0 auto;
-    }
-    .newsletter-section h2 {
-      font-size: 1.7rem;
-      color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-    .newsletter-section p {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 1.4rem;
-    }
-
-    /* Modal del Carrito */
-    .carrito-modal {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: flex;
-      justify-content: flex-end;
-      z-index: 2500;
-    }
-    .carrito-modal.oculto {
-      display: none;
-    }
-    .carrito-contenido {
-      width: 100%;
-      max-width: 420px;
-      background: #fff;
-      height: 100%;
-      padding: 1.5rem 1.2rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: -5px 0 20px rgba(0,0,0,0.15);
-      overflow-y: auto;
-    }
-    .carrito-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .cerrar-carrito {
-      font-size: 1.8rem;
-      cursor: pointer;
-      line-height: 1;
-      color: #777;
-    }
-    .btn-seguir-comprando {
-      width: 100%;
-      background: #fdf2f2;
-      border: 1px solid #f9dede;
-      color: var(--brand-red);
-      padding: 0.6rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-    #lista-carrito {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      min-height: 110px;
-      max-height: 230px;
-      overflow-y: auto;
-      margin-bottom: 14px;
-      border: 1px solid #ebdcd5;
-      border-radius: 10px;
-      padding: 10px;
-      background: #faf8f5;
-    }
-    .item-carrito {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-    }
-    .item-izq {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 1;
-      min-width: 0;
-    }
-    .item-thumb-carrito {
-      width: 44px;
-      height: 44px;
-      border-radius: 6px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: #f0ebe4;
-      border: 1px solid #e8dec8;
-    }
-    .item-info {
-      flex: 1;
-      min-width: 0;
-    }
-    .item-info strong {
-      font-size: 0.88rem;
-      color: var(--text-main);
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .item-info span {
-      color: var(--brand-red);
-      font-weight: 600;
-      font-size: 0.86rem;
-    }
-    .item-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-left: 8px;
-    }
-    .item-controls button {
-      background: #f4efe6;
-      border: 1px solid #e2dacd;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: 700;
-      color: var(--brand-red);
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .item-controls span {
-      font-weight: 600;
-      min-width: 16px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    /* Acordeón de Datos Requeridos */
-    .btn-acordeon-datos {
-      width: 100%;
-      background: #faf7f2;
-      border: 1px dashed #d9cbbe;
-      border-radius: 8px;
-      padding: 10px 14px;
-      text-align: left;
-      font-size: 0.86rem;
-      font-weight: 600;
-      color: var(--text-main);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      font-family: 'Poppins', sans-serif;
-    }
-    .caja-entrega {
-      display: none;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 14px;
-      padding: 12px;
-      background: #fff;
-      border: 1px solid #ebdcd5;
-      border-radius: 10px;
-    }
-    .caja-entrega.abierta {
-      display: flex;
-    }
-    .caja-entrega label {
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .caja-entrega label span.req {
-      color: var(--brand-red);
-    }
-    .caja-entrega input, .caja-entrega select {
-      padding: 0.55rem 0.8rem;
-      border-radius: 8px;
-      border: 1px solid #d5c8be;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.83rem;
-      outline: none;
-      width: 100%;
-    }
-    .carrito-resumen {
-      background: #fdf8f8;
-      border: 1px solid #f5e6e6;
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 0.85rem;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .carrito-resumen div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .envio-nota {
-      font-size: 0.78rem;
-      color: var(--brand-red);
-      font-weight: 600;
-    }
-    .carrito-total {
-      border-top: 2px solid #eee;
-      padding-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-    .btn-pagar-tarjeta {
-      width: 100%;
-      background-color: #FF6A00;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 5px;
-      font-size: 0.88rem;
-    }
-    .btn-pagar-whatsapp {
-      width: 100%;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 5px;
-      font-size: 0.88rem;
-    }
-    .btn-banco {
-      width: 100%;
-      background: none;
-      border: 1px solid #ccc;
-      color: var(--text-main);
-      padding: 0.6rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-    .modal-banco {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3500;
-      padding: 20px;
-    }
-    .modal-banco.open {
-      display: flex;
-    }
-    .modal-banco-content {
-      background: white;
-      max-width: 380px;
-      width: 100%;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    /* Modales de Producto y Taller */
-    .product-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 3000;
-      padding: 20px;
-    }
-    .product-modal.open {
-      display: flex;
-    }
-    .product-modal-content {
-      background: #fff;
-      border-radius: 12px;
-      max-width: 780px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 1.8rem;
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    .close-product-modal {
-      position: absolute;
-      top: 12px;
-      right: 18px;
-      font-size: 1.8rem;
-      cursor: pointer;
-      color: #555;
-    }
-    .modal-gallery {
-      display: flex;
-      flex-direction: column;
-    }
-    .modal-gallery img#modal-img-principal, .modal-gallery img#taller-modal-img {
-      width: 100%;
-      height: 290px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #f2ece4;
-    }
-    .modal-thumbs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      min-height: 55px;
-    }
-    .modal-thumb {
-      width: 55px;
-      height: 55px;
-      object-fit: cover;
-      border-radius: 6px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      opacity: 0.65;
-      transition: all 0.2s ease;
-      background: #f8f8f8;
-    }
-    .modal-thumb:hover, .modal-thumb.active {
-      border-color: var(--brand-red);
-      opacity: 1;
-    }
-    .modal-details {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-    .modal-category {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--brand-red);
-      text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-    .modal-title {
-      font-size: 1.35rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-    .modal-price {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--brand-red);
-      margin-bottom: 10px;
-    }
-    .modal-desc-box {
-      max-height: 230px;
-      overflow-y: auto;
-      padding: 10px 12px;
-      margin-bottom: 16px;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      background: #faf8f5;
-      border: 1px solid #f0ebe4;
-      border-radius: 8px;
-    }
-
-    /* Footer */
-    .main-footer {
-      background: #231F1C;
-      color: #FAF7F2;
-      padding: 50px 24px 30px;
-      width: 100%;
-    }
-    .footer-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-      gap: 30px;
-      margin-bottom: 35px;
-      width: 100%;
-    }
-    .footer-col {
-      display: flex;
-      flex-direction: column;
-    }
-    .footer-col h4 {
-      font-size: 0.82rem;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #FAF7F2;
-      text-transform: uppercase;
-    }
-    .footer-desc {
-      color: #A89F94;
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-    .footer-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-    }
-    .footer-links a, .footer-links button {
-      color: #A89F94;
-      text-decoration: none;
-      font-size: 0.88rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-    .footer-links a:hover, .footer-links button:hover {
-      color: white;
-    }
-    .btn-wa-footer {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: #25D366;
-      color: white !important;
-      padding: 10px 18px;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      margin-top: 10px;
-      font-size: 0.88rem;
-      max-width: 250px;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-      padding-top: 20px;
-      color: #7A7268;
-      font-size: 0.8rem;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding-top: 95px;
-      }
-      header.navbar {
-        padding: 0.7rem 1.2rem;
-        flex-wrap: wrap;
-      }
-      .nav-links li:last-child {
-        display: none;
-      }
-      .mobile-controls {
-        display: flex;
-      }
-      .nav-wrapper {
-        width: 100%;
-      }
-      .nav-links {
-        display: none;
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem 0 0.4rem 0;
-        gap: 12px;
-        border-top: 1px solid #f0ebe4;
-        margin-top: 8px;
-      }
-      .nav-links.open {
-        display: flex;
-      }
-      .nav-links li {
-        width: 100%;
-      }
-      .nav-links a, .nav-links button {
-        font-size: 0.95rem !important;
-        display: block;
-        width: 100%;
-        text-align: left;
-      }
-      .dropdown-content {
-        position: static;
-        box-shadow: none;
-        background: #fdf8f8;
-        padding: 6px 12px;
-        margin-top: 4px;
-        border-radius: 8px;
-        min-width: unset;
-      }
-      .dropdown:hover .dropdown-content {
-        display: block;
-      }
-      .product-modal-content {
-        grid-template-columns: 1fr;
-        max-height: 94vh;
-        padding: 1.4rem 1.1rem;
-      }
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 22px;
-        margin-top: 1.2rem;
-        padding: 0 1.2rem;
-      }
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      .footer-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-        width: 100% !important;
-      }
-      .footer-col {
-        width: 100% !important;
-      }
-      .btn-wa-footer {
-        max-width: 100% !important;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Cabecera Fija -->
-  <div class="header-fijo">
-    <div class="top-banner">✨ Envíos a todo el país | Talleres presenciales EMOCION-ARTE en Almax Center, Samborondón ✨</div>
+  <div id="header-global"></div>
 
-    <header class="navbar">
-      <a href="index.html" class="logo-container">
-        <div class="logo-card"><img src="logo.jpg" alt="Logo" onerror="this.style.display='none'"></div>
-        <div class="brand-text">
-          <span class="brand-main">handmade love</span>
-          <span class="brand-sub">BY E.L.E · EMOCION-ARTE</span>
-        </div>
-      </a>
-
-      <div class="mobile-controls">
-        <button type="button" class="cart-btn" onclick="toggleCarrito()">
-          🛒 <span class="cart-badge cart-num-mobile">0</span>
-        </button>
-        <button type="button" class="btn-menu-hamburguesa" onclick="toggleMenuMovil()" aria-label="Abrir Menú">
-          ☰
-        </button>
-      </div>
-
-      <nav class="nav-wrapper">
-        <ul class="nav-links" id="menu-navegacion">
-          <li><button type="button" onclick="irACatalogo(); cerrarMenuMovil();">Catálogo</button></li>
-          <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdownMovil(event)">Categorías ▾</a>
-            <div class="dropdown-content" id="submenu-categorias">
-              <a href="velas.html" onclick="cerrarMenuMovil()">Velas</a>
-              <a href="bisuteria.html" onclick="cerrarMenuMovil()">Bisutería</a>
-              <a href="bordado.html" onclick="cerrarMenuMovil()">Bordado</a>
-              <a href="pintura.html" onclick="cerrarMenuMovil()">Pintura</a>
-              <a href="crochet.html" onclick="cerrarMenuMovil()">Crochet</a>
-            </div>
-          </li>
-          <li><a href="blog.html" onclick="cerrarMenuMovil()">Blog</a></li>
-          <li><a href="#talleres" class="pill-talleres" onclick="cerrarMenuMovil()">Talleres EMOCION-ARTE</a></li>
-          <li>
-            <button type="button" class="cart-btn" onclick="toggleCarrito()">
-              🛒 <span class="cart-badge" id="cart-num">0</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  </div>
-
-  <!-- Hero -->
+  <!-- Hero Principal con Carrusel -->
   <section class="hero">
     <div>
       <span class="hero-badge">DISEÑOS HECHOS CON EL CORAZÓN</span>
@@ -1196,16 +38,16 @@
     </div>
   </section>
 
-  <!-- Catálogo Representativo (1 pieza por categoría activa) -->
+  <!-- Catálogo Destacado -->
   <main class="catalogo-section" id="catalogo">
     <div class="section-title">
       <h2>Catálogo de Creaciones</h2>
-      <p>Una muestra destacada de cada una de nuestras colecciones hechas a mano.</p>
+      <p>Una muestra especial de cada una de nuestras líneas artesanales.</p>
     </div>
     <div class="grid-productos" id="grid-productos"></div>
   </main>
 
-  <!-- Talleres EMOCION-ARTE (100% Dinámico desde Decap CMS) -->
+  <!-- Talleres Presenciales -->
   <section class="talleres-section" id="talleres">
     <div class="section-title" style="margin-bottom: 1.5rem;">
       <h2>Talleres Presenciales EMOCION-ARTE</h2>
@@ -1228,43 +70,20 @@
     </div>
   </section>
 
-  <!-- Modal Detalle de Producto -->
-  <div id="modal-producto" class="product-modal" onclick="if(event.target.id === 'modal-producto') cerrarModalProducto()">
+  <!-- Modal Detalle Compartido -->
+  <div id="modal-producto" class="product-modal">
     <div class="product-modal-content">
       <span class="close-product-modal" onclick="cerrarModalProducto()">×</span>
       <div class="modal-gallery">
-        <img id="modal-img-principal" src="" alt="Producto">
+        <img id="modal-img-principal" src="" alt="Detalle">
         <div class="modal-thumbs" id="modal-galeria-thumbs"></div>
       </div>
       <div class="modal-details">
         <span class="modal-category" id="modal-categoria">Categoría</span>
         <h2 class="modal-title" id="modal-titulo">Título</h2>
         <p class="modal-price" id="modal-precio">$0.00</p>
-        <div class="modal-desc-box">
-          <p id="modal-descripcion" style="white-space: pre-line;"></p>
-        </div>
+        <div class="modal-desc-box" id="modal-descripcion" style="white-space: pre-line;"></div>
         <button type="button" class="card-btn" id="modal-btn-comprar" style="margin-top: auto; padding: 0.7rem; font-size: 0.95rem;">+ Agregar al Carrito</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Detalle de Taller -->
-  <div id="modal-taller" class="product-modal" onclick="if(event.target.id === 'modal-taller') cerrarModalTaller()">
-    <div class="product-modal-content">
-      <span class="close-product-modal" onclick="cerrarModalTaller()">×</span>
-      <div class="modal-gallery">
-        <img id="taller-modal-img" src="" alt="Taller EMOCION-ARTE">
-      </div>
-      <div class="modal-details">
-        <span class="modal-category">Taller Presencial · EMOCION-ARTE</span>
-        <h2 class="modal-title" id="taller-modal-titulo">Nombre del Taller</h2>
-        <p class="modal-price" id="taller-modal-precio">$0.00</p>
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;" id="taller-modal-fecha"></p>
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;" id="taller-modal-lugar"></p>
-        <div class="modal-desc-box">
-          <p id="taller-modal-desc" style="white-space: pre-line;"></p>
-        </div>
-        <button type="button" class="btn-reservar-taller" id="taller-modal-btn" style="margin-top: auto; padding: 0.75rem; font-size: 0.95rem; width: 100%;">Reservar Cupo</button>
       </div>
     </div>
   </div>
@@ -1276,51 +95,39 @@
         <h3 style="margin:0; font-size:1.3rem;">Tu Carrito de Compras</h3>
         <span class="cerrar-carrito" onclick="toggleCarrito()">×</span>
       </div>
-
       <button type="button" class="btn-seguir-comprando" onclick="toggleCarrito()">← Seguir explorando</button>
-
       <div id="lista-carrito">
         <p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>
       </div>
-
       <button type="button" class="btn-acordeon-datos" onclick="toggleDesplegableDatos()">
         <span>📝 Datos para la Entrega y Pedido</span>
         <span id="flecha-acordeon">▾</span>
       </button>
-
       <div class="caja-entrega" id="caja-formulario-entrega">
         <label for="select-modalidad">Tipo de Entrega: <span class="req">*</span></label>
         <select id="select-modalidad" onchange="cambiarModalidadEntrega()">
           <option value="envio">Envío a Domicilio (Por cotizar)</option>
           <option value="retiro">Retiro en Taller (Almax Center, Samborondón)</option>
         </select>
-
         <label for="input-nombre">Tu Nombre y Apellido: <span class="req">*</span></label>
         <input type="text" id="input-nombre" placeholder="Ej: María Pérez" required>
-
         <label for="input-telefono">Celular / WhatsApp: <span class="req">*</span></label>
         <input type="tel" id="input-telefono" placeholder="Ej: 0980526007" required>
-
         <label for="input-correo">Correo Electrónico: <span class="req">*</span></label>
         <input type="email" id="input-correo" placeholder="correo@ejemplo.com" required>
-
         <div id="campo-sector-entrega">
           <label for="input-ubicacion">Sector o Dirección de Entrega: <span class="req">*</span></label>
           <input type="text" id="input-ubicacion" placeholder="Ej: Samborondón, Daule, Ceibos, Guayaquil, etc.">
         </div>
       </div>
-
       <div class="carrito-resumen">
         <div><span>Subtotal:</span> <span id="cart-subtotal">$0.00</span></div>
-        <div><span>IVA (15% productos):</span> <span id="cart-iva">$0.00</span></div>
         <div><span>Envío:</span> <span class="envio-nota" id="resumen-envio-texto">Por cotizar según dirección</span></div>
       </div>
-
       <div class="carrito-total">
-        <span>TOTAL:</span>
+        <span>TOTAL COMPRA:</span>
         <span id="total-precio" style="color: var(--brand-red);">$0.00</span>
       </div>
-
       <button type="button" class="btn-pagar-tarjeta" onclick="pagarPayphone()">💳 Pagar con Tarjeta (Payphone vía WhatsApp)</button>
       <button type="button" class="btn-pagar-whatsapp" onclick="procesarCompraWhatsApp()">💬 Finalizar por WhatsApp</button>
       <button type="button" class="btn-banco" onclick="mostrarDatosBancarios()">🏦 Ver Datos Bancarios / Deuna</button>
@@ -1344,82 +151,14 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-col">
-        <h4>Handmade Love by E.L.E</h4>
-        <p class="footer-desc">
-          Creaciones artesanales hechas con el corazón y talleres presenciales EMOCION-ARTE en Samborondón.
-        </p>
-      </div>
-      <div class="footer-col">
-        <h4>CATEGORÍAS</h4>
-        <ul class="footer-links">
-          <li><a href="velas.html">Velas</a></li>
-          <li><a href="bisuteria.html">Bisutería</a></li>
-          <li><a href="bordado.html">Bordado</a></li>
-          <li><a href="pintura.html">Pintura</a></li>
-          <li><a href="crochet.html">Crochet</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>TALLERES</h4>
-        <ul class="footer-links">
-          <li><a href="#talleres">Almax Center, Samborondón</a></li>
-          <li><a href="#talleres">Experiencias EMOCION-ARTE</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>CONTACTO DIRECTO</h4>
-        <p style="color: #B5ACA0; font-size: 0.85rem; margin-bottom: 8px;">
-          ¿Consultas o encargos personalizados?
-        </p>
-        <p style="margin-bottom: 12px;">
-          <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.88rem; font-weight: 500;">
-            ✉️ hadmadelovebyele@gmail.com
-          </a>
-        </p>
-        <a href="https://wa.me/593980526007?text=Hola%20Handmade%20Love!%20Quisiera%20hacer%20una%20consulta" target="_blank" class="btn-wa-footer">
-          <span>💬 WhatsApp de Atención</span>
-        </a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      © 2026 Handmade Love by E.L.E & EMOCION-ARTE. Todos los derechos reservados.
-    </div>
-  </footer>
+  <div id="footer-global"></div>
 
-  <!-- Scripts -->
+  <script src="header.js"></script>
+  <script src="footer.js"></script>
+  <script src="carrito.js"></script>
+  <script src="promociones.js"></script>
+
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxujxo4lfmDVvnXSwPvpLB9My-q-Ht10WKhpsqj8xCSoQ-EsaZqlZULlAbpJOAYyIypfQ/exec";
-
-    function toggleMenuMovil() {
-      const menu = document.getElementById('menu-navegacion');
-      if (menu) menu.classList.toggle('open');
-    }
-
-    function cerrarMenuMovil() {
-      const menu = document.getElementById('menu-navegacion');
-      if (menu) menu.classList.remove('open');
-    }
-
-    function toggleDropdownMovil(e) {
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        const sub = document.getElementById('submenu-categorias');
-        if (sub) {
-          sub.style.display = (sub.style.display === 'block') ? 'none' : 'block';
-        }
-      }
-    }
-
-    function irACatalogo() {
-      const el = document.getElementById('catalogo');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    /* Carrusel */
     let currentSlide = 0;
     const slides = document.querySelectorAll('.hero-slide');
     const dotsContainer = document.getElementById('carousel-dots');
@@ -1442,380 +181,69 @@
       dots[currentSlide].classList.add('active');
     }
 
-    function moverCarrusel(direction) {
-      updateSlide(currentSlide + direction);
-    }
-
-    function goToSlide(index) {
-      updateSlide(index);
-    }
-
-    setInterval(() => {
-      moverCarrusel(1);
-    }, 4000);
-
-    /* Acordeón de Datos de Entrega */
-    function toggleDesplegableDatos() {
-      const caja = document.getElementById('caja-formulario-entrega');
-      const flecha = document.getElementById('flecha-acordeon');
-      if (caja.classList.contains('abierta')) {
-        caja.classList.remove('abierta');
-        flecha.textContent = '▾';
-      } else {
-        caja.classList.add('abierta');
-        flecha.textContent = '▴';
-      }
-    }
-
-    function cambiarModalidadEntrega() {
-      const modalidad = document.getElementById('select-modalidad').value;
-      const campoSector = document.getElementById('campo-sector-entrega');
-      const resumenTexto = document.getElementById('resumen-envio-texto');
-      if (modalidad === 'retiro') {
-        campoSector.style.display = 'none';
-        resumenTexto.textContent = 'Retiro en Taller (Gratis)';
-      } else {
-        campoSector.style.display = 'block';
-        resumenTexto.textContent = 'Por cotizar según dirección';
-      }
-    }
-
-    function mostrarAvisoToast(mensaje) {
-      let toast = document.getElementById('toast-aviso');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'toast-aviso';
-        toast.style.cssText = `
-          position: fixed;
-          bottom: 25px;
-          right: 25px;
-          background: #231F1C;
-          color: #FAF7F2;
-          padding: 12px 20px;
-          border-radius: 30px;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-          font-size: 0.88rem;
-          font-weight: 500;
-          z-index: 4000;
-          opacity: 0;
-          transition: opacity 0.3s ease, transform 0.3s ease;
-          transform: translateY(10px);
-          pointer-events: none;
-        `;
-        document.body.appendChild(toast);
-      }
-      toast.textContent = mensaje;
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateY(0)';
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateY(10px)';
-      }, 2200);
-    }
-
-    async function enviarBaseDatos(tipo, nombre, telefono, correo, detalle, total) {
-      if (!SCRIPT_URL) return;
-      try {
-        await fetch(SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tipo, nombre, telefono, correo, detalle, total })
-        });
-      } catch (err) {}
-    }
+    function moverCarrusel(direction) { updateSlide(currentSlide + direction); }
+    function goToSlide(index) { updateSlide(index); }
+    setInterval(() => { moverCarrusel(1); }, 4000);
 
     function suscribirNewsletter(e) {
       e.preventDefault();
       const nombre = document.getElementById('newsletter-nombre').value.trim();
       const telefono = document.getElementById('newsletter-telefono').value.trim();
       const correo = document.getElementById('newsletter-email').value.trim();
-
       enviarBaseDatos('Suscripción Comunidad VIP', nombre, telefono, correo, 'Alta en boletín de noticias y talleres', '$0.00');
       alert(`¡Bienvenida a la Comunidad VIP, ${nombre}! Te hemos registrado con éxito.`);
-      
       document.getElementById('newsletter-nombre').value = '';
       document.getElementById('newsletter-telefono').value = '';
       document.getElementById('newsletter-email').value = '';
     }
 
-    /* Carrito Sincronizado (con IVA 0% en Talleres) */
-    let carrito = JSON.parse(localStorage.getItem('carrito_hml') || '[]');
-    let productosDestacados = [];
-    let listaTalleres = [];
-    const TASA_IVA = 0.15;
+    let productosDestacadosHome = [];
+    let todosLosTalleres = [];
 
-    function guardarCarrito() {
-      localStorage.setItem('carrito_hml', JSON.stringify(carrito));
+    const productosBaseReales = [
+      { title: "Bolso Granny Square Margaritas", categoria: "Crochet", precio: 35.00, descripcion: "Bolso tipo tote tejido completamente a mano con técnica de crochet mediante cuadros clásicos con margaritas en relieve tridimensional.", imagen: "img/uploads/bolso-granny.jpg" },
+      { title: "Pulsera de Hilo Rojo con Perlas", categoria: "Bisutería", precio: 9.99, descripcion: "Pulsera artesanal de hilo rojo de protección tejida a mano con perlas de río y dijes laminados en oro de 18k.", imagen: "pulsera-secundaria.jpg" }
+    ];
+
+    const talleresBaseReales = [
+      { title: "Taller de Arte en Concreto: Joyero Plano", categoria: "Talleres", fecha: "2026-11-21T09:00:00.000-05:00", lugar: "Almax Center, Samborondón", precio: 25.00, cupoMax: 12, ocupados: 0, descripcion: "Diseña, pinta y sella tu propia bandeja joyera de concreto en una mañana pensada para crear y desconectar.", imagen: "img/uploads/bordado-crochet-varios.jpg" }
+    ];
+
+    function formatearFechaLegible(fechaRaw) {
+      if (!fechaRaw) return 'Por coordinar';
+      try {
+        const d = new Date(fechaRaw);
+        if (isNaN(d.getTime())) return fechaRaw;
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()} - ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+      } catch (e) { return fechaRaw; }
     }
 
-    function toggleCarrito() {
-      const modal = document.getElementById('modal-carrito');
-      if (modal) modal.classList.toggle('oculto');
-    }
-
-    function normalizarRutaImagen(ruta) {
-      if (!ruta) return 'logo.jpg';
-      let r = String(ruta).trim().replace(/^["']|["']$/g, '');
-      if (r.startsWith('http://') || r.startsWith('https://')) return r;
-      r = r.replace(/^\.?\/?img\/uploads\//, '').replace(/^\.?\//, '');
-      return 'img/uploads/' + r;
-    }
-
-    function agregarAlCarrito(nombre, precio, imagen, esTaller = false) {
-      const precioNumerico = parseFloat(precio) || 0;
-      const fotoItem = normalizarRutaImagen(imagen);
-      const encontrado = carrito.find(item => item.nombre === nombre);
-      
-      if (encontrado) {
-        encontrado.cantidad += 1;
-        if (!encontrado.imagen && fotoItem) encontrado.imagen = fotoItem;
-      } else {
-        carrito.push({ nombre, precio: precioNumerico, cantidad: 1, imagen: fotoItem, esTaller: Boolean(esTaller) });
-      }
-
-      guardarCarrito();
-      actualizarCarrito();
-      cerrarModalProducto();
-      cerrarModalTaller();
-      mostrarAvisoToast(`"${nombre}" añadido al carrito 🛒`);
-    }
-
-    function cambiarCantidad(index, delta) {
-      if (!carrito[index]) return;
-      carrito[index].cantidad += delta;
-      if (carrito[index].cantidad <= 0) {
-        carrito.splice(index, 1);
-      }
-      guardarCarrito();
-      actualizarCarrito();
-    }
-
-    function actualizarCarrito() {
-      const lista = document.getElementById('lista-carrito');
-      const contadorDesktop = document.getElementById('cart-num');
-      const contadorMobile = document.querySelector('.cart-num-mobile');
-      const subtotalEl = document.getElementById('cart-subtotal');
-      const ivaEl = document.getElementById('cart-iva');
-      const totalEl = document.getElementById('total-precio');
-
-      let totalItems = 0;
-      carrito.forEach(item => totalItems += item.cantidad);
-      
-      if (contadorDesktop) contadorDesktop.textContent = totalItems;
-      if (contadorMobile) contadorMobile.textContent = totalItems;
-
-      if (carrito.length === 0) {
-        if (lista) lista.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin: 1.5rem 0;">El carrito está vacío</p>';
-        if (subtotalEl) subtotalEl.textContent = '$0.00';
-        if (ivaEl) ivaEl.textContent = '$0.00';
-        if (totalEl) totalEl.textContent = '$0.00';
-        return;
-      }
-
-      let subtotal = 0;
-      let baseGravableIva = 0;
-
-      if (lista) {
-        lista.innerHTML = carrito.map((item, index) => {
-          const precioItem = parseFloat(item.precio) || 0;
-          const totalLinea = precioItem * item.cantidad;
-          subtotal += totalLinea;
-          if (!item.esTaller && !item.nombre.toLowerCase().includes('taller')) {
-            baseGravableIva += totalLinea;
-          }
-          const miniatura = item.imagen || 'logo.jpg';
-          return `
-            <div class="item-carrito">
-              <div class="item-izq">
-                <img src="${miniatura}" alt="${item.nombre}" class="item-thumb-carrito" onerror="this.src='logo.jpg'">
-                <div class="item-info">
-                  <strong title="${item.nombre}">${item.nombre}</strong>
-                  <span>$${totalLinea.toFixed(2)} ${item.esTaller ? '(IVA 0%)' : ''}</span>
-                </div>
-              </div>
-              <div class="item-controls">
-                <button type="button" onclick="cambiarCantidad(${index}, -1)">-</button>
-                <span>${item.cantidad}</span>
-                <button type="button" onclick="cambiarCantidad(${index}, 1)">+</button>
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-
-      const valorIva = baseGravableIva * TASA_IVA;
-      const totalDefinitivo = subtotal + valorIva;
-
-      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-      if (ivaEl) ivaEl.textContent = `$${valorIva.toFixed(2)}`;
-      if (totalEl) totalEl.textContent = `$${totalDefinitivo.toFixed(2)}`;
-    }
-
-    function validarYObtenerDatosCliente() {
-      const nombre = (document.getElementById('input-nombre').value || '').trim();
-      const telefono = (document.getElementById('input-telefono').value || '').trim();
-      const correo = (document.getElementById('input-correo').value || '').trim();
-      const modalidad = document.getElementById('select-modalidad').value;
-      const ubicacion = (document.getElementById('input-ubicacion').value || '').trim();
-      const soloTalleres = carrito.every(i => i.esTaller || i.nombre.toLowerCase().includes('taller'));
-
-      const caja = document.getElementById('caja-formulario-entrega');
-      const flecha = document.getElementById('flecha-acordeon');
-
-      if (!nombre || !telefono || !correo || (!soloTalleres && modalidad === 'envio' && !ubicacion)) {
-        caja.classList.add('abierta');
-        flecha.textContent = '▴';
-
-        if (!nombre) {
-          alert('Por favor ingresa tu Nombre y Apellido para continuar.');
-          document.getElementById('input-nombre').focus();
-          return null;
-        }
-        if (!telefono) {
-          alert('Por favor ingresa tu número de Celular o WhatsApp para coordinar.');
-          document.getElementById('input-telefono').focus();
-          return null;
-        }
-        if (!correo || !correo.includes('@')) {
-          alert('Por favor ingresa un Correo Electrónico válido para tu comprobante.');
-          document.getElementById('input-correo').focus();
-          return null;
-        }
-        if (!soloTalleres && modalidad === 'envio' && !ubicacion) {
-          alert('Por favor ingresa tu Sector, Ciudad o Dirección de entrega para cotizar el flete.');
-          document.getElementById('input-ubicacion').focus();
-          return null;
-        }
-      }
-
-      const entregaTexto = soloTalleres
-        ? 'Reserva Taller Presencial (Almax Center)'
-        : ((modalidad === 'retiro') ? 'Retiro en Taller (Almax Center)' : `Envío a domicilio (${ubicacion})`);
-      return { nombre, telefono, correo, modalidad, ubicacion, entregaTexto, soloTalleres };
-    }
-
-    function calcularTotalesCarrito() {
-      let subtotal = 0;
-      let baseIva = 0;
-      let detalleStr = "";
-      carrito.forEach(item => {
-        const pVal = parseFloat(item.precio) || 0;
-        const linea = pVal * item.cantidad;
-        detalleStr += `${item.nombre} (x${item.cantidad}) - $${linea.toFixed(2)}; `;
-        subtotal += linea;
-        if (!item.esTaller && !item.nombre.toLowerCase().includes('taller')) {
-          baseIva += linea;
-        }
-      });
-      const valorIva = baseIva * TASA_IVA;
-      const totalFinal = subtotal + valorIva;
-      return { subtotal, valorIva, totalFinal, detalleStr };
-    }
-
-    function procesarCompraWhatsApp() {
-      if (carrito.length === 0) {
-        alert('Tu carrito está vacío.');
-        return;
-      }
-
-      const cliente = validarYObtenerDatosCliente();
-      if (!cliente) return;
-
-      const { subtotal, valorIva, totalFinal, detalleStr } = calcularTotalesCarrito();
-      const tipoRegistro = cliente.soloTalleres ? 'Reserva Taller (WhatsApp)' : 'Compra Web (WhatsApp)';
-
-      enviarBaseDatos(
-        tipoRegistro,
-        cliente.nombre,
-        cliente.telefono,
-        cliente.correo,
-        `[${cliente.entregaTexto}] ${detalleStr}`,
-        `$${totalFinal.toFixed(2)}`
-      );
-
-      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo confirmar lo siguiente:%0A%0A`;
-      carrito.forEach(item => {
-        const pVal = parseFloat(item.precio) || 0;
-        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
-      });
-
-      mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
-      if (valorIva > 0) mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
-      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
-      mensaje += `%0AModalidad: *${cliente.entregaTexto}*`;
-
-      window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
-    }
-
-    function pagarPayphone() {
-      if (carrito.length === 0) {
-        alert('Tu carrito está vacío.');
-        return;
-      }
-
-      const cliente = validarYObtenerDatosCliente();
-      if (!cliente) return;
-
-      const { subtotal, valorIva, totalFinal, detalleStr } = calcularTotalesCarrito();
-
-      enviarBaseDatos(
-        'Solicitud Link Payphone (WhatsApp)',
-        cliente.nombre,
-        cliente.telefono,
-        cliente.correo,
-        `[${cliente.entregaTexto}] ${detalleStr}`,
-        `$${totalFinal.toFixed(2)}`
-      );
-
-      let mensaje = `Hola Handmade Love! Mi nombre es *${cliente.nombre}* (Tel: ${cliente.telefono}). Deseo pagar con *Tarjeta de Crédito/Débito (Payphone)*:%0A%0A`;
-      carrito.forEach(item => {
-        const pVal = parseFloat(item.precio) || 0;
-        mensaje += `- ${item.nombre} (x${item.cantidad}) - $${(pVal * item.cantidad).toFixed(2)}%0A`;
-      });
-
-      mensaje += `%0ASubtotal: $${subtotal.toFixed(2)}`;
-      if (valorIva > 0) mensaje += `%0AIVA (15%): $${valorIva.toFixed(2)}`;
-      mensaje += `%0A*TOTAL: $${totalFinal.toFixed(2)}*%0A`;
-      mensaje += `%0AModalidad: *${cliente.entregaTexto}*`;
-
-      window.open(`https://wa.me/593980526007?text=${mensaje}`, '_blank');
-    }
-
-    function mostrarDatosBancarios() {
-      document.getElementById('modal-banco').classList.add('open');
-    }
-
-    function cerrarDatosBancarios() {
-      document.getElementById('modal-banco').classList.remove('open');
-    }
-
-    /* Modales de Producto y Taller */
     function abrirModalProducto(index) {
-      const p = productosDestacados[index];
+      const p = productosDestacadosHome[index];
       if (!p) return;
+      const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
 
       document.getElementById('modal-categoria').textContent = p.categoria || 'Creación';
       document.getElementById('modal-titulo').textContent = p.title || '';
-      document.getElementById('modal-precio').textContent = `$${(parseFloat(p.precio) || 0).toFixed(2)}`;
+      if (infoPrecio.tieneDescuento) {
+        document.getElementById('modal-precio').innerHTML = `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span> $${infoPrecio.precioFinal.toFixed(2)} <span style="font-size:0.75rem; background:#fdf2f2; padding:2px 8px; border-radius:10px;">-${infoPrecio.porcentaje}% OFF</span>`;
+      } else {
+        document.getElementById('modal-precio').textContent = `$${infoPrecio.precioFinal.toFixed(2)}`;
+      }
       document.getElementById('modal-descripcion').textContent = p.descripcion || 'Sin descripción adicional.';
 
       let galeria = [];
       const portada = normalizarRutaImagen(p.imagen);
       if (portada) galeria.push(portada);
-
       if (p.fotos && Array.isArray(p.fotos)) {
         p.fotos.forEach(f => {
           let rutaNorm = normalizarRutaImagen(f);
-          if (rutaNorm && !galeria.includes(rutaNorm)) {
-            galeria.push(rutaNorm);
-          }
+          if (rutaNorm && !galeria.includes(rutaNorm)) galeria.push(rutaNorm);
         });
       }
 
       const imgPrincipal = document.getElementById('modal-img-principal');
       const thumbsContainer = document.getElementById('modal-galeria-thumbs');
-
       imgPrincipal.src = galeria[0] || 'logo.jpg';
       thumbsContainer.innerHTML = '';
 
@@ -1834,9 +262,49 @@
       }
 
       const btnComprar = document.getElementById('modal-btn-comprar');
+      btnComprar.textContent = '+ Agregar al Carrito';
       btnComprar.onclick = (e) => {
         e.stopPropagation();
-        agregarAlCarrito(p.title, p.precio, portada, false);
+        agregarAlCarrito(p.title, infoPrecio.precioFinal, portada, false);
+      };
+
+      document.getElementById('modal-producto').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function abrirModalTaller(index) {
+      const t = todosLosTalleres[index];
+      if (!t) return;
+      t.categoria = 'Talleres';
+      const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(t) : { tieneDescuento: false, precioFinal: parseFloat(t.precio) || 0 };
+      const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
+      const max = parseInt(t.cupoMax) || 10;
+      const ocup = parseInt(t.ocupados) || 0;
+      const disponibles = Math.max(0, max - ocup);
+      const fechaTexto = formatearFechaLegible(t.fecha);
+
+      document.getElementById('modal-categoria').textContent = 'Taller Presencial EMOCION-ARTE';
+      document.getElementById('modal-titulo').textContent = t.title || 'Taller';
+
+      if (infoPrecio.precioFinal <= 0) {
+        document.getElementById('modal-precio').textContent = 'Gratuito';
+      } else if (infoPrecio.tieneDescuento) {
+        document.getElementById('modal-precio').innerHTML = `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span> $${infoPrecio.precioFinal.toFixed(2)} <span style="font-size:0.75rem; background:#fdf2f2; padding:2px 8px; border-radius:10px;">-${infoPrecio.porcentaje}% PRONTO PAGO</span>`;
+      } else {
+        document.getElementById('modal-precio').textContent = `$${infoPrecio.precioFinal.toFixed(2)}`;
+      }
+
+      const notaProntoPago = (infoPrecio.tieneDescuento && t.fechaFin) ? `\n🏷️ Pronto pago válido hasta: ${formatearFechaLegible(t.fechaFin)}` : '';
+      document.getElementById('modal-descripcion').textContent = `📅 Fecha: ${fechaTexto}\n📍 Lugar: ${t.lugar || 'Almax Center, Samborondón'}\n👥 Cupos Libres: ${disponibles > 0 ? disponibles : 'Agotados'}${notaProntoPago}\n\n${t.descripcion || ''}`;
+
+      document.getElementById('modal-img-principal').src = fotoTaller;
+      document.getElementById('modal-galeria-thumbs').innerHTML = '';
+
+      const btnComprar = document.getElementById('modal-btn-comprar');
+      btnComprar.textContent = disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera';
+      btnComprar.onclick = (e) => {
+        e.stopPropagation();
+        agregarAlCarrito(`Taller: ${t.title}`, infoPrecio.precioFinal, fotoTaller, true);
       };
 
       document.getElementById('modal-producto').classList.add('open');
@@ -1849,52 +317,95 @@
       document.body.style.overflow = 'auto';
     }
 
-    function abrirModalTaller(index) {
-      const t = listaTalleres[index];
-      if (!t) return;
-
-      const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
-      const precioNum = parseFloat(t.precio) || 0;
-      const cupoMax = parseInt(t.cupoMax) || 10;
-      const ocupados = parseInt(t.ocupados) || 0;
-      const disponibles = Math.max(0, cupoMax - ocupados);
-
-      document.getElementById('taller-modal-img').src = fotoTaller;
-      document.getElementById('taller-modal-titulo').textContent = t.title || 'Taller EMOCION-ARTE';
-      document.getElementById('taller-modal-precio').textContent = `$${precioNum.toFixed(2)}`;
-      document.getElementById('taller-modal-fecha').innerHTML = `<strong>📅 Fecha y Hora:</strong> ${formatearFechaTaller(t.fecha)}`;
-      document.getElementById('taller-modal-lugar').innerHTML = `<strong>📍 Lugar:</strong> ${t.lugar || 'Almax Center, Samborondón'} · <strong>Cupos libres:</strong> ${disponibles}`;
-      document.getElementById('taller-modal-desc').textContent = t.descripcion || 'Experiencia creativa presencial guiada paso a paso con todos los materiales incluidos.';
-
-      const btnReservar = document.getElementById('taller-modal-btn');
-      if (disponibles <= 0) {
-        btnReservar.textContent = 'Cupos Agotados';
-        btnReservar.disabled = true;
-      } else {
-        btnReservar.textContent = 'Reservar Cupo';
-        btnReservar.disabled = false;
-        btnReservar.onclick = (e) => {
-          e.stopPropagation();
-          agregarAlCarrito(`Cupo: ${t.title}`, precioNum, fotoTaller, true);
-        };
-      }
-
-      document.getElementById('modal-taller').classList.add('open');
-      document.body.style.overflow = 'hidden';
+    function obtenerUrlCategoria(cat) {
+      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      if (c.includes('vela')) return 'velas.html';
+      if (c.includes('bisuteria') || c.includes('joya') || c.includes('pulsera')) return 'bisuteria.html';
+      if (c.includes('bordad')) return 'bordado.html';
+      if (c.includes('pintur')) return 'pintura.html';
+      if (c.includes('crochet') || c.includes('tejido') || c.includes('bolso')) return 'crochet.html';
+      return '#';
     }
 
-    function cerrarModalTaller() {
-      const modal = document.getElementById('modal-taller');
-      if (modal) modal.classList.remove('open');
-      document.body.style.overflow = 'auto';
+    function renderDestacadosHome(lista) {
+      const grid = document.getElementById('grid-productos');
+      if (!grid) return;
+      grid.innerHTML = lista.map((p, index) => {
+        const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(p) : { tieneDescuento: false, precioFinal: parseFloat(p.precio) || 0 };
+        const fotoCard = normalizarRutaImagen(p.imagen);
+        const urlCat = obtenerUrlCategoria(p.categoria);
+
+        const badgeHTML = infoPrecio.tieneDescuento ? `<span class="badge-descuento">-${infoPrecio.porcentaje}% OFF</span>` : '';
+        const precioHTML = infoPrecio.tieneDescuento 
+          ? `<span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span>$${infoPrecio.precioFinal.toFixed(2)}`
+          : `$${infoPrecio.precioFinal.toFixed(2)}`;
+
+        return `
+          <div class="card" onclick="abrirModalProducto(${index})">
+            ${badgeHTML}
+            <img src="${fotoCard}" alt="${p.title}" onerror="this.src='logo.jpg'">
+            <div class="card-body">
+              <span class="card-tag">${p.categoria || 'Creación'}</span>
+              <h3 class="card-title" title="${p.title}">${p.title}</h3>
+              <p class="card-desc">${p.descripcion || ''}</p>
+              <div class="card-footer">
+                <span class="card-price">${precioHTML}</span>
+                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${infoPrecio.precioFinal}, '${fotoCard}', false)">+ Agregar</button>
+              </div>
+              <a href="${urlCat}" onclick="event.stopPropagation();" style="display:block; text-align:center; margin-top:10px; font-size:0.8rem; color:var(--brand-red); font-weight:600; text-decoration:none;">Ver más en ${p.categoria} →</a>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
-    /* Parser Universal de Markdown / YAML */
+    function renderTalleres(lista) {
+      const grid = document.getElementById('grid-talleres');
+      if (!grid) return;
+      grid.innerHTML = lista.map((t, index) => {
+        t.categoria = 'Talleres';
+        const infoPrecio = typeof calcularPrecioConDescuento === 'function' ? calcularPrecioConDescuento(t) : { tieneDescuento: false, precioFinal: parseFloat(t.precio) || 0 };
+        const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
+        const max = parseInt(t.cupoMax) || 10;
+        const ocup = parseInt(t.ocupados) || 0;
+        const disponibles = Math.max(0, max - ocup);
+        const textoCupos = disponibles > 0 ? `Cupos disponibles: ${disponibles}` : '¡Cupos Agotados!';
+        const fechaFormateada = formatearFechaLegible(t.fecha);
+
+        const badgeHTML = infoPrecio.tieneDescuento ? `<span class="badge-descuento">-${infoPrecio.porcentaje}% PRONTO PAGO</span>` : '';
+        const precioTallerHTML = infoPrecio.precioFinal <= 0 
+          ? '<div></div>'
+          : (infoPrecio.tieneDescuento 
+              ? `<div class="taller-precio"><span class="precio-tachado">$${infoPrecio.precioOriginal.toFixed(2)}</span>$${infoPrecio.precioFinal.toFixed(2)}</div>`
+              : `<div class="taller-precio">$${infoPrecio.precioFinal.toFixed(2)}</div>`);
+
+        return `
+          <div class="taller-card" style="position:relative;" onclick="abrirModalTaller(${index})">
+            ${badgeHTML}
+            <img src="${fotoTaller}" alt="${t.title}" onerror="this.src='logo.jpg'">
+            <div class="taller-card-body">
+              <span class="taller-tag">Taller Presencial</span>
+              <h3 class="taller-title" title="${t.title}">${t.title}</h3>
+              <p class="taller-info"><strong>Fecha:</strong> ${fechaFormateada}</p>
+              <p class="taller-info"><strong>Lugar:</strong> ${t.lugar || 'Almax Center, Samborondón'}</p>
+              <p class="taller-desc">${t.descripcion || ''}</p>
+              <span class="taller-cupos">${textoCupos}</span>
+              <div class="taller-footer">
+                ${precioTallerHTML}
+                <button type="button" class="btn-reservar-taller" onclick="event.stopPropagation(); agregarAlCarrito('Taller: ${t.title}', ${infoPrecio.precioFinal}, '${fotoTaller}', true)">
+                  ${disponibles > 0 ? 'Reservar Cupo' : 'Lista de Espera'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     function parsearMarkdownCompleto(texto) {
       if (!texto) return null;
       const match = texto.match(/^---([\s\S]*?)---([\s\S]*)$/);
       if (!match) return null;
-      
       const frontmatter = match[1];
       const cuerpoMarkdown = match[2].trim();
       const lineas = frontmatter.split('\n');
@@ -1905,38 +416,28 @@
       lineas.forEach(line => {
         const lineaTrim = line.trim();
         if (!lineaTrim) return;
-
         if (lineaTrim.startsWith('fotos:')) {
-          enFotos = true;
-          claveActual = 'fotos';
+          enFotos = true; claveActual = 'fotos';
           const resto = lineaTrim.replace('fotos:', '').trim();
-          if (resto && !resto.startsWith('-') && resto !== '[]') {
-            data.fotos.push(resto.replace(/^["']|["']$/g, ''));
-          }
+          if (resto && !resto.startsWith('-') && resto !== '[]') data.fotos.push(resto.replace(/^["']|["']$/g, ''));
           return;
         }
-
         if (enFotos) {
           if (lineaTrim.startsWith('-')) {
-            const fItem = lineaTrim.replace(/^[-\s*]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
+            const fItem = lineaTrim.replace(/^[-*\s]+/, '').replace(/^foto:\s*/, '').replace(/^url:\s*/, '').replace(/^["']|["']$/g, '').trim();
             if (fItem) data.fotos.push(fItem);
             return;
           } else if (lineaTrim.startsWith('foto:') || lineaTrim.startsWith('url:')) {
             const fItem = lineaTrim.replace(/^(foto|url):\s*/, '').replace(/^["']|["']$/g, '').trim();
             if (fItem) data.fotos.push(fItem);
             return;
-          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) {
-            enFotos = false;
-          }
+          } else if (/^[a-zA-Z0-9_-]+\s*:/.test(lineaTrim)) { enFotos = false; }
         }
-
         const matchClave = lineaTrim.match(/^([a-zA-Z0-9_-]+)\s*:\s*(.*)$/);
         if (matchClave) {
           claveActual = matchClave[1];
           let val = matchClave[2].trim();
-          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-            val = val.slice(1, -1);
-          }
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1);
           data[claveActual] = (val === '>' || val === '|' || val === '>-' || val === '|-') ? '' : val;
         } else if (claveActual && !enFotos) {
           const textoContinuacion = lineaTrim.replace(/^["']|["']$/g, '');
@@ -1944,160 +445,94 @@
         }
       });
 
-      if (!data.descripcion && cuerpoMarkdown) {
-        data.descripcion = cuerpoMarkdown;
-      }
-
+      if (!data.descripcion && cuerpoMarkdown) data.descripcion = cuerpoMarkdown;
+      data.title = data.title || data.nombre || 'Creación';
       data.precio = parseFloat(data.precio || data.price || 0) || 0;
-      data.title = data.title || data.nombre || '';
       data.imagen = data.imagen || data.foto || (data.fotos && data.fotos[0]) || '';
       return data;
     }
 
-    function obtenerPaginaCategoria(cat) {
-      const c = (cat || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      if (c.includes('vela')) return { url: 'velas.html', label: 'Velas' };
-      if (c.includes('bisuteria') || c.includes('joyeria')) return { url: 'bisuteria.html', label: 'Bisutería' };
-      if (c.includes('bordado')) return { url: 'bordado.html', label: 'Bordado' };
-      if (c.includes('pintura')) return { url: 'pintura.html', label: 'Pintura' };
-      if (c.includes('crochet') || c.includes('tejido')) return { url: 'crochet.html', label: 'Crochet' };
-      return { url: '#catalogo', label: cat || 'Artesanía' };
+    async function leerCarpetaProductos(rutaCarpeta, categoriaForzada, cacheBuster) {
+      try {
+        const res = await fetch(`https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/${rutaCarpeta}${cacheBuster}`);
+        if (!res.ok) return [];
+        const archivos = await res.json();
+        if (!Array.isArray(archivos)) return [];
+        const promesas = archivos.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
+        const contenidos = await Promise.all(promesas);
+        return contenidos.map(parsearMarkdownCompleto).filter(Boolean).map(p => {
+          if (categoriaForzada) p.categoria = categoriaForzada;
+          return p;
+        });
+      } catch (e) { return []; }
     }
 
-    function renderProductosDestacados(lista) {
-      const grid = document.getElementById('grid-productos');
-      if (!grid) return;
-      if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 30px 0;">Explora nuestras categorías en el menú superior para ver todas las piezas disponibles.</p>';
-        return;
-      }
-      grid.innerHTML = lista.map((p, index) => {
-        const precioNum = parseFloat(p.precio) || 0;
-        const fotoCard = normalizarRutaImagen(p.imagen);
-        const catInfo = obtenerPaginaCategoria(p.categoria);
-        return `
-          <div class="card" onclick="abrirModalProducto(${index})">
-            <span class="card-cat-badge">${catInfo.label}</span>
-            <img src="${fotoCard}" alt="${p.title}" onerror="this.src='logo.jpg'">
-            <div class="card-body">
-              <h3 class="card-title" title="${p.title}">${p.title}</h3>
-              <p class="card-desc">${p.descripcion || ''}</p>
-              <a href="${catInfo.url}" class="card-cat-link" onclick="event.stopPropagation()">Ver toda la colección de ${catInfo.label} →</a>
-              <div class="card-footer">
-                <span class="card-price">$${precioNum.toFixed(2)}</span>
-                <button class="card-btn" type="button" onclick="event.stopPropagation(); agregarAlCarrito('${p.title}', ${precioNum}, '${fotoCard}', false)">+ Agregar</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
+    function extraerDestacadosPorCategoria(productos) {
+      if (!Array.isArray(productos) || productos.length === 0) return [];
+      const mapa = new Map();
+      productos.forEach(p => {
+        const cat = (p.categoria || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const tit = (p.title || '').toLowerCase();
+        let grupo = null;
+        if (cat.includes('vela') || tit.includes('vela')) grupo = 'Velas';
+        else if (cat.includes('bisuteria') || cat.includes('joya') || cat.includes('pulsera') || tit.includes('pulsera')) grupo = 'Bisutería';
+        else if (cat.includes('crochet') || cat.includes('tejido') || cat.includes('bolso') || tit.includes('bolso')) grupo = 'Crochet';
+        else if (cat.includes('bordad') || tit.includes('bordad')) grupo = 'Bordado';
+        else if (cat.includes('pintur') || tit.includes('pintur')) grupo = 'Pintura';
 
-    function formatearFechaTaller(fechaRaw) {
-      if (!fechaRaw) return 'Próxima fecha por confirmar';
-      const f = new Date(fechaRaw);
-      if (isNaN(f.getTime())) return fechaRaw;
-      return f.toLocaleDateString('es-EC', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        hour: '2-digit',
-        minute: '2-digit'
+        if (grupo && !mapa.has(grupo)) {
+          p.categoria = grupo;
+          mapa.set(grupo, p);
+        }
       });
+      return Array.from(mapa.values());
     }
 
-    function renderTalleres(lista) {
-      const grid = document.getElementById('grid-talleres');
-      if (!grid) return;
-      if (lista.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: var(--text-muted); padding: 30px 0;">Pronto anunciaremos nuevas fechas de nuestros talleres presenciales EMOCION-ARTE en Almax Center.</p>';
-        return;
-      }
-      grid.innerHTML = lista.map((t, index) => {
-        const precioNum = parseFloat(t.precio) || 0;
-        const fotoTaller = normalizarRutaImagen(t.imagen || t.foto);
-        const cupoMax = parseInt(t.cupoMax) || 10;
-        const ocupados = parseInt(t.ocupados) || 0;
-        const libres = Math.max(0, cupoMax - ocupados);
-        const agotado = libres <= 0;
-        return `
-          <div class="taller-card" onclick="abrirModalTaller(${index})">
-            <span class="taller-cupos-badge ${agotado ? 'agotado' : ''}">
-              ${agotado ? 'AGOTADO' : `Solo ${libres} cupos libres`}
-            </span>
-            <img src="${fotoTaller}" alt="${t.title}" onerror="this.src='logo.jpg'">
-            <div class="taller-body">
-              <h3>${t.title}</h3>
-              <p class="taller-meta">📅 ${formatearFechaTaller(t.fecha)}</p>
-              <p class="taller-meta">📍 ${t.lugar || 'Almax Center, Samborondón'}</p>
-              <p class="taller-desc-corta">${t.descripcion || ''}</p>
-              <div class="taller-footer">
-                <span class="taller-precio">$${precioNum.toFixed(2)}</span>
-                <button type="button" class="btn-reservar-taller" ${agotado ? 'disabled' : ''} onclick="event.stopPropagation(); agregarAlCarrito('Cupo: ${t.title}', ${precioNum}, '${fotoTaller}', true)">
-                  ${agotado ? 'Agotado' : 'Reservar Cupo'}
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
+    async function cargarTodo() {
+      productosDestacadosHome = [...productosBaseReales];
+      todosLosTalleres = [...talleresBaseReales];
+      renderDestacadosHome(productosDestacadosHome);
+      renderTalleres(todosLosTalleres);
 
-    async function cargarProductos(cacheBuster) {
-      try {
-        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/productos' + cacheBuster);
-        if (res.ok) {
-          const archivos = await res.json();
-          if (Array.isArray(archivos)) {
-            const promesas = archivos
-              .filter(f => f.name.endsWith('.md'))
-              .map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
-            const contenidos = await Promise.all(promesas);
-            const todos = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-
-            const porCategoria = new Map();
-            todos.forEach(p => {
-              const claveCat = (p.categoria || 'otros').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-              if (!porCategoria.has(claveCat)) {
-                porCategoria.set(claveCat, p);
-              }
-            });
-            productosDestacados = Array.from(porCategoria.values());
-          }
-        }
-      } catch (err) {
-        productosDestacados = [];
-      }
-      renderProductosDestacados(productosDestacados);
-    }
-
-    async function cargarTalleres(cacheBuster) {
-      try {
-        const res = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres' + cacheBuster);
-        if (res.ok) {
-          const archivos = await res.json();
-          if (Array.isArray(archivos)) {
-            const promesas = archivos
-              .filter(f => f.name.endsWith('.md'))
-              .map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
-            const contenidos = await Promise.all(promesas);
-            listaTalleres = contenidos.map(parsearMarkdownCompleto).filter(Boolean);
-          }
-        }
-      } catch (err) {
-        listaTalleres = [];
-      }
-      renderTalleres(listaTalleres);
-    }
-
-    function iniciarTienda() {
       const cacheBuster = '?t=' + new Date().getTime();
-      cargarProductos(cacheBuster);
-      cargarTalleres(cacheBuster);
-      actualizarCarrito();
+      try {
+        const resT = await fetch('https://api.github.com/repos/handmadelovebyele/tienda-handmadelove/contents/contenido/talleres' + cacheBuster);
+        if (resT.ok) {
+          const archivosT = await resT.json();
+          if (Array.isArray(archivosT) && archivosT.length > 0) {
+            const promesasT = archivosT.filter(f => f.name.endsWith('.md')).map(f => fetch(f.download_url + cacheBuster).then(r => r.text()));
+            const contenidosT = await Promise.all(promesasT);
+            const talleresCMS = contenidosT.map(parsearMarkdownCompleto).filter(Boolean);
+            if (talleresCMS.length > 0) {
+              todosLosTalleres = talleresCMS;
+              renderTalleres(todosLosTalleres);
+            }
+          }
+        }
+
+        const [velas, bisuteria, bordado, pintura, crochet, anteriores] = await Promise.all([
+          leerCarpetaProductos('contenido/productos/velas', 'Velas', cacheBuster),
+          leerCarpetaProductos('contenido/productos/bisuteria', 'Bisutería', cacheBuster),
+          leerCarpetaProductos('contenido/productos/bordado', 'Bordado', cacheBuster),
+          leerCarpetaProductos('contenido/productos/pintura', 'Pintura', cacheBuster),
+          leerCarpetaProductos('contenido/productos/crochet', 'Crochet', cacheBuster),
+          leerCarpetaProductos('contenido/productos', null, cacheBuster)
+        ]);
+
+        const todosProductosCMS = [...velas, ...bisuteria, ...bordado, ...pintura, ...crochet, ...anteriores];
+        const destacados = extraerDestacadosPorCategoria(todosProductosCMS);
+        if (destacados.length > 0) {
+          productosDestacadosHome = destacados;
+          renderDestacadosHome(productosDestacadosHome);
+        }
+      } catch (err) {}
     }
 
-    iniciarTienda();
+    window.addEventListener('promocionesListas', () => {
+      renderDestacadosHome(productosDestacadosHome);
+      renderTalleres(todosLosTalleres);
+    });
+    cargarTodo();
   </script>
 </body>
 </html>
