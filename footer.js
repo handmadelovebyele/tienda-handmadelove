@@ -38,8 +38,8 @@ function renderFooterGlobal() {
             Encuentra inspiración y novedades:
           </p>
           <p style="margin-bottom: 10px;">
-            <a href="mailto:hadmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.86rem; font-weight: 500;">
-              ✉️ hadmadelovebyele@gmail.com
+            <a href="mailto:handmadelovebyele@gmail.com" style="color: #FAF7F2; text-decoration: underline; font-size: 0.86rem; font-weight: 500;">
+              ✉️ handmadelovebyele@gmail.com
             </a>
           </p>
           <a href="https://instagram.com/handmadelovebyele" target="_blank" rel="noopener noreferrer" class="btn-footer-social btn-instagram-footer">
