@@ -3,7 +3,9 @@ title: "Kit DIY: Borda tu Propia Tote Bag Floral"
 categoria: Bordado
 subcategoria: Kits
 precio: 28
-descuento: 0
+descuento: 10
+fechaInicio: 2026-11-30T23:59:00.000-05:00
+fechaFin: 2026-12-31T23:59:00.000-05:00
 descripcion: Kit completo de bordado artesanal diseñado para que crees tu propia
   tote bag personalizada desde cero, sin necesidad de experiencia previa.
   Incluye una tote bag de lienzo resistente de algodón en tono natural, un
