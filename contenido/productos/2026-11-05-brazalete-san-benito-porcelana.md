@@ -3,6 +3,9 @@ title: Brazalete San Benito & Porcelana
 categoria: Bisutería
 subcategoria: Pulseras
 precio: 15
+descuento: 10
+fechaInicio: 2026-11-30T23:59:00.000-05:00
+fechaFin: 2026-12-31T23:59:00.000-05:00
 descripcion: Pulsera artesanal elaborada con cuentas esféricas de cerámica
   esmaltada en blanco brillante, decoradas con delicados motivos florales
   vintage en tonos rosa y lavanda. Incorpora como pieza central una medalla
