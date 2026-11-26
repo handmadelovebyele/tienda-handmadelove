@@ -3,7 +3,9 @@ title: Gargantilla Destellos de Medianoche
 categoria: Bisutería
 subcategoria: Collares
 precio: 21.99
-descuento: ""
+descuento: 25
+fechaInicio: 2026-11-30T23:59:00.000-05:00
+fechaFin: 2026-12-31T23:59:00.000-05:00
 descripcion: Gargantilla artesanal confeccionada cuidadosamente a mano con
   cristales facetados en profundo tono morado amatista oscuro, intercalados
   simétricamente con esferas lisas y separadores en baño de oro que aportan un
