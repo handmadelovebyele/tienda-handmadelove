@@ -1,8 +1,11 @@
 ---
 title: "Taller de Arte en Concreto: Joyero Plano"
-fecha: 2026-11-28T10:00:00.000-05:00
+fecha: 2026-12-12T10:00:00.000-05:00
 lugar: Almax Center, Samborondón
 precio: 25
+descuento: 15
+fechaInicio: 2026-12-01T00:01:00.000-05:00
+fechaFin: 2026-12-05T23:59:00.000-05:00
 cupoMax: 10
 ocupados: 0
 descripcion: >-
