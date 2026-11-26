@@ -3,7 +3,7 @@ title: Pulsera Hilo Rojo & Inicial (Varios modelos)
 categoria: Bisutería
 subcategoria: Pulseras
 precio: 9.99
-descuento: 300
+descuento: 30
 fechaInicio: 2026-11-30T23:59:00.000-05:00
 fechaFin: 2026-12-31T23:59:00.000-05:00
 descripcion: Pulsera artesanal de hilo rojo de protección, tejida cuidadosamente
