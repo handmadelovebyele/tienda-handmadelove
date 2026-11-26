@@ -2,7 +2,7 @@
 title: "Taller de Velas Artesanales de Soya: Diseña tus Aromas"
 fecha: 2026-12-19T10:00:00.000-05:00
 lugar: Almax Center, Samborondón
-precio: 40
+precio: 45
 descuento: 10
 fechaInicio: 2026-12-04T00:01:00.000-05:00
 fechaFin: 2026-12-16T23:59:00.000-05:00
